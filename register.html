@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Venturalink</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/auth.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="./index.html">
+                    <img src="assets/logo Venturalink.png" alt="Venturalink Logo" style="height:80px;vertical-align:middle;">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/about" class="nav-link">About</a>
+                <a href="/login" class="nav-link">Login</a>
+                <a href="/register" class="nav-link">Register</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="auth-container">
+        <div class="auth-box">
+            <h1>Create Account</h1>
+            <p class="auth-subtitle">Join Venturalink to connect with investors and entrepreneurs</p>
+
+            <form id="register-form" class="auth-form">
+                <div class="form-group">
+                    <input type="text" name="name" required placeholder="Full Name">
+                </div>
+
+                <div class="form-group">
+                    <input type="email" name="email" required placeholder="Email address">
+                </div>
+
+                <div class="form-group">
+                    <input type="password" name="password" required placeholder="Password" minlength="8">
+                </div>
+
+                <div class="form-group">
+                    <select name="userType" required>
+                        <option value="">Select your role</option>
+                        <option value="investor">I am an Investor</option>
+                        <option value="business">I am a Business Owner</option>
+                    </select>
+                </div>
+
+                <div class="form-options">
+                    <label class="terms">
+                        <input type="checkbox" name="terms" required>
+                        <span>I agree to the <a href="/terms">Terms</a> and <a href="/privacy">Privacy Policy</a></span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn">Create Account</button>
+            </form>
+
+            <p class="auth-footer">
+                Already have an account? <a href="login.html">Sign in</a>
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About Venturalink</h4>
+                <p>Connecting investors with entrepreneurs to create meaningful business relationships.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/privacy">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Venturalink Platform. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="scripts/register.js"></script>
+</body>
+</html> 

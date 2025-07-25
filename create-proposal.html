@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Proposal - Venturalink</title>
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/proposal.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="./index.html">
+                    <img src="assets/logo Venturalink.png" alt="Venturalink Logo" style="height:80px;vertical-align:middle;">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="./create-proposal.html" class="nav-link active">Create Proposal</a>
+                <a href="#" onclick="logout(); return false;" class="nav-link">Logout</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Add debug info -->
+    <div id="debug-info" style="display: none; padding: 1rem; background: #f0f0f0; margin: 1rem;">
+        <p>User Status: <span id="user-status">Checking...</span></p>
+        <p>User Type: <span id="user-type">Checking...</span></p>
+    </div>
+
+    <main class="proposal-container">
+        <div class="proposal-box">
+            <h1>Create Business Proposal</h1>
+            <p class="proposal-subtitle">Share your business idea with potential investors</p>
+
+            <form id="proposal-form" class="proposal-form">
+                <div class="form-section">
+                    <h2>Basic Information</h2>
+                    <div class="form-group">
+                        <label for="title">Business Name/Title*</label>
+                        <input type="text" id="title" name="title" required 
+                               placeholder="Enter your business name or proposal title">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Business Category*</label>
+                        <select id="category" name="category" required>
+                            <option value="">Select a category</option>
+                            <option value="technology">Technology</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="education">Education</option>
+                            <option value="retail">Retail</option>
+                            <option value="manufacturing">Manufacturing</option>
+                            <option value="services">Services</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Business Details</h2>
+                    <div class="form-group">
+                        <label for="description">Business Description*</label>
+                        <textarea id="description" name="description" required rows="4"
+                                placeholder="Describe your business idea, its unique value proposition, and target market"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="problem">Problem Statement*</label>
+                        <textarea id="problem" name="problem" required rows="3"
+                                placeholder="What problem does your business solve?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="solution">Solution*</label>
+                        <textarea id="solution" name="solution" required rows="3"
+                                placeholder="How does your business solve this problem?"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Investment Details</h2>
+                    <div class="form-group">
+                        <label for="amount">Investment Amount Needed*</label>
+                        <div class="amount-input">
+                            <span class="currency">$</span>
+                            <input type="number" id="amount" name="amount" required min="1000"
+                                   placeholder="Enter amount in USD">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="equity">Equity Offered (%)</label>
+                        <input type="number" id="equity" name="equity" min="0" max="100"
+                               placeholder="Percentage of equity offered">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="useOfFunds">Use of Funds*</label>
+                        <textarea id="useOfFunds" name="useOfFunds" required rows="3"
+                                placeholder="How will you use the investment funds?"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Additional Information</h2>
+                    <div class="form-group">
+                        <label for="marketSize">Market Size</label>
+                        <textarea id="marketSize" name="marketSize" rows="2"
+                                placeholder="Describe your target market size and potential"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="competitors">Competitors</label>
+                        <textarea id="competitors" name="competitors" rows="2"
+                                placeholder="List your main competitors and your competitive advantage"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="timeline">Business Timeline</label>
+                        <textarea id="timeline" name="timeline" rows="2"
+                                placeholder="What are your key milestones and timeline?"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Submit Proposal</button>
+                    <button type="button" onclick="window.location.href='index.html'" class="btn btn-secondary">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Venturalink</p>
+        </div>
+    </footer>
+
+    <script type="module" src="./scripts/create-proposal.js"></script>
+</body>
+</html> 

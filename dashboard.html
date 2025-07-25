@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Venturalink</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">Venturalink</a>
+            </div>
+            <ul class="nav-links">
+            <li><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
+            <li><button onclick="handleLogout()" class="nav-link">Logout</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Welcome, <span id="user-name">User</span></h1>
+            <p id="user-role">Role</p>
+        </div>
+
+        <!-- Investor Dashboard -->
+        <div id="investor-dashboard" class="dashboard-section" style="display: none;">
+            <h2>Investment Opportunities</h2>
+            <div id="proposals-list" class="proposals-grid">
+                <!-- Proposals will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Business Dashboard -->
+        <div id="business-dashboard" class="dashboard-section" style="display: none;">
+            <h2>My Proposals</h2>
+            <button onclick="showNewProposalForm()" class="btn">Create New Proposal</button>
+            <div id="my-proposals" class="proposals-grid">
+                <!-- User's proposals will be loaded here -->
+            </div>
+        </div>
+
+        <!-- New Proposal Form (hidden by default) -->
+        <div id="new-proposal-form" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h2>Create New Proposal</h2>
+                <form id="proposal-form">
+                    <div class="form-group">
+                        <input type="text" name="title" required placeholder="Proposal Title">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="description" required placeholder="Describe your business proposal"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" name="amount" required placeholder="Investment Amount">
+                    </div>
+                    <button type="submit" class="btn">Submit Proposal</button>
+                    <button type="button" onclick="hideNewProposalForm()" class="btn btn-secondary">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Venturalink</p>
+        </div>
+    </footer>
+
+    <script type="module" src="scripts/dashboard.js"></script>
+</body>
+</html> 

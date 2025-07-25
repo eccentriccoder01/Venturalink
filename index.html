@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Venturalink - Connect investors with entrepreneurs">
+    <title>Venturalink - Investor & Business Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/styles/mainindex.css">
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar" id="main-nav">
+            <div class="logo">
+                <a href="./index.html">
+                    <img src="assets/logo Venturalink.png" alt="Venturalink Logo">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/about" class="nav-link">About</a>
+                <a href="./login.html" class="nav-link">Login</a>
+                <a href="./register.html" class="nav-link">Register</a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <h1><span class="gradient-text">Empowering Dreams</span> Through Smart Investments</h1>
+                <p class="hero-subtext">Where visionary entrepreneurs meet modern-day investors to build the future together, fostering innovation and growth.</p>
+                <div class="cta-buttons">
+                    <a href="/login.html" class="btn btn-primary animate-fade-in">Join as Investor</a>
+                    <a href="/login.html" class="btn btn-secondary animate-fade-in">Join as Entrepreneur</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <h2 class="section-title">Seamless Connections, Powerful Growth</h2>
+            <div class="feature-grid">
+                <div class="feature-card animate-slide-up">
+                    <div class="icon-wrapper"><img src="assets/investor-icon.svg" alt="Investor Icon"></div>
+                    <h3>For Investors</h3>
+                    <ul>
+                        <li><span class="list-icon"></span>Curated Business Proposals</li>
+                        <li><span class="list-icon"></span>Direct Entrepreneur Connections</li>
+                        <li><span class="list-icon"></span>Exclusive Investment Opportunities</li>
+                    </ul>
+                </div>
+                <div class="feature-card animate-slide-up" style="animation-delay: 0.1s;">
+                    <div class="icon-wrapper"><img src="assets/entrepreneur-icon.svg" alt="Entrepreneur Icon"></div>
+                    <h3>For Entrepreneurs</h3>
+                    <ul>
+                        <li><span class="list-icon"></span>Showcase Innovative Ideas</li>
+                        <li><span class="list-icon"></span>Access to Global Investors</li>
+                        <li><span class="list-icon"></span>Receive Expert Mentorship</li>
+                    </ul>
+                </div>
+                <div class="feature-card animate-slide-up" style="animation-delay: 0.2s;">
+                    <div class="icon-wrapper"><img src="assets/advisor-icon.svg" alt="Advisor Icon"></div>
+                    <h3>For Advisors</h3>
+                    <ul>
+                        <li><span class="list-icon"></span>Share Specialized Knowledge</li>
+                        <li><span class="list-icon"></span>Engage in Q&A Sessions</li>
+                        <li><span class="list-icon"></span>Build Professional Reputation</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section footer-about">
+                <h4>About Venturalink</h4>
+                <p>Connecting investors with entrepreneurs to create meaningful business relationships and drive economic progress.</p>
+            </div>
+            <div class="footer-section footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/privacy">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="LinkedIn"><img src="assets/linkedin-icon.svg" alt="LinkedIn"></a>
+                    <a href="#" aria-label="Twitter"><img src="assets/twitter-icon.svg" alt="Twitter"></a>
+                    <a href="#" aria-label="Facebook"><img src="assets/facebook-icon.svg" alt="Facebook"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Venturalink Platform. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

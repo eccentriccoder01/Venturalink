@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Opportunities - Venturalink</title>
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/proposals.css">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="./index.html">
+                    <img src="assets/logo Venturalink.png" alt="Venturalink Logo" style="height:80px;vertical-align:middle;">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/index.html" onclick="handleLogout(); return true;" class="nav-link">Logout</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Debug info -->
+    <div id="debug-info" class="debug-info" style="display: none;">
+        <div class="debug-info-content">
+            <p><strong>User Status:</strong> <span id="user-status">Checking...</span></p>
+            <p><strong>User Type:</strong> <span id="user-type">Checking...</span></p>
+        </div>
+    </div>
+
+    <main class="proposals-container">
+        <div class="proposals-header">
+            <div class="header-content">
+                <h1><i class="fas fa-lightbulb"></i> Investment Opportunities</h1>
+                <p class="subtitle">Discover promising business ventures and investment opportunities</p>
+            </div>
+            
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="category-filter">
+                        <i class="fas fa-tag"></i>
+                        Category
+                    </label>
+                    <select id="category-filter" class="filter-select">
+                        <option value="">All Categories</option>
+                        <option value="technology">Technology</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="education">Education</option>
+                        <option value="retail">Retail</option>
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="services">Services</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="amount-filter">
+                        <i class="fas fa-dollar-sign"></i>
+                        Investment Range
+                    </label>
+                    <select id="amount-filter" class="filter-select">
+                        <option value="">All Amounts</option>
+                        <option value="0-10000">$0 - $10,000</option>
+                        <option value="10000-50000">$10,000 - $50,000</option>
+                        <option value="50000-100000">$50,000 - $100,000</option>
+                        <option value="100000+">$100,000+</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="sort-by">
+                        <i class="fas fa-sort"></i>
+                        Sort By
+                    </label>
+                    <select id="sort-by" class="filter-select">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="amount-low">Amount: Low to High</option>
+                        <option value="amount-high">Amount: High to Low</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="proposals-grid" id="proposals-grid">
+            <!-- Proposals will be loaded here dynamically -->
+        </div>
+
+        <!-- Proposal Detail Modal -->
+        <div id="proposal-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div id="proposal-details">
+                    <!-- Proposal details will be loaded here -->
+                </div>
+                <div class="modal-actions">
+                    <button id="contact-entrepreneur" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i>
+                        Contact Entrepreneur
+                    </button>
+                    <button id="express-interest" class="btn btn-secondary">
+                        <i class="fas fa-handshake"></i>
+                        Express Interest
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Venturalink</h3>
+                <p>Connecting investors with innovative entrepreneurs</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> support@Venturalink.com</li>
+                    <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Venturalink. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="./scripts/proposals.js"></script>
+</body>
+</html>

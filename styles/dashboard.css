@@ -1,0 +1,382 @@
+/* dashboard.css */
+
+/* Variables (if not already defined in main.css, otherwise main.css should be the source) */
+:root {
+    --primary-color: #2563eb; /* Blue */
+    --primary-hover: #1e40af;
+    --secondary-button-bg: #e8f4fc;
+    --secondary-button-text: #2563eb;
+    --text-color-dark: #1f2937;
+    --text-color-light: #6b7280;
+    --background-light: #f3f4f6;
+    --card-background: #ffffff;
+    --border-color: #e5e7eb;
+    --shadow-light: rgba(0, 0, 0, 0.05);
+    --shadow-medium: rgba(0, 0, 0, 0.1);
+    --success-color: #10b981;
+    --error-color: #ef4444;
+}
+
+body {
+    background-color: var(--background-light);
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color-dark);
+}
+
+/* Main Dashboard Container */
+.dashboard-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Dashboard Header */
+.dashboard-header {
+    background-color: var(--card-background);
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px var(--shadow-light);
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* For pseudo-elements */
+}
+
+.dashboard-header::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(37,99,235,0.1) 0%, rgba(37,99,235,0) 70%);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.dashboard-header::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(78,168,237,0.1) 0%, rgba(78,168,237,0) 70%);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.dashboard-header h1 {
+    font-size: 2.5rem;
+    color: var(--text-color-dark);
+    margin-bottom: 0.5rem;
+    position: relative; /* Ensure text is above pseudo-elements */
+    z-index: 1;
+}
+
+.dashboard-header h1 #user-name {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.dashboard-header p#user-role {
+    font-size: 1.1rem;
+    color: var(--text-color-light);
+    margin-top: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Dashboard Sections */
+.dashboard-section {
+    background-color: var(--card-background);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px var(--shadow-light);
+}
+
+.dashboard-section h2 {
+    font-size: 1.8rem;
+    color: var(--text-color-dark);
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.75rem;
+}
+
+/* Proposals Grid - shared styling */
+.proposals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Individual Proposal Card (for dashboard display) - assume similar to proposals.css */
+.proposal-card {
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.proposal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.proposal-card h3 {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+}
+
+.proposal-card p {
+    font-size: 0.95rem;
+    color: var(--text-color-light);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.proposal-card .amount {
+    font-weight: 600;
+    color: var(--text-color-dark);
+    font-size: 1.1rem;
+}
+
+.proposal-card .status {
+    padding: 0.3em 0.7em;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+.proposal-card .status.pending {
+    background-color: #ffedd5;
+    color: #f97316;
+}
+
+.proposal-card .status.approved {
+    background-color: #dcfce7;
+    color: #22c55e;
+}
+
+.proposal-card .status.rejected {
+    background-color: #fee2e2;
+    color: #ef4444;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.75rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none; /* For button-like links */
+    color: white;
+    background-color: var(--primary-color);
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
+}
+
+.btn:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-button-bg);
+    color: var(--secondary-button-text);
+    box-shadow: none;
+    border: 1px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: #d1e7ff;
+    color: var(--primary-hover);
+    box-shadow: none;
+}
+
+/* New Proposal Form Modal */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: var(--card-background);
+    margin: auto;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px var(--shadow-medium);
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    animation: fadeInScale 0.3s ease-out;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-content h2 {
+    text-align: center;
+    color: var(--text-color-dark);
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+.modal-content .close-button {
+    color: var(--text-color-light);
+    font-size: 2rem;
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.modal-content .close-button:hover {
+    color: var(--text-color-dark);
+}
+
+/* Form Styles within Modal */
+#new-proposal-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#new-proposal-form .form-group {
+    margin-bottom: 1rem;
+}
+
+#new-proposal-form input[type="text"],
+#new-proposal-form input[type="number"],
+#new-proposal-form textarea {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--text-color-dark);
+    background-color: var(--background-light);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#new-proposal-form input[type="text"]:focus,
+#new-proposal-form input[type="number"]:focus,
+#new-proposal-form textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    outline: none;
+}
+
+#new-proposal-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+#new-proposal-form button[type="submit"] {
+    margin-top: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 1.5rem;
+        margin: 1rem auto;
+    }
+
+    .dashboard-header h1 {
+        font-size: 2rem;
+    }
+
+    .dashboard-header p#user-role {
+        font-size: 1rem;
+    }
+
+    .dashboard-section {
+        padding: 1.5rem;
+    }
+
+    .dashboard-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .proposals-grid {
+        grid-template-columns: 1fr; /* Stack proposals on small screens */
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .modal-content {
+        padding: 1.5rem;
+        max-width: 95%;
+    }
+
+    .modal-content h2 {
+        font-size: 1.6rem;
+    }
+
+    #new-proposal-form input,
+    #new-proposal-form textarea {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-container {
+        padding: 1rem;
+    }
+
+    .dashboard-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .dashboard-section {
+        padding: 1rem;
+    }
+
+    .dashboard-section h2 {
+        font-size: 1.3rem;
+    }
+
+    .modal-content h2 {
+        font-size: 1.4rem;
+    }
+}
