@@ -8,23 +8,18 @@ const firebaseConfig = {
   measurementId: "G-1GT8XMMFM3"
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-// Initialize Firebase services
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-// DOM Elements
 const mainNav = document.getElementById('main-nav');
 const navLinks = document.querySelector('.nav-links');
 const menuToggle = document.querySelector('.menu-toggle');
 
-// Event listener for mobile menu toggle
 menuToggle.addEventListener('click', () => {
     navLinks.classList.toggle('active');
     menuToggle.classList.toggle('active');
-    // Apply animation delay to nav links
     document.querySelectorAll('.nav-link').forEach((link, index) => {
         if (navLinks.classList.contains('active')) {
             link.style.setProperty('--delay', `${index * 0.1}s`);
@@ -34,7 +29,6 @@ menuToggle.addEventListener('click', () => {
     });
 });
 
-// Close mobile menu when a link is clicked
 navLinks.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
         if (navLinks.classList.contains('active')) {
@@ -71,24 +65,12 @@ auth.onAuthStateChanged((user) => {
 
 // Update navigation based on auth state
 function updateNavigationForLoggedInUser(user) {
-    const userType = localStorage.getItem('userType'); // 'investor', 'business', or 'advisor'
-    
-    // Clear existing navigation
+    const userType = localStorage.getItem('userType');
     navLinks.innerHTML = '';
-    
-    // Add common links
     navLinks.innerHTML += `
         <a href="/" class="nav-link">Home</a>
-        <a href="${getDashboardRoute(userType)}" class="nav-link">Dashboard</a>
+        <a href="/dashboard.html" class="nav-link">Dashboard</a>
     `;
-    
-    function getDashboardRoute(userType) {
-        if (userType === 'investor') return '/proposals.html';
-        if (userType === 'business') return '/create-proposal.html';
-        return '/dashboard.html';
-    }
-
-    // Add role-specific links
     switch(userType) {
         case 'investor':
             navLinks.innerHTML += `
@@ -102,20 +84,12 @@ function updateNavigationForLoggedInUser(user) {
                 <a href="/create-proposal" class="nav-link">Create Proposal</a>
             `;
             break;
-        case 'advisor':
-            navLinks.innerHTML += `
-                <a href="/queries" class="nav-link">View Queries</a>
-                <a href="/post-advice" class="nav-link">Post Advice</a>
-            `;
-            break;
     }
-    
-    // Add logout link
+
     navLinks.innerHTML += `
         <a href="#" class="nav-link" id="logout-link">Logout</a>
     `;
-    
-    // Add logout event listener
+
     document.getElementById('logout-link').addEventListener('click', handleLogout);
 }
 
@@ -127,8 +101,6 @@ function updateNavigationForLoggedOutUser() {
         <a href="/register" class="nav-link">Register</a>
     `;
 }
-
-// Handle logout
 async function handleLogout(e) {
     e.preventDefault();
     try {
@@ -141,27 +113,22 @@ async function handleLogout(e) {
     }
 }
 
-// Utility function to show alerts
 function showAlert(message, type = 'info') {
     const alertDiv = document.createElement('div');
     alertDiv.className = `alert alert-${type}`;
     alertDiv.textContent = message;
-    
-    // Insert alert at the top of the main content, before any existing content
+
     const main = document.querySelector('main');
     if (main) {
         main.insertBefore(alertDiv, main.firstChild);
     } else {
         document.body.insertBefore(alertDiv, document.body.firstChild);
     }
-    
-    // Remove alert after 5 seconds
     setTimeout(() => {
         alertDiv.remove();
     }, 5000);
 }
 
-// Handle form submissions
 document.addEventListener('submit', async (e) => {
     if (e.target.matches('form')) {
         e.preventDefault();
@@ -180,7 +147,6 @@ document.addEventListener('submit', async (e) => {
                 case 'proposal':
                     await handleProposalSubmission(formData);
                     break;
-                // Add more form handlers as needed
             }
         } catch (error) {
             console.error('Form submission error:', error);
@@ -189,7 +155,6 @@ document.addEventListener('submit', async (e) => {
     }
 });
 
-// Login handler
 async function handleLogin(formData) {
     const email = formData.get('email');
     const password = formData.get('password');
@@ -197,8 +162,6 @@ async function handleLogin(formData) {
     try {
         const userCredential = await auth.signInWithEmailAndPassword(email, password);
         const user = userCredential.user;
-        
-        // Get user type from Firestore
         const userDoc = await db.collection('users').doc(user.uid).get();
         if (userDoc.exists) {
             const userType = userDoc.data().userType;
@@ -219,18 +182,15 @@ async function handleLogin(formData) {
     }
 }
 
-// Registration handler
 async function handleRegistration(formData) {
     const email = formData.get('email');
     const password = formData.get('password');
-    const userType = formData.get('userType'); // Ensure your registration form has a 'userType' input
-    const name = formData.get('name'); // Ensure your registration form has a 'name' input
+    const userType = formData.get('userType'); 
+    const name = formData.get('name');
     
     try {
         const userCredential = await auth.createUserWithEmailAndPassword(email, password);
         const user = userCredential.user;
-        
-        // Create user profile in Firestore
         await db.collection('users').doc(user.uid).set({
             name,
             email,
@@ -241,7 +201,7 @@ async function handleRegistration(formData) {
         localStorage.setItem('userType', userType);
         showAlert('Registration successful! Redirecting to dashboard...', 'success');
         setTimeout(() => {
-            window.location.href = '/dashboard'; // Redirect to dashboard or appropriate page
+            window.location.href = '/dashboard';
         }, 1500);
     } catch (error) {
         console.error("Registration error:", error.code, error.message);
@@ -257,7 +217,6 @@ async function handleRegistration(formData) {
     }
 }
 
-// Proposal submission handler (example - assuming this form exists on another page)
 async function handleProposalSubmission(formData) {
     const title = formData.get('title');
     const description = formData.get('description');
@@ -286,16 +245,11 @@ async function handleProposalSubmission(formData) {
         throw new Error('Failed to submit proposal. Please ensure all fields are correct.');
     }
 }
-
-// Initialize the application with element animations
 function init() {
-    // Apply fade-in animation to hero content
     const heroContent = document.querySelector('.hero-content');
     if (heroContent) {
-        heroContent.style.opacity = '1'; // CSS animation handles transform
+        heroContent.style.opacity = '1'; 
     }
-
-    // Intersection Observer for feature cards and other sections
     const observerOptions = {
         root: null,
         rootMargin: '0px',
@@ -305,8 +259,8 @@ function init() {
     const observerCallback = (entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('in-view'); // Add a class to trigger CSS animation
-                observer.unobserve(entry.target); // Stop observing once animated
+                entry.target.classList.add('in-view'); 
+                observer.unobserve(entry.target);
             }
         });
     };
@@ -331,5 +285,4 @@ function init() {
     console.log('Application initialized with enhanced UI features.');
 }
 
-// Start the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', init);
