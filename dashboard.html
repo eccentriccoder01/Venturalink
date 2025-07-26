@@ -4,72 +4,357 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Venturalink</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/dashboard.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.js"></script>
 </head>
 <body>
-    <header>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="floating-orb orb-1"></div>
+        <div class="floating-orb orb-2"></div>
+        <div class="floating-orb orb-3"></div>
+        <div class="floating-orb orb-4"></div>
+        <div class="gradient-mesh"></div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="glass-nav">
         <nav class="navbar">
             <div class="logo">
-                <a href="index.html">Venturalink</a>
+                <a href="index.html" class="logo-link">
+                    <div class="logo-icon">
+                        <i data-lucide="trending-up"></i>
+                    </div>
+                    <span class="logo-text">Venturalink</span>
+                </a>
             </div>
             <ul class="nav-links">
-            <li><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
-            <li><button onclick="handleLogout()" class="nav-link">Logout</button></li>
+                <li><a href="dashboard.html" class="nav-link active">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>Dashboard</span>
+                </a></li>
+                <li><button onclick="handleLogout()" class="nav-link logout-btn">
+                    <i data-lucide="log-out"></i>
+                    <span>Logout</span>
+                </button></li>
             </ul>
         </nav>
     </header>
 
     <main class="dashboard-container">
-        <div class="dashboard-header">
-            <h1>Welcome, <span id="user-name">User</span></h1>
-            <p id="user-role">Role</p>
+        <!-- Hero Header -->
+        <div class="hero-header">
+            <div class="hero-content">
+                <div class="hero-avatar">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar-inner">
+                        <i data-lucide="user"></i>
+                    </div>
+                </div>
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        Welcome back, <span id="user-name" class="text-gradient">User</span>
+                    </h1>
+                    <p id="user-role" class="hero-subtitle">Role</p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i data-lucide="trending-up"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-number" id="total-proposals">0</span>
+                                <span class="stat-label">Total Proposals</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i data-lucide="briefcase"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-number" id="active-investments">0</span>
+                                <span class="stat-label">Active Investments</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i data-lucide="message-circle"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-number" id="unread-messages">0</span>
+                                <span class="stat-label">Unread Messages</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-decoration">
+                <div class="floating-elements">
+                    <div class="float-element element-1"></div>
+                    <div class="float-element element-2"></div>
+                    <div class="float-element element-3"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Navigation Tabs -->
+        <div class="dashboard-tabs">
+            <div class="tabs-container">
+                <button class="tab-btn active" data-tab="overview">
+                    <i data-lucide="home"></i>
+                    <span>Overview</span>
+                </button>
+                <button class="tab-btn" data-tab="investments">
+                    <i data-lucide="trending-up"></i>
+                    <span>Investments</span>
+                </button>
+                <button class="tab-btn" data-tab="proposals">
+                    <i data-lucide="file-text"></i>
+                    <span>Proposals</span>
+                </button>
+                <button class="tab-btn" data-tab="analytics">
+                    <i data-lucide="bar-chart-3"></i>
+                    <span>Analytics</span>
+                </button>
+                <div class="tab-indicator"></div>
+            </div>
+        </div>
+
+        <!-- Overview Tab Content -->
+        <div id="overview-tab" class="tab-content active">
+            <div class="cards-grid">
+                <div class="glass-card feature-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i data-lucide="target"></i>
+                        </div>
+                        <h3>Quick Actions</h3>
+                    </div>
+                    <div class="quick-actions">
+                        <button class="action-btn primary" onclick="showNewProposalForm()">
+                            <i data-lucide="plus"></i>
+                            <span>New Proposal</span>
+                        </button>
+                        <button class="action-btn secondary">
+                            <i data-lucide="search"></i>
+                            <span>Find Investors</span>
+                        </button>
+                        <button class="action-btn tertiary">
+                            <i data-lucide="message-square"></i>
+                            <span>Messages</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="glass-card analytics-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i data-lucide="activity"></i>
+                        </div>
+                        <h3>Recent Activity</h3>
+                    </div>
+                    <div id="activity-feed" class="activity-feed">
+                        <!-- Activity items will be loaded here -->
+                    </div>
+                </div>
+
+                <div class="glass-card performance-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i data-lucide="bar-chart-2"></i>
+                        </div>
+                        <h3>Performance</h3>
+                    </div>
+                    <div class="performance-metrics">
+                        <div class="metric">
+                            <div class="metric-value">98.5%</div>
+                            <div class="metric-label">Success Rate</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 98.5%"></div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">24.7K</div>
+                            <div class="metric-label">Total Invested</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Investor Dashboard -->
-        <div id="investor-dashboard" class="dashboard-section" style="display: none;">
-            <h2>Investment Opportunities</h2>
+        <div id="investor-dashboard" class="tab-content" style="display: none;">
+            <div class="section-header">
+                <h2 class="section-title">Investment Opportunities</h2>
+                <div class="section-controls">
+                    <div class="search-box">
+                        <i data-lucide="search"></i>
+                        <input type="text" placeholder="Search opportunities...">
+                    </div>
+                    <div class="filter-dropdown">
+                        <button class="filter-btn">
+                            <i data-lucide="filter"></i>
+                            <span>Filter</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
             <div id="proposals-list" class="proposals-grid">
                 <!-- Proposals will be loaded here -->
             </div>
         </div>
 
         <!-- Business Dashboard -->
-        <div id="business-dashboard" class="dashboard-section" style="display: none;">
-            <h2>My Proposals</h2>
-            <button onclick="showNewProposalForm()" class="btn">Create New Proposal</button>
+        <div id="business-dashboard" class="tab-content" style="display: none;">
+            <div class="section-header">
+                <h2 class="section-title">My Proposals</h2>
+                <button onclick="showNewProposalForm()" class="premium-btn">
+                    <div class="btn-gradient"></div>
+                    <i data-lucide="plus"></i>
+                    <span>Create New Proposal</span>
+                </button>
+            </div>
             <div id="my-proposals" class="proposals-grid">
                 <!-- User's proposals will be loaded here -->
             </div>
         </div>
 
-        <!-- New Proposal Form (hidden by default) -->
-        <div id="new-proposal-form" class="modal" style="display: none;">
-            <div class="modal-content">
-                <h2>Create New Proposal</h2>
-                <form id="proposal-form">
+        <!-- Premium Modal for New Proposal -->
+        <div id="new-proposal-form" class="premium-modal" style="display: none;">
+            <div class="modal-overlay"></div>
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h2>Create New Proposal</h2>
+                    <button class="modal-close" onclick="hideNewProposalForm()">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <form id="proposal-form" class="premium-form">
                     <div class="form-group">
-                        <input type="text" name="title" required placeholder="Proposal Title">
+                        <label for="title">Proposal Title</label>
+                        <div class="input-wrapper">
+                            <i data-lucide="file-text"></i>
+                            <input type="text" name="title" id="title" required placeholder="Enter your proposal title">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <textarea name="description" required placeholder="Describe your business proposal"></textarea>
+                        <label for="description">Description</label>
+                        <div class="input-wrapper">
+                            <i data-lucide="align-left"></i>
+                            <textarea name="description" id="description" required placeholder="Describe your business proposal in detail"></textarea>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <input type="number" name="amount" required placeholder="Investment Amount">
+                        <label for="amount">Investment Amount</label>
+                        <div class="input-wrapper">
+                            <i data-lucide="dollar-sign"></i>
+                            <input type="number" name="amount" id="amount" required placeholder="0.00">
+                        </div>
                     </div>
-                    <button type="submit" class="btn">Submit Proposal</button>
-                    <button type="button" onclick="hideNewProposalForm()" class="btn btn-secondary">Cancel</button>
+                    <div class="form-actions">
+                        <button type="button" onclick="hideNewProposalForm()" class="btn-secondary">
+                            <span>Cancel</span>
+                        </button>
+                        <button type="submit" class="premium-btn">
+                            <div class="btn-gradient"></div>
+                            <i data-lucide="send"></i>
+                            <span>Submit Proposal</span>
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 Venturalink</p>
-        </div>
-    </footer>
+    <!-- Floating Action Button -->
+    <div class="fab-container">
+        <button class="fab" onclick="showNewProposalForm()">
+            <i data-lucide="plus"></i>
+        </button>
+    </div>
 
     <script type="module" src="scripts/dashboard.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Tab functionality
+        document.querySelectorAll('.tab-btn').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.dataset.tab;
+                
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                const content = document.getElementById(`${tabName}-tab`);
+                if (content) content.classList.add('active');
+                
+                // Move indicator
+                const indicator = document.querySelector('.tab-indicator');
+                const tabRect = tab.getBoundingClientRect();
+                const containerRect = tab.parentElement.getBoundingClientRect();
+                indicator.style.left = `${tabRect.left - containerRect.left}px`;
+                indicator.style.width = `${tabRect.width}px`;
+            });
+        });
+
+        // Modal functions
+        window.showNewProposalForm = function() {
+            const modal = document.getElementById('new-proposal-form');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 10);
+        };
+
+        window.hideNewProposalForm = function() {
+            const modal = document.getElementById('new-proposal-form');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        };
+
+        // Floating elements animation
+        function animateFloatingElements() {
+            const elements = document.querySelectorAll('.float-element');
+            elements.forEach((el, index) => {
+                const delay = index * 2000;
+                const duration = 8000 + (index * 1000);
+                
+                el.style.animationDelay = `${delay}ms`;
+                el.style.animationDuration = `${duration}ms`;
+            });
+        }
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', () => {
+            animateFloatingElements();
+            
+            // Set initial tab indicator position
+            const activeTab = document.querySelector('.tab-btn.active');
+            if (activeTab) {
+                const indicator = document.querySelector('.tab-indicator');
+                const tabRect = activeTab.getBoundingClientRect();
+                const containerRect = activeTab.parentElement.getBoundingClientRect();
+                indicator.style.left = `${tabRect.left - containerRect.left}px`;
+                indicator.style.width = `${tabRect.width}px`;
+            }
+        });
+    </script>
 </body>
-</html> 
+</html>
