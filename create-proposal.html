@@ -4,7 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Proposal - Venturalink</title>
-    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Venturalink" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/proposal.css">
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -12,135 +20,315 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
+    <!-- Animated background -->
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+            <div class="shape shape-6"></div>
+        </div>
+        <div class="grid-overlay"></div>
+    </div>
+
     <header class="main-header">
         <nav class="navbar">
             <div class="logo">
                 <a href="./index.html">
-                    <img src="assets/logo Venturalink.png" alt="Venturalink Logo" style="height:80px;vertical-align:middle;">
+                    <img src="V.png" alt="Venturalink Logo" style="height:80px;vertical-align:middle;">
                 </a>
             </div>
             <div class="nav-links">
-                <a href="./create-proposal.html" class="nav-link active">Create Proposal</a>
-                <a href="#" onclick="logout(); return false;" class="nav-link">Logout</a>
+                <a href="./create-proposal.html" class="nav-link active">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    Create Proposal
+                </a>
+                <a href="#" onclick="logout(); return false;" class="nav-link logout-btn">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M16 17v-3H9v-4h7V7l5 5-5 5M14 2a2 2 0 012 2v2h-2V4H6v16h8v-2h2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2h8z"/>
+                    </svg>
+                    Logout
+                </a>
             </div>
         </nav>
     </header>
 
-    <!-- Add debug info -->
-    <div id="debug-info" style="display: none; padding: 1rem; background: #f0f0f0; margin: 1rem;">
-        <p>User Status: <span id="user-status">Checking...</span></p>
-        <p>User Type: <span id="user-type">Checking...</span></p>
+    <!-- Debug info with enhanced styling -->
+    <div id="debug-info" class="debug-panel">
+        <div class="debug-content">
+            <h4>System Status</h4>
+            <div class="status-grid">
+                <div class="status-item">
+                    <span class="status-label">User Status:</span>
+                    <span id="user-status" class="status-value">Checking...</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">User Type:</span>
+                    <span id="user-type" class="status-value">Checking...</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <main class="proposal-container">
-        <div class="proposal-box">
-            <h1>Create Business Proposal</h1>
-            <p class="proposal-subtitle">Share your business idea with potential investors</p>
-
-            <form id="proposal-form" class="proposal-form">
-                <div class="form-section">
-                    <h2>Basic Information</h2>
-                    <div class="form-group">
-                        <label for="title">Business Name/Title*</label>
-                        <input type="text" id="title" name="title" required 
-                               placeholder="Enter your business name or proposal title">
+        <div class="container-wrapper">
+            <!-- Progress indicator -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="progress-steps">
+                    <div class="step active" data-step="1">
+                        <div class="step-circle">1</div>
+                        <span>Basic Info</span>
                     </div>
-
-                    <div class="form-group">
-                        <label for="category">Business Category*</label>
-                        <select id="category" name="category" required>
-                            <option value="">Select a category</option>
-                            <option value="technology">Technology</option>
-                            <option value="healthcare">Healthcare</option>
-                            <option value="education">Education</option>
-                            <option value="retail">Retail</option>
-                            <option value="manufacturing">Manufacturing</option>
-                            <option value="services">Services</option>
-                            <option value="other">Other</option>
-                        </select>
+                    <div class="step" data-step="2">
+                        <div class="step-circle">2</div>
+                        <span>Details</span>
+                    </div>
+                    <div class="step" data-step="3">
+                        <div class="step-circle">3</div>
+                        <span>Investment</span>
+                    </div>
+                    <div class="step" data-step="4">
+                        <div class="step-circle">4</div>
+                        <span>Additional</span>
                     </div>
                 </div>
+            </div>
 
-                <div class="form-section">
-                    <h2>Business Details</h2>
-                    <div class="form-group">
-                        <label for="description">Business Description*</label>
-                        <textarea id="description" name="description" required rows="4"
-                                placeholder="Describe your business idea, its unique value proposition, and target market"></textarea>
+            <div class="proposal-box">
+                <div class="proposal-header">
+                    <div class="header-icon">
+                        <svg width="48" height="48" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
                     </div>
-
-                    <div class="form-group">
-                        <label for="problem">Problem Statement*</label>
-                        <textarea id="problem" name="problem" required rows="3"
-                                placeholder="What problem does your business solve?"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="solution">Solution*</label>
-                        <textarea id="solution" name="solution" required rows="3"
-                                placeholder="How does your business solve this problem?"></textarea>
-                    </div>
+                    <h1 class="proposal-title">Create Business Proposal</h1>
+                    <p class="proposal-subtitle">Transform your vision into reality with our intelligent proposal system</p>
                 </div>
 
-                <div class="form-section">
-                    <h2>Investment Details</h2>
-                    <div class="form-group">
-                        <label for="amount">Investment Amount Needed*</label>
-                        <div class="amount-input">
-                            <span class="currency">$</span>
-                            <input type="number" id="amount" name="amount" required min="1000"
-                                   placeholder="Enter amount in USD">
+                <form id="proposal-form" class="proposal-form">
+                    <!-- Section 1: Basic Information -->
+                    <div class="form-section active" data-section="1">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2>Basic Information</h2>
+                                <p>Let's start with the fundamentals of your business</p>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group floating-label">
+                                <input type="text" id="title" name="title" required placeholder=" ">
+                                <label for="title">Business Name / Title</label>
+                                <div class="input-border"></div>
+                                <div class="field-icon">
+                                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M20 6L9 17l-5-5 1.41-1.41L9 14.17 18.59 4.41 20 6z"/>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="form-group custom-select">
+                                <select id="category" name="category" required>
+                                    <option value="">Select a category</option>
+                                    <option value="technology">🚀 Technology</option>
+                                    <option value="healthcare">🏥 Healthcare</option>
+                                    <option value="education">📚 Education</option>
+                                    <option value="retail">🛍️ Retail</option>
+                                    <option value="manufacturing">🏭 Manufacturing</option>
+                                    <option value="services">⚡ Services</option>
+                                    <option value="other">🔧 Other</option>
+                                </select>
+                                <label for="category">Business Category</label>
+                                <div class="select-arrow">
+                                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M7 10l5 5 5-5z"/>
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="equity">Equity Offered (%)</label>
-                        <input type="number" id="equity" name="equity" min="0" max="100"
-                               placeholder="Percentage of equity offered">
+                    <!-- Section 2: Business Details -->
+                    <div class="form-section" data-section="2">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2>Business Details</h2>
+                                <p>Tell us about your innovative solution</p>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group floating-label full-width">
+                                <textarea id="description" name="description" required rows="4" placeholder=" "></textarea>
+                                <label for="description">Business Description</label>
+                                <div class="input-border"></div>
+                                <div class="char-counter" data-target="description" data-max="500">0/500</div>
+                            </div>
+
+                            <div class="form-group floating-label">
+                                <textarea id="problem" name="problem" required rows="3" placeholder=" "></textarea>
+                                <label for="problem">Problem Statement</label>
+                                <div class="input-border"></div>
+                                <div class="char-counter" data-target="problem" data-max="300">0/300</div>
+                            </div>
+
+                            <div class="form-group floating-label">
+                                <textarea id="solution" name="solution" required rows="3" placeholder=" "></textarea>
+                                <label for="solution">Your Solution</label>
+                                <div class="input-border"></div>
+                                <div class="char-counter" data-target="solution" data-max="300">0/300</div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="useOfFunds">Use of Funds*</label>
-                        <textarea id="useOfFunds" name="useOfFunds" required rows="3"
-                                placeholder="How will you use the investment funds?"></textarea>
-                    </div>
-                </div>
+                    <!-- Section 3: Investment Details -->
+                    <div class="form-section" data-section="3">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2>Investment Details</h2>
+                                <p>Define your funding requirements</p>
+                            </div>
+                        </div>
 
-                <div class="form-section">
-                    <h2>Additional Information</h2>
-                    <div class="form-group">
-                        <label for="marketSize">Market Size</label>
-                        <textarea id="marketSize" name="marketSize" rows="2"
-                                placeholder="Describe your target market size and potential"></textarea>
+                        <div class="form-grid">
+                            <div class="form-group floating-label currency-input">
+                                <input type="number" id="amount" name="amount" required min="1000" placeholder=" ">
+                                <label for="amount">Investment Amount Needed</label>
+                                <div class="currency-symbol">$</div>
+                                <div class="input-border"></div>
+                            </div>
+
+                            <div class="form-group floating-label percentage-input">
+                                <input type="number" id="equity" name="equity" min="0" max="100" placeholder=" ">
+                                <label for="equity">Equity Offered</label>
+                                <div class="percentage-symbol">%</div>
+                                <div class="input-border"></div>
+                            </div>
+
+                            <div class="form-group floating-label full-width">
+                                <textarea id="useOfFunds" name="useOfFunds" required rows="3" placeholder=" "></textarea>
+                                <label for="useOfFunds">Use of Funds</label>
+                                <div class="input-border"></div>
+                                <div class="char-counter" data-target="useOfFunds" data-max="400">0/400</div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="competitors">Competitors</label>
-                        <textarea id="competitors" name="competitors" rows="2"
-                                placeholder="List your main competitors and your competitive advantage"></textarea>
+                    <!-- Section 4: Additional Information -->
+                    <div class="form-section" data-section="4">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2>Additional Information</h2>
+                                <p>Complete your proposal with market insights</p>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group floating-label">
+                                <textarea id="marketSize" name="marketSize" rows="2" placeholder=" "></textarea>
+                                <label for="marketSize">Market Size & Potential</label>
+                                <div class="input-border"></div>
+                                <div class="char-counter" data-target="marketSize" data-max="250">0/250</div>
+                            </div>
+
+                            <div class="form-group floating-label">
+                                <textarea id="competitors" name="competitors" rows="2" placeholder=" "></textarea>
+                                <label for="competitors">Competitive Landscape</label>
+                                <div class="input-border"></div>
+                                <div class="char-counter" data-target="competitors" data-max="250">0/250</div>
+                            </div>
+
+                            <div class="form-group floating-label full-width">
+                                <textarea id="timeline" name="timeline" rows="2" placeholder=" "></textarea>
+                                <label for="timeline">Business Timeline & Milestones</label>
+                                <div class="input-border"></div>
+                                <div class="char-counter" data-target="timeline" data-max="300">0/300</div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="timeline">Business Timeline</label>
-                        <textarea id="timeline" name="timeline" rows="2"
-                                placeholder="What are your key milestones and timeline?"></textarea>
-                    </div>
-                </div>
+                    <!-- Navigation buttons -->
+                    <div class="form-navigation">
+                        <button type="button" id="prev-btn" class="nav-btn prev-btn" disabled>
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                            </svg>
+                            Previous
+                        </button>
+                        
+                        <div class="section-indicator">
+                            <span class="current-section">1</span> / <span class="total-sections">4</span>
+                        </div>
 
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Submit Proposal</button>
-                    <button type="button" onclick="window.location.href='index.html'" class="btn btn-secondary">Cancel</button>
-                </div>
-            </form>
+                        <button type="button" id="next-btn" class="nav-btn next-btn">
+                            Next
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                            </svg>
+                        </button>
+
+                        <button type="submit" id="submit-btn" class="nav-btn submit-btn" style="display: none;">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                            </svg>
+                            Submit Proposal
+                        </button>
+                    </div>
+
+                    <!-- Quick actions -->
+                    <div class="form-actions">
+                        <button type="button" class="action-btn save-draft" title="Save as Draft">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/>
+                            </svg>
+                            Save Draft
+                        </button>
+                        
+                        <button type="button" class="action-btn cancel-btn" onclick="window.location.href='index.html'">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                            </svg>
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </main>
 
     <footer>
         <div class="footer-content">
-            <p>&copy; 2024 Venturalink</p>
+            <p>&copy; 2024 Venturalink - Empowering Innovation</p>
         </div>
     </footer>
 
     <script type="module" src="./scripts/create-proposal.js"></script>
 </body>
-</html> 
+</html>
