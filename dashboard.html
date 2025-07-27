@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/dashboard.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.js"></script>
+    <script defer src="scripts/lucide.js"></script>
 </head>
 <body>
     <!-- Animated Background -->
@@ -285,82 +285,5 @@
     </div>
 
     <script type="module" src="scripts/dashboard.js"></script>
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-        
-        // Tab functionality
-        document.querySelectorAll('.tab-btn').forEach(tab => {
-            tab.addEventListener('click', () => {
-                const tabName = tab.dataset.tab;
-                
-                // Remove active class from all tabs and contents
-                document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                
-                // Add active class to clicked tab
-                tab.classList.add('active');
-                
-                // Show corresponding content
-                const content = document.getElementById(`${tabName}-tab`);
-                if (content) content.classList.add('active');
-                
-                // Move indicator
-                const indicator = document.querySelector('.tab-indicator');
-                const tabRect = tab.getBoundingClientRect();
-                const containerRect = tab.parentElement.getBoundingClientRect();
-                indicator.style.left = `${tabRect.left - containerRect.left}px`;
-                indicator.style.width = `${tabRect.width}px`;
-            });
-        });
-
-        // Modal functions
-        window.showNewProposalForm = function() {
-            const modal = document.getElementById('new-proposal-form');
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-            
-            setTimeout(() => {
-                modal.classList.add('active');
-            }, 10);
-        };
-
-        window.hideNewProposalForm = function() {
-            const modal = document.getElementById('new-proposal-form');
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-            
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
-        };
-
-        // Floating elements animation
-        function animateFloatingElements() {
-            const elements = document.querySelectorAll('.float-element');
-            elements.forEach((el, index) => {
-                const delay = index * 2000;
-                const duration = 8000 + (index * 1000);
-                
-                el.style.animationDelay = `${delay}ms`;
-                el.style.animationDuration = `${duration}ms`;
-            });
-        }
-
-        // Initialize animations
-        document.addEventListener('DOMContentLoaded', () => {
-            animateFloatingElements();
-            
-            // Set initial tab indicator position
-            const activeTab = document.querySelector('.tab-btn.active');
-            if (activeTab) {
-                const indicator = document.querySelector('.tab-indicator');
-                const tabRect = activeTab.getBoundingClientRect();
-                const containerRect = activeTab.parentElement.getBoundingClientRect();
-                indicator.style.left = `${tabRect.left - containerRect.left}px`;
-                indicator.style.width = `${tabRect.width}px`;
-            }
-        });
-    </script>
 </body>
 </html>

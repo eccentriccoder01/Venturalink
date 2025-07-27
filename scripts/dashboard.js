@@ -1,9 +1,7 @@
-// Import Firebase services and auth functions
-import { db, auth } from './firebase.js';
-import { getCurrentUser, getUserType } from './auth.js';
+
+import { db, auth } from './firebase.js';import { getCurrentUser, getUserType } from './auth.js';
 import { doc, getDoc, addDoc, updateDoc, collection, getDocs, query, where, orderBy, limit } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-// Get DOM elements
 const userNameElement = document.getElementById('user-name');
 const userRoleElement = document.getElementById('user-role');
 const totalProposalsElement = document.getElementById('total-proposals');
@@ -332,6 +330,7 @@ async function loadDashboardData(user) {
                         const proposalDiv = createProposalCard(proposal, index);
                         proposalsList.appendChild(proposalDiv);
                     });
+                    window.lucide.createIcons();
                 }
             }
 
@@ -351,12 +350,11 @@ async function loadDashboardData(user) {
                     const proposalDiv = createProposalCard(proposal, index);
                     myProposals.appendChild(proposalDiv);
                 });
+                    window.lucide.createIcons();
             }
         }
 
         await loadRecentActivity(user.uid);
-        
-        // Simulate unread messages for demo
         if (unreadMessagesElement) {
             animateCounter(unreadMessagesElement, Math.floor(Math.random() * 10));
         }
@@ -656,14 +654,10 @@ async function handleProposalSubmit(event) {
         };
         
         await addDoc(collection(db, 'proposals'), formData);
-        
-        // Reset form with animation
         proposalForm.reset();
         hideNewProposalForm();
         
         showMessage('Proposal submitted successfully!', 'success');
-        
-        // Reload dashboard data
         await loadDashboardData(currentUser);
         
     } catch (error) {
@@ -674,8 +668,6 @@ async function handleProposalSubmit(event) {
         hideButtonLoading(submitButton);
     }
 }
-
-// Enhanced button loading states
 function showButtonLoading(button) {
     if (!button) return;
     
@@ -703,8 +695,6 @@ function hideButtonLoading(button) {
         button.innerHTML = button.dataset.originalContent;
     }
 }
-
-// Enhanced message system
 function showMessage(message, type = 'info', duration = 5000) {
     const messageContainer = document.createElement('div');
     messageContainer.className = `toast-message toast-${type}`;
@@ -725,8 +715,7 @@ function showMessage(message, type = 'info', duration = 5000) {
             <i data-lucide="x"></i>
         </button>
     `;
-    
-    // Add toast styles if not already added
+
     if (!document.getElementById('toast-styles')) {
         const toastStyles = document.createElement('style');
         toastStyles.id = 'toast-styles';
@@ -793,11 +782,7 @@ function showMessage(message, type = 'info', duration = 5000) {
     }
     
     document.body.appendChild(messageContainer);
-    
-    // Initialize lucide icons for the new message
-    lucide.createIcons();
-    
-    // Auto remove after duration
+    window.lucide.createIcons();
     setTimeout(() => {
         messageContainer.style.animation = 'slideInRight 0.3s ease-in reverse';
         setTimeout(() => {
@@ -806,7 +791,6 @@ function showMessage(message, type = 'info', duration = 5000) {
     }, duration);
 }
 
-// Enhanced date formatting
 function formatDate(timestamp) {
     if (!timestamp) return '';
     
@@ -833,7 +817,6 @@ function formatDate(timestamp) {
     }
 }
 
-// Placeholder functions for proposal actions
 window.viewProposal = function(proposalId) {
     showMessage('Proposal viewer coming soon!', 'info');
 };
@@ -842,22 +825,16 @@ window.contactUser = function(userId) {
     showMessage('Messaging system coming soon!', 'info');
 };
 
-// Enhanced logout handler with animation
 window.handleLogout = async function () {
     try {
-        showLoadingState();
-        
+        showLoadingState();    
         await auth.signOut();
         localStorage.clear();
-        
-        // Add exit animation
         document.body.style.opacity = '0';
-        document.body.style.transform = 'scale(0.95)';
-        
+        document.body.style.transform = 'scale(0.95)';  
         setTimeout(() => {
             window.location.href = 'login.html';
         }, 500);
-        
     } catch (error) {
         console.error('Logout failed:', error);
         hideLoadingState();
@@ -865,15 +842,11 @@ window.handleLogout = async function () {
     }
 };
 
-// Initialize performance monitoring
 function initPerformanceMonitoring() {
-    // Monitor page load performance
     window.addEventListener('load', () => {
         const loadTime = performance.now();
         console.log(`Dashboard loaded in ${Math.round(loadTime)}ms`);
     });
-    
-    // Monitor memory usage (if available)
     if ('memory' in performance) {
         setInterval(() => {
             const memory = performance.memory;
@@ -884,11 +857,19 @@ function initPerformanceMonitoring() {
     }
 }
 
-// Initialize dashboard
+window.hideNewProposalForm = () => {
+    const modal = document.getElementById('new-proposal-form');
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+};
+
+
 document.addEventListener('DOMContentLoaded', () => {
     initPerformanceMonitoring();
-    
-    // Add entrance animation styles
+    window.lucide.createIcons();
     const animationStyles = document.createElement('style');
     animationStyles.textContent = `
         .animate-entrance {
