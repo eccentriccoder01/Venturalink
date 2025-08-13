@@ -1812,6 +1812,24 @@ function init() {
 
 document.addEventListener('DOMContentLoaded', init);
 
+// ===== THEME TOGGLE =====
+const toggleBtn = document.getElementById("theme-toggle");
+const root = document.documentElement;
+
+// Load saved theme or default to dark
+const savedTheme = localStorage.getItem("theme") || "dark";
+root.setAttribute("data-theme", savedTheme);
+toggleBtn.textContent = savedTheme === "dark" ? "🌙" : "☀️";
+
+// Toggle theme on click
+toggleBtn.addEventListener("click", () => {
+  let currentTheme = root.getAttribute("data-theme");
+  let newTheme = currentTheme === "dark" ? "light" : "dark";
+  root.setAttribute("data-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
+  toggleBtn.textContent = newTheme === "dark" ? "🌙" : "☀️";
+});
+
 // Run after DOM is ready
 document.addEventListener("DOMContentLoaded", function () {
   const mybutton = document.getElementById("myBtn");
@@ -1833,5 +1851,4 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
-
 
