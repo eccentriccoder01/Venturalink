@@ -1812,7 +1812,6 @@ function init() {
 
 document.addEventListener('DOMContentLoaded', init);
 
-
 // ===== THEME TOGGLE =====
 const toggleBtn = document.getElementById("theme-toggle");
 const root = document.documentElement;
@@ -1830,3 +1829,26 @@ toggleBtn.addEventListener("click", () => {
   localStorage.setItem("theme", newTheme);
   toggleBtn.textContent = newTheme === "dark" ? "🌙" : "☀️";
 });
+
+// Run after DOM is ready
+document.addEventListener("DOMContentLoaded", function () {
+  const mybutton = document.getElementById("myBtn");
+
+  // Show button on scroll
+  window.addEventListener("scroll", function () {
+    if (window.scrollY > 200) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+  });
+
+  // Scroll to top on click
+  mybutton.addEventListener("click", function () {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+});
+
