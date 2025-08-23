@@ -1,6 +1,11 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/", "destination": "/index.html" }
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/login", "destination": "/login.html" },
+    { "source": "/register", "destination": "/register.html" },
+    { "source": "/dashboard", "destination": "/dashboard.html" },
+    { "source": "/proposals", "destination": "/proposals.html" },
+    { "source": "/create-proposal", "destination": "/create-proposal.html" }
   ]
 }
