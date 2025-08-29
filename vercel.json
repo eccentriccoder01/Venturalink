@@ -1,5 +1,6 @@
 {
-  "rewrites": [
+  "cleanUrls":true
+  "redirects": [
     { "source": "/", "destination": "/index.html" },
     { "source": "/login", "destination": "/login.html" },
     { "source": "/register", "destination": "/register.html" },
