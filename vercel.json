@@ -1,5 +1,4 @@
 {
-  "cleanUrls":true,
   "redirects": [
     { "source": "/", "destination": "/index.html" },
     { "source": "/login", "destination": "/login.html" },
