@@ -374,6 +374,19 @@ body {
     color: var(--text-tertiary);
 }
 
+/* Select placeholder styling */
+.field-select[data-placeholder]:invalid {
+    color: var(--text-tertiary);
+}
+
+.field-select[data-placeholder]:invalid::before {
+    content: attr(data-placeholder);
+}
+
+.field-select option:first-child {
+    display: none;
+}
+
 /* Form Options */
 .form-options {
     display: flex;
