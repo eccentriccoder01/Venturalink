@@ -182,7 +182,7 @@ function showNotification(message, type = "info") {
 document
   .getElementById("btn-google-sign")
   .addEventListener("click", async (event) => {
-    event.preventDefault(); // Stop form submission
+    event.preventDefault();
     document.querySelector("form").noValidate = true;
     try {
       const result = await signInWithPopup(auth, provider);
