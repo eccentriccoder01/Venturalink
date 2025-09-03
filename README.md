@@ -310,7 +310,7 @@ We love our contributors! If you'd like to help, please check out our [`CONTRIBU
 
 <!-- Contributors badge (auto-updating) -->
 
-[![Contributors](https://img.shields.io/github/contributors/eccentriccoder01/Venturalink?style=for-the-badge)](https://github.com/RhythmPahwa14/eccentriccoder01/Venturalink/contributors)
+[![Contributors](https://img.shields.io/github/contributors/eccentriccoder01/Venturalink?style=for-the-badge)](https://github.com/eccentriccoder01/Venturalink/contributors)
 
 <!-- Contributors avatars (auto-updating) -->
 <p align="left">
