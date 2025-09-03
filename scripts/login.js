@@ -1,11 +1,13 @@
 import {
+  getAuth,
   GoogleAuthProvider,
   signInWithPopup,
-} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-import { auth } from './firebase.js';
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+import { auth, db } from './firebase.js';
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
 const provider = new GoogleAuthProvider();
-
 const loginForm = document.getElementById("login-form");
 
 if (loginForm) {
@@ -179,22 +181,16 @@ function showNotification(message, type = "info") {
 }
 
 // 🔹 Google Sign-In Function
-document
-  .getElementById("btn-google-sign")
-  .addEventListener("click", async (event) => {
+document.getElementById("btn-google-sign").addEventListener("click", async (event) => {
     event.preventDefault();
-    document.querySelector("form").noValidate = true;
     try {
-      const result = await signInWithPopup(auth, provider);
-      console.log(getauth);
-
-      const user = result.user;
-      alert(`Welcome ${user.displayName}!`);
-      console.log(user);
-
-      window.location.href = "index.html";
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        console.log("Signed in with Google:", user);
+        window.location.href = "dashboard.html";
     } catch (error) {
-      console.error(error);
-      alert("Sign-in failed!");
+        if (error.code !== 'auth/popup-closed-by-user') {
+            alert("Sign-in failed. Please check the console for details.");
+        }
     }
-  });
+});
