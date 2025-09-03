@@ -2,20 +2,9 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-const firebaseConfig = {
-  apiKey: "AIzaSyA37bruIT_neT5w-8CUuPGofy0Lnv2UJOg",
-  authDomain: "project-1-747ec.firebaseapp.com",
-  projectId: "project-1-747ec",
-  storageBucket: "project-1-747ec.firebasestorage.app",
-  messagingSenderId: "122686135785",
-  appId: "1:122686135785:web:7e159363045f52208cbf78",
-  measurementId: "G-1GT8XMMFM3",
-};
+import { auth } from './firebase.js';
 
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
-const provide = new GoogleAuthProvider();
+const provider = new GoogleAuthProvider();
 
 const loginForm = document.getElementById("login-form");
 
@@ -192,18 +181,17 @@ function showNotification(message, type = "info") {
 // 🔹 Google Sign-In Function
 document
   .getElementById("btn-google-sign")
-  .addEventListener("click", async () => {
+  .addEventListener("click", async (event) => {
     event.preventDefault(); // Stop form submission
     document.querySelector("form").noValidate = true; // Temporarily disable validation
     try {
-      const result = await signInWithPopup(auth, provide);
+      const result = await signInWithPopup(auth, provider);
       console.log(getauth);
 
       const user = result.user;
       alert(`Welcome ${user.displayName}!`);
-      console.log(user); // See all user info in console
+      console.log(user);
 
-      // Example redirect
       window.location.href = "index.html";
     } catch (error) {
       console.error(error);
