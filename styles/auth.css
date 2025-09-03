@@ -486,6 +486,10 @@ body {
     overflow: hidden;
     transition: var(--transition-normal);
     margin-top: var(--space-md);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .auth-submit-btn:hover {
@@ -500,6 +504,16 @@ body {
 .btn-text {
     position: relative;
     z-index: 2;
+}
+#btn-google-sign{
+    background: var(--glass-bg); 
+}
+#btn-google-sign:hover{
+    background: var(--gradient-primary);
+}
+#google-logo{
+    width: 24px;
+    height: 24px;
 }
 
 .btn-shine {
