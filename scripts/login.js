@@ -183,7 +183,7 @@ document
   .getElementById("btn-google-sign")
   .addEventListener("click", async (event) => {
     event.preventDefault(); // Stop form submission
-    document.querySelector("form").noValidate = true; // Temporarily disable validation
+    document.querySelector("form").noValidate = true;
     try {
       const result = await signInWithPopup(auth, provider);
       console.log(getauth);
