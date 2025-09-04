@@ -134,7 +134,7 @@ Experience Venturalink live here:
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
-![GSSoC Logo](/Venturalink/assets/gssoc%20logo.png)
+![GSSoC Logo](assets/gssoc%20logo.png)
 
 🌟 **Exciting News...**
 
