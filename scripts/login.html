@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Stream Page</title>
+    <style>
+        body {
+            background: #f4f4f8;
+            color: #222;
+            transition: background 0.3s, color 0.3s;
+            min-height: 100vh;
+        }
+        .dark-mode {
+            background: #181824;
+            color: #f4f4f8;
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #fff;
+            color: #222;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 1001;
+            transition: background 0.3s, color 0.3s;
+        }
+        .dark-mode .theme-toggle {
+            background: #222;
+            color: #fff;
+            border-color: #444;
+        }
+        .stream-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .stream-title {
+            font-size: 2rem;
+            margin-bottom: 24px;
+        }
+        .stream-embed iframe {
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        }
+        .dark-mode .stream-title {
+            color: #f4f4f8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark mode toggle removed as requested -->
+    <div class="stream-container">
+        <h1 class="stream-title">Live Stream</h1>
+        <div class="stream-embed">
+            <!-- Example YouTube embed, replace src with your stream URL if needed -->
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/live_stream?channel=UC4a-Gbdw7vOaccHmFo40b9g" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <script>
+    // Dark mode toggle script removed as requested
+    </script>
+</body>
+</html>
