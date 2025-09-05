@@ -155,107 +155,115 @@ class PremiumUIController {
         };
 
         document.addEventListener('mousemove', (e) => {
-            targetX = e.clientX;
-            targetY = e.clientY;
-            this.mousePos = { x: e.clientX, y: e.clientY };
+                const loader = document.createElement('div');
+                loader.className = 'page-loader';
+                loader.innerHTML = `
+                    <div class="loader-content">
+                        <div class="loader-logo">
+                            <svg viewBox="0 0 40 40" width="60" height="60">
+                                <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="url(#loader-gradient)" stroke-width="2" fill="none"/>
+                                <circle cx="20" cy="20" r="6" fill="url(#loader-gradient)"/>
+                                <defs>
+                                    <linearGradient id="loader-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#667eea"/>
+                                        <stop offset="100%" style="stop-color:#764ba2"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="loader-text">Venturalink</div>
+                        <div class="loader-progress">
+                            <div class="loader-bar"></div>
+                        </div>
+                    </div>
+                `;
+                loader.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: #0a0a0f;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                    opacity: 1;
+                    transition: opacity 0.5s ease;
+                `;
 
-            if (!this.isMouseMoving) {
-                this.isMouseMoving = true;
-                this.cursorFollower.style.opacity = '1';
-                cursorTrail.style.opacity = '1';
-                cursorGlow.style.opacity = '1';
-            }
+                const loaderStyles = `
+                    .loader-content {
+                        text-align: center;
+                    }
 
-            clearTimeout(this.mouseStopTimeout);
-            this.mouseStopTimeout = setTimeout(() => {
-                this.isMouseMoving = false;
-            }, 100);
-        });
+                    .loader-logo {
+                        margin-bottom: 2rem;
+                        animation: logoSpin 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+                    }
 
-        updateCursor();
+                    .loader-text {
+                        font-family: 'Space Grotesk', sans-serif;
+                        font-size: 2rem;
+                        font-weight: 700;
+                        background: linear-gradient(135deg, #667eea, #764ba2);
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        margin-bottom: 2rem;
+                        animation: textGlow 2s ease-in-out infinite alternate;
+                    }
 
-        // Enhanced cursor interactions
-        document.addEventListener('mousedown', () => {
-            this.cursorFollower.classList.add('cursor-click');
-        });
+                    .loader-progress {
+                        width: 200px;
+                        height: 4px;
+                        background: rgba(255, 255, 255, 0.1);
+                        border-radius: 2px;
+                        overflow: hidden;
+                        margin: 0 auto;
+                    }
 
-        document.addEventListener('mouseup', () => {
-            this.cursorFollower.classList.remove('cursor-click');
-        });
+                    .loader-bar {
+                        height: 100%;
+                        background: linear-gradient(90deg, #667eea, #764ba2);
+                        width: 0%;
+                        border-radius: 2px;
+                        animation: loaderProgress 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+                    }
 
-        // Cursor state changes for different elements
-        const hoverElements = document.querySelectorAll('a, button, .btn, .nav-link, .feature-card');
-        hoverElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                this.cursorFollower.classList.add('cursor-hover');
-                cursorGlow.style.opacity = '0.3';
-            });
-            el.addEventListener('mouseleave', () => {
-                this.cursorFollower.classList.remove('cursor-hover');
-                cursorGlow.style.opacity = '0.1';
-            });
-        });
+                    @keyframes logoSpin {
+                        0%, 100% { transform: rotate(0deg) scale(1); }
+                        50% { transform: rotate(180deg) scale(1.1); }
+                    }
 
-        const textElements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, span');
-        textElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                this.cursorFollower.classList.add('cursor-text');
-            });
-            el.addEventListener('mouseleave', () => {
-                this.cursorFollower.classList.remove('cursor-text');
-            });
-        });
-    }
+                    @keyframes textGlow {
+                        0% { filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.5)); }
+                        100% { filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.8)); }
+                    }
 
-    // Magnetic Elements Effect
-    setupMagneticElements() {
-        this.magneticElements = document.querySelectorAll('.btn, .feature-card, .social-link, .nav-link-cta');
-        
-        this.magneticElements.forEach(el => {
-            const strength = el.dataset.magneticStrength || 0.3;
-            
-            el.addEventListener('mousemove', (e) => {
-                const rect = el.getBoundingClientRect();
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
-                
-                const deltaX = (e.clientX - centerX) * strength;
-                const deltaY = (e.clientY - centerY) * strength;
-                
-                el.style.transform = `translate3d(${deltaX}px, ${deltaY}px, 0) scale(1.02)`;
-            });
-            
-            el.addEventListener('mouseleave', () => {
-                el.style.transform = 'translate3d(0, 0, 0) scale(1)';
-            });
-        });
-    }
+                    @keyframes loaderProgress {
+                        to { width: 100%; }
+                    }
+                `;
 
-    // Advanced Scroll Enhancements
-    setupScrollEnhancements() {
-        let ticking = false;
-        
-        const updateScrollEffects = () => {
-            this.scrollProgress = window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight);
-            this.lastScrollTime = Date.now();
-            
-            // Update scroll progress indicator
-            this.updateScrollProgress();
-            
-            // Parallax effects
-            this.updateParallax();
-            
-            // Header effects
-            this.updateHeaderEffects();
-            
-            ticking = false;
-        };
+                const loaderStyleSheet = document.createElement('style');
+                loaderStyleSheet.textContent = loaderStyles;
+                document.head.appendChild(loaderStyleSheet);
 
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                requestAnimationFrame(updateScrollEffects);
-                ticking = true;
-            }
+                document.body.appendChild(loader);
+
+                // Remove loader after animation and show main content
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    setTimeout(() => {
+                        loader.remove();
+                        // Show main content after loader hides
+                        const mainContent = document.querySelector('main');
+                        if (mainContent) {
+                            mainContent.style.opacity = '1';
+                            mainContent.style.pointerEvents = 'auto';
+                        }
+                    }, 500);
+                }, 2500);
             
             this.isScrolling = true;
             clearTimeout(this.scrollTimeout);

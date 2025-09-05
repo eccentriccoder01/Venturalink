@@ -1,3 +1,20 @@
+    <div id="logo-loader" style="position:fixed;top:0;left:0;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;background:#181c2a;z-index:9999;transition:opacity 0.6s;">
+        <img src="V.png" alt="Venturalink Logo" style="width:100px;height:100px;animation:spinLogo 1.2s linear infinite;filter:drop-shadow(0 0 24px #667eea);">
+    </div>
+        <script>
+            // Preloader hide logic
+                    window.addEventListener('load', function() {
+                        var loader = document.getElementById('logo-loader');
+                        if (loader) {
+                            setTimeout(function() {
+                                loader.style.opacity = '0';
+                                setTimeout(function() {
+                                    loader.style.display = 'none';
+                                }, 600);
+                            }, 2000); // Show loader for 2 seconds
+                        }
+                    });
+        </script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,9 +38,12 @@
         .nav-links a:hover {
             color: white;
         }
+        main {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
     </style>
-</head>
-<body>
+    <!-- Loader removed to ensure static content is always visible -->
     <div class="bg-animation">
         <div class="bg-particle"></div>
         <div class="bg-particle"></div>
@@ -73,7 +93,7 @@
                     <span>About</span>
                 </a>
                 <a href="./login.html" class="nav-link" data-text="Login">
-                    <span>Login</span>
+                                            <button id="theme-toggle" aria-label="Toggle dark and light theme" style="color:#fff;background:transparent;border:none;font-size:1.2rem;">🌙</button>
                 </a>
                 <a href="./register.html" class="nav-link nav-link-cta">
                     <span>Register</span>
@@ -88,8 +108,21 @@
             </button>
         </nav>
     </header>
+                                            <a href="/" class="nav-link" data-text="Home" aria-label="Home" style="color:#fff;">
+                                                <span>Home</span>
+                                            </a>
+                                            <a href="/about" class="nav-link" data-text="About" aria-label="About" style="color:#fff;">
+                                                <span>About</span>
+                                            </a>
+                                            <a href="./login.html" class="nav-link" data-text="Login" aria-label="Login" style="color:#fff;">
+                                                <span>Login</span>
+                                            </a>
+                                            <a href="./register.html" class="nav-link nav-link-cta" aria-label="Register" style="color:#fff;">
+                                                <span>Register</span>
+                                                <div class="nav-link-bg"></div>
+                                            </a>
 
-    <main>
+    <main style="opacity:1;pointer-events:auto;">
         <!-- Hero Section with Advanced Animations -->
         <section id="hero" class="hero-section">
             <div class="hero-bg-elements">
