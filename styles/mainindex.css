@@ -1867,28 +1867,37 @@ main {
 }
 
 /* Scroll to Top Button */
-#myBtn {
-  display: none; /* Hidden by default */
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  z-index: 99;
-  font-size: 25px;
-  border: none;
-  outline: none;
-  background-color: #333;
-  color: white;
-  cursor: pointer;
-  width: 40px;          
-  height: 40px;         
-  line-height: 40px;    
-  text-align: center;   
-  padding: 0;           
-  border-radius: 0;     
-  transition: background-color 0.3s ease;
-  scroll-behavior: smooth;
+
+/* Back to Top Button (Modern, Themed) */
+#backToTopBtn {
+    display: none; /* Hidden by default */
+    position: fixed;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    z-index: 1200;
+    width: 48px;
+    height: 48px;
+    border: none;
+    outline: none;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 0 4px 24px rgba(102,126,234,0.18), 0 1.5px 8px rgba(118,75,162,0.10);
+    cursor: pointer;
+    transition: box-shadow 0.3s, transform 0.2s, background 0.2s;
+    padding: 0;
+    opacity: 0.92;
+    backdrop-filter: blur(2px);
 }
 
-#myBtn:hover {
-  background-color: #555;
+#backToTopBtn svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+#backToTopBtn:hover {
+    box-shadow: 0 8px 32px rgba(102,126,234,0.28), 0 2px 12px rgba(118,75,162,0.18);
+    transform: translateY(-4px) scale(1.08);
+    opacity: 1;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }

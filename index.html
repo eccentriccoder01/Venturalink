@@ -450,9 +450,19 @@
         </div>
     </div>
 </footer>
-    <br>
-        <button onclick="topFunction()" id="myBtn" title="Go to top">^</button>
-    <br>
+        <!-- Back to Top Button -->
+        <button id="backToTopBtn" title="Back to top" aria-label="Back to top">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="12" fill="url(#btt-gradient)"/>
+                <path d="M12 16V8M12 8L8 12M12 8L16 12" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <defs>
+                    <linearGradient id="btt-gradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#667eea"/>
+                        <stop offset="1" stop-color="#764ba2"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </button>
     <script type="module" src="/scripts/main.js"></script>
 </body>
 </html>
