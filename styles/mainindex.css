@@ -1,3 +1,39 @@
+/* Social Media Footer Icons */
+.footer-social-icons {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+    margin-left: 1.5rem;
+}
+
+.footer-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-full);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 1.25rem;
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-social-link:hover {
+    color: #fff;
+    background: var(--gradient-primary);
+    border-color: transparent;
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px) scale(1.08);
+}
+
+.footer-social-link i {
+    pointer-events: none;
+}
 /* =========================================
    ULTRA PREMIUM UI - WORLD CLASS DESIGN
 ========================================= */
