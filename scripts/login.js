@@ -40,7 +40,7 @@ if (loginForm) {
         submitBtn.style.background = "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)";
   
         setTimeout(() => {
-          window.location.href = "./dashboard.html";
+          window.location.href = "./profile.html";
         }, 1000);
       } else {
         throw new Error("User profile not found. Please complete registration.");

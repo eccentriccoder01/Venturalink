@@ -569,7 +569,7 @@ auth.onAuthStateChanged(async (user) => {
             updateDebugInfo('Logged in', 'Document not found');
             showAlert('User profile not found. Redirecting to dashboard...', 'error');
             setTimeout(() => {
-                window.location.href = './dashboard.html';
+                window.location.href = './profile.html';
             }, 2000);
             return;
         }
@@ -582,7 +582,7 @@ auth.onAuthStateChanged(async (user) => {
             console.log('Not a business user');
             showAlert('⚠️ Only business users can submit proposals. Redirecting...', 'error');
             setTimeout(() => {
-                window.location.href = './dashboard.html';
+                window.location.href = './profile.html';
             }, 3000);
         } else {
             // Show welcome message for business users
