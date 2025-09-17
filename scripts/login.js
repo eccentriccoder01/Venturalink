@@ -177,7 +177,7 @@ document.getElementById("btn-google-sign").addEventListener("click", async (even
         const result = await signInWithPopup(auth, provider);
         const user = result.user;
         console.log("Signed in with Google:", user);
-        window.location.href = "dashboard.html";
+        window.location.href = "profile.html";
     } catch (error) {
         if (error.code !== 'auth/popup-closed-by-user') {
             alert("Sign-in failed. Please check the console for details.");
