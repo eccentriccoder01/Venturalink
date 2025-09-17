@@ -30,6 +30,8 @@
     <title>Venturalink - Investor & Business Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/mainindex.css">
+    <!-- Font Awesome CDN for social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-papm6Q+ua6QwQn6QwQn6QwQn6QwQn6QwQn6QwQn6QwQn6QwQn6QwQn6QwQn6QwQn6QwQn6QwQn6QwQn6Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="/scripts/theme.js" defer></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
@@ -442,6 +444,12 @@
             <div class="footer-divider"></div>
             <div class="footer-bottom-content">
                 <p>&copy; 2025 Venturalink Platform. All rights reserved.</p>
+                <div class="footer-social-icons">
+                    <a href="#" aria-label="Facebook" class="footer-social-link" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram" class="footer-social-link" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter/X" class="footer-social-link" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn" class="footer-social-link" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+                </div>
                 <div class="footer-badges">
                     <span class="badge">Trusted by 10K+ users</span>
                     <span class="badge">SOC 2 Compliant</span>
@@ -450,9 +458,19 @@
         </div>
     </div>
 </footer>
-    <br>
-        <button onclick="topFunction()" id="myBtn" title="Go to top">^</button>
-    <br>
+        <!-- Back to Top Button -->
+        <button id="backToTopBtn" title="Back to top" aria-label="Back to top">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="12" fill="url(#btt-gradient)"/>
+                <path d="M12 16V8M12 8L8 12M12 8L16 12" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <defs>
+                    <linearGradient id="btt-gradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#667eea"/>
+                        <stop offset="1" stop-color="#764ba2"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </button>
     <script type="module" src="/scripts/main.js"></script>
 </body>
 </html>

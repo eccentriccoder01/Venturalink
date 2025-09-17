@@ -1,3 +1,24 @@
+// ===============================
+// Back to Top Button Logic
+// ===============================
+document.addEventListener('DOMContentLoaded', function () {
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    if (!backToTopBtn) return;
+
+    // Show button when scrolled down
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 200) {
+            backToTopBtn.style.display = 'block';
+        } else {
+            backToTopBtn.style.display = 'none';
+        }
+    });
+
+    // Smooth scroll to top
+    backToTopBtn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+});
 const firebaseConfig = {
   apiKey: "AIzaSyA37bruIT_neT5w-8CUuPGofy0Lnv2UJOg",
   authDomain: "project-1-747ec.firebaseapp.com",
