@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cookie Policy | Venturalink</title>
+  <title>How to Pitch Your Startup to Investors | Venturalink</title>
   <link rel="icon" type="image/png" href="V.png">
   <link rel="stylesheet" href="styles/mainindex.css">
   <style>
@@ -14,7 +14,6 @@
       margin: 0;
       min-height: 100vh;
     }
-
     .main-header {
       background: #23243a;
       box-shadow: 0 2px 16px rgba(102,126,234,0.08);
@@ -23,60 +22,23 @@
       justify-content: center;
       align-items: center;
     }
-
-    .navbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2rem;
-    }
-
-    .logo {
-      margin-right: 2rem;
-    }
-
     .logo-container {
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-
     .logo-icon svg {
       height: 2.5rem;
       width: 2.5rem;
       display: block;
     }
-
     .logo-text img {
       height: 2.2rem;
-      margin-right: 0.5rem;
+      margin-right: -8px;
       vertical-align: middle;
       filter: drop-shadow(0 0 8px #667eea);
     }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .nav-link {
-      padding: 0.5rem 0;
-      font-size: 1rem;
-      color: #e4e8f7;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .nav-link:hover {
-      color: #764ba2;
-    }
-
-    main {
-      margin-top: 60px;
-    }
-
-    .cookie-section {
+    .blog-post-section {
       max-width: 800px;
       margin: 3rem auto 2rem auto;
       background: rgba(34,36,58,0.95);
@@ -85,63 +47,53 @@
       box-shadow: 0 8px 32px rgba(102,126,234,0.12);
       text-align: left;
     }
-
-    .cookie-section h1 {
+    .blog-post-section h1 {
       color: #667eea;
       font-size: 2.5rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       letter-spacing: 1px;
-      text-align: center;
     }
-
-    .cookie-section h2 {
-      color: #764ba2;
-      font-size: 1.3rem;
-      margin-top: 2rem;
-      margin-bottom: 0.7rem;
+    .blog-post-meta {
+      color: #aab4e8;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
     }
-
-    .cookie-section p, .cookie-section ul {
+    .blog-post-section p {
       color: #e4e8f7;
       font-size: 1.08rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+     .blog-post-section h2 {
+      color: #764ba2;
+      font-size: 1.5rem;
+      margin-top: 2rem;
       margin-bottom: 1rem;
     }
-
-    .cookie-section ul {
-      padding-left: 1.5rem;
-    }
-
-    .cookie-section li {
-      margin-bottom: 0.5rem;
-    }
-
-    .cookie-section a {
+    .back-link {
+      display: inline-block;
+      margin-top: 2rem;
       color: #667eea;
       text-decoration: none;
+      font-weight: bold;
     }
-
-    .cookie-section a:hover {
-      color: #764ba2;
+    .back-link:hover {
       text-decoration: underline;
     }
-
-    /* Footer styles */
+    /* Footer override for dark theme */
     .premium-footer {
       background: #18192b;
       color: #e4e8f7;
       border-top: 2px solid #23243a;
     }
-
     .footer-section h4 {
       color: #667eea;
     }
-
     .footer-links-grid a {
       color: #e4e8f7;
       text-decoration: none;
       transition: color 0.2s;
     }
-
     .footer-links-grid a:hover {
       color: #764ba2;
       text-decoration: underline;
@@ -180,11 +132,7 @@
         <a href="features.html" class="nav-link" data-text="Features"><span>Features</span></a>
         <a href="pricing.html" class="nav-link" data-text="Pricing"><span>Pricing</span></a>
         <a href="contact.html" class="nav-link" data-text="Contact"><span>Contact</span></a>
-        <a href="blog.html" class="nav-link" data-text="Blog"><span>Blog</span></a>
-        <a href="help.html" class="nav-link" data-text="Help"><span>Help Center</span></a>
-        <a href="guides.html" class="nav-link" data-text="Guides"><span>Guides</span></a>
-        <a href="api.html" class="nav-link" data-text="API"><span>API Docs</span></a>
-        <a href="terms.html" class="nav-link" data-text="Terms"><span>Terms of Service</span></a>
+        <a href="blog.html" class="nav-link active" data-text="Blog"><span>Blog</span></a>
         <a href="login.html" class="nav-link" data-text="Login"><span>Login</span></a>
         <a href="register.html" class="nav-link nav-link-cta"><span>Register</span><div class="nav-link-bg"></div></a>
       </div>
@@ -192,43 +140,35 @@
   </header>
 
   <main>
-    <section class="cookie-section">
-      <h1>Cookie Policy</h1>
-      <p>
-        This Cookie Policy explains how Venturalink uses cookies and similar technologies to recognize you when you visit our website.
-      </p>
-      <h2>1. What Are Cookies?</h2>
-      <p>
-        Cookies are small data files placed on your device when you visit a website. They help us remember your preferences and improve your experience.
-      </p>
-      <h2>2. How We Use Cookies</h2>
-      <ul>
-        <li>To remember your login and session information.</li>
-        <li>To analyze site usage and improve our services.</li>
-        <li>To personalize content and features.</li>
-      </ul>
-      <h2>3. Types of Cookies We Use</h2>
-      <ul>
-        <li><strong>Essential Cookies:</strong> Necessary for basic site functionality.</li>
-        <li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our site.</li>
-        <li><strong>Preference Cookies:</strong> Remember your settings and choices.</li>
-      </ul>
-      <h2>4. Managing Cookies</h2>
-      <p>
-        You can control or delete cookies through your browser settings. However, disabling cookies may affect your experience on Venturalink.
-      </p>
-      <h2>5. Changes to This Policy</h2>
-      <p>
-        We may update this Cookie Policy from time to time. Changes will be posted on this page.
-      </p>
-      <h2>6. Contact Us</h2>
-      <p>
-        For any questions about our Cookie Policy, contact us at <a href="mailto:support@venturalink.com">support@venturalink.com</a>.
-      </p>
+    <section class="blog-post-section">
+      <h1>How to Pitch Your Startup to Investors</h1>
+      <div class="blog-post-meta">By Team Venturalink &middot; April 2025</div>
+      
+      <p>Securing funding from investors is a critical milestone for any startup. A well-crafted pitch can make all the difference. It’s not just about having a great idea; it’s about presenting that idea in a compelling way that convinces investors of its potential. This guide will walk you through the key elements of a successful pitch.</p>
+
+      <h2>1. Know Your Audience</h2>
+      <p>Before you even think about your pitch deck, research the investors you’re targeting. Understand their investment thesis, the types of companies they’ve funded in the past, and what they look for in a founding team. Tailor your pitch to align with their interests and expertise. A generic pitch sent to a hundred investors is far less effective than a few highly targeted, personalized pitches.</p>
+
+      <h2>2. The Problem and Your Solution</h2>
+      <p>Start by clearly articulating the problem you’re solving. How significant is this problem? Who does it affect? A compelling problem creates a sense of urgency. Then, introduce your solution. Explain how your product or service addresses this problem in a unique and effective way. Avoid jargon and technical-heavy language; keep it simple and clear.</p>
+
+      <h2>3. Market Size and Opportunity</h2>
+      <p>Investors want to see a large, growing market. Provide data to support your claims about the market size (TAM, SAM, and SOM). Show that you have a deep understanding of the market landscape and your target customer. Explain why now is the right time for your solution to succeed.</p>
+
+      <h2>4. Your Business Model</h2>
+      <p>How will you make money? Clearly explain your revenue streams, pricing strategy, and customer acquisition costs. Investors need to see a clear path to profitability. If you have any traction—such as early customers, revenue, or user growth—be sure to highlight it. This provides validation for your business model.</p>
+
+      <h2>5. The Team</h2>
+      <p>Many investors will say that they invest in people, not just ideas. Introduce your founding team and key advisors. Highlight their relevant experience, expertise, and passion for the problem you’re solving. Show that you have the right team to execute your vision.</p>
+
+      <h2>6. The Ask</h2>
+      <p>Be specific about how much funding you’re seeking and how you plan to use it. Provide a clear breakdown of how the capital will be allocated (e.g., product development, marketing, hiring). This shows that you’ve thought carefully about your financial needs and have a plan for growth.</p>
+
+      <a href="blog.html" class="back-link">&larr; Back to Blog</a>
     </section>
   </main>
 
-  <!-- Footer -->
+  <!-- Footer (same as other pages) -->
   <footer class="premium-footer">
     <div class="footer-bg">
       <div class="footer-gradient"></div>
