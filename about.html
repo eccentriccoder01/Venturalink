@@ -10,10 +10,11 @@
     body {
       background: linear-gradient(135deg, #23243a 0%, #18192b 100%);
       color: #e4e8f7;
-      font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+      font-family: 'Inter', 'Space Grotesk', Arial, sans-serif;
       margin: 0;
       min-height: 100vh;
     }
+
     .main-header {
       background: #23243a;
       box-shadow: 0 2px 16px rgba(102,126,234,0.08);
@@ -22,21 +23,57 @@
       justify-content: center;
       align-items: center;
     }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+    }
+
+    .logo {
+      margin-right: 2rem;
+    }
+
     .logo-container {
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+
     .logo-icon svg {
       height: 2.5rem;
       width: 2.5rem;
       display: block;
     }
+
     .logo-text img {
       height: 2.2rem;
-      margin-right: -8px;
+      margin-right: 0.5rem;
       vertical-align: middle;
       filter: drop-shadow(0 0 8px #667eea);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      padding: 0.5rem 0;
+      font-size: 1rem;
+      color: #e4e8f7;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: #764ba2;
+    }
+
+    main {
+      margin-top: 60px;
     }
     .about-section {
       max-width: 800px;
@@ -139,25 +176,44 @@
 <body>
   <!-- Header -->
   <header class="main-header">
-    <a href="index.html" class="logo-link">
-      <div class="logo-container">
-        <div class="logo-icon">
-          <svg viewBox="0 0 40 40" fill="none">
-            <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="url(#logo-gradient)" stroke-width="2" fill="none"/>
-            <circle cx="20" cy="20" r="6" fill="url(#logo-gradient)"/>
-            <defs>
-              <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#667eea"/>
-                <stop offset="100%" style="stop-color:#764ba2"/>
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-        <div class="logo-text">
-          <img src="V.png" alt="Venturalink Logo">
-        </div>
+    <nav class="navbar" id="main-nav">
+      <div class="logo">
+        <a href="index.html" class="logo-link">
+          <div class="logo-container">
+            <div class="logo-icon">
+              <svg viewBox="0 0 40 40" fill="none">
+                <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="url(#logo-gradient)" stroke-width="2" fill="none"/>
+                <circle cx="20" cy="20" r="6" fill="url(#logo-gradient)"/>
+                <defs>
+                  <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#667eea"/>
+                    <stop offset="100%" style="stop-color:#764ba2"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="logo-text">
+              <img src="V.png" alt="Venturalink Logo">
+            </div>
+          </div>
+        </a>
       </div>
-    </a>
+      <div class="nav-links">
+        <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+        <a href="index.html" class="nav-link" data-text="Home"><span>Home</span></a>
+        <a href="about.html" class="nav-link" data-text="About"><span>About Us</span></a>
+        <a href="features.html" class="nav-link" data-text="Features"><span>Features</span></a>
+        <a href="pricing.html" class="nav-link" data-text="Pricing"><span>Pricing</span></a>
+        <a href="contact.html" class="nav-link" data-text="Contact"><span>Contact</span></a>
+        <a href="blog.html" class="nav-link" data-text="Blog"><span>Blog</span></a>
+        <a href="help.html" class="nav-link" data-text="Help"><span>Help Center</span></a>
+        <a href="guides.html" class="nav-link" data-text="Guides"><span>Guides</span></a>
+        <a href="api.html" class="nav-link" data-text="API"><span>API Docs</span></a>
+        <a href="terms.html" class="nav-link" data-text="Terms"><span>Terms of Service</span></a>
+        <a href="login.html" class="nav-link" data-text="Login"><span>Login</span></a>
+        <a href="register.html" class="nav-link nav-link-cta"><span>Register</span><div class="nav-link-bg"></div></a>
+      </div>
+    </nav>
   </header>
 
   <main>
