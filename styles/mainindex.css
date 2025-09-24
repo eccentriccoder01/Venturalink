@@ -145,6 +145,8 @@
 
 /* Toggle button styling */
 #theme-toggle {
+    margin-right: 45px;
+    margin-top: 12px;
   position: fixed;
   top: 20px;
   right: 20px;
