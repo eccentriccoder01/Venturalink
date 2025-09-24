@@ -156,8 +156,6 @@
 
 /* Toggle button styling */
 #theme-toggle {
-    margin-right: 45px;
-    margin-top: 12px;
   position: fixed;
   top: 20px;
   right: 20px;
@@ -170,6 +168,27 @@
   z-index: 9999;
   transition: background var(--transition-normal), color var(--transition-normal);
 }
+
+/* ✅ Mobile view */
+@media (max-width: 768px) {
+  #theme-toggle {
+    margin-right: 45px;
+    top: 12px;
+    right: 45px;
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  #theme-toggle {
+    top: 8px;
+    right: 8px;
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+
 
 #theme-toggle:hover {
   background: var(--hover-bg);
