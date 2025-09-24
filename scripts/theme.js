@@ -33,7 +33,7 @@
       if (!btn) return;
       btn.type = 'button';
       btn.style.position = 'fixed';
-      btn.style.top = '20px';
+      btn.style.top = '30px';
       btn.style.right = '20px';
       btn.style.zIndex = '99999';
       btn.style.padding = '12px 18px';

@@ -1,115 +1,122 @@
-    <div id="logo-loader" style="position:fixed;top:0;left:0;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;background:#181c2a;z-index:9999;transition:opacity 0.6s;">
-        <img src="V.png" alt="Venturalink Logo" style="width:100px;height:100px;animation:spinLogo 1.2s linear infinite;filter:drop-shadow(0 0 24px #667eea);">
-    </div>
-        <script>
-            // Preloader hide logic
-                    window.addEventListener('load', function() {
-                        var loader = document.getElementById('logo-loader');
-                        if (loader) {
-                            setTimeout(function() {
-                                loader.style.opacity = '0';
-                                setTimeout(function() {
-                                    loader.style.display = 'none';
-                                }, 600);
-                            }, 2000); // Show loader for 2 seconds
-                        }
-                    });
-        </script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Venturalink - Connect investors with entrepreneurs">
-    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="Venturalink" />
-    <link rel="manifest" href="/favicon/site.webmanifest" />
-    <title>Venturalink - Investor & Business Platform</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles/mainindex.css">
-    <!-- Font Awesome CDN for social media icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-papm6Q+ua6QwQn6QwQn6QwQn6QwQn6QwQn6QwQn6QwQn6QwQn6QwQn6QwQn6QwQn6QwQn6QwQn6QwQn6Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="/scripts/theme.js" defer></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Venturalink - Connect investors with entrepreneurs">
+  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Venturalink" />
+  <link rel="manifest" href="/favicon/site.webmanifest" />
+  <title>Venturalink - Investor & Business Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/mainindex.css">
+  <!-- Font Awesome CDN for social media icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="./scripts/theme.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
-    <style>
-        .nav-links a:hover {
-            color: white;
-        }
-        main {
+  <style>
+    .nav-links a:hover {
+      color: white;
+    }
+    .nav-links a{
+        color:#8092e2;
+    }
+    main {
             opacity: 1 !important;
             pointer-events: auto !important;
         }
-    </style>
-    <!-- Loader removed to ensure static content is always visible -->
-    <div class="bg-animation">
-        <div class="bg-particle"></div>
-        <div class="bg-particle"></div>
-        <div class="bg-particle"></div>
-        <div class="bg-particle"></div>
-        <div class="bg-particle"></div>
-        <div class="bg-orb orb-1"></div>
-        <div class="bg-orb orb-2"></div>
-        <div class="bg-orb orb-3"></div>
+
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div id="logo-loader" style="position:fixed;top:0;left:0;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;background:#181c2a;z-index:9999;transition:opacity 0.6s;">
+    <img src="V.png" alt="Venturalink Logo" style="width:100px;height:100px;animation:spinLogo 1.2s linear infinite;filter:drop-shadow(0 0 24px #667eea);">
+  </div>
+  <script>
+    // Preloader hide logic
+    window.addEventListener('load', function() {
+      var loader = document.getElementById('logo-loader');
+      if (loader) {
+        setTimeout(function() {
+          loader.style.opacity = '0';
+          setTimeout(function() {
+            loader.style.display = 'none';
+          }, 600);
+        }, 2000); // Show loader for 2 seconds
+      }
+    });
+  </script>
+
+  <!-- Background Animation -->
+  <div class="bg-animation">
+    <div class="bg-particle"></div>
+    <div class="bg-particle"></div>
+    <div class="bg-particle"></div>
+    <div class="bg-particle"></div>
+    <div class="bg-particle"></div>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+  </div>
+
+  <!-- Cursor follower -->
+  <div class="cursor-follower"></div>
+
+  <!-- Header -->
+<header class="main-header">
+  <nav class="navbar" id="main-nav">
+    <div class="logo">
+      <a href="index.html" class="logo-link">
+        <div class="logo-container">
+          <div class="logo-icon">
+            <svg viewBox="0 0 40 40" fill="none">
+              <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="url(#logo-gradient)" stroke-width="2" fill="none"/>
+              <circle cx="20" cy="20" r="6" fill="url(#logo-gradient)"/>
+              <defs>
+                <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#667eea"/>
+                  <stop offset="100%" style="stop-color:#764ba2"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="logo-text" style="transform: translateY(-4px)">
+            <img src="V.png" alt="V" style="height: 3rem; margin-right: -8px; transform: translateY(8px)">ENTURALINK
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link"><span>Home</span></a>
+      <a href="about.html" class="nav-link"><span>About</span></a>
+      <a href="login.html" class="nav-link" data-text="Login"><span>Login</span>
+      <a href="register.html" class="nav-link nav-link-cta">
+        <span>Register</span>
+        <div class="nav-link-bg"></div>
+      </a>
+      <button id="theme-toggle" aria-label="Toggle dark and light theme" style= "color:#fff;background:transparent;font-size:1.2rem;">🌙</button></a>
+
+      
     </div>
 
-    <div class="cursor-follower"></div>
-
-    <header class="main-header">
-        <nav class="navbar" id="main-nav">
-            <div class="logo">
-                <a href="./index.html" class="logo-link">
-                    <div class="logo-container">
-                        <div class="logo-icon">
-                            <svg viewBox="0 0 40 40" fill="none">
-                                <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="url(#logo-gradient)" stroke-width="2" fill="none"/>
-                                <circle cx="20" cy="20" r="6" fill="url(#logo-gradient)"/>
-                                <defs>
-                                    <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" style="stop-color:#667eea"/>
-                                        <stop offset="100%" style="stop-color:#764ba2"/>
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-                        </div>
-                    <div class="logo-text" style="transform: translateY(-4px)">
-                    <img src="V.png" alt="V" style="height: 3rem; margin-right: -8px; transform: translateY(8px)">ENTURALINK
-                    </div>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="nav-links">
-                <a href="/" class="nav-link" data-text="Home">
-                    <span>Home</span>
-                </a>
-                <a href="/about" class="nav-link" data-text="About">
-                    <span>About</span>
-                </a>
-                <a href="./login.html" class="nav-link" data-text="Login">
-                                            <button id="theme-toggle" aria-label="Toggle dark and light theme" style="color:#fff;background:transparent;border:none;font-size:1.2rem;">🌙</button>
-                </a>
-                <a href="./register.html" class="nav-link nav-link-cta">
-                    <span>Register</span>
-                    <div class="nav-link-bg"></div>
-                </a>
-            </div>
-            
-            <button class="menu-toggle" aria-label="Toggle navigation menu">
-                <span class="hamburger"></span>
-                <span class="hamburger"></span>
-                <span class="hamburger"></span>
-            </button>
-        </nav>
-    </header>
+    <button class="menu-toggle" aria-label="Toggle navigation menu">
+      <span class="hamburger"></span>
+      <span class="hamburger"></span>
+      <span class="hamburger"></span>
+    </button>
+  </nav>
+</header>
 
 
-    <main style="opacity:1;pointer-events:auto;">
+  <!-- Main content -->
+  <main style="opacity:1;pointer-events:auto;">
         <!-- Hero Section with Advanced Animations -->
         <section id="hero" class="hero-section">
             <div class="hero-bg-elements">
@@ -146,7 +153,7 @@
                 
                 <div class="cta-container">
                     <div class="cta-buttons">
-                        <a href="/login.html" class="btn btn-primary">
+                        <a href="login.html" class="btn btn-primary">
                             <span class="btn-text">Join as Investor</span>
                             <div class="btn-particles">
                                 <span class="particle"></span>
@@ -155,7 +162,7 @@
                             </div>
                             <div class="btn-glow"></div>
                         </a>
-                        <a href="/login.html" class="btn btn-secondary">
+                        <a href="login.html" class="btn btn-secondary">
                             <span class="btn-text">Join as Entrepreneur</span>
                             <div class="btn-border"></div>
                         </a>
@@ -358,9 +365,8 @@
         </section>
     </main>
 
-    <!-- Premium Footer -->
-   <!-- Premium Footer -->
-<footer class="premium-footer">
+  <!-- Footer -->
+  <footer class="premium-footer">
     <div class="footer-bg">
         <div class="footer-gradient"></div>
         <div class="footer-pattern"></div>
@@ -441,19 +447,21 @@
         </div>
     </div>
 </footer>
-        <!-- Back to Top Button -->
-        <button id="backToTopBtn" title="Back to top" aria-label="Back to top">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="12" fill="url(#btt-gradient)"/>
-                <path d="M12 16V8M12 8L8 12M12 8L16 12" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <defs>
-                    <linearGradient id="btt-gradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#667eea"/>
-                        <stop offset="1" stop-color="#764ba2"/>
-                    </linearGradient>
-                </defs>
-            </svg>
-        </button>
-    <script type="module" src="/scripts/main.js"></script>
+
+  <!-- Back to Top Button -->
+<button id="backToTopBtn" title="Back to top" aria-label="Back to top">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="12" fill="url(#btt-gradient)"/>
+        <path d="M12 16V8M12 8L8 12M12 8L16 12" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs>
+            <linearGradient id="btt-gradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#667eea"/>
+                <stop offset="1" stop-color="#764ba2"/>
+            </linearGradient>
+        </defs>
+    </svg>
+</button>
+
+  <script type="module" src="./scripts/main.js"></script>
 </body>
 </html>
