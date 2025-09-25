@@ -1,122 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Venturalink - Connect investors with entrepreneurs">
-  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Venturalink" />
-  <link rel="manifest" href="/favicon/site.webmanifest" />
-  <title>Venturalink - Investor & Business Platform</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles/mainindex.css">
-  <!-- Font Awesome CDN for social media icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script src="./scripts/theme.js" defer></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
-  <style>
-    .nav-links a:hover {
-      color: white;
-    }
-    .nav-links a{
-        color:#8092e2;
-    }
-    main {
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Venturalink - Connect investors with entrepreneurs">
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Venturalink" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <title>Venturalink - Investor & Business Platform</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./styles/mainindex.css">
+    <!-- Font Awesome CDN for social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="./scripts/theme.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <style>
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding-right: 30px;
+            /* 👈 adds the 20px space on the right */
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-links a {
+            color: #8092e2;
+        }
+
+        main {
             opacity: 1 !important;
             pointer-events: auto !important;
         }
-
-  </style>
+    </style>
 </head>
+
 <body>
-  <!-- Loader -->
-  <div id="logo-loader" style="position:fixed;top:0;left:0;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;background:#181c2a;z-index:9999;transition:opacity 0.6s;">
-    <img src="V.png" alt="Venturalink Logo" style="width:100px;height:100px;animation:spinLogo 1.2s linear infinite;filter:drop-shadow(0 0 24px #667eea);">
-  </div>
-  <script>
-    // Preloader hide logic
-    window.addEventListener('load', function() {
-      var loader = document.getElementById('logo-loader');
-      if (loader) {
-        setTimeout(function() {
-          loader.style.opacity = '0';
-          setTimeout(function() {
-            loader.style.display = 'none';
-          }, 600);
-        }, 2000); // Show loader for 2 seconds
-      }
-    });
-  </script>
-
-  <!-- Background Animation -->
-  <div class="bg-animation">
-    <div class="bg-particle"></div>
-    <div class="bg-particle"></div>
-    <div class="bg-particle"></div>
-    <div class="bg-particle"></div>
-    <div class="bg-particle"></div>
-    <div class="bg-orb orb-1"></div>
-    <div class="bg-orb orb-2"></div>
-    <div class="bg-orb orb-3"></div>
-  </div>
-
-  <!-- Cursor follower -->
-  <div class="cursor-follower"></div>
-
-  <!-- Header -->
-<header class="main-header">
-  <nav class="navbar" id="main-nav">
-    <div class="logo">
-      <a href="index.html" class="logo-link">
-        <div class="logo-container">
-          <div class="logo-icon">
-            <svg viewBox="0 0 40 40" fill="none">
-              <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="url(#logo-gradient)" stroke-width="2" fill="none"/>
-              <circle cx="20" cy="20" r="6" fill="url(#logo-gradient)"/>
-              <defs>
-                <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style="stop-color:#667eea"/>
-                  <stop offset="100%" style="stop-color:#764ba2"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-          <div class="logo-text" style="transform: translateY(-4px)">
-            <img src="V.png" alt="V" style="height: 3rem; margin-right: -8px; transform: translateY(8px)">ENTURALINK
-          </div>
-        </div>
-      </a>
+    <!-- Loader -->
+    <div id="logo-loader"
+        style="position:fixed;top:0;left:0;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;background:#181c2a;z-index:9999;transition:opacity 0.6s;">
+        <img src="V.png" alt="Venturalink Logo"
+            style="width:100px;height:100px;animation:spinLogo 1.2s linear infinite;filter:drop-shadow(0 0 24px #667eea);">
     </div>
-    <div class="nav-links">
-      <a href="index.html" class="nav-link"><span>Home</span></a>
-      <a href="about.html" class="nav-link"><span>About</span></a>
-      <a href="login.html" class="nav-link" data-text="Login"><span>Login</span>
-      <a href="register.html" class="nav-link nav-link-cta">
-        <span>Register</span>
-        <div class="nav-link-bg"></div>
-      </a>
-      <button id="theme-toggle" aria-label="Toggle dark and light theme" style= "color:#fff;background:transparent;font-size:1.2rem;">🌙</button></a>
+    <script>
+        // Preloader hide logic
+        window.addEventListener('load', function () {
+            var loader = document.getElementById('logo-loader');
+            if (loader) {
+                setTimeout(function () {
+                    loader.style.opacity = '0';
+                    setTimeout(function () {
+                        loader.style.display = 'none';
+                    }, 600);
+                }, 2000); // Show loader for 2 seconds
+            }
+        });
+    </script>
 
-      
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="bg-particle"></div>
+        <div class="bg-particle"></div>
+        <div class="bg-particle"></div>
+        <div class="bg-particle"></div>
+        <div class="bg-particle"></div>
+        <div class="bg-orb orb-1"></div>
+        <div class="bg-orb orb-2"></div>
+        <div class="bg-orb orb-3"></div>
     </div>
 
-    <button class="menu-toggle" aria-label="Toggle navigation menu">
-      <span class="hamburger"></span>
-      <span class="hamburger"></span>
-      <span class="hamburger"></span>
-    </button>
-  </nav>
-</header>
+    <!-- Cursor follower -->
+    <div class="cursor-follower"></div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <nav class="navbar" id="main-nav">
+            <div class="logo">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 40 40" fill="none">
+                                <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="url(#logo-gradient)"
+                                    stroke-width="2" fill="none" />
+                                <circle cx="20" cy="20" r="6" fill="url(#logo-gradient)" />
+                                <defs>
+                                    <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#667eea" />
+                                        <stop offset="100%" style="stop-color:#764ba2" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="logo-text" style="transform: translateY(-4px)">
+                            <img src="V.png" alt="V"
+                                style="height: 3rem; margin-right: -8px; transform: translateY(8px)">ENTURALINK
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link"><span>Home</span></a>
+                <a href="about.html" class="nav-link"><span>About</span></a>
+                <a href="login.html" class="nav-link" data-text="Login"><span>Login</span>
+                    <a href="register.html" class="nav-link nav-link-cta">
+                        <span>Register</span>
+                        <div class="nav-link-bg"></div>
+                    </a>
+
+            </div>
+
+            <button class="menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </button>
+        </nav>
+    </header>
 
 
-  <!-- Main content -->
-  <main style="opacity:1;pointer-events:auto;">
+    <!-- Main content -->
+    <main style="opacity:1;pointer-events:auto;">
         <!-- Hero Section with Advanced Animations -->
         <section id="hero" class="hero-section">
             <div class="hero-bg-elements">
@@ -125,13 +141,13 @@
                 <div class="floating-shape shape-3"></div>
                 <div class="floating-shape shape-4"></div>
             </div>
-            
+
             <div class="hero-content">
                 <div class="hero-badge">
                     <span class="badge-icon">✨</span>
                     <span>Transforming Ideas Into Reality</span>
                 </div>
-                
+
                 <h1 class="hero-title">
                     <span class="title-line">
                         <span class="word" data-word="Empowering">Empowering</span>
@@ -145,12 +161,12 @@
                         <span class="word gradient-text" data-word="Investments">Investments</span>
                     </span>
                 </h1>
-                
+
                 <p class="hero-subtext">
-                    Where visionary entrepreneurs meet modern-day investors to build the future together, 
+                    Where visionary entrepreneurs meet modern-day investors to build the future together,
                     fostering innovation and creating sustainable growth in tomorrow's economy.
                 </p>
-                
+
                 <div class="cta-container">
                     <div class="cta-buttons">
                         <a href="login.html" class="btn btn-primary">
@@ -167,7 +183,7 @@
                             <div class="btn-border"></div>
                         </a>
                     </div>
-                    
+
                     <div class="hero-stats">
                         <div class="stat-item">
                             <div class="stat-number" data-target="10000">0</div>
@@ -186,13 +202,13 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="scroll-indicator">
                 <div class="scroll-line"></div>
                 <div class="scroll-text">Scroll to explore</div>
             </div>
         </section>
-        
+
         <!-- Features Section with Card Morphing -->
         <section id="features" class="features-section">
             <div class="section-header">
@@ -209,7 +225,7 @@
                     Discover how our platform revolutionizes the way investors and entrepreneurs connect
                 </p>
             </div>
-            
+
             <div class="feature-grid">
                 <div class="feature-card" data-category="investors">
                     <div class="card-glow"></div>
@@ -217,20 +233,23 @@
                         <div class="icon-container">
                             <div class="icon-bg"></div>
                             <svg class="feature-icon" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 2L22 8.5V15.5L12 22L2 15.5V8.5L12 2Z" stroke="currentColor" stroke-width="2"/>
-                                <circle cx="12" cy="12" r="3" fill="currentColor"/>
+                                <path d="M12 2L22 8.5V15.5L12 22L2 15.5V8.5L12 2Z" stroke="currentColor"
+                                    stroke-width="2" />
+                                <circle cx="12" cy="12" r="3" fill="currentColor" />
                             </svg>
                         </div>
                         <h3>For Investors</h3>
                         <div class="card-number">01</div>
                     </div>
-                    
+
                     <div class="card-content">
                         <ul class="feature-list">
                             <li>
                                 <span class="list-icon">
                                     <svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd" />
                                     </svg>
                                 </span>
                                 <span>Curated Business Proposals</span>
@@ -238,7 +257,9 @@
                             <li>
                                 <span class="list-icon">
                                     <svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd" />
                                     </svg>
                                 </span>
                                 <span>Direct Entrepreneur Connections</span>
@@ -246,14 +267,16 @@
                             <li>
                                 <span class="list-icon">
                                     <svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd" />
                                     </svg>
                                 </span>
                                 <span>Exclusive Investment Opportunities</span>
                             </li>
                         </ul>
                     </div>
-                    
+
                     <div class="card-footer">
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 85%"></div>
@@ -268,19 +291,22 @@
                         <div class="icon-container">
                             <div class="icon-bg"></div>
                             <svg class="feature-icon" viewBox="0 0 24 24" fill="none">
-                                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2"
+                                    fill="none" />
                             </svg>
                         </div>
                         <h3>For Entrepreneurs</h3>
                         <div class="card-number">02</div>
                     </div>
-                    
+
                     <div class="card-content">
                         <ul class="feature-list">
                             <li>
                                 <span class="list-icon">
                                     <svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd" />
                                     </svg>
                                 </span>
                                 <span>Showcase Innovative Ideas</span>
@@ -288,7 +314,9 @@
                             <li>
                                 <span class="list-icon">
                                     <svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd" />
                                     </svg>
                                 </span>
                                 <span>Access to Global Investors</span>
@@ -296,14 +324,16 @@
                             <li>
                                 <span class="list-icon">
                                     <svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd" />
                                     </svg>
                                 </span>
                                 <span>Receive Expert Mentorship</span>
                             </li>
                         </ul>
                     </div>
-                    
+
                     <div class="card-footer">
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 92%"></div>
@@ -318,19 +348,23 @@
                         <div class="icon-container">
                             <div class="icon-bg"></div>
                             <svg class="feature-icon" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7.5V9M15 11.5V9.5L21 10V12L15 11.5ZM11 20V14L13 12L15 14V20H11ZM3 12V10L9 9.5V11.5L3 12ZM9 9V7L3 7.5V8.5L9 9Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path
+                                    d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7.5V9M15 11.5V9.5L21 10V12L15 11.5ZM11 20V14L13 12L15 14V20H11ZM3 12V10L9 9.5V11.5L3 12ZM9 9V7L3 7.5V8.5L9 9Z"
+                                    stroke="currentColor" stroke-width="2" fill="none" />
                             </svg>
                         </div>
                         <h3>For Advisors</h3>
                         <div class="card-number">03</div>
                     </div>
-                    
+
                     <div class="card-content">
                         <ul class="feature-list">
                             <li>
                                 <span class="list-icon">
                                     <svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd" />
                                     </svg>
                                 </span>
                                 <span>Share Specialized Knowledge</span>
@@ -338,7 +372,9 @@
                             <li>
                                 <span class="list-icon">
                                     <svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd" />
                                     </svg>
                                 </span>
                                 <span>Engage in Q&A Sessions</span>
@@ -346,14 +382,16 @@
                             <li>
                                 <span class="list-icon">
                                     <svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd" />
                                     </svg>
                                 </span>
                                 <span>Build Professional Reputation</span>
                             </li>
                         </ul>
                     </div>
-                    
+
                     <div class="card-footer">
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 78%"></div>
@@ -365,122 +403,130 @@
         </section>
     </main>
 
-  <!-- Footer -->
-  <footer class="premium-footer">
-    <div class="footer-bg">
-        <div class="footer-gradient"></div>
-        <div class="footer-pattern"></div>
-    </div>
-    
-    <div class="footer-content">
-        <div class="footer-main">
-            <div class="footer-brand">
-                <div class="footer-logo">
-                    <div class="logo-container">
-                        <div class="logo-icon">
-                            <svg viewBox="0 0 40 40" fill="none">
-                                <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="url(#footer-logo-gradient)" stroke-width="2" fill="none"/>
-                                <circle cx="20" cy="20" r="6" fill="url(#footer-logo-gradient)"/>
-                                <defs>
-                                    <linearGradient id="footer-logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" style="stop-color:#667eea"/>
-                                        <stop offset="100%" style="stop-color:#764ba2"/>
-                                    </linearGradient>
-                                </defs>
-                            </svg>
+    <!-- Footer -->
+    <footer class="premium-footer">
+        <div class="footer-bg">
+            <div class="footer-gradient"></div>
+            <div class="footer-pattern"></div>
+        </div>
+
+        <div class="footer-content">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo-container">
+                            <div class="logo-icon">
+                                <svg viewBox="0 0 40 40" fill="none">
+                                    <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="url(#footer-logo-gradient)"
+                                        stroke-width="2" fill="none" />
+                                    <circle cx="20" cy="20" r="6" fill="url(#footer-logo-gradient)" />
+                                    <defs>
+                                        <linearGradient id="footer-logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#667eea" />
+                                            <stop offset="100%" style="stop-color:#764ba2" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <span class="logo-text">Venturalink</span>
                         </div>
-                        <span class="logo-text">Venturalink</span>
+                    </div>
+                    <p class="footer-description">
+                        Connecting investors with entrepreneurs to create meaningful business relationships and drive
+                        economic progress in the digital age.
+                    </p>
+
+                </div>
+
+                <div class="footer-links-grid">
+                    <div class="footer-section">
+                        <h4>Platform</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="features.html">Features</a></li>
+                            <li><a href="pricing.html">Pricing</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="help.html">Help Center</a></li>
+                            <li><a href="guides.html">Guides</a></li>
+                            <li><a href="api.html">API Docs</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="terms.html">Terms of Service</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                            <li><a href="cookies.html">Cookie Policy</a></li>
+                            <li><a href="security.html">Security</a></li>
+                        </ul>
                     </div>
                 </div>
-                <p class="footer-description">
-                    Connecting investors with entrepreneurs to create meaningful business relationships and drive economic progress in the digital age.
-                </p>
-                
             </div>
-            
-            <div class="footer-links-grid">
-                <div class="footer-section">
-                    <h4>Platform</h4>
-                    <ul>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="features.html">Features</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="help.html">Help Center</a></li>
-                        <li><a href="guides.html">Guides</a></li>
-                        <li><a href="api.html">API Docs</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="terms.html">Terms of Service</a></li>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="cookies.html">Cookie Policy</a></li>
-                        <li><a href="security.html">Security</a></li>
-                    </ul>
+
+            <div class="footer-bottom">
+                <div class="footer-divider"></div>
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 Venturalink Platform. All rights reserved.</p>
+                    <div class="footer-social-icons">
+                        <a href="#" aria-label="Facebook" class="footer-social-link" target="_blank" rel="noopener"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram" class="footer-social-link" target="_blank" rel="noopener"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter/X" class="footer-social-link" target="_blank" rel="noopener"><i
+                                class="fab fa-x-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn" class="footer-social-link" target="_blank" rel="noopener"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <div class="footer-badges">
+                        <span class="badge">Trusted by 10K+ users</span>
+                        <span class="badge">SOC 2 Compliant</span>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <div class="footer-bottom">
-            <div class="footer-divider"></div>
-            <div class="footer-bottom-content">
-                <p>&copy; 2025 Venturalink Platform. All rights reserved.</p>
-                <div class="footer-social-icons">
-                    <a href="#" aria-label="Facebook" class="footer-social-link" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Instagram" class="footer-social-link" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="Twitter/X" class="footer-social-link" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
-                    <a href="#" aria-label="LinkedIn" class="footer-social-link" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <div class="footer-badges">
-                    <span class="badge">Trusted by 10K+ users</span>
-                    <span class="badge">SOC 2 Compliant</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+    </footer>
 
-  <!-- Back to Top Button -->
-<button id="backToTopBtn" title="Back to top" aria-label="Back to top">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="12" cy="12" r="12" fill="url(#btt-gradient)"/>
-        <path d="M12 16V8M12 8L8 12M12 8L16 12" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <defs>
-            <linearGradient id="btt-gradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#667eea"/>
-                <stop offset="1" stop-color="#764ba2"/>
-            </linearGradient>
-        </defs>
-    </svg>
-</button>
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" title="Back to top" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="12" fill="url(#btt-gradient)" />
+            <path d="M12 16V8M12 8L8 12M12 8L16 12" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            <defs>
+                <linearGradient id="btt-gradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#667eea" />
+                    <stop offset="1" stop-color="#764ba2" />
+                </linearGradient>
+            </defs>
+        </svg>
+    </button>
 
-  <script type="module" src="./scripts/main.js"></script>
+    <script type="module" src="./scripts/main.js"></script>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const navLinks = document.querySelectorAll(".nav-link");
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const navLinks = document.querySelectorAll(".nav-link");
 
-      navLinks.forEach(link => {
-        if (link.href === window.location.href) {
-          // Mark as active
-          link.classList.add("active");
+            navLinks.forEach(link => {
+                if (link.href === window.location.href) {
+                    // Mark as active
+                    link.classList.add("active");
 
-          // Prevent reload when clicked
-          link.addEventListener("click", (e) => {
-            e.preventDefault();
-          });
-        }
-      });
-    });
-  </script>
+                    // Prevent reload when clicked
+                    link.addEventListener("click", (e) => {
+                        e.preventDefault();
+                    });
+                }
+            });
+        });
+    </script>
 
 </body>
+
 </html>
