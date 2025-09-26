@@ -10,6 +10,24 @@ import { doc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-
 const provider = new GoogleAuthProvider();
 const loginForm = document.getElementById("login-form");
 
+// Password visibility toggle
+const passwordInput = document.getElementById('password');
+const passwordToggle = document.getElementById('password-toggle');
+if (passwordInput && passwordToggle) {
+  passwordToggle.addEventListener('click', () => {
+    const isVisible = passwordToggle.getAttribute('data-visible') === 'true';
+    if (isVisible) {
+      passwordInput.type = 'password';
+      passwordToggle.setAttribute('data-visible', 'false');
+      passwordToggle.setAttribute('aria-label', 'Show password');
+    } else {
+      passwordInput.type = 'text';
+      passwordToggle.setAttribute('data-visible', 'true');
+      passwordToggle.setAttribute('aria-label', 'Hide password');
+    }
+  });
+}
+
 if (loginForm) {
   loginForm.addEventListener("submit", async (event) => {
     event.preventDefault();

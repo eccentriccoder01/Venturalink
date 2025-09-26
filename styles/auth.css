@@ -400,6 +400,39 @@ body {
     color: var(--text-accent);
 }
 
+/* Password Toggle */
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0.95rem;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transition-fast);
+}
+
+.password-toggle:hover {
+    color: var(--text-primary);
+    background: var(--hover-bg);
+}
+
+.password-toggle:focus {
+    outline: 2px solid rgba(102, 126, 234, 0.5);
+    outline-offset: 2px;
+}
+
+.password-toggle svg { width: 20px; height: 20px; }
+.password-toggle .icon-eye-off { display: none; }
+.password-toggle[data-visible="true"] .icon-eye { display: none; }
+.password-toggle[data-visible="true"] .icon-eye-off { display: block; }
+
 .field-input::placeholder {
     color: var(--text-tertiary);
 }
