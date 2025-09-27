@@ -14,60 +14,73 @@ const db = firebase.firestore();
 
 const registerForm = document.getElementById('register-form');
 
+// ✅ Declare checklist globally so updateChecklist can always access it
+let checklist = {};
+
 if (registerForm) {
-    registerForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        
-        const name = registerForm.name.value.trim();
-        const email = registerForm.email.value.trim();
-        const password = registerForm.password.value;
-        const userType = registerForm.userType.value;
+  registerForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
 
-        // Add loading state to button
-        const submitBtn = registerForm.querySelector('.auth-submit-btn');
-        const btnText = submitBtn.querySelector('.btn-text');
-        const originalText = btnText.textContent;
-        
-        btnText.textContent = 'Creating Account...';
-        submitBtn.style.opacity = '0.7';
-        submitBtn.disabled = true;
+    const name = registerForm.name.value.trim();
+    const email = registerForm.email.value.trim();
+    const password = registerForm.password.value;
+    const userType = registerForm.userType.value;
 
-        try {
-            const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
-            const user = userCredential.user;
-            
-            await firebase.firestore().collection('users').doc(user.uid).set({
-                name,
-                email,
-                userType,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
-            
-            localStorage.setItem('userType', userType);
-            
-            // Success animation
-            btnText.textContent = 'Account Created!';
-            submitBtn.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
-            
-            setTimeout(() => {
-                if (userType === 'business') {
-                    window.location.href = './create-proposal.html';
-                } else {
-                    window.location.href = './proposals.html';
-                }
-            }, 1000);
+    // Add loading state to button
+    const submitBtn = registerForm.querySelector('.auth-submit-btn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const originalText = btnText.textContent;
 
-        } catch (error) {
-            // Reset button state
-            btnText.textContent = originalText;
-            submitBtn.style.opacity = '1';
-            submitBtn.disabled = false;
-            submitBtn.style.background = '';
-            
-            // Show error with better UX
-            showNotification("Registration failed: " + error.message, 'error');
+    btnText.textContent = 'Creating Account...';
+    submitBtn.style.opacity = '0.7';
+    submitBtn.disabled = true;
+
+    // ✅ Enforce password checklist before registration
+    const allValid = updateChecklist(password);
+    if (!allValid) {
+      showNotification("Please meet all password requirements before continuing.", 'error');
+      btnText.textContent = originalText;
+      submitBtn.style.opacity = '1';
+      submitBtn.disabled = false;
+      return;
+    }
+
+    try {
+      const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+      const user = userCredential.user;
+
+      await firebase.firestore().collection('users').doc(user.uid).set({
+        name,
+        email,
+        userType,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      localStorage.setItem('userType', userType);
+
+      // Success animation
+      btnText.textContent = 'Account Created!';
+      submitBtn.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+
+      setTimeout(() => {
+        if (userType === 'business') {
+          window.location.href = './create-proposal.html';
+        } else {
+          window.location.href = './proposals.html';
         }
-    });
+      }, 1000);
+
+    } catch (error) {
+      // Reset button state
+      btnText.textContent = originalText;
+      submitBtn.style.opacity = '1';
+      submitBtn.disabled = false;
+      submitBtn.style.background = '';
+
+      // Show error with better UX
+      showNotification("Registration failed: " + error.message, 'error');
+    }
+  });
 }
 
 // Enhanced notification system
@@ -167,7 +180,7 @@ function showNotification(message, type = 'info') {
       }
     }
   `;
-  
+
   if (!document.querySelector('#notification-styles')) {
     style.id = 'notification-styles';
     document.head.appendChild(style);
@@ -185,52 +198,84 @@ function showNotification(message, type = 'info') {
 }
 
 // Add form validation enhancements
-document.addEventListener('DOMContentLoaded', function() {
-    const passwordField = registerForm?.querySelector('input[name="password"]');
-    const emailField = registerForm?.querySelector('input[name="email"]');
-    
-    // Password strength indicator
-    if (passwordField) {
-        passwordField.addEventListener('input', function() {
-            const password = this.value;
-            const strength = getPasswordStrength(password);
-            updatePasswordStrength(strength);
-        });
-    }
-    
-    // Email validation
-    if (emailField) {
-        emailField.addEventListener('blur', function() {
-            const email = this.value;
-            if (email && !isValidEmail(email)) {
-                this.style.borderColor = '#ef4444';
-            } else {
-                this.style.borderColor = '';
-            }
-        });
-    }
+document.addEventListener('DOMContentLoaded', function () {
+  const passwordField = registerForm?.querySelector('input[name="password"]');
+  const emailField = registerForm?.querySelector('input[name="email"]');
+
+  // ✅ Initialize checklist when DOM is ready
+  checklist = {
+    minLength: document.getElementById('rule-minLength'),
+    uppercase: document.getElementById('rule-uppercase'),
+    lowercase: document.getElementById('rule-lowercase'),
+    number: document.getElementById('rule-number'),
+    specialChar: document.getElementById('rule-specialChar'),
+  };
+
+  // Password strength indicator
+  if (passwordField) {
+    passwordField.addEventListener('input', function () {
+      const password = this.value;
+      const strength = getPasswordStrength(password);
+      updatePasswordStrength(strength);
+      updateChecklist(password); // ✅ live update
+    });
+  }
+
+  // Email validation
+  if (emailField) {
+    emailField.addEventListener('blur', function () {
+      const email = this.value;
+      if (email && !isValidEmail(email)) {
+        this.style.borderColor = '#ef4444';
+      } else {
+        this.style.borderColor = '';
+      }
+    });
+  }
 });
 
 function getPasswordStrength(password) {
-    let strength = 0;
-    if (password.length >= 8) strength++;
-    if (/[a-z]/.test(password)) strength++;
-    if (/[A-Z]/.test(password)) strength++;
-    if (/[0-9]/.test(password)) strength++;
-    if (/[^A-Za-z0-9]/.test(password)) strength++;
-    return strength;
+  let strength = 0;
+  if (password.length >= 8) strength++;
+  if (/[a-z]/.test(password)) strength++;
+  if (/[A-Z]/.test(password)) strength++;
+  if (/[0-9]/.test(password)) strength++;
+  if (/[^A-Za-z0-9]/.test(password)) strength++;
+  return strength;
+}
+
+// ✅ Update checklist dynamically
+function updateChecklist(password) {
+  const rules = {
+    minLength: password.length >= 8,
+    uppercase: /[A-Z]/.test(password),
+    lowercase: /[a-z]/.test(password),
+    number: /[0-9]/.test(password),
+    specialChar: /[^A-Za-z0-9]/.test(password),
+  };
+
+  for (const rule in rules) {
+    if (rules[rule]) {
+      checklist[rule].classList.add('valid');
+      checklist[rule].innerText = "✔ " + checklist[rule].dataset.message;
+    } else {
+      checklist[rule].classList.remove('valid');
+      checklist[rule].innerText = "✖ " + checklist[rule].dataset.message;
+    }
+  }
+
+  return Object.values(rules).every(Boolean);
 }
 
 function updatePasswordStrength(strength) {
-    // This could be enhanced with a visual strength indicator
-    const strengthColors = ['#ef4444', '#f97316', '#eab308', '#22c55e', '#10b981'];
-    const passwordField = document.querySelector('input[name="password"]');
-    if (passwordField && strength > 0) {
-        passwordField.style.borderColor = strengthColors[strength - 1];
-    }
+  const strengthColors = ['#ef4444', '#f97316', '#eab308', '#22c55e', '#10b981'];
+  const passwordField = document.querySelector('input[name="password"]');
+  if (passwordField && strength > 0) {
+    passwordField.style.borderColor = strengthColors[strength - 1];
+  }
 }
 
 function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
 }
