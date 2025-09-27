@@ -463,5 +463,24 @@
 </button>
 
   <script type="module" src="./scripts/main.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const navLinks = document.querySelectorAll(".nav-link");
+
+      navLinks.forEach(link => {
+        if (link.href === window.location.href) {
+          // Mark as active
+          link.classList.add("active");
+
+          // Prevent reload when clicked
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+          });
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>
