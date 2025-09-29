@@ -19,8 +19,11 @@
     <script src="/scripts/theme.js" defer></script>
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <!-- TODO: Consider updating Firebase SDK version periodically -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <!-- TODO: Consider updating Firebase SDK version periodically -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <!-- TODO: Consider updating Firebase SDK version periodically -->
 </head>
 <body class="auth-body">
     <div class="auth-background">
@@ -102,7 +105,7 @@
                         <div class="btn-shine"></div>
                     </button>
                     <!-- added sign in with google -->
-                    <button type="submit"  id="btn-google-sign" class="auth-submit-btn">
+                    <button type="button" id="btn-google-sign" class="auth-submit-btn">
                         <img id="google-logo" src="./assets/google.png" alt="google">
                         <span class="btn-text">Sign In with Google</span>
                         <div class="btn-shine"></div>
