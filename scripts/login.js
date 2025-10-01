@@ -4,8 +4,10 @@ import {
   signInWithPopup,
   signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+// TODO: Consider updating Firebase SDK version periodically
 import { auth, db } from './firebase.js';
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+// TODO: Consider updating Firebase SDK version periodically
 
 const provider = new GoogleAuthProvider();
 const loginForm = document.getElementById("login-form");

@@ -1,6 +1,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+// TODO: Consider updating Firebase SDK version periodically
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+// TODO: Consider updating Firebase SDK version periodically
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"; 
+// TODO: Consider updating Firebase SDK version periodically
 
 const firebaseConfig = {
   apiKey: "AIzaSyA37bruIT_neT5w-8CUuPGofy0Lnv2UJOg",
