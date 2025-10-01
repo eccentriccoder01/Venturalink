@@ -4,8 +4,10 @@ import {
   signInWithPopup,
   signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+// TODO: Consider updating Firebase SDK version periodically
 import { auth, db } from './firebase.js';
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+// TODO: Consider updating Firebase SDK version periodically
 
 const provider = new GoogleAuthProvider();
 const loginForm = document.getElementById("login-form");
@@ -13,56 +15,46 @@ const loginForm = document.getElementById("login-form");
 if (loginForm) {
   loginForm.addEventListener("submit", async (event) => {
     event.preventDefault();
-
+  
     const email = loginForm.email.value.trim();
     const password = loginForm.password.value;
-
-    // Add loading state to button
+  
     const submitBtn = loginForm.querySelector(".auth-submit-btn");
     const btnText = submitBtn.querySelector(".btn-text");
     const originalText = btnText.textContent;
-
+  
     btnText.textContent = "Signing In...";
     submitBtn.style.opacity = "0.7";
     submitBtn.disabled = true;
-
+  
     try {
-      const userCredential = await auth.signInWithEmailAndPassword(
-        email,
-        password
-      );
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-
-      const userDoc = await db.collection("users").doc(user.uid).get();
-
-      if (userDoc.exists) {
+  
+      const userRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userRef);
+  
+      if (userDoc.exists()) {
         const userData = userDoc.data();
         localStorage.setItem("userType", userData.userType);
-
-        // Success animation
+  
         btnText.textContent = "Success!";
-        submitBtn.style.background =
-          "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)";
-
+        submitBtn.style.background = "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)";
+  
         setTimeout(() => {
-          window.location.href = "./dashboard.html";
+          window.location.href = "./profile.html";
         }, 1000);
       } else {
-        throw new Error(
-          "User profile not found. Please complete registration."
-        );
+        throw new Error("User profile not found. Please complete registration.");
       }
     } catch (error) {
-      // Reset button state
       btnText.textContent = originalText;
       submitBtn.style.opacity = "1";
       submitBtn.disabled = false;
       submitBtn.style.background = "";
-
-      // Show error with better UX
+  
       showNotification("Login failed: " + error.message, "error");
     }
-    console.log("Login form submitted");
   });
 }
 
@@ -187,7 +179,7 @@ document.getElementById("btn-google-sign").addEventListener("click", async (even
         const result = await signInWithPopup(auth, provider);
         const user = result.user;
         console.log("Signed in with Google:", user);
-        window.location.href = "dashboard.html";
+        window.location.href = "profile.html";
     } catch (error) {
         if (error.code !== 'auth/popup-closed-by-user') {
             alert("Sign-in failed. Please check the console for details.");

@@ -599,7 +599,7 @@ auth.onAuthStateChanged(async (user) => {
             updateDebugInfo('Logged in', 'Document not found');
             showAlert('User profile not found. Redirecting to dashboard...', 'error');
             setTimeout(() => {
-                window.location.href = './dashboard.html';
+                window.location.href = './profile.html';
             }, 2000);
             return;
         }
@@ -612,7 +612,7 @@ auth.onAuthStateChanged(async (user) => {
             console.log('Not an investor');
             showAlert('Access restricted to investors only', 'error');
             setTimeout(() => {
-                window.location.href = './dashboard.html';
+                window.location.href = './profile.html';
             }, 2000);
             return;
         }

@@ -1,3 +1,24 @@
+// ===============================
+// Back to Top Button Logic
+// ===============================
+document.addEventListener('DOMContentLoaded', function () {
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    if (!backToTopBtn) return;
+
+    // Show button when scrolled down
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 200) {
+            backToTopBtn.style.display = 'block';
+        } else {
+            backToTopBtn.style.display = 'none';
+        }
+    });
+
+    // Smooth scroll to top
+    backToTopBtn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+});
 const firebaseConfig = {
   apiKey: "AIzaSyA37bruIT_neT5w-8CUuPGofy0Lnv2UJOg",
   authDomain: "project-1-747ec.firebaseapp.com",
@@ -1504,8 +1525,8 @@ auth.onAuthStateChanged((user) => {
                 ctaInvestor.href = '/create-proposal.html';
                 ctaEntrepreneur.href = '/create-proposal.html';
             } else {
-                ctaInvestor.href = '/dashboard.html';
-                ctaEntrepreneur.href = '/dashboard.html';
+                ctaInvestor.href = '/profile.html';
+                ctaEntrepreneur.href = '/profile.html';
             }
         }
     } else {
@@ -1518,7 +1539,7 @@ function updateNavigationForLoggedInUser(user) {
     navLinks.innerHTML = '';
     navLinks.innerHTML += `
         <a href="/" class="nav-link">Home</a>
-        <a href="/dashboard.html" class="nav-link">Dashboard</a>
+        <a href="/profile.html" class="nav-link">Dashboard</a>
     `;
     switch(userType) {
         case 'investor':
@@ -1705,7 +1726,7 @@ async function handleLogin(formData) {
             } else if (userType === 'business') {
                 window.location.href = '/create-proposal.html';
             } else {
-                window.location.href = '/dashboard.html';
+                window.location.href = '/profile.html';
             }
         } else {
             throw new Error('User profile not found. Please complete registration.');
@@ -1734,7 +1755,7 @@ async function handleRegistration(formData) {
         localStorage.setItem('userType', userType);
         showAlert('Registration successful! Redirecting to dashboard...', 'success');
         setTimeout(() => {
-            window.location.href = '/dashboard';
+            window.location.href = '/profile';
         }, 1500);
     } catch (error) {
         console.error("Registration error:", error.code, error.message);

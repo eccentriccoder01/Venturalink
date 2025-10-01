@@ -640,3 +640,18 @@ body {
         font-size: 0.85rem;
     }
 }
+
+.password-checklist {
+  list-style: none;
+  margin: 0.5rem 0 1rem;
+  padding: 0;
+  font-size: 0.9rem;
+}
+.password-checklist li {
+  margin-bottom: 0.3rem;
+  color: #d9534f; /* red by default */
+  transition: color 0.2s ease;
+}
+.password-checklist li.valid {
+  color: #28a745; /* green */
+}

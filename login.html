@@ -12,6 +12,7 @@
     <meta name="apple-mobile-web-app-title" content="Venturalink" />
     <link rel="manifest" href="/favicon/site.webmanifest" />
     <link rel="stylesheet" href="styles/auth.css">
+    <link rel="stylesheet" href="styles/mainindex.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,8 +20,11 @@
     <script src="/scripts/theme.js" defer></script>
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <!-- TODO: Consider updating Firebase SDK version periodically -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <!-- TODO: Consider updating Firebase SDK version periodically -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <!-- TODO: Consider updating Firebase SDK version periodically -->
 </head>
 <body class="auth-body">
     <div class="auth-background">
@@ -33,16 +37,42 @@
         </div>
     </div>
 
-    <header class="auth-header">
-        <nav class="auth-navbar">
+    <header class="main-header">
+        <nav class="navbar" id="main-nav">
             <div class="logo">
-                <a href="./index.html" class="logo-link">
-                    <img src="V.png" alt="Venturalink Logo" class="logo-img">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 40 40" fill="none">
+                                <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="url(#logo-gradient)" stroke-width="2" fill="none"/>
+                                <circle cx="20" cy="20" r="6" fill="url(#logo-gradient)"/>
+                                <defs>
+                                    <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#667eea"/>
+                                        <stop offset="100%" style="stop-color:#764ba2"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="logo-text" style="transform: translateY(-4px)">
+                            <img src="V.png" alt="V" style="height: 3rem; margin-right: -8px; transform: translateY(8px)">ENTURALINK
+                        </div>
+                    </div>
                 </a>
             </div>
-            <div class="nav-actions">
-                <a href="register.html" class="nav-btn nav-btn-outline">Sign Up</a>
+            <div class="nav-links">
+                <a href="register.html" class="nav-link nav-link-cta">
+                    <span>Sign Up</span>
+                    <div class="nav-link-bg"></div>
+                </a>
+                <button id="theme-toggle" aria-label="Toggle dark and light theme" style="color:#fff;background:transparent;font-size:1.2rem;">🌙</button>
             </div>
+
+            <button class="menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </button>
         </nav>
     </header>
 
@@ -94,7 +124,7 @@
                             <span class="checkbox-mark"></span>
                             <span class="checkbox-label">Remember me</span>
                         </label>
-                        <a href="#" class="forgot-link">Forgot password?</a>
+                        <a href="forgot-password.html" class="forgot-link">Forgot password?</a>
                     </div>
 
                     <button type="submit" class="auth-submit-btn">
@@ -102,7 +132,7 @@
                         <div class="btn-shine"></div>
                     </button>
                     <!-- added sign in with google -->
-                    <button type="submit"  id="btn-google-sign" class="auth-submit-btn">
+                    <button type="button" id="btn-google-sign" class="auth-submit-btn">
                         <img id="google-logo" src="./assets/google.png" alt="google">
                         <span class="btn-text">Sign In with Google</span>
                         <div class="btn-shine"></div>

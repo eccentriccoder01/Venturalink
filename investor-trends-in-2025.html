@@ -3,15 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help Center | Venturalink</title>
-  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Venturalink" />
-  <link rel="manifest" href="/favicon/site.webmanifest" />
+  <title>Investor Trends in 2025 | Venturalink</title>
+  <link rel="icon" type="image/png" href="V.png">
   <link rel="stylesheet" href="styles/mainindex.css">
-  <link rel="stylesheet" href="styles/navbar.css">
   <style>
     body {
       background: linear-gradient(135deg, #23243a 0%, #18192b 100%);
@@ -20,46 +14,71 @@
       margin: 0;
       min-height: 100vh;
     }
-    .help-section {
-      max-width: 700px;
+    .main-header {
+      background: #23243a;
+      box-shadow: 0 2px 16px rgba(102,126,234,0.08);
+      padding: 0.5rem 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .logo-icon svg {
+      height: 2.5rem;
+      width: 2.5rem;
+      display: block;
+    }
+    .logo-text img {
+      height: 2.2rem;
+      margin-right: -8px;
+      vertical-align: middle;
+      filter: drop-shadow(0 0 8px #667eea);
+    }
+    .blog-post-section {
+      max-width: 800px;
       margin: 3rem auto 2rem auto;
       background: rgba(34,36,58,0.95);
       border-radius: 1.5rem;
       padding: 2.5rem 2rem;
       box-shadow: 0 8px 32px rgba(102,126,234,0.12);
-      text-align: center;
+      text-align: left;
     }
-    .help-section h1 {
+    .blog-post-section h1 {
       color: #667eea;
       font-size: 2.5rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       letter-spacing: 1px;
     }
-    .help-section p {
-      margin-bottom: 2rem;
+    .blog-post-meta {
       color: #aab4e8;
-      font-size: 1.1rem;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
     }
-    .faq-list {
-      text-align: left;
-      margin-top: 2rem;
-    }
-    .faq-item {
-      margin-bottom: 1.5rem;
-      background: #23243a;
-      border-radius: 1rem;
-      padding: 1.2rem 1rem;
-      box-shadow: 0 2px 12px rgba(102,126,234,0.08);
-    }
-    .faq-question {
-      color: #667eea;
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-    .faq-answer {
+    .blog-post-section p {
       color: #e4e8f7;
-      font-size: 1.05rem;
+      font-size: 1.08rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+     .blog-post-section h2 {
+      color: #764ba2;
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 2rem;
+      color: #667eea;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .back-link:hover {
+      text-decoration: underline;
     }
     /* Footer override for dark theme */
     .premium-footer {
@@ -113,8 +132,7 @@
         <a href="features.html" class="nav-link" data-text="Features"><span>Features</span></a>
         <a href="pricing.html" class="nav-link" data-text="Pricing"><span>Pricing</span></a>
         <a href="contact.html" class="nav-link" data-text="Contact"><span>Contact</span></a>
-        <a href="blog.html" class="nav-link" data-text="Blog"><span>Blog</span></a>
-        <a href="help.html" class="nav-link active" data-text="Help"><span>Help Center</span></a>
+        <a href="blog.html" class="nav-link active" data-text="Blog"><span>Blog</span></a>
         <a href="login.html" class="nav-link" data-text="Login"><span>Login</span></a>
         <a href="register.html" class="nav-link nav-link-cta"><span>Register</span><div class="nav-link-bg"></div></a>
       </div>
@@ -122,29 +140,33 @@
   </header>
 
   <main>
-    <section class="help-section">
-      <h1>Help Center</h1>
-      <p>
-        Find answers to common questions and get support for using Venturalink.
-      </p>
-      <div class="faq-list">
-        <div class="faq-item">
-          <div class="faq-question">How do I register on Venturalink?</div>
-          <div class="faq-answer">Click on the "Register" button in the navigation bar and fill out the registration form with your details.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">How can I connect with investors or entrepreneurs?</div>
-          <div class="faq-answer">After logging in, use the platform’s search and messaging features to find and connect with relevant users.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">Is my data secure?</div>
-          <div class="faq-answer">Yes, Venturalink uses industry-standard security practices to keep your data safe and private.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">Where can I get more support?</div>
-          <div class="faq-answer">You can contact our support team via the Contact page or email us at support@venturalink.com.</div>
-        </div>
-      </div>
+    <section class="blog-post-section">
+      <h1>Investor Trends in 2025: What’s Hot?</h1>
+      <div class="blog-post-meta">By Team Venturalink &middot; February 2025</div>
+      
+      <p>The investment landscape is in a constant state of flux, with new technologies and market dynamics shaping where the smart money is flowing. As we move through 2025, several key trends have emerged, indicating a significant shift in investor priorities. For founders seeking funding, understanding these trends is crucial. Here’s a look at what’s hot in the world of startup investing this year.</p>
+
+      <h2>1. Sustainable and Impact-First Tech</h2>
+      <p>Investors are increasingly looking for companies that not only promise strong financial returns but also have a positive impact on the world. Sustainability is no longer a niche interest; it's a core investment thesis for many venture capitalists. This includes everything from renewable energy and circular economy models to sustainable agriculture and carbon capture technologies.</p>
+      <p><strong>What this means for founders:</strong> If your startup has a strong ESG (Environmental, Social, and Governance) component, make sure to highlight it in your pitch. Demonstrate how your business model is not just profitable but also sustainable and socially responsible.</p>
+
+      <h2>2. The Next Wave of AI and Automation</h2>
+      <p>Artificial intelligence continues to be a dominant theme, but the focus is shifting. While foundational models and generative AI captured the spotlight in previous years, investors in 2025 are looking for practical applications that solve specific industry problems. This includes AI-powered tools for drug discovery, autonomous logistics, and hyper-personalized customer experiences.</p>
+      <p><strong>What this means for founders:</strong> It's no longer enough to have an "AI startup." You need to show how your AI technology provides a tangible solution and a clear ROI for your customers. Focus on a niche and demonstrate deep domain expertise.</p>
+
+      <h2>3. The Future of Health and Wellness</h2>
+      <p>The pandemic accelerated the adoption of digital health technologies, and this trend shows no signs of slowing down. Investors are particularly interested in startups that are personalizing healthcare, from at-home diagnostics and remote patient monitoring to mental wellness platforms and longevity science. The focus is on proactive and preventative care, rather than reactive treatments.</p>
+      <p><strong>What this means for founders:</strong> If you're in the health tech space, emphasize how your solution empowers patients and improves outcomes. Data privacy and regulatory compliance are also critical, so be prepared to address these issues in detail.</p>
+
+      <h2>4. The Creator Economy and Web3</h2>
+      <p>The creator economy is maturing, and investors are looking for the tools and platforms that will power its next phase of growth. This includes everything from monetization tools for creators to decentralized social media platforms built on Web3 principles. The emphasis is on giving creators more ownership and control over their content and their audience.</p>
+      <p><strong>What this means for founders:</strong> Focus on building a strong community around your product. Demonstrate how you are empowering creators and providing them with new ways to earn a living. A clear understanding of tokenomics and decentralized governance is a plus if you're in the Web3 space.</p>
+
+      <h2>5. The New Era of B2B SaaS</h2>
+      <p>B2B SaaS is a perennially hot sector, but the bar is getting higher. In 2025, investors are looking for vertical SaaS solutions that cater to the specific needs of a particular industry. They are also interested in companies that are leveraging AI to automate workflows and provide predictive insights. Product-led growth (PLG) remains a popular go-to-market strategy, but founders also need to demonstrate a clear path to enterprise sales.</p>
+      <p><strong>What this means for founders:</strong> Know your industry inside and out. Show how your product is not just a "nice-to-have" but a "must-have" for your customers. Be prepared to discuss your go-to-market strategy in detail, including how you plan to acquire and retain customers.</p>
+
+      <a href="blog.html" class="back-link">&larr; Back to Blog</a>
     </section>
   </main>
 

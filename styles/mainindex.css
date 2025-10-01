@@ -1,3 +1,39 @@
+/* Social Media Footer Icons */
+.footer-social-icons {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+    margin-left: 1.5rem;
+}
+
+.footer-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-full);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 1.25rem;
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-social-link:hover {
+    color: #fff;
+    background: var(--gradient-primary);
+    border-color: transparent;
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px) scale(1.08);
+}
+
+.footer-social-link i {
+    pointer-events: none;
+}
 /* =========================================
    ULTRA PREMIUM UI - WORLD CLASS DESIGN
 ========================================= */
@@ -10,7 +46,7 @@
   --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
   --gradient-success: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
 
-  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-bg: rgba(242, 237, 237, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 
@@ -54,6 +90,17 @@
   --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
+[data-theme="light"] header,
+[data-theme="light"] .navbar,
+[data-theme="light"] .top-header,
+[data-theme="light"] .site-header {
+  background: #ffffff !important; /* White background in light mode */
+}
+[data-theme="light"] .nav-link:hover,
+[data-theme="light"] .nav-link:active {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #000000 !important;
+}
 
 /* Light Theme (new colors) */
 [data-theme="light"] {
@@ -62,7 +109,7 @@
   --gradient-accent: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
   --gradient-success: linear-gradient(135deg, #38f9d7 0%, #43e97b 100%);
 
-  --glass-bg: rgba(0, 0, 0, 0.05);
+  --glass-bg: rgba(244, 239, 239, 0.992);
   --glass-border: rgba(0, 0, 0, 0.1);
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
 
@@ -121,6 +168,27 @@
   z-index: 9999;
   transition: background var(--transition-normal), color var(--transition-normal);
 }
+
+/* ✅ Mobile view */
+@media (max-width: 768px) {
+  #theme-toggle {
+    margin-right: 45px;
+    top: 12px;
+    right: 45px;
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  #theme-toggle {
+    top: 8px;
+    right: 8px;
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+
 
 #theme-toggle:hover {
   background: var(--hover-bg);
@@ -1867,28 +1935,37 @@ main {
 }
 
 /* Scroll to Top Button */
-#myBtn {
-  display: none; /* Hidden by default */
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  z-index: 99;
-  font-size: 25px;
-  border: none;
-  outline: none;
-  background-color: #333;
-  color: white;
-  cursor: pointer;
-  width: 40px;          
-  height: 40px;         
-  line-height: 40px;    
-  text-align: center;   
-  padding: 0;           
-  border-radius: 0;     
-  transition: background-color 0.3s ease;
-  scroll-behavior: smooth;
+
+/* Back to Top Button (Modern, Themed) */
+#backToTopBtn {
+    display: none; /* Hidden by default */
+    position: fixed;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    z-index: 1200;
+    width: 48px;
+    height: 48px;
+    border: none;
+    outline: none;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 0 4px 24px rgba(102,126,234,0.18), 0 1.5px 8px rgba(118,75,162,0.10);
+    cursor: pointer;
+    transition: box-shadow 0.3s, transform 0.2s, background 0.2s;
+    padding: 0;
+    opacity: 0.92;
+    backdrop-filter: blur(2px);
 }
 
-#myBtn:hover {
-  background-color: #555;
+#backToTopBtn svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+#backToTopBtn:hover {
+    box-shadow: 0 8px 32px rgba(102,126,234,0.28), 0 2px 12px rgba(118,75,162,0.18);
+    transform: translateY(-4px) scale(1.08);
+    opacity: 1;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
