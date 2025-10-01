@@ -1,5 +1,6 @@
 import { auth } from "./firebase.js";
 import { sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+// TODO: Consider updating Firebase SDK version periodically
 
 // Select the form and button
 const form = document.getElementById("forgot-password-form");

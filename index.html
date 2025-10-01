@@ -17,8 +17,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="./scripts/theme.js" defer></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <!-- TODO: Consider updating Firebase SDK version periodically -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <!-- TODO: Consider updating Firebase SDK version periodically -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <!-- TODO: Consider updating Firebase SDK version periodically -->
 
   <style>
     .nav-links a:hover {
@@ -94,17 +97,16 @@
         </a>
     </div>
     <div class="nav-links">
-        <a href="index.html" class="nav-link"><span>Home</span></a>
-        <a href="about.html" class="nav-link"><span>About</span></a>
-        <a href="login.html" class="nav-link" data-text="Login"><span>Login</span></a>
-        <a href="register.html" class="nav-link nav-link-cta">
-            <span>Register</span>
-            <div class="nav-link-bg"></div>
-        </a>
-    </div>
-    <!-- Theme toggle button moved outside nav-links for independent positioning -->
-    <div id="theme-toggle-container">
-        <button id="theme-toggle" aria-label="Toggle dark and light theme" style="color:#fff;background:transparent;font-size:1.2rem;transition:transform 0.2s;">🌙</button>
+      <a href="index.html" class="nav-link"><span>Home</span></a>
+      <a href="about.html" class="nav-link"><span>About</span></a>
+      <a href="login.html" class="nav-link" data-text="Login"><span>Login</span>
+      <a href="register.html" class="nav-link nav-link-cta">
+        <span>Register</span>
+        <div class="nav-link-bg"></div>
+      </a>
+      <button id="theme-toggle" aria-label="Toggle dark and light theme" style= "color:#fff;background:transparent;font-size:1.2rem;">🌙</button></a>
+
+      
     </div>
 
     <button class="menu-toggle" aria-label="Toggle navigation menu">
