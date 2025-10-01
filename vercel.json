@@ -5,6 +5,7 @@
     { "source": "/register", "destination": "/register.html" },
     { "source": "/profile", "destination": "/profile.html" },
     { "source": "/proposals", "destination": "/proposals.html" },
-    { "source": "/create-proposal", "destination": "/create-proposal.html" }
+    { "source": "/create-proposal", "destination": "/create-proposal.html" },
+    { "source": "/about", "destination": "/about.html" }
   ]
 }

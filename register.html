@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,13 +14,16 @@
     <link rel="stylesheet" href="styles/auth.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <script src="/scripts/theme.js" defer></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
 </head>
+
 <body class="auth-body">
     <div class="auth-background">
         <div class="floating-shapes">
@@ -50,14 +54,21 @@
                 <div class="auth-card-header">
                     <div class="auth-icon">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M16 21V19C16 17.9391 15.5786 16.9217 14.8284 16.1716C14.0783 15.4214 13.0609 15 12 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="url(#gradient2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <circle cx="8.5" cy="7" r="4" stroke="url(#gradient2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M20 8V14" stroke="url(#gradient2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M23 11H17" stroke="url(#gradient2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path
+                                d="M16 21V19C16 17.9391 15.5786 16.9217 14.8284 16.1716C14.0783 15.4214 13.0609 15 12 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21"
+                                stroke="url(#gradient2)" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <circle cx="8.5" cy="7" r="4" stroke="url(#gradient2)" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M20 8V14" stroke="url(#gradient2)" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M23 11H17" stroke="url(#gradient2)" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
                             <defs>
-                                <linearGradient id="gradient2" x1="1" y1="3" x2="23" y2="21" gradientUnits="userSpaceOnUse">
-                                    <stop offset="0%" stop-color="#667eea"/>
-                                    <stop offset="100%" stop-color="#373a9c"/>
+                                <linearGradient id="gradient2" x1="1" y1="3" x2="23" y2="21"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#667eea" />
+                                    <stop offset="100%" stop-color="#373a9c" />
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -70,8 +81,12 @@
                     <div class="form-field">
                         <div class="field-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path
+                                    d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </div>
                         <input type="text" name="name" required placeholder="Enter your full name" class="field-input">
@@ -80,8 +95,12 @@
                     <div class="form-field">
                         <div class="field-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path
+                                    d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </div>
                         <input type="email" name="email" required placeholder="Enter your email" class="field-input">
@@ -90,31 +109,57 @@
                     <div class="form-field">
                         <div class="field-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
-                                <circle cx="12" cy="16" r="1" fill="currentColor"/>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="currentColor" stroke-width="2"/>
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="currentColor"
+                                    stroke-width="2" />
+                                <circle cx="12" cy="16" r="1" fill="currentColor" />
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="currentColor" stroke-width="2" />
                             </svg>
                         </div>
-                        <input type="password" name="password" required placeholder="Create a password" class="field-input" minlength="8">
+                        <input type="password" name="password" required placeholder="Create a password"
+                            class="field-input" minlength="8">
                     </div>
+
+                    <ul id="password-checklist" class="password-checklist">
+                        <li id="rule-minLength" data-message="At least 8 characters">✖ At least 8 characters</li>
+                        <li id="rule-uppercase" data-message="One uppercase letter (A-Z)">✖ One uppercase letter (A-Z)
+                        </li>
+                        <li id="rule-lowercase" data-message="One lowercase letter (a-z)">✖ One lowercase letter (a-z)
+                        </li>
+                        <li id="rule-number" data-message="One number (0-9)">✖ One number (0-9)</li>
+                        <li id="rule-specialChar" data-message="One special character (!@#$%)">✖ One special character
+                            (!@#$%)</li>
+                    </ul>
 
                     <div class="form-field">
                         <div class="field-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M23 21V19C23 18.1645 22.7155 17.3541 22.2094 16.6977C21.7033 16.0414 20.9984 15.5754 20.2 15.3727" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89317 18.7122 8.75608 18.1676 9.45768C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path
+                                    d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path
+                                    d="M23 21V19C23 18.1645 22.7155 17.3541 22.2094 16.6977C21.7033 16.0414 20.9984 15.5754 20.2 15.3727"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89317 18.7122 8.75608 18.1676 9.45768C17.623 10.1593 16.8604 10.6597 16 10.88"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                         </div>
                         <select name="userType" required class="field-select" data-placeholder="Select your role">
                             <option value="">Select your role</option>
-                            <option style="background-color: rgb(220, 238, 255); color: rgb(3, 3, 3);" value="investor">I am an Investor</option>
-                            <option style="background-color: rgb(46, 142, 238); color: rgb(3, 3, 3);" value="business">I am a Business Owner</option>
+                            <option style="background-color: rgb(220, 238, 255); color: rgb(3, 3, 3);" value="investor">
+                                I am an Investor</option>
+                            <option style="background-color: rgb(46, 142, 238); color: rgb(3, 3, 3);" value="business">I
+                                am a Business Owner</option>
                         </select>
                         <div class="select-arrow">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                <polyline points="6,9 12,15 18,9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <polyline points="6,9 12,15 18,9" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </div>
                     </div>
@@ -124,7 +169,8 @@
                             <input type="checkbox" name="terms" required class="checkbox-input">
                             <span class="checkbox-mark"></span>
                             <span class="checkbox-label">
-                                I agree to the <a href="/terms" class="inline-link">Terms</a> and <a href="/privacy" class="inline-link">Privacy Policy</a>
+                                I agree to the <a href="/terms" class="inline-link">Terms</a> and <a href="/privacy"
+                                    class="inline-link">Privacy Policy</a>
                             </span>
                         </label>
                     </div>
@@ -137,7 +183,7 @@
 
                 <div class="auth-footer">
                     <p class="auth-footer-text">
-                        Already have an account? 
+                        Already have an account?
                         <a href="login.html" class="auth-link">Sign in now</a>
                     </p>
                 </div>
@@ -147,4 +193,5 @@
 
     <script type="module" src="scripts/register.js"></script>
 </body>
+
 </html>
