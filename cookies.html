@@ -11,6 +11,7 @@
   <meta name="apple-mobile-web-app-title" content="Venturalink" />
   <link rel="manifest" href="/favicon/site.webmanifest" />
   <link rel="stylesheet" href="styles/mainindex.css">
+  <script src="./scripts/theme.js" defer></script>
   <style>
     body {
       background: linear-gradient(135deg, #23243a 0%, #18192b 100%);
@@ -150,6 +151,70 @@
     .footer-links-grid a:hover {
       color: #764ba2;
       text-decoration: underline;
+    }
+
+    /* Light Theme Overrides */
+    [data-theme="light"] body {
+      background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+      color: #333333;
+    }
+
+    [data-theme="light"] .main-header {
+      background: #ffffff;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    [data-theme="light"] .nav-link {
+      color: #333333;
+    }
+
+    [data-theme="light"] .nav-link:hover {
+      color: #373a9c;
+    }
+
+    [data-theme="light"] .cookie-section {
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    [data-theme="light"] .cookie-section h1 {
+      color: #373a9c;
+    }
+
+    [data-theme="light"] .cookie-section h2 {
+      color: #5767f5;
+    }
+
+    [data-theme="light"] .cookie-section p,
+    [data-theme="light"] .cookie-section ul,
+    [data-theme="light"] .cookie-section li {
+      color: #333333;
+    }
+
+    [data-theme="light"] .cookie-section a {
+      color: #373a9c;
+    }
+
+    [data-theme="light"] .cookie-section a:hover {
+      color: #5767f5;
+    }
+
+    [data-theme="light"] .premium-footer {
+      background: #f5f5f5;
+      color: #333333;
+      border-top: 2px solid #e0e0e0;
+    }
+
+    [data-theme="light"] .footer-section h4 {
+      color: #373a9c;
+    }
+
+    [data-theme="light"] .footer-links-grid a {
+      color: #333333;
+    }
+
+    [data-theme="light"] .footer-links-grid a:hover {
+      color: #373a9c;
     }
   </style>
 </head>
