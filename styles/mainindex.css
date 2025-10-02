@@ -1137,35 +1137,41 @@ main {
     border-color: rgba(102, 126, 234, 0.3);
 }
 
+/* Card Header: stack icon + heading consistently */
 .card-header {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    flex-direction: column; /* stack icon above the title */
+    align-items: center;    /* center horizontally */
+    justify-content: flex-start;
     margin-bottom: var(--space-xl);
+    gap: 1rem;              /* uniform spacing between icon and title */
     position: relative;
 }
 
+/* Icon container: consistent size and center alignment */
 .icon-container {
-    position: relative;
     width: 80px;
     height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: var(--space-lg);
+    margin: 0;              /* remove any bottom margin */
+    position: relative;
 }
 
+/* Icon background inside container */
 .icon-bg {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--gradient-primary);
     border-radius: 50%;
     opacity: 0.1;
+    background: var(--gradient-primary);
     transition: all var(--transition-normal);
 }
+
 
 .feature-card:hover .icon-bg {
     opacity: 0.2;
@@ -1185,12 +1191,15 @@ main {
     transform: scale(1.1);
 }
 
+
+/* Card title: remove default margins to avoid misalignment */
 .card-header h3 {
     font-family: var(--font-primary);
     font-size: 1.8rem;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: var(--space-sm);
+    margin: 0; /* no margin */
+    text-align: center;
 }
 
 .card-number {
