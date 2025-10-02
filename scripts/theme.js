@@ -29,37 +29,34 @@
     }
 
     var button = document.getElementById('theme-toggle');
-    var ensureButtonStyles = function (btn) {
-      if (!btn) return;
-      btn.type = 'button';
-      btn.style.position = 'fixed';
-      btn.style.top = '30px';
-      btn.style.right = '20px';
-      btn.style.zIndex = '99999';
-      btn.style.padding = '12px 18px';
-      btn.style.borderRadius = '9999px';
-      btn.style.border = '1px solid var(--glass-border, rgba(0,0,0,0.1))';
-      btn.style.background = 'var(--bg-secondary, #f5f5f5)';
-      btn.style.color = 'var(--text-primary, #000)';
-      btn.style.cursor = 'pointer';
-      btn.style.fontSize = '18px';
-      btn.style.lineHeight = '1';
-      btn.style.boxShadow = '0 6px 20px rgba(0,0,0,0.15)';
-    };
-
+    // Always ensure the toggle is visible at the bottom-right so users notice it
     if (!button) {
       button = document.createElement('button');
       button.id = 'theme-toggle';
-      ensureButtonStyles(button);
+      button.type = 'button';
+      button.classList.add('theme-toggle--floating');
+      // Minimal, unobtrusive fallback styling
+      button.style.position = 'fixed';
+      button.style.bottom = '24px';
+      button.style.right = '24px';
+      button.style.zIndex = '9999';
+      button.style.padding = '10px 12px';
+      button.style.borderRadius = '9999px';
+      button.style.border = '1px solid rgba(255,255,255,0.15)';
+      button.style.background = 'rgba(0,0,0,0.35)';
+      button.style.backdropFilter = 'blur(8px)';
+      button.style.color = '#fff';
+      button.style.cursor = 'pointer';
+      button.style.fontSize = '16px';
+      button.style.lineHeight = '1';
       document.body.appendChild(button);
     } else {
-      // If an existing button is hidden by layout, reattach it to body and style it
-      var computed = window.getComputedStyle(button);
-      var hidden = computed.display === 'none' || computed.visibility === 'hidden' || button.offsetParent === null;
-      if (hidden || button.parentElement !== document.body) {
+      // Ensure it's a button for accessibility and move it to body bottom-right
+      button.type = 'button';
+      if (button.parentElement !== document.body) {
         document.body.appendChild(button);
       }
-      ensureButtonStyles(button);
+      button.classList.add('theme-toggle--floating');
     }
 
     setIcon(button, saved);
