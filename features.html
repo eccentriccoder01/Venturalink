@@ -92,6 +92,23 @@
       color: #764ba2;
       text-decoration: underline;
     }
+    .footer-bottom-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      align-items: center; 
+      text-align: center;  
+      font-size: 0.9rem;
+      color: #aab4e8;
+    }
+
+    .footer-badges {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center; 
+    }
+
   </style>
 </head>
 <body>
@@ -214,9 +231,12 @@
   <div style="text-align:center;margin-top:2rem;">
     <div class="footer-divider" style="height:1px;background:#23243a;margin-bottom:1rem;"></div>
     <p style="margin-bottom:0.5rem;">&copy; 2025 Venturalink Platform. All rights reserved.</p>
-  
+    <div class="footer-badges">
+      <span class="badge">Trusted by 10K+ users</span>
+      <span class="badge">SOC 2 Compliant</span>
+    </div>
   </div>
 </footer>
-  <script type="module" src="scripts/main.js"></script>
+<script type="module" src="scripts/main.js"></script>
 </body>
 </html>
