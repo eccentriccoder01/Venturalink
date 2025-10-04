@@ -1,24 +1,51 @@
-// ===============================
-// Back to Top Button Logic
-// ===============================
+// ===========================================
+// Back to Top Button Logic (Rocket Launch)
+// ===========================================
 document.addEventListener('DOMContentLoaded', function () {
     const backToTopBtn = document.getElementById('backToTopBtn');
     if (!backToTopBtn) return;
 
+    // Add random offset to smoke puffs
+    const smokePuffs = backToTopBtn.querySelectorAll('.smoke');
+    smokePuffs.forEach(smoke => {
+        const randomX = (Math.random() - 0.5) * 30;
+        smoke.style.setProperty('--random-x', `${randomX}px`);
+    });
+
     // Show button when scrolled down
     window.addEventListener('scroll', function () {
-        if (window.scrollY > 200) {
+        if (window.scrollY > 300) {
             backToTopBtn.style.display = 'block';
         } else {
             backToTopBtn.style.display = 'none';
         }
     });
 
-    // Smooth scroll to top
+    // Smooth scroll + launch animation
     backToTopBtn.addEventListener('click', function () {
+        // Prevent launching if already in flight
+        if (backToTopBtn.classList.contains('launching')) {
+            return;
+        }
+
+        // Add launch animation class
+        backToTopBtn.classList.add('launching');
+
+        // Smooth scroll to top
         window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Remove class and reset after animation ends
+        setTimeout(() => {
+            backToTopBtn.classList.remove('launching');
+            // Randomize smoke positions for next launch
+            smokePuffs.forEach(smoke => {
+                const randomX = (Math.random() - 0.5) * 30;
+                smoke.style.setProperty('--random-x', `${randomX}px`);
+            });
+        }, 1500);
     });
 });
+
 const firebaseConfig = {
   apiKey: "AIzaSyA37bruIT_neT5w-8CUuPGofy0Lnv2UJOg",
   authDomain: "project-1-747ec.firebaseapp.com",

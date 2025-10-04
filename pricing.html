@@ -112,24 +112,82 @@
     .pricing-card-btn:hover {
       background: #764ba2;
     }
-    /* Footer override for dark theme */
-    .premium-footer {
-      background: #18192b;
-      color: #e4e8f7;
-      border-top: 2px solid #23243a;
+   /* Footer override for dark theme */
+.premium-footer {
+  background: #18192b;
+  color: #e4e8f7;
+  border-top: 2px solid #23243a;
+  padding: 3rem 2rem 1.5rem 2rem; /* 👈 spacing added */
+}
+
+.footer-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem; /* 👈 sections ke darmiyan spacing */
+  margin-bottom: 2.5rem; /* 👈 footer-bottom se space */
+}
+
+.footer-brand {
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+.footer-description {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #cbd5f7;
+}
+
+.footer-links-grid {
+  display: flex;
+  gap: 3rem; /* 👈 spacing between Platform / Resources / Legal */
+}
+
+.footer-section h4 {
+  color: #667eea;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section li {
+  margin-bottom: 0.6rem;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.footer-divider {
+  height: 1px;
+  background: #23243a;
+  margin-bottom: 1.5rem;
+}
+
+.footer-bottom-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      align-items: center; 
+      text-align: center;  
+      font-size: 0.9rem;
+      color: #aab4e8;
     }
-    .footer-section h4 {
-      color: #667eea;
+
+    .footer-badges {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center; 
     }
-    .footer-links-grid a {
-      color: #e4e8f7;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-links-grid a:hover {
-      color: #764ba2;
-      text-decoration: underline;
-    }
+
   </style>
 </head>
 <body>
@@ -179,8 +237,7 @@
       </div>
     </section>
   </main>
-
-  <!-- Footer (same as index.html, dark theme) -->
+  <!-- Footer -->
 <footer class="premium-footer" style="background:#181c2a;color:#e4e8f7;padding:2.5rem 0 1.5rem 0;">
   <div class="footer-content" style="max-width:1200px;margin:auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:2.5rem;">
     <div class="footer-info" style="flex:1;min-width:220px;">
@@ -223,7 +280,13 @@
   <div style="text-align:center;margin-top:2rem;">
     <div class="footer-divider" style="height:1px;background:#23243a;margin-bottom:1rem;"></div>
     <p style="margin-bottom:0.5rem;">&copy; 2025 Venturalink Platform. All rights reserved.</p>
-  
+                <div class="footer-badges">
+                    <span class="badge">Trusted by 10K+ users</span>
+                    <span class="badge">SOC 2 Compliant</span>
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
 </footer>
   <div class="cursor"> 

@@ -199,3 +199,37 @@ body {
     .navbar { flex-direction: column; gap: var(--space-lg); }
     .nav-links { width: 100%; justify-content: center; }
 }
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-overlay.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    width: 320px;
+    max-width: 90%;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.modal-actions button {
+    flex: 1;
+    margin: 0 0.5rem;
+}
