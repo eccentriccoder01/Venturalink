@@ -154,45 +154,7 @@
   --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-/* Toggle button styling */
-#theme-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: var(--bg-secondary);
-  color: var(--text-primary);
-  border: 1px solid var(--glass-border);
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  z-index: 9999;
-  transition: background var(--transition-normal), color var(--transition-normal);
-}
 
-/* ✅ Mobile view */
-@media (max-width: 768px) {
-  #theme-toggle {
-    margin-right: 45px;
-    top: 12px;
-    right: 45px;
-    padding: 6px 10px;
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  #theme-toggle {
-    top: 8px;
-    right: 8px;
-    padding: 4px 8px;
-    font-size: 12px;
-  }
-}
-
-
-#theme-toggle:hover {
-  background: var(--hover-bg);
-}
 
 
 /* =========================================
@@ -351,31 +313,43 @@ body {
    CURSOR FOLLOWER
 ========================================= */
 
-.cursor-follower {
-    position: fixed;
-    width: 20px;
-    height: 20px;
-    background: var(--gradient-primary);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.1s ease;
-    opacity: 0;
-    mix-blend-mode: difference;
+/* --- Custom Cursor Styles --- */
+.cursor__ball {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none; 
+  opacity: 0; /* Hidden by default */
+  transform: translate(0, 0);
+  will-change: transform;
+  z-index: 9999; /* Ensure it is on top */
+  transition: opacity 0.3s ease-in-out; /* Smooth transition for showing/hiding */
+  mix-blend-mode: difference; /* Creates a contrast effect */
+  fill: white;
 }
 
+.cursor__ball--big {
+  width: 40px;
+  height: 40px;
+
+}
+
+
+
 @media (pointer: fine) {
-    .cursor-follower {
+    .cursor__ball {
         opacity: 0.8;
     }
 }
+
+
 
 /* =========================================
    PREMIUM HEADER & NAVIGATION
 ========================================= */
 
 .main-header {
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     right: 0;
@@ -970,23 +944,23 @@ main {
     background: var(--glass-border);
 }
 
-/* Scroll Indicator - Fixed */
+/* Scroll Indicator - Centered at bottom */
 .scroll-indicator {
-    position: relative; /* keep in flow */
+    position: absolute;
+    top: 0rem; /* distance from bottom */
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* left-align children inside this box */
-    justify-content: center;
-    margin: 2rem auto 0; /* top spacing, auto horizontal centering */
-    gap: 0.5rem; /* space between line and text */
-    width: fit-content; /* shrink to content width */
-    margin-left: 44.5%;
+    align-items: center;
+    gap: 0.5rem;
 }
 
+/* Vertical line with gradient */
 .scroll-line {
     width: 2px;
-    height: 30px;
-    background: var(--gradient-primary);
+    height: 2rem; /* line height */
+    background: linear-gradient(to bottom, #0ea5e9, transparent);
     border-radius: 1px;
     position: relative; /* keep for pseudo-element */
     overflow: hidden;
@@ -994,44 +968,79 @@ main {
     margin-left: 50%;
 }
 
+/* Moving white block animation */
 .scroll-line::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 20px;
+    height: 0.8rem;
     background: white;
     animation: scroll-line-move 2s infinite ease-in-out;
 }
 
 @keyframes scroll-line-move {
     0% {
-        transform: translateY(-20px);
+        transform: translateY(-0.8rem);
         opacity: 0;
     }
     50% {
         opacity: 1;
     }
     100% {
-        transform: translateY(30px);
+        transform: translateY(2rem);
         opacity: 0;
     }
 }
 
+/* Scroll text */
 .scroll-text {
-    font-size: 0.8rem;
-    color: var(--text-tertiary);
+    font-size: 0.75rem;
+    color: #6b7280;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-     margin-left: 1rem; /* small spacing from left if needed */
-    text-align: center; /* ensures it remains centered below the line */
+    letter-spacing: 0.05em;
 }
 
+/* Flashcards */
+    .flashcards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin: 2.5rem 0 1rem 0;
+    }
+    .flashcard {
+      background: linear-gradient(135deg, #23243a 60%, #667eea 100%);
+      border-radius: 1.2rem;
+      box-shadow: 0 4px 24px rgba(102,126,234,0.18);
+      color: #fff;
+      padding: 1.5rem 1.2rem;
+      min-width: 180px;
+      max-width: 220px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      transition: transform 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .flashcard:hover {
+      transform: scale(1.07) rotate(-2deg);
+      box-shadow: 0 8px 32px #764ba2a0;
+      background: linear-gradient(135deg, #764ba2 60%, #667eea 100%);
+    }
+    .flashcard-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
 
 /* =========================================
    FEATURES SECTION - NEXT-LEVEL CARDS
 ========================================= */
+
+
 
 .features-section {
     padding: 8rem var(--space-xl);
