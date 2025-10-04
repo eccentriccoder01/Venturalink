@@ -1,74 +1,74 @@
-// Theme bootstrap and toggle for all pages
+// ==============================
+// Theme toggle for all pages
+// ==============================
 (function () {
   try {
-    var root = document.documentElement;
-    var saved = localStorage.getItem('theme') || 'dark';
-    root.setAttribute('data-theme', saved);
-    document.body.classList.remove('theme-dark', 'theme-light');
-    document.body.classList.add(saved === 'dark' ? 'theme-dark' : 'theme-light');
+    const root = document.documentElement;
+    const body = document.body;
 
-    function setIcon(btn, theme) {
-      if (!btn) return;
-      btn.textContent = theme === 'dark' ? '🌙' : '☀️';
-      btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    // Get saved theme or default to dark
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+
+    // Apply a theme
+    function applyTheme(theme) {
+      root.setAttribute('data-theme', theme);
+      root.style.colorScheme = theme;
+      body.classList.remove('theme-dark', 'theme-light');
+      body.classList.add(theme === 'dark' ? 'theme-dark' : 'theme-light');
+      setButtonIcon(theme);
     }
 
-    function toggleTheme() {
-      var current = root.getAttribute('data-theme') || 'dark';
-      var next = current === 'dark' ? 'light' : 'dark';
-      root.setAttribute('data-theme', next);
-      // Hint to UA color-scheme for built-in widgets
-      root.style.colorScheme = next;
-      // Force reflow to ensure CSS vars recalc on some browsers
-      void root.offsetHeight;
-      // Also keep a body class for any page-specific styles that might rely on classes
-      document.body.classList.remove('theme-dark', 'theme-light');
-      document.body.classList.add(next === 'dark' ? 'theme-dark' : 'theme-light');
-      localStorage.setItem('theme', next);
-      setIcon(button, next);
-    }
-
-    var button = document.getElementById('theme-toggle');
-    var ensureButtonStyles = function (btn) {
-      if (!btn) return;
-      btn.type = 'button';
-      btn.style.position = 'fixed';
-      btn.style.bottom = '2.5rem';
-      btn.style.left = '2.5rem';
-      btn.style.zIndex = '9998';
-      // btn.style.padding = '12px 12px';
-      btn.style.borderRadius = '9999px';
-      btn.style.border = '1px solid var(--glass-border, rgba(0,0,0,0.1))';
-      btn.style.background = 'var(--bg-secondary, #f5f5f5)';
-      btn.style.color = 'var(--text-primary, #000)';
-      btn.style.cursor = 'pointer';
-      btn.style.fontSize = '18px';
-      btn.style.width = '48px';
-      btn.style.height = '48px';
-      btn.style.lineHeight = '1';
-      btn.style.boxShadow = '0 6px 20px rgba(0,0,0,0.15)';
-    };
-
+    // Create or attach the toggle button
+    let button = document.getElementById('theme-toggle');
     if (!button) {
       button = document.createElement('button');
       button.id = 'theme-toggle';
-      ensureButtonStyles(button);
-      document.body.appendChild(button);
-    } else {
-      // If an existing button is hidden by layout, reattach it to body and style it
-      var computed = window.getComputedStyle(button);
-      var hidden = computed.display === 'none' || computed.visibility === 'hidden' || button.offsetParent === null;
-      if (hidden || button.parentElement !== document.body) {
-        document.body.appendChild(button);
-      }
-      ensureButtonStyles(button);
+      body.appendChild(button);
     }
 
-    setIcon(button, saved);
-    button.addEventListener('click', toggleTheme);
-  } catch (e) {
-    console.error('Theme init failed', e);
+    // Style the button (floating circular)
+    Object.assign(button.style, {
+      position: 'fixed',
+      bottom: '2.5rem',
+      left: '2.5rem',
+      zIndex: '99999',
+      width: '48px',
+      height: '48px',
+      borderRadius: '50%',
+      border: '1px solid var(--glass-border, rgba(255,255,255,0.1))',
+      background: 'var(--bg-secondary, #111118)',
+      color: 'var(--text-primary, #fff)',
+      fontSize: '20px',
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      boxShadow: '0 6px 20px rgba(0,0,0,0.2)',
+      transition: 'background 0.3s, color 0.3s, transform 0.2s',
+    });
+
+    // Add hover effect
+    button.addEventListener('mouseenter', () => button.style.transform = 'scale(1.1)');
+    button.addEventListener('mouseleave', () => button.style.transform = 'scale(1)');
+
+    // Set button icon based on theme
+    function setButtonIcon(theme) {
+      button.textContent = theme === 'dark' ? '🌙' : '☀️';
+      button.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+
+    // Initialize theme
+    applyTheme(savedTheme);
+
+    // Toggle on click
+    button.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      localStorage.setItem('theme', next);
+    });
+
+  } catch (error) {
+    console.error('Theme toggle failed:', error);
   }
 })();
-
-

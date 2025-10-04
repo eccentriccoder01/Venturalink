@@ -233,3 +233,53 @@ body {
     flex: 1;
     margin: 0 0.5rem;
 }
+/* ==========================
+   Light Theme Styles
+========================== */
+[data-theme="light"] {
+  --gradient-primary: linear-gradient(135deg, #373a9c 0%, #667eea 100%);
+  --gradient-secondary: linear-gradient(135deg, #5767f5 0%, #93c9fb 100%);
+  --gradient-accent: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  --gradient-success: linear-gradient(135deg, #38f9d7 0%, #43e97b 100%);
+
+  --glass-bg: rgba(244, 239, 239, 0.992);
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-tertiary: #eaeaea;
+  --bg-card: rgba(255, 255, 255, 0.8);
+
+  --text-primary: #000000;
+  --text-secondary: #333333;
+  --text-tertiary: #555555;
+  --text-accent: #373a9c;
+
+  --hover-bg: rgba(0, 0, 0, 0.05);
+  --active-bg: rgba(0, 0, 0, 0.1);
+
+  --shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.1);
+  --shadow-strong: 0 20px 40px rgba(0, 0, 0, 0.15);
+  --shadow-glow: 0 0 20px rgba(55, 58, 156, 0.2);
+}
+
+/* Light theme background overrides */
+[data-theme="light"] header,
+[data-theme="light"] .navbar,
+[data-theme="light"] .top-header,
+[data-theme="light"] .site-header {
+  background: #ffffff !important;
+}
+
+[data-theme="light"] .nav-link:hover,
+[data-theme="light"] .nav-link:active {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #000000 !important;
+}
+
+[data-theme="light"] body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
