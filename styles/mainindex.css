@@ -944,17 +944,17 @@ main {
     background: var(--glass-border);
 }
 
-/* Scroll Indicator */
+/* Scroll Indicator - Fixed */
 .scroll-indicator {
-    position: absolute;
-    bottom: var(--space-2xl);
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative; /* keep in flow */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: var(--space-sm);
-    animation: fade-in-up 1s ease-out 1s both;
+    align-items: flex-start; /* left-align children inside this box */
+    justify-content: center;
+    margin: 2rem auto 0; /* top spacing, auto horizontal centering */
+    gap: 0.5rem; /* space between line and text */
+    width: fit-content; /* shrink to content width */
+    margin-left: 44.5%;
 }
 
 .scroll-line {
@@ -962,8 +962,10 @@ main {
     height: 30px;
     background: var(--gradient-primary);
     border-radius: 1px;
-    position: relative;
+    position: relative; /* keep for pseudo-element */
     overflow: hidden;
+    margin-bottom: 1.5rem;
+    margin-left: 50%;
 }
 
 .scroll-line::after {
@@ -996,6 +998,8 @@ main {
     color: var(--text-tertiary);
     text-transform: uppercase;
     letter-spacing: 0.1em;
+     margin-left: 1rem; /* small spacing from left if needed */
+    text-align: center; /* ensures it remains centered below the line */
 }
 
 /* =========================================
