@@ -86,6 +86,104 @@ document.addEventListener('DOMContentLoaded', () => {
       emailField.style.borderColor = isValidEmail(emailField.value) ? '' : '#ef4444';
     });
   }
+
+
+// --- START: Progress Bar Logic ---
+if (document.getElementById('progress-bar-fill')) {
+
+    // --- Element Selections for Progress Bar (CORRECTED) ---
+    // This now uses the form's name attributes, which is more reliable.
+    const formInputs = {
+        name: registerForm.name,
+        email: registerForm.email,
+        password: registerForm.password,
+        role: registerForm.userType, // Matches your existing code
+        terms: registerForm.terms,     // Assumes the checkbox has name="terms"
+    };
+
+    const progressBarFill = document.getElementById('progress-bar-fill');
+    const stepCircles = [
+        document.getElementById('step-circle-1'),
+        document.getElementById('step-circle-2'),
+        document.getElementById('step-circle-3'),
+        document.getElementById('step-circle-4'),
+        document.getElementById('step-circle-5'),
+    ];
+    const stepAnnotations = [
+        document.getElementById('step-annotation-1'),
+        document.getElementById('step-annotation-2'),
+        document.getElementById('step-annotation-3'),
+        document.getElementById('step-annotation-4'),
+        document.getElementById('step-annotation-5'),
+    ];
+
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+
+    const totalSteps = stepCircles.length;
+
+    // --- Validation Logic for Progress Bar UI ---
+    const validators = {
+        name: (el) => el && el.value.trim().length > 2,
+        email: (el) => el && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value),
+        // Use the same password validation as your checklist for consistency
+        password: (el) => el && el.value.length >= 8 && /[A-Z]/.test(el.value) && /[a-z]/.test(el.value) && /[0-9]/.test(el.value) && /[^A-Za-z0-9]/.test(el.value),
+        role: (el) => el && el.value !== '',
+        terms: (el) => el && el.checked,
+    };
+
+    // --- Update Progress Bar Function (IMPROVED LOGIC) ---
+    const updateProgress = () => {
+        let activeStep = 1; // Start at step 1 (Name)
+        
+        if (validators.name(formInputs.name)) {
+            activeStep = 2; // Move to Email
+            if (validators.email(formInputs.email)) {
+                activeStep = 3; // Move to Password
+                if (validators.password(formInputs.password)) {
+                    activeStep = 4; // Move to Role
+                    if (validators.role(formInputs.role)) {
+                        activeStep = 5; // Move to Agree
+                        if (validators.terms(formInputs.terms)) {
+                            activeStep = 6; // All steps complete
+                        }
+                    }
+                }
+            }
+        }
+
+        stepCircles.forEach((circle, index) => {
+            if (index < activeStep) circle.classList.add('active');
+            else circle.classList.remove('active');
+        });
+
+        stepAnnotations.forEach((annotation, index) => {
+            // Annotations become active as you complete the previous step
+            if (index < activeStep) annotation.classList.add('active');
+            else annotation.classList.remove('active');
+        });
+
+        const progressPercentage = (activeStep - 1) / (totalSteps - 1) * 100;
+        progressBarFill.style.width = `${Math.min(100, progressPercentage)}%`;
+    };
+
+    // --- Event Listeners for Progress Bar ---
+    Object.values(formInputs).forEach(input => {
+        if (input) {
+            // Use 'keyup' for instant feedback on text fields
+            input.addEventListener('keyup', updateProgress);
+            input.addEventListener('input', updateProgress);
+            // Use 'change' for the dropdown and checkbox
+            input.addEventListener('change', updateProgress);
+        }
+    });
+
+    // --- Initial Call ---
+    updateProgress();
+}
+// --- END: Progress Bar Logic ---
+
 });
 
 function getPasswordStrength(password) {
@@ -99,25 +197,31 @@ function getPasswordStrength(password) {
 }
 
 function updateChecklist(password) {
-  const rules = {
-    minLength: password.length >= 8,
-    uppercase: /[A-Z]/.test(password),
-    lowercase: /[a-z]/.test(password),
-    number: /[0-9]/.test(password),
-    specialChar: /[^A-Za-z0-9]/.test(password),
-  };
+    const rules = {
+        minLength: password.length >= 8,
+        uppercase: /[A-Z]/.test(password),
+        lowercase: /[a-z]/.test(password),
+        number: /[0-9]/.test(password),
+        specialChar: /[^A-Za-z0-9]/.test(password),
+    };
 
-  for (const rule in rules) {
-    if (rules[rule]) {
-      checklist[rule].classList.add('valid');
-      checklist[rule].innerText = "✔ " + checklist[rule].dataset.message;
-    } else {
-      checklist[rule].classList.remove('valid');
-      checklist[rule].innerText = "✖ " + checklist[rule].dataset.message;
+    for (const rule in rules) {
+        if (checklist[rule]) { // Check if element exists
+            if (rules[rule]) {
+                checklist[rule].classList.add('valid');
+                checklist[rule].innerHTML = `<i data-lucide="check" class="w-4 h-4 mr-2"></i> ${checklist[rule].dataset.message}`;
+            } else {
+                checklist[rule].classList.remove('valid');
+                checklist[rule].innerHTML = `<i data-lucide="x" class="w-4 h-4 mr-2"></i> ${checklist[rule].dataset.message}`;
+            }
+        }
     }
-  }
+    
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
 
-  return Object.values(rules).every(Boolean);
+    return Object.values(rules).every(Boolean);
 }
 
 function updatePasswordStrength(strength) {

@@ -26,6 +26,92 @@
     <!-- TODO: Consider updating Firebase SDK version periodically -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
     <!-- TODO: Consider updating Firebase SDK version periodically -->
+
+
+    <style>
+    /* --- Progress Bar Styles --- */
+    .progress-container {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .progress-bar-bg {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        height: 4px;
+        width: 100%;
+        background-color: #334155; /* slate-700 */
+        z-index: 1;
+    }
+
+    .progress-bar-fill {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        height: 4px;
+        background-color: #8B5CF6; /* A vibrant violet */
+        width: 0%;
+        z-index: 2;
+        transition: width 0.4s ease-in-out;
+    }
+
+    .step-circle {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: #334155; /* slate-700 */
+        border: 2px solid #475569; /* slate-600 */
+        z-index: 3;
+        transition: all 0.4s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .step-circle.active {
+        background-color: #8B5CF6;
+        border-color: #A78BFA;
+        box-shadow: 0 0 15px 3px rgba(139, 92, 246, 0.5);
+    }
+
+    .step-circle.active .check-icon {
+        opacity: 1;
+    }
+    
+    .check-icon {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        color: white;
+    }
+
+    .step-annotations {
+    position: relative; 
+    width: 100%;
+    height: 1.5rem; 
+    margin-top: 0.25rem; 
+}
+
+    .step-annotation {
+    position: absolute; 
+    top: 0;
+    color: #94A3B8; 
+    font-size: 0.75rem;
+    width: 60px;
+    text-align: center;
+}
+    
+    .step-annotation.active {
+        color: #F8FAFC; /* slate-50 */
+    }
+</style>
+
 </head>
 
 <body class="auth-body">
@@ -77,6 +163,29 @@
                             </defs>
                         </svg>
                     </div>
+
+
+    <!-- START: Progress Bar -->
+<div class="mb-6 mt-6">
+    <div class="progress-container">
+        <div class="progress-bar-bg"></div>
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        <div id="step-circle-1" class="step-circle active"><i data-lucide="check" class="check-icon w-4 h-4"></i></div>
+        <div id="step-circle-2" class="step-circle"><i data-lucide="check" class="check-icon w-4 h-4"></i></div>
+        <div id="step-circle-3" class="step-circle"><i data-lucide="check" class="check-icon w-4 h-4"></i></div>
+        <div id="step-circle-4" class="step-circle"><i data-lucide="check" class="check-icon w-4 h-4"></i></div>
+        <div id="step-circle-5" class="step-circle"><i data-lucide="check" class="check-icon w-4 h-4"></i></div>
+    </div>
+<div class="step-annotations">
+    <div id="step-annotation-1" class="step-annotation active" style="left: 0%; transform: translateX(0%); text-align: left;">Name</div>
+    <div id="step-annotation-2" class="step-annotation" style="left: 25%; transform: translateX(-50%);">Email</div>
+    <div id="step-annotation-3" class="step-annotation" style="left: 50%; transform: translateX(-50%);">Password</div>
+    <div id="step-annotation-4" class="step-annotation" style="left: 75%; transform: translateX(-50%);">Role</div>
+    <div id="step-annotation-5" class="step-annotation" style="left: 100%; transform: translateX(-100%); text-align: right;">Agree</div>
+</div>
+</div>
+    <!-- END: Progress Bar -->
+
                     <h1 class="auth-title">Join Venturalink</h1>
                     <p class="auth-subtitle">Create your account and start connecting</p>
                 </div>
