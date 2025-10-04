@@ -1137,35 +1137,41 @@ main {
     border-color: rgba(102, 126, 234, 0.3);
 }
 
+/* Card Header: stack icon + heading consistently */
 .card-header {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    flex-direction: column; /* stack icon above the title */
+    align-items: center;    /* center horizontally */
+    justify-content: flex-start;
     margin-bottom: var(--space-xl);
+    gap: 1rem;              /* uniform spacing between icon and title */
     position: relative;
 }
 
+/* Icon container: consistent size and center alignment */
 .icon-container {
-    position: relative;
     width: 80px;
     height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: var(--space-lg);
+    margin: 0;              /* remove any bottom margin */
+    position: relative;
 }
 
+/* Icon background inside container */
 .icon-bg {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--gradient-primary);
     border-radius: 50%;
     opacity: 0.1;
+    background: var(--gradient-primary);
     transition: all var(--transition-normal);
 }
+
 
 .feature-card:hover .icon-bg {
     opacity: 0.2;
@@ -1185,12 +1191,15 @@ main {
     transform: scale(1.1);
 }
 
+
+/* Card title: remove default margins to avoid misalignment */
 .card-header h3 {
     font-family: var(--font-primary);
     font-size: 1.8rem;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: var(--space-sm);
+    margin: 0; /* no margin */
+    text-align: center;
 }
 
 .card-number {
@@ -1934,38 +1943,192 @@ main {
     color: var(--text-primary);
 }
 
-/* Scroll to Top Button */
-
-/* Back to Top Button (Modern, Themed) */
+/* Rocket Back to Top Button */
 #backToTopBtn {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
-    bottom: 2.5rem;
-    right: 2.5rem;
+    bottom: 30px;
+    right: 30px;
     z-index: 1200;
-    width: 48px;
-    height: 48px;
     border: none;
     outline: none;
     background: transparent;
-    border-radius: 50%;
-    box-shadow: 0 4px 24px rgba(102,126,234,0.18), 0 1.5px 8px rgba(118,75,162,0.10);
     cursor: pointer;
-    transition: box-shadow 0.3s, transform 0.2s, background 0.2s;
     padding: 0;
-    opacity: 0.92;
-    backdrop-filter: blur(2px);
+    width: 50px;
+    height: 70px;
+    transition: transform 0.2s ease;
+    will-change: transform;
 }
 
-#backToTopBtn svg {
+#backToTopBtn .rocket-svg {
     width: 100%;
     height: 100%;
+    filter: drop-shadow(0 2px 8px rgba(102, 126, 234, 0.25));
+    transition: filter 0.3s ease;
+}
+
+/* Hover effect: smooth tilt and wiggle */
+#backToTopBtn:hover .rocket-svg {
+    animation: wiggle 0.5s ease-in-out infinite;
+    filter: drop-shadow(0 4px 12px rgba(118, 75, 162, 0.4));
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(-3deg) translateY(0); }
+    25% { transform: rotate(2deg) translateY(-4px); }
+    50% { transform: rotate(3deg) translateY(-8px); }
+    75% { transform: rotate(-2deg) translateY(-4px); }
+}
+
+/* Launch animation with smooth scroll sync */
+#backToTopBtn.launching {
+    animation: rocket-launch 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    pointer-events: none;
+}
+
+@keyframes rocket-launch {
+    0% { 
+        transform: translateY(0) scale(1) rotate(0deg); 
+        opacity: 1; 
+    }
+    10% {
+        transform: translateY(-30px) scale(1.05) rotate(-2deg);
+    }
+    100% { 
+        transform: translateY(-150vh) scale(0.3) rotate(3deg); 
+        opacity: 0; 
+    }
+}
+
+/* Effects container - FIXED POSITIONING */
+/* Effects container - FIXED POSITIONING */
+.effects {
+    position: absolute;
+
+    /* === THE FIX === */
+    /* This locks the effects container to the bottom of the rocket button */
+    top: 100%;          
+    /* This pulls the flames up slightly to look like they're coming from the base */
+    margin-top: -15px; 
+    /* We unset the bottom property to avoid conflicts */
+    bottom: auto;       
+
+    /* These lines correctly center the effects horizontally */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Hide effects by default */
+.flames, .smoke-trail {
+    display: none;
+}
+
+/* Show effects only during launch */
+#backToTopBtn.launching .flames,
+#backToTopBtn.launching .smoke-trail {
     display: block;
 }
 
-#backToTopBtn:hover {
-    box-shadow: 0 8px 32px rgba(102,126,234,0.28), 0 2px 12px rgba(118,75,162,0.18);
-    transform: translateY(-4px) scale(1.08);
-    opacity: 1;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+/* Flames container positioning */
+.flames {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    top: auto;
+}
+
+/* Flame Styling - FIXED POSITIONING */
+.flame {
+    position: absolute;
+    top: 0;
+    bottom: auto;
+    width: 12px;
+    height: 35px;
+    background: linear-gradient(to top, #667eea 0%, #764ba2 30%, #ffa500 70%, #ffd700 100%);
+    border-radius: 50% 50% 15% 15%;
+    opacity: 0;
+    animation: flameGlow 0.15s linear infinite, flameFade 1.5s ease-out forwards;
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.8);
+}
+
+.flame:nth-child(1) { 
+    left: 50%; 
+    transform: translateX(-50%); 
+    height: 40px;
+    animation-delay: 0s;
+}
+
+.flame:nth-child(2) { 
+    left: 50%; 
+    transform: translateX(-15px);
+    animation-delay: 0.08s;
+    height: 32px;
+}
+
+.flame:nth-child(3) { 
+    left: 50%;
+    transform: translateX(3px);
+    animation-delay: 0.05s;
+    height: 35px;
+}
+
+@keyframes flameGlow {
+    0%, 100% { 
+        opacity: 0.9;
+    }
+    50% { 
+        opacity: 1;
+    }
+}
+
+@keyframes flameFade {
+    0% { opacity: 0; }
+    10% { opacity: 0.95; }
+    85% { opacity: 0.9; }
+    100% { opacity: 0; }
+}
+
+/* Smoke trail container positioning */
+.smoke-trail {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    top: auto;
+}
+
+/* Smoke Puff Styling - FIXED POSITIONING */
+.smoke {
+    position: absolute;
+    top: 0;
+    bottom: auto;
+    left: 50%;
+    width: 18px;
+    height: 18px;
+    background: radial-gradient(circle, rgba(118, 75, 162, 0.4) 0%, rgba(102, 126, 234, 0.2) 50%, transparent 100%);
+    border-radius: 50%;
+    opacity: 0;
+    animation: puff 1.4s ease-out forwards;
+}
+
+.smoke:nth-child(1) { animation-delay: 0.1s; }
+.smoke:nth-child(2) { animation-delay: 0.3s; }
+.smoke:nth-child(3) { animation-delay: 0.5s; }
+.smoke:nth-child(4) { animation-delay: 0.7s; }
+
+@keyframes puff {
+    0% { 
+        transform: translate(-50%, 0) scale(0.5); 
+        opacity: 0.8; 
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% { 
+        transform: translate(calc(-50% + var(--random-x, 0px)), 70px) scale(3); 
+        opacity: 0; 
+    }
 }
