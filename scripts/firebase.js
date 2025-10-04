@@ -3,12 +3,13 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBHSYHYProIQaLDzBV2YjU5tceh0jxZOM4",
-  authDomain: "venturalink-3ebe5.firebaseapp.com",
-  projectId: "venturalink-3ebe5",
-  storageBucket: "venturalink-3ebe5.firebasestorage.app",
-  messagingSenderId: "919446126939",
-  appId: "1:919446126939:web:e5efc3774d3f0e3cbd5a7e"
+  apiKey: "AIzaSyA37bruIT_neT5w-8CUuPGofy0Lnv2UJOg",
+  authDomain: "project-1-747ec.firebaseapp.com",
+  projectId: "project-1-747ec",
+  storageBucket: "project-1-747ec.firebasestorage.app",
+  messagingSenderId: "122686135785",
+  appId: "1:122686135785:web:7e159363045f52208cbf78",
+  measurementId: "G-1GT8XMMFM3"
 };
 
 // Initialize Firebase
