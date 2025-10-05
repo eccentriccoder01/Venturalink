@@ -190,20 +190,38 @@ npx live-server .
 
 ### 3. Configure Firebase
 
-Update `firebase.js` with your Firebase config:
+To connect the project to your own Firebase backend, follow these steps:
 
-```js
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
+**Step 1:** Create Your Config File: In the scripts/ folder, find the file named firebase-config.example.js. Make a copy of this file in the same folder and rename the copy to firebase-config.js.
+
+**Step 2:** Add Your Firebase Keys: Open your new scripts/firebase-config.js file and replace the placeholder values with your actual Firebase project keys. This file is already listed in .gitignore, so your secret keys will not be committed.
+
+Note: Make sure your Firestore database has a users collection. Each user document should have a userType field set to either investor or business.
+
+###  Developer Guide: Using Firebase
+
+* This project uses a central file to manage the Firebase connection for security and maintainability.
+
+* **Golden Rule:** Do NOT add Firebase configuration or call initializeApp in any new file.
+
+* When you need to interact with Firebase services (like Authentication or Firestore), you must import the initialized services from scripts/firebase.js.
+
+Example Usage:-
+At the top of your JavaScript file (scripts/your-new-feature.js): 
+
 ```
+// Import the services you need from the central firebase.js file
+import { auth, db } from './firebase.js';
 
-> Make sure your Firestore has a `users` collection with documents having `userType` fields (`investor` or `business`).
+// You can also import any specific Firebase functions you need
+import { doc, getDoc, updateDoc } from "[https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js](https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js)";
+
+// Now you can use 'auth' and 'db' directly in your code
+const user = auth.currentUser;
+//your logic here...
+```
+By following this pattern, we keep all Firebase logic clean, secure, and easy to manage :)
+
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 

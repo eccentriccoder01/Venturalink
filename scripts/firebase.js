@@ -1,22 +1,14 @@
+// 1. Import the configuration object from our new untracked file
+import { firebaseConfig } from './firebase-config.js';
+
+// 2. Import the necessary functions from the SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyA37bruIT_neT5w-8CUuPGofy0Lnv2UJOg",
-  authDomain: "project-1-747ec.firebaseapp.com",
-  projectId: "project-1-747ec",
-  storageBucket: "project-1-747ec.firebasestorage.app",
-  messagingSenderId: "122686135785",
-  appId: "1:122686135785:web:7e159363045f52208cbf78",
-  measurementId: "G-1GT8XMMFM3"
-};
-
-// Initialize Firebase
+// 3. Initialize Firebase with the imported config
 const app = initializeApp(firebaseConfig);
 
-// Export auth and db
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-export { auth, db };
+// 4. Export auth and db for rest of the app to use
+export const auth = getAuth(app);
+export const db = getFirestore(app);
