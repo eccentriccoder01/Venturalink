@@ -1,191 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - Venturalink</title>
-    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="Venturalink" />
-    <link rel="manifest" href="/favicon/site.webmanifest" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/profile.css">
-    <script defer src="scripts/lucide.js"></script>
-    <script src="/scripts/theme.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - Venturalink</title>
+  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Venturalink" />
+  <link rel="manifest" href="/favicon/site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/profile.css">
+  <script defer src="scripts/lucide.js"></script>
+  <script defer src="scripts/theme.js"></script>
 </head>
 <body>
-    <div class="animated-bg">
-        <div class="floating-orb orb-1"></div>
-        <div class="floating-orb orb-2"></div>
-        <div class="floating-orb orb-3"></div>
-        <div class="floating-orb orb-4"></div>
-        <div class="gradient-mesh"></div>
+  <!-- Animated background -->
+  <div class="animated-bg">
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+    <div class="floating-orb orb-3"></div>
+    <div class="floating-orb orb-4"></div>
+    <div class="gradient-mesh"></div>
+  </div>
+
+  <!-- Dark/Light Mode Toggle (top-right) -->
+  <button id="theme-toggle" aria-label="Switch theme"></button>
+
+  <header class="glass-nav">
+    <nav class="navbar">
+      <div class="logo">
+        <a href="index.html" class="logo-link">
+          <div class="logo-icon"><i data-lucide="trending-up"></i></div>
+          <div class="logo-text">
+            <img src="V.png" alt="V" style="height: 3rem; margin-right: -8px; transform: translateY(8px)">ENTURALINK
+          </div>
+        </a>
+      </div>
+      <ul class="nav-links">
+        <li>
+          <a href="profile.html" class="nav-link active">
+            <i data-lucide="user"></i>
+            <span>Profile</span>
+          </a>
+        </li>
+        <li>
+          <button onclick="handleLogout()" class="nav-link logout-btn">
+            <i data-lucide="log-out"></i>
+            <span>Logout</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="profile-container">
+    <!-- Profile Header -->
+    <div class="profile-header glass-card">
+      <div class="profile-avatar">
+        <img id="avatar-img" src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Avatar" class="avatar-image">
+        <button class="avatar-edit-btn" title="Change profile picture">
+          <i data-lucide="camera"></i>
+        </button>
+      </div>
+      <div class="profile-info">
+        <h1 id="user-name" class="profile-name">Loading...</h1>
+        <p id="user-role" class="profile-role">User</p>
+        <div class="profile-completion">
+          <span id="completion-text" class="completion-text">Profile Completion</span>
+          <div class="completion-bar">
+            <div id="completion-fill" class="completion-fill"></div>
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="#" class="social-icon" title="LinkedIn"><i data-lucide="linkedin"></i></a>
+          <a href="#" class="social-icon" title="Twitter"><i data-lucide="twitter"></i></a>
+          <a href="#" class="social-icon" title="GitHub"><i data-lucide="github"></i></a>
+        </div>
+      </div>
     </div>
 
-    <header class="glass-nav">
-        <nav class="navbar">
-            <div class="logo">
-                <a href="index.html" class="logo-link">
-                    <div class="logo-icon">
-                        <i data-lucide="trending-up"></i>
-                    </div>
-                    <div class="logo-text">
-                        <img src="V.png" alt="V" style="height: 3rem; margin-right: -8px; transform: translateY(8px)">ENTURALINK
-                    </div>
-                </a>
-            </div>
-            <ul class="nav-links">
-                <li>
-                    <a href="profile.html" class="nav-link active">
-                        <i data-lucide="user"></i>
-                        <span>Profile</span>
-                    </a>
-                </li>
-                <li>
-                    <button onclick="handleLogout()" class="nav-link logout-btn">
-                        <i data-lucide="log-out"></i>
-                        <span>Logout</span>
-                    </button>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
-    <main class="profile-container">
-        <div class="profile-header glass-card">
-            <div class="profile-avatar">
-                <img id="avatar-img" src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Avatar" class="avatar-image">
-                <button class="avatar-edit-btn" title="Change profile picture">
-                    <i data-lucide="camera"></i>
-                </button>
-            </div>
-            <div class="profile-info">
-                <h1 id="user-name" class="profile-name">Loading...</h1>
-                <p id="user-role" class="profile-role">User</p>
-                <div class="profile-completion">
-                    <span id="completion-text" class="completion-text">Profile Completion</span>
-                    <div class="completion-bar">
-                        <div id="completion-fill" class="completion-fill"></div>
-                    </div>
-                </div>
-                <div class="social-links">
-                    <a href="#" class="social-icon" title="LinkedIn"><i data-lucide="linkedin"></i></a>
-                    <a href="#" class="social-icon" title="Twitter"><i data-lucide="twitter"></i></a>
-                    <a href="#" class="social-icon" title="GitHub"><i data-lucide="github"></i></a>
-                </div>
-            </div>
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card glass-card">
+        <div class="stat-icon"><i data-lucide="file-text"></i></div>
+        <div class="stat-content">
+          <span class="stat-number" id="proposals-count">0</span>
+          <span class="stat-label">Proposals</span>
         </div>
-
-        <div class="stats-grid">
-            <div class="stat-card glass-card">
-                <div class="stat-icon"><i data-lucide="file-text"></i></div>
-                <div class="stat-content">
-                    <span class="stat-number" id="proposals-count">0</span>
-                    <span class="stat-label">Proposals</span>
-                </div>
-            </div>
-            <div class="stat-card glass-card">
-                <div class="stat-icon"><i data-lucide="trending-up"></i></div>
-                <div class="stat-content">
-                    <span class="stat-number" id="investments-count">0</span>
-                    <span class="stat-label">Investments</span>
-                </div>
-            </div>
-            <div class="stat-card glass-card">
-                <div class="stat-icon"><i data-lucide="message-circle"></i></div>
-                <div class="stat-content">
-                    <span class="stat-number" id="messages-count">0</span>
-                    <span class="stat-label">Messages</span>
-                </div>
-            </div>
+      </div>
+      <div class="stat-card glass-card">
+        <div class="stat-icon"><i data-lucide="trending-up"></i></div>
+        <div class="stat-content">
+          <span class="stat-number" id="investments-count">0</span>
+          <span class="stat-label">Investments</span>
         </div>
-
-        <div class="profile-grid">
-            <div class="glass-card profile-form-card">
-                <div class="card-header">
-                    <div class="card-icon"><i data-lucide="edit-3"></i></div>
-                    <h3>Edit Your Profile</h3>
-                </div>
-                <form id="profile-form" class="premium-form">
-                    <div class="form-group">
-                        <label for="displayName">Full Name</label>
-                        <div class="input-wrapper" style="position: relative; width: 100%;">
-                            <i data-lucide="user" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #6b6b76; pointer-events: none; font-size: 1rem;"></i>
-                            <input type="text" id="displayName" name="displayName" placeholder="Enter your full name"
-                                   style="width: 100%; padding: 10px 12px 10px 40px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: #fff; font-family: inherit;">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="bio">Your Bio</label>
-                        <div class="input-wrapper" style="position: relative; width: 100%;">
-                            <i data-lucide="align-left" style="position: absolute; left: 12px; top: 12px; color: #6b6b76; pointer-events: none; font-size: 1rem;"></i>
-                            <textarea id="bio" name="bio" rows="3" placeholder="Tell us about yourself..."
-                                      style="width: 100%; padding: 10px 12px 10px 40px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: #fff; font-family: inherit; min-height: 80px; resize: vertical;"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <div class="input-wrapper" style="position: relative; width: 100%;">
-                            <i data-lucide="phone" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #6b6b76; pointer-events: none; font-size: 1rem;"></i>
-                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567"
-                                   style="width: 100%; padding: 10px 12px 10px 40px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: #fff; font-family: inherit;">
-                        </div>
-                    </div>
-
-                    <button type="submit" class="premium-btn">
-                        <div class="btn-gradient"></div>
-                        <i data-lucide="save"></i>
-                        <span>Save Changes</span>
-                    </button>
-                </form>
-            </div>
-
-            <div class="glass-card activity-card">
-                <div class="card-header">
-                    <div class="card-icon"><i data-lucide="activity"></i></div>
-                    <h3>Recent Activity</h3>
-                </div>
-                <div id="activity-feed" class="activity-feed">
-                    <p>No recent activity.</p>
-                </div>
-            </div>
-
-            <div id="proposals-investments" class="glass-card full-width-card">
-                <div class="card-header">
-                    <div class="card-icon"><i data-lucide="briefcase"></i></div>
-                    <h3 id="proposals-investments-title">My Content</h3>
-                </div>
-                <div id="proposals-investments-list" class="proposals-list">
-                </div>
-            </div>
+      </div>
+      <div class="stat-card glass-card">
+        <div class="stat-icon"><i data-lucide="message-circle"></i></div>
+        <div class="stat-content">
+          <span class="stat-number" id="messages-count">0</span>
+          <span class="stat-label">Messages</span>
         </div>
+      </div>
+    </div>
 
-        <!-- Logout Confirmation Modal -->
-        <div id="logout-modal" class="modal-overlay hidden">
-            <div class="modal-content glass-card">
-                <h2>Confirm Logout</h2>
-                <p>Are you sure you want to log out?</p>
-                <div class="modal-actions">
-                    <button id="confirm-logout" class="premium-btn confirm-btn">
-                        <div class="btn-gradient"></div>
-                        <span>Confirm</span>
-                    </button>
-                    <button id="cancel-logout" class="premium-btn cancel-btn">
-                        <div class="btn-gradient"></div>
-                        <span>Cancel</span>
-                    </button>
-                </div>
-            </div>
+    <!-- Profile Form & Activity -->
+    <div class="profile-grid">
+      <div class="glass-card profile-form-card">
+        <div class="card-header">
+          <div class="card-icon"><i data-lucide="edit-3"></i></div>
+          <h3>Edit Your Profile</h3>
         </div>
+        <form id="profile-form" class="premium-form">
+          <!-- Name -->
+          <div class="form-group">
+            <label for="displayName">Full Name</label>
+            <div class="input-wrapper">
+              <i data-lucide="user"></i>
+              <input type="text" id="displayName" name="displayName" placeholder="Enter your full name">
+            </div>
+          </div>
+          <!-- Bio -->
+          <div class="form-group">
+            <label for="bio">Your Bio</label>
+            <div class="input-wrapper">
+              <i data-lucide="align-left"></i>
+              <textarea id="bio" name="bio" rows="3" placeholder="Tell us about yourself..."></textarea>
+            </div>
+          </div>
+          <!-- Phone -->
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <div class="input-wrapper">
+              <i data-lucide="phone"></i>
+              <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+            </div>
+          </div>
+          <button type="submit" class="premium-btn">
+            <i data-lucide="save"></i>
+            <span>Save Changes</span>
+          </button>
+        </form>
+      </div>
 
-    </main>
+      <div class="glass-card activity-card">
+        <div class="card-header">
+          <div class="card-icon"><i data-lucide="activity"></i></div>
+          <h3>Recent Activity</h3>
+        </div>
+        <div id="activity-feed" class="activity-feed">
+          <p>No recent activity.</p>
+        </div>
+      </div>
 
-    <script type="module" src="scripts/profile.js"></script>
+      <div id="proposals-investments" class="glass-card full-width-card">
+        <div class="card-header">
+          <div class="card-icon"><i data-lucide="briefcase"></i></div>
+          <h3 id="proposals-investments-title">My Content</h3>
+        </div>
+        <div id="proposals-investments-list" class="proposals-list"></div>
+      </div>
+    </div>
+
+    <!-- Logout Modal -->
+    <div id="logout-modal" class="modal-overlay hidden">
+      <div class="modal-content glass-card">
+        <h2>Confirm Logout</h2>
+        <p>Are you sure you want to log out?</p>
+        <div class="modal-actions">
+          <button id="confirm-logout" class="premium-btn confirm-btn">Confirm</button>
+          <button id="cancel-logout" class="premium-btn cancel-btn">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Profile JS -->
+  <script type="module" src="scripts/profile.js"></script>
 </body>
 </html>
