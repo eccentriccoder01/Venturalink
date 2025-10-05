@@ -48,3 +48,6 @@ yarn-error.log*
 .npm/
 .eslintcache 
 .vercel
+
+# Ignore local Firebase configuration
+scripts/firebase-config.js
