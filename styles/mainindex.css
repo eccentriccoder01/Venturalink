@@ -945,62 +945,52 @@ main {
 }
 
 /* Scroll Indicator - Fixed */
+/* Scroll Indicator - Fixed */
 .scroll-indicator {
-    position: relative; /* keep in flow */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* left-align children inside this box */
-    justify-content: center;
-    margin: 2rem auto 0; /* top spacing, auto horizontal centering */
-    gap: 0.5rem; /* space between line and text */
-    width: fit-content; /* shrink to content width */
-    margin-left: 44.5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4rem;
+  gap: 0.4rem;
 }
 
-.scroll-line {
-    width: 2px;
-    height: 30px;
-    background: var(--gradient-primary);
-    border-radius: 1px;
-    position: relative; /* keep for pseudo-element */
-    overflow: hidden;
-    margin-bottom: 1.5rem;
-    margin-left: 50%;
+.scroll-arrow {
+  font-size: 1.2rem;
+  color: var(--gradient-primary);
+  animation: arrow-bounce 1.6s infinite ease-in-out;
+}
+.scroll-text-box {
+  animation: pulse 2s infinite ease-in-out;
 }
 
-.scroll-line::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 20px;
-    background: white;
-    animation: scroll-line-move 2s infinite ease-in-out;
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(162, 182, 255, 0.2); }
+  50% { box-shadow: 0 0 16px rgba(162, 182, 255, 0.5); }
 }
 
-@keyframes scroll-line-move {
-    0% {
-        transform: translateY(-20px);
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(30px);
-        opacity: 0;
-    }
+
+@keyframes arrow-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(6px); opacity: 1; }
 }
 
 .scroll-text {
-    font-size: 0.8rem;
-    color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-     margin-left: 1rem; /* small spacing from left if needed */
-    text-align: center; /* ensures it remains centered below the line */
+  font-size: 0.8rem;
+  color: #ffffffc3;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 0.4rem 0.8rem;
+  border: 2px solid rgba(102,126,234,0.5); 
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(102,126,234,0.2);
+  background: rgba(14,17,26,0.3);
+  backdrop-filter: blur(4px);
 }
+
+
+
+
+
 
 /* =========================================
    FEATURES SECTION - NEXT-LEVEL CARDS
