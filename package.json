@@ -1,0 +1,26 @@
+{
+  "name": "venturalink",
+  "version": "1.0.0",
+  "description": "<div align=\"center\"><img src=\"V.png\" style=\"width: 220px; height: 220px;\" alt=\"Venturalink Logo\" /></div>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "generate-env": "node generate-env.js",
+    "build": "npm run generate-env"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krishagandhi0711/Venturalink.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/krishagandhi0711/Venturalink/issues"
+  },
+  "homepage": "https://github.com/krishagandhi0711/Venturalink#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

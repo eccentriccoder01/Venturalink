@@ -1,0 +1,229 @@
+<header class="main-header">
+  <nav class="navbar" id="main-nav">
+    <div class="logo">
+      <a href="index.html" class="logo-link">
+        <div class="logo-container">
+          <div class="logo-icon">
+            <svg viewBox="0 0 40 40" fill="none">
+              <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="url(#logo-gradient)" stroke-width="2" fill="none"/>
+              <circle cx="20" cy="20" r="6" fill="url(#logo-gradient)"/>
+              <defs>
+                <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#667eea"/>
+                  <stop offset="100%" style="stop-color:#764ba2"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="logo-text" style="transform: translateY(-4px); font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight:700; letter-spacing:2px; font-size:1.6rem;">
+            <img src="V.png" alt="V" style="height: 3rem; margin-right: -8px; transform: translateY(8px)"><span>ENTURALINK</span>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html" class="nav-link"><span>Home</span></a>
+      <div class="dropdown">
+        <a href="about.html" class="nav-link dropdown-toggle"><span>About</span></a>
+        <div class="dropdown-menu">
+          <a href="features.html" class="nav-link" data-text="Features"><span>Features</span></a>
+          <a href="pricing.html" class="nav-link" data-text="Pricing"><span>Pricing</span></a>
+          <a href="blog.html" class="nav-link" data-text="Blog"><span>Blog</span></a>
+          <a href="help.html" class="nav-link" data-text="Help"><span>Help Center</span></a>
+          <a href="guides.html" class="nav-link" data-text="Guides"><span>Guides</span></a>
+          <a href="api.html" class="nav-link" data-text="API"><span>API Docs</span></a>
+          <a href="terms.html" class="nav-link" data-text="Terms"><span>Terms of Service</span></a>
+        </div>
+      </div>
+      <a href="contact.html" class="nav-link"><span>Contact</span></a>
+    </div>
+    <div class="nav-actions">
+      <a href="login.html" class="nav-link">Login</a>
+      <a href="register.html" class="nav-link nav-link-cta">
+        <span>Register</span>
+        <div class="nav-link-bg"></div>
+      </a>
+    </div>
+    <button class="menu-toggle" aria-label="Toggle navigation menu" id="menu-toggle">
+      <span class="hamburger"></span>
+      <span class="hamburger"></span>
+      <span class="hamburger"></span>
+    </button>
+  </nav>
+</header>
+
+<style>
+.main-header {
+  width: 100%;
+  background: var(--bg-primary, #111);
+  border-bottom: 1px solid var(--glass-border, rgba(255,255,255,0.1));
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.navbar {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.logo-icon svg {
+  height: 2.6rem;
+  width: 2.6rem;
+  margin-right: 0.5rem;
+  transition: transform 0.3s cubic-bezier(.4,2,.6,1);
+}
+.logo-link:hover .logo-icon svg {
+  transform: rotate(-10deg) scale(1.08);
+  filter: drop-shadow(0 0 12px #667eea88);
+}
+.logo-text {
+  color: #fff;
+  text-shadow: 0 2px 12px #667eea33;
+  transition: color 0.3s;
+}
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+.nav-link {
+  position: relative;
+  font-weight: 500;
+  color: var(--text-secondary, #aaa);
+  text-decoration: none;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+.nav-link:hover {
+  color: var(--text-primary, #fff);
+}
+.nav-link-cta {
+  position: relative;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  color: var(--text-primary, #fff);
+  border-radius: var(--radius-md, 8px);
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  transition: all 0.2s ease;
+}
+.nav-link-cta .nav-link-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 60% 40%, #fff3 0%, #fff0 80%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.nav-link-cta:hover .nav-link-bg {
+  opacity: 1;
+}
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.hamburger {
+  width: 24px;
+  height: 2px;
+  background: var(--text-primary, #fff);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.dropdown {
+  position: relative;
+}
+.dropdown-toggle::after {
+  font-size: 0.7rem;
+}
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-secondary, #111);
+  border-radius: 10px;
+  padding: 1rem;
+  min-width: 320px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  z-index: 200;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  gap: 0.5rem 1rem;
+}
+.dropdown-menu a {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  color: var(--text-primary, #fff);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+.dropdown-menu a:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--text-primary, #fff);
+}
+.dropdown:hover .dropdown-menu {
+  display: grid;
+}
+@media (max-width: 768px) {
+  .nav-links, .nav-actions {
+    display: none;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background: var(--bg-secondary, #111);
+    flex-direction: column;
+    width: 220px;
+    padding: 1rem;
+    border-radius: 0 0 0 12px;
+    box-shadow: 0 8px 32px #667eea22;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+  .nav-links.open, .nav-actions.open {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .menu-toggle {
+    display: flex;
+  }
+}
+@media (max-width: 480px) {
+  .dropdown-menu {
+    grid-template-columns: 1fr;
+    min-width: 200px;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const menuToggle = document.getElementById('menu-toggle');
+  const navLinks = document.getElementById('nav-links');
+  const navActions = document.querySelector('.nav-actions');
+  menuToggle.addEventListener('click', function () {
+    navLinks.classList.toggle('open');
+    navActions.classList.toggle('open');
+  });
+});
+</script>

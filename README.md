@@ -190,20 +190,75 @@ npx live-server .
 
 ### 3. Configure Firebase
 
-Update `firebase.js` with your Firebase config:
+To connect the project to your Firebase backend securely, follow these steps:
+
+**Step 1:** Go to your Firebase Console → Project Settings → General tab → “Your apps” → Copy your web app configuration.
+
+**Step 2:** On **Vercel**, open your project → **Settings → Environment Variables**, and add the following keys with your Firebase config values:
+
+| Key | Example Value |
+|------|----------------|
+| `VITE_FIREBASE_API_KEY` | `AIzaSyA...` |
+| `VITE_FIREBASE_AUTH_DOMAIN` | `project-id.firebaseapp.com` |
+| `VITE_FIREBASE_PROJECT_ID` | `project-id` |
+| `VITE_FIREBASE_STORAGE_BUCKET` | `project-id.firebasestorage.app` |
+| `VITE_FIREBASE_MESSAGING_SENDER_ID` | `1234567890` |
+| `VITE_FIREBASE_APP_ID` | `1:1234567890:web:abcdef123456` |
+| `VITE_FIREBASE_MEASUREMENT_ID` | `G-XXXXXXX` |
+
+> 🔒 These variables are automatically loaded by Vercel during deployment and never exposed in your repository.
+
+**Step 3:** For local development, create a file named `.env.local` (not committed to Git) in your project root and add the same variables.
+
+```bash
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
+````
+
+**Step 4:** You don’t need to edit any Firebase config files manually.
+The app automatically reads credentials from the environment using:
 
 ```js
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+// scripts/firebase-config.js
+export const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 ```
 
-> Make sure your Firestore has a `users` collection with documents having `userType` fields (`investor` or `business`).
+---
+
+### Developer Guide: Using Firebase
+
+* This project uses a **centralized Firebase setup** to keep configuration clean and secure.
+* **Never initialize Firebase directly** in new files. Always import the pre-configured services from `scripts/firebase.js`.
+
+Example usage:
+
+```js
+// scripts/your-feature.js
+import { auth, db } from './firebase.js';
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+
+const user = auth.currentUser;
+// your logic here...
+```
+
+By following this structure, Firebase logic remains modular, secure, and easy to maintain.
+
+> ⚙️ Make sure your Firestore has a `users` collection with each document containing a `userType` field (`investor` or `business`).
+
+---
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
