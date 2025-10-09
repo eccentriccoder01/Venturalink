@@ -1619,10 +1619,14 @@ main {
         grid-template-columns: 1fr;
         gap: 3rem;
     }
-    
-    .footer-links-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
+    .footer-brand{ 
+        width: 90%;
+        margin: 0.5rem auto;
+    }
+    .footer-links-grid { 
+        grid-template-columns: repeat(3 , 250px);
+        gap: 1rem; 
+        margin-left: 2rem;
     }
     
     .hero-stats {
@@ -1734,14 +1738,12 @@ main {
     }
     
     .footer-links-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+        grid-template-columns: repeat(2 , 250px);
+        gap: 3rem;
         text-align: center;
     }
-    
-    .footer-brand {
-        text-align: center;
-        max-width: none;
+    .footer-section h4::after{
+        left: 45%;
     }
     
     .footer-social {
@@ -1758,7 +1760,13 @@ main {
         justify-content: center;
     }
 }
-
+/* for footer */
+@media (max-width: 620px) {
+    .footer-links-grid{
+        grid-template-columns: repeat(2 , 200px);
+        gap: 0.5rem;
+    }
+}
 @media (max-width: 480px) {
     .hero-title {
         font-size: clamp(2rem, 10vw, 3rem);
@@ -1788,6 +1796,25 @@ main {
     
     .card-number {
         font-size: 3rem;
+    }
+     .footer-links-grid{
+        margin-left: 0;
+    }
+    .footer-links-grid .footer-section:last-child{
+        width: 200%;
+        margin: 0 auto;
+    }
+}
+@media (max-width:400px) {
+     .footer-links-grid{
+        grid-template-columns: repeat(1 , 200px);
+        gap: 1rem;
+        place-content: center;
+        place-items: center;
+    }
+    .footer-links-grid .footer-section:last-child{
+        width: 100%;
+        margin: 0 auto;
     }
 }
 
