@@ -104,7 +104,7 @@ function showNotification(message, type = "info") {
   if (existingNotification) existingNotification.remove();
 
   const notification = document.createElement("div");
-  notification.className = notification notification-${type};
+  notification.className = `notification notification-${type}`;
   notification.innerHTML = `
     <div class="notification-content">
       <span class="notification-message">${message}</span>
