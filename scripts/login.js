@@ -29,6 +29,17 @@ if (loginForm) {
     submitBtn.disabled = true;
 
     try {
+      // ✅ Check if this email is linked to Google Sign-In
+      const methods = await fetchSignInMethodsForEmail(auth, email);
+      if (methods.includes("google.com") && !methods.includes("password")) {
+        showNotification("⚠️ This account uses Google Sign-In. Please continue with Google.", "info");
+        btnText.textContent = originalText;
+        submitBtn.style.opacity = "1";
+        submitBtn.disabled = false;
+        return;
+      }
+
+      // Proceed with password login
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
@@ -69,11 +80,10 @@ if (googleBtn) {
       const result = await signInWithPopup(auth, provider);
       const googleUser = result.user;
 
-      // Check if email already exists with password sign-in
+      // ✅ Check if email already has a password-based account
       const methods = await fetchSignInMethodsForEmail(auth, googleUser.email);
 
       if (methods.includes("password")) {
-        // Link both accounts
         const password = prompt(
           "This email is already registered with a password. Enter it to link your Google account:"
         );
