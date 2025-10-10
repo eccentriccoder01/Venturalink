@@ -29,17 +29,16 @@ if (loginForm) {
     submitBtn.disabled = true;
 
     try {
-      // ✅ Check if this email is linked to Google Sign-In
+      // ✅ Check if this email uses Google only
       const methods = await fetchSignInMethodsForEmail(auth, email);
       if (methods.includes("google.com") && !methods.includes("password")) {
-        showNotification("⚠️ This account uses Google Sign-In. Please continue with Google.", "info");
+        showNotification("⚠️ This account uses Google Sign-In. Please use the Google login option.", "info");
         btnText.textContent = originalText;
         submitBtn.style.opacity = "1";
         submitBtn.disabled = false;
         return;
       }
 
-      // Proceed with password login
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
@@ -70,30 +69,41 @@ if (loginForm) {
   });
 }
 
-// === Google Sign-In (with Account Linking) ===
+// === Google Sign-In (BLOCK overwrite) ===
 const googleBtn = document.getElementById("btn-google-sign");
 if (googleBtn) {
   googleBtn.addEventListener("click", async (event) => {
     event.preventDefault();
 
     try {
+      // 🔍 Pre-check before signInWithPopup
+      const emailInput = document.getElementById("login-email");
+      let emailToCheck = emailInput ? emailInput.value.trim() : null;
+
+      if (emailToCheck) {
+        const methods = await fetchSignInMethodsForEmail(auth, emailToCheck);
+        if (methods.includes("password") && !methods.includes("google.com")) {
+          showNotification("⚠️ This email is registered with a password. Use email login instead.", "info");
+          return;
+        }
+      }
+
+      // Proceed with Google only if not password user
       const result = await signInWithPopup(auth, provider);
       const googleUser = result.user;
 
-      // ✅ Check if email already has a password-based account
+      // Double check after sign-in — if it’s a new account, link optional password
       const methods = await fetchSignInMethodsForEmail(auth, googleUser.email);
-
       if (methods.includes("password")) {
-        const password = prompt(
-          "This email is already registered with a password. Enter it to link your Google account:"
-        );
-
-        if (password) {
-          const cred = EmailAuthProvider.credential(googleUser.email, password);
-          await linkWithCredential(googleUser, cred);
-          showNotification("✅ Google and Email accounts linked successfully!", "success");
-        } else {
-          showNotification("Linking cancelled.", "info");
+        try {
+          const password = prompt("Enter your password to link your existing account with Google:");
+          if (password) {
+            const cred = EmailAuthProvider.credential(googleUser.email, password);
+            await linkWithCredential(googleUser, cred);
+            showNotification("✅ Google and Email accounts linked successfully!", "success");
+          }
+        } catch (linkErr) {
+          console.warn("Linking failed:", linkErr);
         }
       }
 
