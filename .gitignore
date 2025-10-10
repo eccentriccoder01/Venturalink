@@ -9,6 +9,7 @@ yarn-error.log
 .env.local
 .env.*.local
 env.js
+
 # IDE
 .vscode/
 .idea/
