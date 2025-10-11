@@ -1536,15 +1536,16 @@ navLinks?.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
-auth.onAuthStateChanged((user) => {
+auth.onAuthStateChanged(async (user) => {
     if (user) {
-        updateNavigationForLoggedInUser(user);
+        // update nav based on authoritative userType from Firestore
+        const userType = await updateNavigationForLoggedInUser(user);
 
         const ctaInvestor = document.querySelector('.cta-buttons .btn-primary');
         const ctaEntrepreneur = document.querySelector('.cta-buttons .btn-secondary');
 
-        const userType = localStorage.getItem('userType');
-        if (ctaInvestor && ctaEntrepreneur && userType) {
+        // fallback to sensible defaults for CTAs
+        if (ctaInvestor && ctaEntrepreneur) {
             if (userType === 'investor') {
                 ctaInvestor.href = 'proposals.html';
                 ctaEntrepreneur.href = 'proposals.html';
@@ -1561,26 +1562,40 @@ auth.onAuthStateChanged((user) => {
     }
 });
 
-function updateNavigationForLoggedInUser(user) {
-    const userType = localStorage.getItem('userType');
+async function updateNavigationForLoggedInUser(user) {
+    // Try to read authoritative userType from Firestore (compat API)
+    let userType = null;
+    try {
+        const userDoc = await db.collection('users').doc(user.uid).get();
+        if (userDoc && userDoc.exists) {
+            userType = userDoc.data().userType || null;
+            // also keep a local cache for faster access elsewhere
+            try { localStorage.setItem('userType', userType || ''); } catch (e) {}
+        }
+    } catch (err) {
+        console.error('Failed to fetch userType for navigation:', err);
+        // fallback to localStorage if Firestore read fails
+        userType = localStorage.getItem('userType');
+    }
+
     navLinks.innerHTML = '';
     navLinks.innerHTML += `
         <a href="index.html" class="nav-link">Home</a>
         <a href="profile.html" class="nav-link">Dashboard</a>
     `;
-    switch (userType) {
-        case 'investor':
-            navLinks.innerHTML += `
-                <a href="investments.html" class="nav-link">My Investments</a>
-                <a href="proposals.html" class="nav-link">View Proposals</a>
-            `;
-            break;
-        case 'business':
-            navLinks.innerHTML += `
-                <a href="proposals.html" class="nav-link">My Proposals</a>
-                <a href="create-proposal.html" class="nav-link">Create Proposal</a>
-            `;
-            break;
+if (userType === 'investor') {
+    // 'My Investments' has been removed from navbar per request;
+    // investors now only see the proposals link here.
+    navLinks.innerHTML += `
+        <a href="/proposals" class="nav-link">View Proposals</a>
+    `;
+} else if (userType === 'business') {
+    navLinks.innerHTML += `
+        <a href="/proposals" class="nav-link">My Proposals</a>
+        <a href="/create-proposal" class="nav-link">Create Proposal</a>
+    `;
+}
+
     }
 
     navLinks.innerHTML += `
@@ -1588,6 +1603,8 @@ function updateNavigationForLoggedInUser(user) {
     `;
 
     document.getElementById('logout-link')?.addEventListener('click', handleLogout);
+
+    return userType;
 }
 
 function updateNavigationForLoggedOutUser() {
