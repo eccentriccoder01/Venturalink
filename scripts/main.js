@@ -47,13 +47,13 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA37bruIT_neT5w-8CUuPGofy0Lnv2UJOg",
-  authDomain: "project-1-747ec.firebaseapp.com",
-  projectId: "project-1-747ec",
-  storageBucket: "project-1-747ec.firebasestorage.app",
-  messagingSenderId: "122686135785",
-  appId: "1:122686135785:web:7e159363045f52208cbf78",
-  measurementId: "G-1GT8XMMFM3"
+    apiKey: "AIzaSyA37bruIT_neT5w-8CUuPGofy0Lnv2UJOg",
+    authDomain: "project-1-747ec.firebaseapp.com",
+    projectId: "project-1-747ec",
+    storageBucket: "project-1-747ec.firebasestorage.app",
+    messagingSenderId: "122686135785",
+    appId: "1:122686135785:web:7e159363045f52208cbf78",
+    measurementId: "G-1GT8XMMFM3"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -203,9 +203,9 @@ class PremiumUIController {
         };
 
         document.addEventListener('mousemove', (e) => {
-                const loader = document.createElement('div');
-                loader.className = 'page-loader';
-                loader.innerHTML = `
+            const loader = document.createElement('div');
+            loader.className = 'page-loader';
+            loader.innerHTML = `
                     <div class="loader-content">
                         <div class="loader-logo">
                             <svg viewBox="0 0 40 40" width="60" height="60">
@@ -225,7 +225,7 @@ class PremiumUIController {
                         </div>
                     </div>
                 `;
-                loader.style.cssText = `
+            loader.style.cssText = `
                     position: fixed;
                     top: 0;
                     left: 0;
@@ -240,7 +240,7 @@ class PremiumUIController {
                     transition: opacity 0.5s ease;
                 `;
 
-                const loaderStyles = `
+            const loaderStyles = `
                     .loader-content {
                         text-align: center;
                     }
@@ -293,26 +293,26 @@ class PremiumUIController {
                     }
                 `;
 
-                const loaderStyleSheet = document.createElement('style');
-                loaderStyleSheet.textContent = loaderStyles;
-                document.head.appendChild(loaderStyleSheet);
+            const loaderStyleSheet = document.createElement('style');
+            loaderStyleSheet.textContent = loaderStyles;
+            document.head.appendChild(loaderStyleSheet);
 
-                document.body.appendChild(loader);
+            document.body.appendChild(loader);
 
-                // Remove loader after animation and show main content
+            // Remove loader after animation and show main content
+            setTimeout(() => {
+                loader.style.opacity = '0';
                 setTimeout(() => {
-                    loader.style.opacity = '0';
-                    setTimeout(() => {
-                        loader.remove();
-                        // Show main content after loader hides
-                        const mainContent = document.querySelector('main');
-                        if (mainContent) {
-                            mainContent.style.opacity = '1';
-                            mainContent.style.pointerEvents = 'auto';
-                        }
-                    }, 500);
-                }, 2500);
-            
+                    loader.remove();
+                    // Show main content after loader hides
+                    const mainContent = document.querySelector('main');
+                    if (mainContent) {
+                        mainContent.style.opacity = '1';
+                        mainContent.style.pointerEvents = 'auto';
+                    }
+                }, 500);
+            }, 2500);
+
             this.isScrolling = true;
             clearTimeout(this.scrollTimeout);
             this.scrollTimeout = setTimeout(() => {
@@ -420,16 +420,16 @@ class PremiumUIController {
         const progressCircle = document.querySelector('.progress-circle');
         const progressPercentage = document.querySelector('.scroll-percentage');
         const progressContainer = document.querySelector('.scroll-progress-circle');
-        
+
         if (progressBar && progressCircle && progressPercentage) {
             const progress = this.scrollProgress * 100;
             const circumference = 125.6;
             const offset = circumference - (progress / 100) * circumference;
-            
+
             progressBar.style.width = `${progress}%`;
             progressCircle.style.strokeDashoffset = offset;
             progressPercentage.textContent = `${Math.round(progress)}%`;
-            
+
             if (progress > 10) {
                 progressContainer.classList.add('visible');
             } else {
@@ -451,11 +451,11 @@ class PremiumUIController {
         if (header) {
             const scrolled = window.pageYOffset > 50;
             header.classList.toggle('scrolled', scrolled);
-            
+
             // Add blur effect based on scroll speed
             const scrollSpeed = Math.abs(window.pageYOffset - (this.lastScrollY || 0));
             this.lastScrollY = window.pageYOffset;
-            
+
             if (scrollSpeed > 10) {
                 header.style.backdropFilter = 'blur(25px)';
             } else {
@@ -467,7 +467,7 @@ class PremiumUIController {
     // Parallax Effects Setup
     setupParallaxEffects() {
         this.parallaxElements = document.querySelectorAll('.floating-shape, .bg-orb');
-        
+
         // Add parallax data attributes
         this.parallaxElements.forEach((el, index) => {
             el.dataset.parallaxSpeed = (0.2 + index * 0.1).toString();
@@ -495,7 +495,7 @@ class PremiumUIController {
     createSplitTextAnimation(element) {
         const text = element.textContent;
         element.innerHTML = '';
-        
+
         [...text].forEach((char, index) => {
             const span = document.createElement('span');
             span.textContent = char === ' ' ? '\u00A0' : char;
@@ -530,7 +530,7 @@ class PremiumUIController {
         const text = element.textContent;
         element.textContent = '';
         element.style.borderRight = '2px solid #667eea';
-        
+
         let i = 0;
         const typeWriter = () => {
             if (i < text.length) {
@@ -560,11 +560,11 @@ class PremiumUIController {
 
     setupMorphingText() {
         const morphingElements = document.querySelectorAll('.gradient-text');
-        
+
         morphingElements.forEach(el => {
             const originalText = el.textContent;
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            
+
             el.addEventListener('mouseenter', () => {
                 let iteration = 0;
                 const interval = setInterval(() => {
@@ -575,9 +575,9 @@ class PremiumUIController {
                             return chars[Math.floor(Math.random() * chars.length)];
                         })
                         .join('');
-                    
+
                     if (iteration >= originalText.length) clearInterval(interval);
-                    iteration += 1/3;
+                    iteration += 1 / 3;
                 }, 30);
             });
         });
@@ -586,7 +586,7 @@ class PremiumUIController {
     // Enhanced Button Interactions
     setupButtonEnhancements() {
         const buttons = document.querySelectorAll('.btn');
-        
+
         buttons.forEach(btn => {
             // Ripple effect
             btn.addEventListener('click', (e) => {
@@ -615,7 +615,7 @@ class PremiumUIController {
         const size = Math.max(rect.width, rect.height);
         const x = e.clientX - rect.left - size / 2;
         const y = e.clientY - rect.top - size / 2;
-        
+
         ripple.style.cssText = `
             position: absolute;
             border-radius: 50%;
@@ -627,11 +627,11 @@ class PremiumUIController {
             animation: ripple 0.6s linear;
             pointer-events: none;
         `;
-        
+
         element.style.position = 'relative';
         element.style.overflow = 'hidden';
         element.appendChild(ripple);
-        
+
         setTimeout(() => ripple.remove(), 600);
 
         const rippleStyles = `
@@ -654,7 +654,7 @@ class PremiumUIController {
     createParticleExplosion(element) {
         const particleCount = 6;
         const particles = [];
-        
+
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
             particle.style.cssText = `
@@ -666,19 +666,19 @@ class PremiumUIController {
                 pointer-events: none;
                 z-index: 1000;
             `;
-            
+
             const angle = (i / particleCount) * Math.PI * 2;
             const velocity = 20 + Math.random() * 10;
             const x = Math.cos(angle) * velocity;
             const y = Math.sin(angle) * velocity;
-            
+
             particle.style.left = '50%';
             particle.style.top = '50%';
             particle.style.transform = 'translate(-50%, -50%)';
-            
+
             element.style.position = 'relative';
             element.appendChild(particle);
-            
+
             particle.animate([
                 { transform: 'translate(-50%, -50%) scale(0)', opacity: 1 },
                 { transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(1)`, opacity: 1, offset: 0.7 },
@@ -694,24 +694,24 @@ class PremiumUIController {
         const rect = element.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
-        
+
         const rotateX = (e.clientY - centerY) / 10;
         const rotateY = (centerX - e.clientX) / 10;
-        
+
         element.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
     }
 
     // Advanced Card Interactions
     setupCardInteractions() {
         const cards = document.querySelectorAll('.feature-card');
-        
+
         cards.forEach(card => {
             // Liquid morphing effect
             this.setupLiquidMorph(card);
-            
+
             // Advanced hover states
             this.setupAdvancedHover(card);
-            
+
             // Card flip interactions
             this.setupCardFlip(card);
         });
@@ -732,15 +732,15 @@ class PremiumUIController {
             transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
             z-index: -1;
         `;
-        
+
         card.style.position = 'relative';
         card.appendChild(morphBg);
-        
+
         card.addEventListener('mouseenter', () => {
             morphBg.style.opacity = '1';
             morphBg.style.transform = 'scale(1.05)';
         });
-        
+
         card.addEventListener('mouseleave', () => {
             morphBg.style.opacity = '0';
             morphBg.style.transform = 'scale(1)';
@@ -749,7 +749,7 @@ class PremiumUIController {
 
     setupAdvancedHover(card) {
         const elements = card.querySelectorAll('.feature-icon, h3, .feature-list li');
-        
+
         card.addEventListener('mouseenter', () => {
             elements.forEach((el, index) => {
                 setTimeout(() => {
@@ -758,7 +758,7 @@ class PremiumUIController {
                 }, index * 50);
             });
         });
-        
+
         card.addEventListener('mouseleave', () => {
             elements.forEach(el => {
                 el.style.transform = 'translateX(0)';
@@ -768,14 +768,14 @@ class PremiumUIController {
 
     setupCardFlip(card) {
         let isFlipped = false;
-        
+
         card.addEventListener('dblclick', () => {
             isFlipped = !isFlipped;
             const rotateY = isFlipped ? 180 : 0;
-            
+
             card.style.transform = `rotateY(${rotateY}deg)`;
             card.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            
+
             // Add back face content
             if (isFlipped && !card.querySelector('.card-back')) {
                 this.createCardBack(card);
@@ -801,7 +801,7 @@ class PremiumUIController {
             transform: rotateY(180deg);
             backface-visibility: hidden;
         `;
-        
+
         cardBack.innerHTML = `
             <div style="text-align: center;">
                 <div style="font-size: 3rem; margin-bottom: 1rem;">🚀</div>
@@ -811,7 +811,7 @@ class PremiumUIController {
                 </p>
             </div>
         `;
-        
+
         card.appendChild(cardBack);
         card.style.transformStyle = 'preserve-3d';
     }
@@ -850,7 +850,7 @@ class PremiumUIController {
                 </div>
             </div>
         `;
-        
+
         loader.style.cssText = `
             position: fixed;
             top: 0;
@@ -934,7 +934,7 @@ class PremiumUIController {
 
     setupFormLoadingStates() {
         const forms = document.querySelectorAll('form');
-        
+
         forms.forEach(form => {
             form.addEventListener('submit', (e) => {
                 const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
@@ -948,13 +948,13 @@ class PremiumUIController {
     createButtonLoadingState(button) {
         const originalText = button.textContent;
         const originalHTML = button.innerHTML;
-        
+
         button.disabled = true;
         button.innerHTML = `
             <div class="loading-spinner"></div>
             <span>Processing...</span>
         `;
-        
+
         const spinnerStyles = `
             .loading-spinner {
                 display: inline-block;
@@ -1020,7 +1020,7 @@ class PremiumUIController {
     triggerElementAnimation(element) {
         element.style.opacity = '1';
         element.style.transform = 'translateY(0)';
-        
+
         // Special animations for specific elements
         if (element.classList.contains('feature-card')) {
             setTimeout(() => {
@@ -1031,7 +1031,7 @@ class PremiumUIController {
 
     setupCounterAnimations() {
         const counters = document.querySelectorAll('.stat-number');
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1056,9 +1056,9 @@ class PremiumUIController {
                 current = target;
                 clearInterval(timer);
             }
-            
+
             element.textContent = Math.floor(current).toLocaleString();
-            
+
             // Add pulsing effect
             if (current === target) {
                 element.style.animation = 'counterComplete 0.5s ease';
@@ -1085,7 +1085,7 @@ class PremiumUIController {
     setupSoundEffects() {
         // Create audio context for sound effects
         this.audioContext = null;
-        
+
         try {
             this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
         } catch (e) {
@@ -1103,40 +1103,40 @@ class PremiumUIController {
 
     playHoverSound() {
         if (!this.audioContext) return;
-        
+
         const oscillator = this.audioContext.createOscillator();
         const gainNode = this.audioContext.createGain();
-        
+
         oscillator.connect(gainNode);
         gainNode.connect(this.audioContext.destination);
-        
+
         oscillator.frequency.setValueAtTime(800, this.audioContext.currentTime);
         oscillator.frequency.exponentialRampToValueAtTime(1200, this.audioContext.currentTime + 0.1);
-        
+
         gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
         gainNode.gain.linearRampToValueAtTime(0.01, this.audioContext.currentTime + 0.01);
         gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + 0.1);
-        
+
         oscillator.start(this.audioContext.currentTime);
         oscillator.stop(this.audioContext.currentTime + 0.1);
     }
 
     playClickSound() {
         if (!this.audioContext) return;
-        
+
         const oscillator = this.audioContext.createOscillator();
         const gainNode = this.audioContext.createGain();
-        
+
         oscillator.connect(gainNode);
         gainNode.connect(this.audioContext.destination);
-        
+
         oscillator.frequency.setValueAtTime(1000, this.audioContext.currentTime);
         oscillator.frequency.exponentialRampToValueAtTime(500, this.audioContext.currentTime + 0.2);
-        
+
         gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
         gainNode.gain.linearRampToValueAtTime(0.02, this.audioContext.currentTime + 0.01);
         gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + 0.2);
-        
+
         oscillator.start(this.audioContext.currentTime);
         oscillator.stop(this.audioContext.currentTime + 0.2);
     }
@@ -1145,35 +1145,35 @@ class PremiumUIController {
     setupMicroInteractions() {
         // Input field enhancements
         this.setupInputEnhancements();
-        
+
         // Logo animations
         this.setupLogoAnimations();
-        
+
         // Navigation enhancements
         this.setupNavEnhancements();
-        
+
         // Footer interactions
         this.setupFooterInteractions();
     }
 
     setupInputEnhancements() {
         const inputs = document.querySelectorAll('input, textarea, select');
-        
+
         inputs.forEach(input => {
             // Floating labels
             this.createFloatingLabel(input);
-            
+
             // Focus rings
             input.addEventListener('focus', () => {
                 input.style.boxShadow = '0 0 0 3px rgba(102, 126, 234, 0.2)';
                 input.style.borderColor = '#667eea';
             });
-            
+
             input.addEventListener('blur', () => {
                 input.style.boxShadow = 'none';
                 input.style.borderColor = 'rgba(255, 255, 255, 0.1)';
             });
-            
+
             // Typing animation
             input.addEventListener('input', () => {
                 this.createTypingParticles(input);
@@ -1183,13 +1183,13 @@ class PremiumUIController {
 
     createFloatingLabel(input) {
         if (input.dataset.floatingLabel) return;
-        
+
         const placeholder = input.placeholder;
         if (!placeholder) return;
-        
+
         input.placeholder = '';
         input.dataset.floatingLabel = 'true';
-        
+
         const label = document.createElement('label');
         label.textContent = placeholder;
         label.style.cssText = `
@@ -1202,14 +1202,14 @@ class PremiumUIController {
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             font-size: 0.9rem;
         `;
-        
+
         const wrapper = document.createElement('div');
         wrapper.style.position = 'relative';
-        
+
         input.parentNode.insertBefore(wrapper, input);
         wrapper.appendChild(input);
         wrapper.appendChild(label);
-        
+
         const updateLabel = () => {
             if (input.value || input === document.activeElement) {
                 label.style.top = '8px';
@@ -1221,7 +1221,7 @@ class PremiumUIController {
                 label.style.color = 'rgba(255, 255, 255, 0.6)';
             }
         };
-        
+
         input.addEventListener('focus', updateLabel);
         input.addEventListener('blur', updateLabel);
         input.addEventListener('input', updateLabel);
@@ -1230,7 +1230,7 @@ class PremiumUIController {
     createTypingParticles(input) {
         const rect = input.getBoundingClientRect();
         const particle = document.createElement('div');
-        
+
         particle.style.cssText = `
             position: fixed;
             width: 2px;
@@ -1242,9 +1242,9 @@ class PremiumUIController {
             left: ${rect.right - 10}px;
             top: ${rect.top + rect.height / 2}px;
         `;
-        
+
         document.body.appendChild(particle);
-        
+
         particle.animate([
             { transform: 'translateY(0) scale(1)', opacity: 1 },
             { transform: 'translateY(-20px) scale(0)', opacity: 0 }
@@ -1257,16 +1257,16 @@ class PremiumUIController {
     setupLogoAnimations() {
         const logo = document.querySelector('.logo-link');
         if (!logo) return;
-        
+
         let animationFrame;
-        
+
         logo.addEventListener('mouseenter', () => {
             const logoIcon = logo.querySelector('.logo-icon svg');
             if (logoIcon) {
                 logoIcon.style.animation = 'logoHover 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
             }
         });
-        
+
         // Add logo hover styles
         const logoStyles = `
             @keyframes logoHover {
@@ -1288,7 +1288,7 @@ class PremiumUIController {
 
     setupNavEnhancements() {
         const navLinks = document.querySelectorAll('.nav-link');
-        
+
         navLinks.forEach(link => {
             // Liquid loading effect
             link.addEventListener('click', (e) => {
@@ -1297,7 +1297,7 @@ class PremiumUIController {
                     this.createLiquidTransition(link.href);
                 }
             });
-            
+
             // Underline animation
             this.createUnderlineAnimation(link);
         });
@@ -1315,13 +1315,13 @@ class PremiumUIController {
             z-index: 9999;
             transition: left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         `;
-        
+
         document.body.appendChild(liquid);
-        
+
         setTimeout(() => {
             liquid.style.left = '0%';
         }, 10);
-        
+
         setTimeout(() => {
             window.location.href = href;
         }, 800);
@@ -1338,14 +1338,14 @@ class PremiumUIController {
             background: linear-gradient(90deg, #667eea, #764ba2);
             transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         `;
-        
+
         link.style.position = 'relative';
         link.appendChild(underline);
-        
+
         link.addEventListener('mouseenter', () => {
             underline.style.width = '100%';
         });
-        
+
         link.addEventListener('mouseleave', () => {
             underline.style.width = '0';
         });
@@ -1353,7 +1353,7 @@ class PremiumUIController {
 
     setupFooterInteractions() {
         const footerLinks = document.querySelectorAll('.footer-section a');
-        
+
         footerLinks.forEach(link => {
             link.addEventListener('mouseenter', () => {
                 this.createFooterLinkEffect(link);
@@ -1375,12 +1375,12 @@ class PremiumUIController {
             opacity: 0;
             animation: footerGlow 0.6s ease-out forwards;
         `;
-        
+
         link.style.position = 'relative';
         link.appendChild(glow);
-        
+
         setTimeout(() => glow.remove(), 600);
-        
+
         const glowStyles = `
             @keyframes footerGlow {
                 to { opacity: 1; }
@@ -1399,10 +1399,10 @@ class PremiumUIController {
     setupAdvancedTransitions() {
         // Page transition effects
         this.setupPageTransitions();
-        
+
         // Element transition orchestration
         this.setupTransitionOrchestration();
-        
+
         // Smooth state changes
         this.setupSmoothStateChanges();
     }
@@ -1431,14 +1431,14 @@ class PremiumUIController {
             opacity: 0;
             transition: opacity 0.5s ease;
         `;
-        
+
         document.body.appendChild(overlay);
-        
+
         // Fade in overlay
         setTimeout(() => {
             overlay.style.opacity = '1';
         }, 10);
-        
+
         // Navigate after transition
         setTimeout(() => {
             window.location.href = href;
@@ -1448,10 +1448,10 @@ class PremiumUIController {
     setupTransitionOrchestration() {
         // Orchestrate multiple element transitions
         const sections = document.querySelectorAll('section');
-        
+
         sections.forEach((section, index) => {
             const elements = section.querySelectorAll('h1, h2, h3, p, .btn, .feature-card');
-            
+
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1460,7 +1460,7 @@ class PremiumUIController {
                     }
                 });
             });
-            
+
             observer.observe(section);
         });
     }
@@ -1488,7 +1488,7 @@ class PremiumUIController {
                 }
             });
         });
-        
+
         observer.observe(document.body, {
             childList: true,
             subtree: true
@@ -1499,7 +1499,7 @@ class PremiumUIController {
         element.style.opacity = '0';
         element.style.transform = 'translateY(20px) scale(0.9)';
         element.style.transition = 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-        
+
         requestAnimationFrame(() => {
             element.style.opacity = '1';
             element.style.transform = 'translateY(0) scale(1)';
@@ -1547,14 +1547,14 @@ auth.onAuthStateChanged(async (user) => {
         // fallback to sensible defaults for CTAs
         if (ctaInvestor && ctaEntrepreneur) {
             if (userType === 'investor') {
-                ctaInvestor.href = '/proposals.html';
-                ctaEntrepreneur.href = '/proposals.html';
+                ctaInvestor.href = 'proposals.html';
+                ctaEntrepreneur.href = 'proposals.html';
             } else if (userType === 'business') {
-                ctaInvestor.href = '/create-proposal.html';
-                ctaEntrepreneur.href = '/create-proposal.html';
+                ctaInvestor.href = 'create-proposal.html';
+                ctaEntrepreneur.href = 'create-proposal.html';
             } else {
-                ctaInvestor.href = '/profile.html';
-                ctaEntrepreneur.href = '/profile.html';
+                ctaInvestor.href = 'profile.html';
+                ctaEntrepreneur.href = 'profile.html';
             }
         }
     } else {
@@ -1580,21 +1580,22 @@ async function updateNavigationForLoggedInUser(user) {
 
     navLinks.innerHTML = '';
     navLinks.innerHTML += `
-        <a href="/" class="nav-link">Home</a>
-        <a href="/profile.html" class="nav-link">Dashboard</a>
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="profile.html" class="nav-link">Dashboard</a>
     `;
+if (userType === 'investor') {
+    // 'My Investments' has been removed from navbar per request;
+    // investors now only see the proposals link here.
+    navLinks.innerHTML += `
+        <a href="/proposals" class="nav-link">View Proposals</a>
+    `;
+} else if (userType === 'business') {
+    navLinks.innerHTML += `
+        <a href="/proposals" class="nav-link">My Proposals</a>
+        <a href="/create-proposal" class="nav-link">Create Proposal</a>
+    `;
+}
 
-    if (userType === 'investor') {
-        // 'My Investments' has been removed from navbar per request;
-        // investors now only see the proposals link here.
-        navLinks.innerHTML += `
-            <a href="/proposals" class="nav-link">View Proposals</a>
-        `;
-    } else if (userType === 'business') {
-        navLinks.innerHTML += `
-            <a href="/proposals" class="nav-link">My Proposals</a>
-            <a href="/create-proposal" class="nav-link">Create Proposal</a>
-        `;
     }
 
     navLinks.innerHTML += `
@@ -1608,10 +1609,10 @@ async function updateNavigationForLoggedInUser(user) {
 
 function updateNavigationForLoggedOutUser() {
     navLinks.innerHTML = `
-        <a href="/" class="nav-link">Home</a>
-        <a href="/about" class="nav-link">About</a>
-        <a href="/login" class="nav-link">Login</a>
-        <a href="/register" class="nav-link">Register</a>
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="login.html" class="nav-link">Login</a>
+        <a href="register.html" class="nav-link">Register</a>
     `;
 }
 
@@ -1620,7 +1621,7 @@ async function handleLogout(e) {
     try {
         await auth.signOut();
         localStorage.removeItem('userType');
-        window.location.href = '/';
+        window.location.href = 'index.html';
     } catch (error) {
         console.error('Error signing out:', error);
         showAlert('Error signing out. Please try again.', 'error');
@@ -1729,12 +1730,12 @@ function showAlert(message, type = 'info') {
 document.addEventListener('submit', async (e) => {
     if (e.target.matches('form')) {
         e.preventDefault();
-        
+
         const formData = new FormData(e.target);
         const formType = e.target.dataset.formType;
-        
+
         try {
-            switch(formType) {
+            switch (formType) {
                 case 'login':
                     await handleLogin(formData);
                     break;
@@ -1755,7 +1756,7 @@ document.addEventListener('submit', async (e) => {
 async function handleLogin(formData) {
     const email = formData.get('email');
     const password = formData.get('password');
-    
+
     try {
         const userCredential = await auth.signInWithEmailAndPassword(email, password);
         const user = userCredential.user;
@@ -1765,11 +1766,11 @@ async function handleLogin(formData) {
             localStorage.setItem('userType', userType);
 
             if (userType === 'investor') {
-                window.location.href = '/proposals.html';
+                window.location.href = 'proposals.html';
             } else if (userType === 'business') {
-                window.location.href = '/create-proposal.html';
+                window.location.href = 'create-proposal.html';
             } else {
-                window.location.href = '/profile.html';
+                window.location.href = 'profile.html';
             }
         } else {
             throw new Error('User profile not found. Please complete registration.');
@@ -1782,9 +1783,9 @@ async function handleLogin(formData) {
 async function handleRegistration(formData) {
     const email = formData.get('email');
     const password = formData.get('password');
-    const userType = formData.get('userType'); 
+    const userType = formData.get('userType');
     const name = formData.get('name');
-    
+
     try {
         const userCredential = await auth.createUserWithEmailAndPassword(email, password);
         const user = userCredential.user;
@@ -1794,11 +1795,11 @@ async function handleRegistration(formData) {
             userType,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
-        
+
         localStorage.setItem('userType', userType);
         showAlert('Registration successful! Redirecting to dashboard...', 'success');
         setTimeout(() => {
-            window.location.href = '/profile';
+            window.location.href = 'profile.html';
         }, 1500);
     } catch (error) {
         console.error("Registration error:", error.code, error.message);
@@ -1819,12 +1820,12 @@ async function handleProposalSubmission(formData) {
     const description = formData.get('description');
     const amount = formData.get('amount');
     const category = formData.get('category');
-    
+
     const user = auth.currentUser;
     if (!user) {
         throw new Error('You must be logged in to submit a proposal.');
     }
-    
+
     try {
         await db.collection('proposals').add({
             title,
@@ -1835,7 +1836,7 @@ async function handleProposalSubmission(formData) {
             status: 'pending',
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
-        
+
         showAlert('Proposal submitted successfully!', 'success');
     } catch (error) {
         console.error("Proposal submission error:", error);
@@ -1845,7 +1846,7 @@ async function handleProposalSubmission(formData) {
 function init() {
     const heroContent = document.querySelector('.hero-content');
     if (heroContent) {
-        heroContent.style.opacity = '1'; 
+        heroContent.style.opacity = '1';
     }
     const observerOptions = {
         root: null,
@@ -1856,7 +1857,7 @@ function init() {
     const observerCallback = (entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('in-view'); 
+                entry.target.classList.add('in-view');
                 observer.unobserve(entry.target);
             }
         });
