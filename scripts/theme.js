@@ -18,12 +18,35 @@
       setButtonIcon(theme);
     }
 
-    // Create or attach the toggle button
-    let button = document.getElementById('theme-toggle');
+    // Always ensure a visible toggle button
+    var button = document.getElementById('theme-toggle');
     if (!button) {
       button = document.createElement('button');
       button.id = 'theme-toggle';
-      body.appendChild(button);
+      button.type = 'button';
+      button.classList.add('theme-toggle--floating');
+      // Minimal, unobtrusive fallback styling
+      button.style.position = 'fixed';
+      button.style.bottom = '24px';
+      button.style.right = '24px';
+      button.style.zIndex = '9999';
+      button.style.padding = '10px 12px';
+      button.style.borderRadius = '9999px';
+      button.style.border = '1px solid rgba(255,255,255,0.15)';
+      button.style.background = 'rgba(0,0,0,0.35)';
+      button.style.backdropFilter = 'blur(8px)';
+      button.style.color = '#fff';
+      button.style.cursor = 'pointer';
+      button.style.fontSize = '16px';
+      button.style.lineHeight = '1';
+      document.body.appendChild(button);
+    } else {
+      // Ensure it's a button for accessibility and move it to body bottom-right
+      button.type = 'button';
+      if (button.parentElement !== document.body) {
+        document.body.appendChild(button);
+      }
+      button.classList.add('theme-toggle--floating');
     }
 
     // Style the button (floating circular)
@@ -54,7 +77,10 @@
     // Set button icon based on theme
     function setButtonIcon(theme) {
       button.textContent = theme === 'dark' ? '🌙' : '☀️';
-      button.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      button.setAttribute(
+        'aria-label',
+        theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
+      );
     }
 
     // Initialize theme
