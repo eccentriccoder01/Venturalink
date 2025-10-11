@@ -22,6 +22,7 @@
         initThemeToggle();
       });
   </script>
+
   <style>
     body {
       background: linear-gradient(135deg, #23243a 0%, #18192b 100%);
@@ -31,7 +32,6 @@
       min-height: 100vh;
     }
 
-   
     .api-section {
       max-width: 900px;
       margin: 3rem auto 2rem auto;
@@ -98,7 +98,6 @@
       font-size: 0.98rem;
       overflow-x: auto;
     }
-    /* Footer override for dark theme */
     .premium-footer {
       background: #18192b;
       color: #e4e8f7;
@@ -119,23 +118,20 @@
   </style>
 </head>
 <body>
- <!-- Header -->
+  <!-- Header (dynamically loaded) -->
   <div id="header"></div>
 
   <main>
     <section class="api-section">
       <h1>Venturalink API Documentation</h1>
-      <p>
-        Integrate with Venturalink using our RESTful API. Below are some example endpoints and usage.
-      </p>
+      <p>Integrate with Venturalink using our RESTful API. Below are some example endpoints and usage.</p>
+
       <div class="api-endpoint">
         <div class="endpoint-title">
           <span class="endpoint-method">GET</span>
           <span class="endpoint-url">/api/v1/startups</span>
         </div>
-        <div class="endpoint-desc">
-          Retrieve a list of all startups registered on Venturalink.
-        </div>
+        <div class="endpoint-desc">Retrieve a list of all startups registered on Venturalink.</div>
         <div class="endpoint-params">
           <strong>Query Params:</strong> <code>category</code> (optional), <code>country</code> (optional)
         </div>
@@ -144,14 +140,13 @@
           <code>GET https://venturalink.com/api/v1/startups?category=fintech&country=IN</code>
         </div>
       </div>
+
       <div class="api-endpoint">
         <div class="endpoint-title">
           <span class="endpoint-method">POST</span>
           <span class="endpoint-url">/api/v1/investor/register</span>
         </div>
-        <div class="endpoint-desc">
-          Register a new investor account.
-        </div>
+        <div class="endpoint-desc">Register a new investor account.</div>
         <div class="endpoint-params">
           <strong>Body:</strong> <code>name</code>, <code>email</code>, <code>password</code>
         </div>
@@ -163,14 +158,13 @@
           </code>
         </div>
       </div>
+
       <div class="api-endpoint">
         <div class="endpoint-title">
           <span class="endpoint-method">GET</span>
           <span class="endpoint-url">/api/v1/investor/{id}</span>
         </div>
-        <div class="endpoint-desc">
-          Get details of a specific investor by ID.
-        </div>
+        <div class="endpoint-desc">Get details of a specific investor by ID.</div>
         <div class="endpoint-params">
           <strong>Path Param:</strong> <code>id</code> (required)
         </div>
@@ -179,14 +173,13 @@
           <code>GET https://venturalink.com/api/v1/investor/12345</code>
         </div>
       </div>
+
       <div class="api-endpoint">
         <div class="endpoint-title">
           <span class="endpoint-method">POST</span>
           <span class="endpoint-url">/api/v1/startup/register</span>
         </div>
-        <div class="endpoint-desc">
-          Register a new startup.
-        </div>
+        <div class="endpoint-desc">Register a new startup.</div>
         <div class="endpoint-params">
           <strong>Body:</strong> <code>name</code>, <code>founder</code>, <code>email</code>, <code>description</code>
         </div>
@@ -201,7 +194,7 @@
     </section>
   </main>
 
-  <!-- Footer (same as other pages) -->
+  <!-- Footer -->
   <footer class="premium-footer">
     <div class="footer-bg">
       <div class="footer-gradient"></div>
@@ -273,15 +266,16 @@
       </div>
     </div>
   </footer>
-   <div class="cursor"> 
-  <div class="cursor__ball cursor__ball--big" >
-    <svg width="40" height="40">
-      <circle cx="20" cy="20" r="20"/>
-    </svg>
-  </div>
-</div>
 
-<script type="module" src="scripts/main.js"></script>
+  <div class="cursor"> 
+    <div class="cursor__ball cursor__ball--big">
+      <svg width="40" height="40">
+        <circle cx="20" cy="20" r="20"/>
+      </svg>
+    </div>
+  </div>
+
+  <script type="module" src="scripts/main.js"></script>
   <script src="scripts/cursor.js"></script>
 </body>
 </html>
