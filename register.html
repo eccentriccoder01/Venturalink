@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register - Venturalink</title>
-    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/favicon/favicon-96x96.png"
+      sizes="96x96"
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
     <meta name="apple-mobile-web-app-title" content="Venturalink" />
     <link rel="manifest" href="/favicon/site.webmanifest" />
-    <link rel="stylesheet" href="styles/auth.css">
-    <link rel="stylesheet" href="styles/mainindex.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles/auth.css" />
+    <link rel="stylesheet" href="styles/mainindex.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <script src="/scripts/theme.js" defer></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <!-- TODO: Consider updating Firebase SDK version periodically -->
@@ -27,22 +36,21 @@
     <!-- TODO: Consider updating Firebase SDK version periodically -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    
+
     <!-- TODO: Consider updating Firebase SDK version periodically -->
 
-
     <style>
-    /* --- Progress Bar Styles --- */
-    .progress-container {
+      /* --- Progress Bar Styles --- */
+      .progress-container {
         position: relative;
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
         margin-bottom: 1rem;
-    }
+      }
 
-    .progress-bar-bg {
+      .progress-bar-bg {
         position: absolute;
         top: 50%;
         left: 0;
@@ -51,21 +59,21 @@
         width: 100%;
         background-color: #334155; /* slate-700 */
         z-index: 1;
-    }
+      }
 
-    .progress-bar-fill {
+      .progress-bar-fill {
         position: absolute;
         top: 50%;
         left: 0;
         transform: translateY(-50%);
         height: 4px;
-        background-color: #8B5CF6; /* A vibrant violet */
+        background-color: #8b5cf6; /* A vibrant violet */
         width: 0%;
         z-index: 2;
         transition: width 0.4s ease-in-out;
-    }
+      }
 
-    .step-circle {
+      .step-circle {
         width: 24px;
         height: 24px;
         border-radius: 50%;
@@ -76,274 +84,470 @@
         display: flex;
         align-items: center;
         justify-content: center;
-    }
+      }
 
-    .step-circle.active {
-        background-color: #8B5CF6;
-        border-color: #A78BFA;
+      .step-circle.active {
+        background-color: #8b5cf6;
+        border-color: #a78bfa;
         box-shadow: 0 0 15px 3px rgba(139, 92, 246, 0.5);
-    }
+      }
 
-    .step-circle.active .check-icon {
+      .step-circle.active .check-icon {
         opacity: 1;
-    }
-    
-    .check-icon {
+      }
+
+      .check-icon {
         opacity: 0;
         transition: opacity 0.3s ease-in-out;
         color: white;
-    }
+      }
 
-    .step-annotations {
-    position: relative; 
-    width: 100%;
-    height: 1.5rem; 
-    margin-top: 0.25rem; 
-}
+      .step-annotations {
+        position: relative;
+        width: 100%;
+        height: 1.5rem;
+        margin-top: 0.25rem;
+      }
 
-    .step-annotation {
-    position: absolute; 
-    top: 0;
-    color: #94A3B8; 
-    font-size: 0.75rem;
-    width: 60px;
-    text-align: center;
-}
-    
-    .step-annotation.active {
-        color: #F8FAFC; /* slate-50 */
-    }
-</style>
+      .step-annotation {
+        position: absolute;
+        top: 0;
+        color: #94a3b8;
+        font-size: 0.75rem;
+        width: 60px;
+        text-align: center;
+      }
 
-</head>
+      .step-annotation.active {
+        color: #f8fafc; /* slate-50 */
+      }
 
-<body class="auth-body">
-      
+      .option-investor {
+        background-color: #eef2ff; /* Light soft blue */
+        color: #1e3a8a; /* Deep blue text */
+        font-weight: 500;
+      }
+
+      .option-business {
+        background-color: #f0f9ff; /* Subtle blue tint */
+        color: #0c4a6e; /* Muted professional blue */
+        font-weight: 500;
+      }
+    </style>
+  </head>
+
+  <body class="auth-body">
     <div class="auth-background">
-        <div class="floating-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-            <div class="shape shape-4"></div>
-            <div class="shape shape-5"></div>
-        </div>
+      <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+        <div class="shape shape-5"></div>
+      </div>
     </div>
 
     <header class="main-header">
-        <nav class="navbar" id="main-nav">
-            <div class="logo">
-                <a href="index.html" class="logo-link">
-                    <div class="logo-container">
-                        <div class="logo-icon">
-                            <svg viewBox="0 0 40 40" fill="none">
-                                <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="url(#logo-gradient)" stroke-width="2" fill="none"/>
-                                <circle cx="20" cy="20" r="6" fill="url(#logo-gradient)"/>
-                                <defs>
-                                    <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" style="stop-color:#667eea"/>
-                                        <stop offset="100%" style="stop-color:#764ba2"/>
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-                        </div>
-                        <div class="logo-text" style="transform: translateY(-4px)">
-                            <img src="V.png" alt="V" style="height: 3rem; margin-right: -8px; transform: translateY(8px)">ENTURALINK
-                        </div>
-                    </div>
-                </a>
+      <nav class="navbar" id="main-nav">
+        <div class="logo">
+          <a href="index.html" class="logo-link">
+            <div class="logo-container">
+              <div class="logo-icon">
+                <svg viewBox="0 0 40 40" fill="none">
+                  <path
+                    d="M20 4L36 12V28L20 36L4 28V12L20 4Z"
+                    stroke="url(#logo-gradient)"
+                    stroke-width="2"
+                    fill="none"
+                  />
+                  <circle cx="20" cy="20" r="6" fill="url(#logo-gradient)" />
+                  <defs>
+                    <linearGradient
+                      id="logo-gradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
+                      <stop offset="0%" style="stop-color: #667eea" />
+                      <stop offset="100%" style="stop-color: #764ba2" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <div class="logo-text" style="transform: translateY(-4px)">
+                <img
+                  src="V.png"
+                  alt="V"
+                  style="
+                    height: 3rem;
+                    margin-right: -8px;
+                    transform: translateY(8px);
+                  "
+                />ENTURALINK
+              </div>
             </div>
-            <div class="nav-links">
-                <a href="login.html" class="nav-link nav-link-cta">
-                    <span>Sign In</span>
-                    <div class="nav-link-bg"></div>
-                </a>
-            </div>
+          </a>
+        </div>
+        <div class="nav-links">
+          <a href="login.html" class="nav-link nav-link-cta">
+            <span>Sign In</span>
+            <div class="nav-link-bg"></div>
+          </a>
+        </div>
 
-            <button class="menu-toggle" aria-label="Toggle navigation menu">
-                <span class="hamburger"></span>
-                <span class="hamburger"></span>
-                <span class="hamburger"></span>
-            </button>
-        </nav>
+        <button class="menu-toggle" aria-label="Toggle navigation menu">
+          <span class="hamburger"></span>
+          <span class="hamburger"></span>
+          <span class="hamburger"></span>
+        </button>
+      </nav>
     </header>
 
-   
     <main class="auth-main">
-        <div class="auth-container">
-            <div class="auth-card">
-                <div class="auth-card-header">
-                    <div class="auth-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M16 21V19C16 17.9391 15.5786 16.9217 14.8284 16.1716C14.0783 15.4214 13.0609 15 12 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21"
-                                stroke="url(#gradient2)" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <circle cx="8.5" cy="7" r="4" stroke="url(#gradient2)" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M20 8V14" stroke="url(#gradient2)" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M23 11H17" stroke="url(#gradient2)" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <defs>
-                                <linearGradient id="gradient2" x1="1" y1="3" x2="23" y2="21"
-                                    gradientUnits="userSpaceOnUse">
-                                    <stop offset="0%" stop-color="#667eea" />
-                                    <stop offset="100%" stop-color="#373a9c" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                    </div>
-
-
-    <!-- START: Progress Bar -->
-<div class="mb-6 mt-6">
-    <div class="progress-container">
-        <div class="progress-bar-bg"></div>
-        <div id="progress-bar-fill" class="progress-bar-fill"></div>
-        <div id="step-circle-1" class="step-circle active"><i data-lucide="check" class="check-icon w-4 h-4"></i></div>
-        <div id="step-circle-2" class="step-circle"><i data-lucide="check" class="check-icon w-4 h-4"></i></div>
-        <div id="step-circle-3" class="step-circle"><i data-lucide="check" class="check-icon w-4 h-4"></i></div>
-        <div id="step-circle-4" class="step-circle"><i data-lucide="check" class="check-icon w-4 h-4"></i></div>
-        <div id="step-circle-5" class="step-circle"><i data-lucide="check" class="check-icon w-4 h-4"></i></div>
-    </div>
-<div class="step-annotations">
-    <div id="step-annotation-1" class="step-annotation active" style="left: 0%; transform: translateX(0%); text-align: left;">Name</div>
-    <div id="step-annotation-2" class="step-annotation" style="left: 25%; transform: translateX(-50%);">Email</div>
-    <div id="step-annotation-3" class="step-annotation" style="left: 50%; transform: translateX(-50%);">Password</div>
-    <div id="step-annotation-4" class="step-annotation" style="left: 75%; transform: translateX(-50%);">Role</div>
-    <div id="step-annotation-5" class="step-annotation" style="left: 100%; transform: translateX(-100%); text-align: right;">Agree</div>
-</div>
-</div>
-    <!-- END: Progress Bar -->
-
-                    <h1 class="auth-title">Join Venturalink</h1>
-                    <p class="auth-subtitle">Create your account and start connecting</p>
-                </div>
-
-                <form id="register-form" class="auth-form">
-                    <div class="form-field">
-                        <div class="field-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path
-                                    d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                        <input type="text" name="name" required placeholder="Enter your full name" class="field-input">
-                    </div>
-
-                    <div class="form-field">
-                        <div class="field-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path
-                                    d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                        <input type="email" name="email" required placeholder="Enter your email" class="field-input">
-                    </div>
-
-                    <div class="form-field">
-                        <div class="field-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="currentColor"
-                                    stroke-width="2" />
-                                <circle cx="12" cy="16" r="1" fill="currentColor" />
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="currentColor" stroke-width="2" />
-                            </svg>
-                        </div>
-                        <input type="password" name="password" required placeholder="Create a password"
-                            class="field-input" minlength="8">
-                    </div>
-
-                    <ul id="password-checklist" class="password-checklist">
-                        <li id="rule-minLength" data-message="At least 8 characters">✖ At least 8 characters</li>
-                        <li id="rule-uppercase" data-message="One uppercase letter (A-Z)">✖ One uppercase letter (A-Z)
-                        </li>
-                        <li id="rule-lowercase" data-message="One lowercase letter (a-z)">✖ One lowercase letter (a-z)
-                        </li>
-                        <li id="rule-number" data-message="One number (0-9)">✖ One number (0-9)</li>
-                        <li id="rule-specialChar" data-message="One special character (!@#$%)">✖ One special character
-                            (!@#$%)</li>
-                    </ul>
-
-                    <div class="form-field">
-                        <div class="field-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path
-                                    d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                                <path
-                                    d="M23 21V19C23 18.1645 22.7155 17.3541 22.2094 16.6977C21.7033 16.0414 20.9984 15.5754 20.2 15.3727"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path
-                                    d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89317 18.7122 8.75608 18.1676 9.45768C17.623 10.1593 16.8604 10.6597 16 10.88"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                        <select name="userType" required class="field-select" data-placeholder="Select your role">
-                            <option value="">Select your role</option>
-                            <option style="background-color: rgb(220, 238, 255); color: rgb(3, 3, 3);" value="investor">
-                                I am an Investor</option>
-                            <option style="background-color: rgb(46, 142, 238); color: rgb(3, 3, 3);" value="business">I
-                                am a Business Owner</option>
-                        </select>
-                        <div class="select-arrow">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                <polyline points="6,9 12,15 18,9" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                    </div>
-
-                    <div class="form-options">
-                        <label class="checkbox-wrapper">
-                            <input type="checkbox" name="terms" required class="checkbox-input">
-                            <span class="checkbox-mark"></span>
-                            <span class="checkbox-label">
-                                I agree to the <a href="/terms" class="inline-link">Terms</a> and <a href="/privacy"
-                                    class="inline-link">Privacy Policy</a>
-                            </span>
-                        </label>
-                    </div>
-
-                    <button type="submit" class="auth-submit-btn">
-                        <span class="btn-text">Create Account</span>
-                        <div class="btn-shine"></div>
-                    </button>
-                </form>
-
-                <div class="auth-footer">
-                    <p class="auth-footer-text">
-                        Already have an account?
-                        <a href="login.html" class="auth-link">Sign in now</a>
-                    </p>
-                </div>
+      <div class="auth-container">
+        <div class="auth-card">
+          <div class="auth-card-header">
+            <div class="auth-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 21V19C16 17.9391 15.5786 16.9217 14.8284 16.1716C14.0783 15.4214 13.0609 15 12 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21"
+                  stroke="url(#gradient2)"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <circle
+                  cx="8.5"
+                  cy="7"
+                  r="4"
+                  stroke="url(#gradient2)"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M20 8V14"
+                  stroke="url(#gradient2)"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M23 11H17"
+                  stroke="url(#gradient2)"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <defs>
+                  <linearGradient
+                    id="gradient2"
+                    x1="1"
+                    y1="3"
+                    x2="23"
+                    y2="21"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop offset="0%" stop-color="#667eea" />
+                    <stop offset="100%" stop-color="#373a9c" />
+                  </linearGradient>
+                </defs>
+              </svg>
             </div>
+
+            <!-- START: Progress Bar -->
+            <div class="mb-6 mt-6">
+              <div class="progress-container">
+                <div class="progress-bar-bg"></div>
+                <div id="progress-bar-fill" class="progress-bar-fill"></div>
+                <div id="step-circle-1" class="step-circle active">
+                  <i data-lucide="check" class="check-icon w-4 h-4"></i>
+                </div>
+                <div id="step-circle-2" class="step-circle">
+                  <i data-lucide="check" class="check-icon w-4 h-4"></i>
+                </div>
+                <div id="step-circle-3" class="step-circle">
+                  <i data-lucide="check" class="check-icon w-4 h-4"></i>
+                </div>
+                <div id="step-circle-4" class="step-circle">
+                  <i data-lucide="check" class="check-icon w-4 h-4"></i>
+                </div>
+                <div id="step-circle-5" class="step-circle">
+                  <i data-lucide="check" class="check-icon w-4 h-4"></i>
+                </div>
+              </div>
+              <div class="step-annotations">
+                <div
+                  id="step-annotation-1"
+                  class="step-annotation active"
+                  style="left: 0%; transform: translateX(0%); text-align: left"
+                >
+                  Name
+                </div>
+                <div
+                  id="step-annotation-2"
+                  class="step-annotation"
+                  style="left: 25%; transform: translateX(-50%)"
+                >
+                  Email
+                </div>
+                <div
+                  id="step-annotation-3"
+                  class="step-annotation"
+                  style="left: 50%; transform: translateX(-50%)"
+                >
+                  Password
+                </div>
+                <div
+                  id="step-annotation-4"
+                  class="step-annotation"
+                  style="left: 75%; transform: translateX(-50%)"
+                >
+                  Role
+                </div>
+                <div
+                  id="step-annotation-5"
+                  class="step-annotation"
+                  style="
+                    left: 100%;
+                    transform: translateX(-100%);
+                    text-align: right;
+                  "
+                >
+                  Agree
+                </div>
+              </div>
+            </div>
+            <!-- END: Progress Bar -->
+
+            <h1 class="auth-title">Join Venturalink</h1>
+            <p class="auth-subtitle">
+              Create your account and start connecting
+            </p>
+          </div>
+
+          <form id="register-form" class="auth-form">
+            <div class="form-field">
+              <div class="field-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle
+                    cx="12"
+                    cy="7"
+                    r="4"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              <input
+                type="text"
+                name="name"
+                required
+                placeholder="Enter your full name"
+                class="field-input"
+              />
+            </div>
+
+            <div class="form-field">
+              <div class="field-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <polyline
+                    points="22,6 12,13 2,6"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="Enter your email"
+                class="field-input"
+              />
+            </div>
+
+            <div class="form-field">
+              <div class="field-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <rect
+                    x="3"
+                    y="11"
+                    width="18"
+                    height="11"
+                    rx="2"
+                    ry="2"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                  <circle cx="12" cy="16" r="1" fill="currentColor" />
+                  <path
+                    d="M7 11V7a5 5 0 0 1 10 0v4"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                </svg>
+              </div>
+              <input
+                type="password"
+                name="password"
+                required
+                placeholder="Create a password"
+                class="field-input"
+                minlength="8"
+              />
+            </div>
+
+            <ul id="password-checklist" class="password-checklist">
+              <li id="rule-minLength" data-message="At least 8 characters">
+                ✖ At least 8 characters
+              </li>
+              <li id="rule-uppercase" data-message="One uppercase letter (A-Z)">
+                ✖ One uppercase letter (A-Z)
+              </li>
+              <li id="rule-lowercase" data-message="One lowercase letter (a-z)">
+                ✖ One lowercase letter (a-z)
+              </li>
+              <li id="rule-number" data-message="One number (0-9)">
+                ✖ One number (0-9)
+              </li>
+              <li
+                id="rule-specialChar"
+                data-message="One special character (!@#$%)"
+              >
+                ✖ One special character (!@#$%)
+              </li>
+            </ul>
+
+            <div class="form-field">
+              <div class="field-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle
+                    cx="9"
+                    cy="7"
+                    r="4"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M23 21V19C23 18.1645 22.7155 17.3541 22.2094 16.6977C21.7033 16.0414 20.9984 15.5754 20.2 15.3727"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89317 18.7122 8.75608 18.1676 9.45768C17.623 10.1593 16.8604 10.6597 16 10.88"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              <select
+                name="userType"
+                required
+                class="field-select"
+                data-placeholder="Select your role"
+              >
+                <option value="">Select your role</option>
+                <option value="investor" class="option-investor">
+                  I am an Investor
+                </option>
+                <option value="business" class="option-business">
+                  I am a Business Owner
+                </option>
+              </select>
+              <div class="select-arrow">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <polyline
+                    points="6,9 12,15 18,9"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            <div class="form-options">
+              <label class="checkbox-wrapper">
+                <input
+                  type="checkbox"
+                  name="terms"
+                  required
+                  class="checkbox-input"
+                />
+                <span class="checkbox-mark"></span>
+                <span class="checkbox-label">
+                  I agree to the
+                  <a href="/terms" class="inline-link">Terms</a> and
+                  <a href="/privacy" class="inline-link">Privacy Policy</a>
+                </span>
+              </label>
+            </div>
+
+            <button type="submit" class="auth-submit-btn">
+              <span class="btn-text">Create Account</span>
+              <div class="btn-shine"></div>
+            </button>
+          </form>
+
+          <div class="auth-footer">
+            <p class="auth-footer-text">
+              Already have an account?
+              <a href="login.html" class="auth-link">Sign in now</a>
+            </p>
+          </div>
         </div>
+      </div>
     </main>
-    <div class="cursor"> 
-  <div class="cursor__ball cursor__ball--big" >
-    <svg width="40" height="40">
-      <circle cx="20" cy="20" r="20"/>
-    </svg>
-  </div>
-</div>
+    <div class="cursor">
+      <div class="cursor__ball cursor__ball--big">
+        <svg width="40" height="40">
+          <circle cx="20" cy="20" r="20" />
+        </svg>
+      </div>
+    </div>
 
-<script src="./scripts/env.js"></script>
-<script type="module" src="scripts/register.js"></script>
-<script src="scripts/cursor.js"></script>
-</body>
-
+    <script src="./scripts/env.js"></script>
+    <script type="module" src="scripts/register.js"></script>
+    <script src="scripts/cursor.js"></script>
+  </body>
 </html>
