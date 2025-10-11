@@ -288,6 +288,7 @@ body {
     box-shadow: var(--shadow-strong);
     position: relative;
     overflow: hidden;
+    width: 500px;
 }
 
 .auth-card::before {
