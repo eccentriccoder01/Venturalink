@@ -22,7 +22,6 @@
         initThemeToggle();
       });
   </script>
-
   <style>
     body {
       background: linear-gradient(135deg, #23243a 0%, #18192b 100%);
@@ -61,16 +60,50 @@
       border-radius: 1rem;
       padding: 1.2rem 1rem;
       box-shadow: 0 2px 12px rgba(102,126,234,0.08);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .faq-item:hover {
+      background: #2a2b42;
+      box-shadow: 0 4px 20px rgba(102,126,234,0.18);
+      transform: translateY(-2px);
+    }
+    .faq-item:focus {
+      outline: 2px solid #667eea;
+      outline-offset: 2px;
     }
     .faq-question {
       color: #667eea;
       font-size: 1.15rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    .faq-question::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      transition: transform 0.3s ease;
+      opacity: 0.7;
+    }
+    .faq-item:hover .faq-question {
+      color: #8b9ff5;
+      text-shadow: 0 0 12px rgba(102,126,234,0.4);
+      transform: translateX(4px);
+    }
+    .faq-item:hover .faq-question::before {
+      transform: rotate(90deg);
+      opacity: 1;
     }
     .faq-answer {
       color: #e4e8f7;
       font-size: 1.05rem;
+      transition: color 0.3s ease;
+    }
+    .faq-item:hover .faq-answer {
+      color: #f0f3ff;
     }
     /* Footer override for dark theme */
     .premium-footer {
@@ -92,16 +125,16 @@
     }
   </style>
 </head>
-
 <body>
-  <!-- Header dynamically injected -->
+  <!-- Header -->
   <div id="header"></div>
 
   <main>
     <section class="help-section">
       <h1>Help Center</h1>
-      <p>Find answers to common questions and get support for using Venturalink.</p>
-
+      <p>
+        Find answers to common questions and get support for using Venturalink.
+      </p>
       <div class="faq-list">
         <div class="faq-item">
           <div class="faq-question">How do I register on Venturalink?</div>
@@ -109,7 +142,7 @@
         </div>
         <div class="faq-item">
           <div class="faq-question">How can I connect with investors or entrepreneurs?</div>
-          <div class="faq-answer">After logging in, use the platform’s search and messaging features to find and connect with relevant users.</div>
+          <div class="faq-answer">After logging in, use the platform's search and messaging features to find and connect with relevant users.</div>
         </div>
         <div class="faq-item">
           <div class="faq-question">Is my data secure?</div>
@@ -123,7 +156,7 @@
     </section>
   </main>
 
-  <!-- Footer -->
+  <!-- Footer (same as other pages) -->
   <footer class="premium-footer">
     <div class="footer-bg">
       <div class="footer-gradient"></div>
@@ -153,7 +186,6 @@
             Connecting investors with entrepreneurs to create meaningful business relationships and drive economic progress in the digital age.
           </p>
         </div>
-
         <div class="footer-links-grid">
           <div class="footer-section">
             <h4>Platform</h4>
@@ -184,7 +216,6 @@
           </div>
         </div>
       </div>
-
       <div class="footer-bottom">
         <div class="footer-divider"></div>
         <div class="footer-bottom-content">
@@ -197,16 +228,15 @@
       </div>
     </div>
   </footer>
-
-  <div class="cursor">
-    <div class="cursor__ball cursor__ball--big">
-      <svg width="40" height="40">
-        <circle cx="20" cy="20" r="20"/>
-      </svg>
-    </div>
+  <div class="cursor"> 
+  <div class="cursor__ball cursor__ball--big" >
+    <svg width="40" height="40">
+      <circle cx="20" cy="20" r="20"/>
+    </svg>
   </div>
+</div>
 
-  <script type="module" src="scripts/main.js"></script>
+<script type="module" src="scripts/main.js"></script>
   <script src="scripts/cursor.js"></script>
 </body>
 </html>
