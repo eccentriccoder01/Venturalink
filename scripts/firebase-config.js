@@ -1,9 +1,25 @@
-export const firebaseConfig = {
-  apiKey: window.env.VITE_FIREBASE_API_KEY,
-  authDomain: window.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: window.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: window.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: window.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: window.env.VITE_FIREBASE_APP_ID,
-  measurementId: window.env.VITE_FIREBASE_MEASUREMENT_ID,
+// scripts/firebase-config.js
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyA37bruIT_neT5w-8CUuPGofy0Lnv2UJOg",
+    authDomain: "project-1-747ec.firebaseapp.com",
+    projectId: "project-1-747ec",
+    storageBucket: "project-1-747ec.firebasestorage.app",
+    messagingSenderId: "122686135785",
+    appId: "1:122686135785:web:7e159363045f52208cbf78",
+    measurementId: "G-1GT8XMMFM3"
 };
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// Initialize Firebase Authentication and get a reference to the service
+const auth = getAuth(app);
+
+// Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore(app);
+
+export { auth, db, app, firebaseConfig }; // Export everything
