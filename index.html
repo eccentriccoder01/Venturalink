@@ -500,6 +500,141 @@
           transform: translateY(0);
         }
       }
+
+      /* Newsletter Section Styles */
+.footer-newsletter {
+  grid-column: 4 / span 1;
+  padding: 0 0 0 2rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-newsletter h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #fff;
+}
+
+.footer-newsletter p {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.newsletter-form {
+  margin-bottom: 1rem;
+}
+
+.input-group {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.newsletter-input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.newsletter-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.newsletter-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.newsletter-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.newsletter-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.newsletter-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.newsletter-btn:hover svg {
+  transform: translateX(2px);
+}
+
+.newsletter-message {
+  display: none;
+  font-size: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.newsletter-message.success {
+  background: rgba(72, 187, 120, 0.1);
+  color: #48bb78;
+  border: 1px solid rgba(72, 187, 120, 0.2);
+}
+
+.newsletter-message.error {
+  background: rgba(245, 101, 101, 0.1);
+  color: #f56565;
+  border: 1px solid rgba(245, 101, 101, 0.2);
+}
+
+.newsletter-note {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.4;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .footer-newsletter {
+    grid-column: 1 / -1;
+    padding: 2rem 0 0 0;
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .input-group {
+    flex-direction: column;
+  }
+  
+  .newsletter-btn {
+    justify-content: center;
+  }
+}
     </style>
 
     <!-- Main content -->
@@ -805,133 +940,221 @@
       </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="premium-footer">
-      <div class="footer-bg">
-        <div class="footer-gradient"></div>
-        <div class="footer-pattern"></div>
-      </div>
+<!-- Footer -->
+<footer class="premium-footer">
+  <div class="footer-bg">
+    <div class="footer-gradient"></div>
+    <div class="footer-pattern"></div>
+  </div>
 
-      <div class="footer-content">
-        <div class="footer-main">
-          <div class="footer-brand">
-            <div class="footer-logo">
-              <div class="logo-container">
-                <div class="logo-icon">
-                  <svg viewBox="0 0 40 40" fill="none">
-                    <path
-                      d="M20 4L36 12V28L20 36L4 28V12L20 4Z"
-                      stroke="url(#footer-logo-gradient)"
-                      stroke-width="2"
-                      fill="none"
-                    />
-                    <circle
-                      cx="20"
-                      cy="20"
-                      r="6"
-                      fill="url(#footer-logo-gradient)"
-                    />
-                    <defs>
-                      <linearGradient
-                        id="footer-logo-gradient"
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="100%"
-                      >
-                        <stop offset="0%" style="stop-color: #667eea" />
-                        <stop offset="100%" style="stop-color: #764ba2" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </div>
-                <span class="logo-text">Venturalink</span>
-              </div>
+  <div class="footer-content">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="logo-container">
+            <div class="logo-icon">
+              <svg viewBox="0 0 40 40" fill="none">
+                <path
+                  d="M20 4L36 12V28L20 36L4 28V12L20 4Z"
+                  stroke="url(#footer-logo-gradient)"
+                  stroke-width="2"
+                  fill="none"
+                />
+                <circle
+                  cx="20"
+                  cy="20"
+                  r="6"
+                  fill="url(#footer-logo-gradient)"
+                />
+                <defs>
+                  <linearGradient
+                    id="footer-logo-gradient"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
+                    <stop offset="0%" style="stop-color: #667eea" />
+                    <stop offset="100%" style="stop-color: #764ba2" />
+                  </linearGradient>
+                </defs>
+              </svg>
             </div>
-            <p class="footer-description">
-              Connecting investors with entrepreneurs to create meaningful
-              business relationships and drive economic progress in the digital
-              age.
-            </p>
-          </div>
-
-          <div class="footer-links-grid">
-            <div class="footer-section">
-              <h4>Platform</h4>
-              <ul>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="features.html">Features</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
-                <li><a href="contact.html">Contact</a></li>
-              </ul>
-            </div>
-            <div class="footer-section">
-              <h4>Resources</h4>
-              <ul>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="help.html">Help Center</a></li>
-                <li><a href="guides.html">Guides</a></li>
-                <li><a href="api.html">API Docs</a></li>
-              </ul>
-            </div>
-            <div class="footer-section">
-              <h4>Legal</h4>
-              <ul>
-                <li><a href="terms.html">Terms of Service</a></li>
-                <li><a href="privacy.html">Privacy Policy</a></li>
-                <li><a href="cookies.html">Cookie Policy</a></li>
-                <li><a href="security.html">Security</a></li>
-              </ul>
-            </div>
+            <span class="logo-text">Venturalink</span>
           </div>
         </div>
+        <p class="footer-description">
+          Connecting investors with entrepreneurs to create meaningful
+          business relationships and drive economic progress in the digital
+          age.
+        </p>
+      </div>
 
-        <div class="footer-bottom">
-          <div class="footer-divider"></div>
-          <div class="footer-bottom-content">
-            <p>&copy; 2025 Venturalink Platform. All rights reserved.</p>
-            <div class="footer-social-icons">
-              <a
-                href="#"
-                aria-label="Facebook"
-                class="footer-social-link"
-                target="_blank"
-                rel="noopener"
-                ><i class="fab fa-facebook-f"></i
-              ></a>
-              <a
-                href="#"
-                aria-label="Instagram"
-                class="footer-social-link"
-                target="_blank"
-                rel="noopener"
-                ><i class="fab fa-instagram"></i
-              ></a>
-              <a
-                href="#"
-                aria-label="Twitter/X"
-                class="footer-social-link"
-                target="_blank"
-                rel="noopener"
-                ><i class="fab fa-x-twitter"></i
-              ></a>
-              <a
-                href="#"
-                aria-label="LinkedIn"
-                class="footer-social-link"
-                target="_blank"
-                rel="noopener"
-                ><i class="fab fa-linkedin-in"></i
-              ></a>
-            </div>
-            <div class="footer-badges">
-              <span class="badge">Trusted by 10K+ users</span>
-              <span class="badge">SOC 2 Compliant</span>
-            </div>
-          </div>
+      <div class="footer-links-grid">
+        <div class="footer-section">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="help.html">Help Center</a></li>
+            <li><a href="guides.html">Guides</a></li>
+            <li><a href="api.html">API Docs</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="cookies.html">Cookie Policy</a></li>
+            <li><a href="security.html">Security</a></li>
+          </ul>
         </div>
       </div>
-    </footer>
+
+      <!-- Newsletter Section -->
+      <div class="footer-newsletter">
+        <h4>Stay Updated</h4>
+        <p>Subscribe to our newsletter for the latest updates and insights.</p>
+        <form class="newsletter-form" id="newsletter-form">
+          <div class="input-group">
+            <input 
+              type="email" 
+              placeholder="Enter your email" 
+              class="newsletter-input" 
+              required
+            />
+            <button type="submit" class="newsletter-btn">
+              <span>Subscribe</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M1 8H15M15 8L8 1M15 8L8 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="newsletter-message" id="newsletter-message"></div>
+        </form>
+        <div class="newsletter-note">
+          By subscribing, you agree to our Privacy Policy and consent to receive updates.
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-divider"></div>
+      <div class="footer-bottom-content">
+        <p>&copy; 2025 Venturalink Platform. All rights reserved.</p>
+        <div class="footer-social-icons">
+          <a
+            href="#"
+            aria-label="Facebook"
+            class="footer-social-link"
+            target="_blank"
+            rel="noopener"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+          <a
+            href="#"
+            aria-label="Instagram"
+            class="footer-social-link"
+            target="_blank"
+            rel="noopener"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a
+            href="#"
+            aria-label="Twitter/X"
+            class="footer-social-link"
+            target="_blank"
+            rel="noopener"
+            ><i class="fab fa-x-twitter"></i
+          ></a>
+          <a
+            href="#"
+            aria-label="LinkedIn"
+            class="footer-social-link"
+            target="_blank"
+            rel="noopener"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+        </div>
+        <div class="footer-badges">
+          <span class="badge">Trusted by 10K+ users</span>
+          <span class="badge">SOC 2 Compliant</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Newsletter functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const newsletterForm = document.getElementById('newsletter-form');
+    const newsletterMessage = document.getElementById('newsletter-message');
+    
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const emailInput = this.querySelector('.newsletter-input');
+        const submitBtn = this.querySelector('.newsletter-btn');
+        const email = emailInput.value.trim();
+        
+        // Basic email validation
+        if (!validateEmail(email)) {
+          showMessage('Please enter a valid email address.', 'error');
+          return;
+        }
+        
+        // Show loading state
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Subscribing...</span>';
+        
+        // Simulate API call (replace with actual API endpoint)
+        setTimeout(() => {
+          // In a real implementation, you would send the email to your backend
+          console.log('Newsletter subscription:', email);
+          
+          // Show success message
+          showMessage('Thank you for subscribing! Please check your email to confirm.', 'success');
+          
+          // Reset form
+          emailInput.value = '';
+          
+          // Reset button
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span>Subscribe</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 8H15M15 8L8 1M15 8L8 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        }, 1500);
+      });
+    }
+    
+    function validateEmail(email) {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+    
+    function showMessage(message, type) {
+      if (newsletterMessage) {
+        newsletterMessage.textContent = message;
+        newsletterMessage.className = 'newsletter-message ' + type;
+        newsletterMessage.style.display = 'block';
+        
+        // Hide message after 5 seconds
+        setTimeout(() => {
+          newsletterMessage.style.display = 'none';
+        }, 5000);
+      }
+    }
+  });
+</script>
 
     <button id="backToTopBtn" title="Back to top" aria-label="Back to top">
       <svg
