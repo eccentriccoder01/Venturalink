@@ -1,3 +1,5 @@
+
+
 // ===========================================
 // Back to Top Button Logic (Rocket Launch)
 // ===========================================
@@ -1504,13 +1506,57 @@ function updateNavigationForLoggedOutUser() {
 
 async function handleLogout(e) {
     e.preventDefault();
-    try {
-        await auth.signOut();
-        localStorage.removeItem('userType');
-        window.location.href = 'index.html';
-    } catch (error) {
-        console.error('Error signing out:', error);
-        showAlert('Error signing out. Please try again.', 'error');
+    
+    // Show confirmation modal
+    const modal = document.getElementById('logoutModal');
+    if (modal) {
+        modal.style.display = 'flex';
+        
+        // Wait for user decision
+        return new Promise((resolve) => {
+            const confirmLogout = document.getElementById('confirmLogout');
+            const cancelLogout = document.getElementById('cancelLogout');
+            
+            const cleanup = () => {
+                confirmLogout.removeEventListener('click', onConfirm);
+                cancelLogout.removeEventListener('click', onCancel);
+                modal.style.display = 'none';
+            };
+            
+            const onConfirm = async () => {
+                cleanup();
+                try {
+                    await auth.signOut();
+                    localStorage.removeItem('userType');
+                    window.location.href = 'index.html';
+                } catch (error) {
+                    console.error('Error signing out:', error);
+                    showAlert('Error signing out. Please try again.', 'error');
+                }
+                resolve(true);
+            };
+            
+            const onCancel = () => {
+                cleanup();
+                resolve(false);
+            };
+            
+            confirmLogout.addEventListener('click', onConfirm);
+            cancelLogout.addEventListener('click', onCancel);
+        });
+    } else {
+        // Fallback to browser confirmation if modal not found
+        const confirmed = confirm('Are you sure you want to log out?');
+        if (confirmed) {
+            try {
+                await auth.signOut();
+                localStorage.removeItem('userType');
+                window.location.href = 'index.html';
+            } catch (error) {
+                console.error('Error signing out:', error);
+                showAlert('Error signing out. Please try again.', 'error');
+            }
+        }
     }
 }
 
@@ -1771,6 +1817,7 @@ function init() {
 document.addEventListener('DOMContentLoaded', () => {
   window.premiumUI = new PremiumUIController();
 });
+
 document.addEventListener('DOMContentLoaded', () => {
   auth.onAuthStateChanged(async (user) => {
     if (user) {

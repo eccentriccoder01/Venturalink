@@ -29,12 +29,9 @@
     />
     <link rel="stylesheet" href="./styles/mainindex.css" />
     <!-- Font Awesome CDN for social media icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <script src="./scripts/theme.js" defer></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <!-- TODO: Consider updating Firebase SDK version periodically -->
@@ -214,212 +211,132 @@
     </header>
 
     <style>
-      /* Navbar Font and Layout */
-      .main-header {
-        font-family: "Space Grotesk", "Inter", sans-serif;
-        background: rgb(14, 17, 26);
-        box-shadow: 0 4px 24px 0 rgba(102, 126, 234, 0.08);
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        transition: background 0.3s;
-      }
+  /* Logout Confirmation Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    backdrop-filter: blur(8px);
+}
 
-      .navbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.5rem 2.5rem;
-        min-height: 70px;
-      }
+.modal-content {
+    background: linear-gradient(135deg, #1a1f35 0%, #2d1b69 100%);
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    position: relative;
+    overflow: hidden;
+    animation: modalSlideIn 0.3s ease-out;
+}
 
-      .logo-link {
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-      }
+.modal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #667eea, transparent);
+}
 
-      .logo-icon svg {
-        height: 2.6rem;
-        width: 2.6rem;
-        margin-right: 0.5rem;
-        transition: transform 0.3s cubic-bezier(0.4, 2, 0.6, 1);
-      }
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #fff;
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+}
 
-      .logo-link:hover .logo-icon svg {
-        transform: rotate(-10deg) scale(1.08);
-        filter: drop-shadow(0 0 12px #667eea88);
-      }
+.modal-message {
+    margin-bottom: 2rem;
+    color: #8092e2;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
 
-      .logo-text {
-        color: #fff;
-        text-shadow: 0 2px 12px #667eea33;
-        transition: color 0.3s;
-      }
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
 
-      /* Nav Links */
-      .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        /* Reduced gap */
-        margin-left: -1.2rem;
-        /* Shift links to the left */
-      }
+.btn-modal {
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
 
-      .nav-link {
-        position: relative;
-        font-family: "Space Grotesk", "Inter", sans-serif;
-        font-weight: 500;
-        font-size: 1.08rem;
-        color: #8092e2;
-        letter-spacing: 0.5px;
-        text-decoration: none;
-        padding: 0.4rem 2rem;
-        border-radius: 8px;
-        transition: color 0.22s, background 0.22s, box-shadow 0.22s,
-          transform 0.18s;
-        overflow: hidden;
-        z-index: 1;
-      }
+.btn-confirm {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+}
 
-      .nav-link span {
-        position: relative;
-        z-index: 2;
-      }
+.btn-confirm:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.6);
+}
 
-      .nav-link::before {
-        content: "";
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 0;
-        height: 0;
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-        border-radius: 12px;
-        opacity: 0.12;
-        transform: translate(-50%, -50%) scale(0.7);
-        transition: width 0.3s, height 0.3s, opacity 0.3s;
-        z-index: 1;
-      }
+.btn-cancel {
+    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(108, 117, 125, 0.4);
+}
 
-      .nav-link:hover,
-      .nav-link:focus {
-        color: #fff;
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-        box-shadow: 0 2px 16px 0 #667eea33;
-        transform: translateY(-2px) scale(1.04);
-      }
+.btn-cancel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.6);
+}
 
-      .nav-link:hover::before,
-      .nav-link:focus::before {
-        width: 100%;
-        height: 180%;
-        opacity: 0.22;
-      }
-
-      .nav-link-cta {
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-        color: #fff !important;
-        font-weight: 700;
-        box-shadow: 0 2px 16px 0 #667eea33;
-        border-radius: 10px;
-        position: relative;
-        overflow: hidden;
-        transition: background 0.22s, box-shadow 0.22s, transform 0.18s;
-      }
-
-      .nav-link-cta:hover,
-      .nav-link-cta:focus {
-        background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
-        box-shadow: 0 4px 24px 0 #764ba244;
-        transform: scale(1.06) rotate(-2deg);
-      }
-
-      .nav-link-cta .nav-link-bg {
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(circle at 60% 40%, #fff3 0%, #fff0 80%);
+@keyframes modalSlideIn {
+    from {
         opacity: 0;
-        transition: opacity 0.3s;
-        z-index: 0;
-      }
-
-      .nav-link-cta:hover .nav-link-bg,
-      .nav-link-cta:focus .nav-link-bg {
+        transform: translateY(-30px) scale(0.9);
+    }
+    to {
         opacity: 1;
-      }
+        transform: translateY(0) scale(1);
+    }
+}
 
-      /* Theme Toggle Button (bottom-right fixed) */
-      #theme-toggle-container {
-        position: fixed;
-        bottom: 2.2rem;
-        margin-top: 0.5rem;
-        right: 2.2rem;
-        z-index: 120;
-        /* Remove background and border for container */
-        background: none;
-        border: none;
-        box-shadow: none;
-        padding: 0.5rem;
-      }
-
-      #theme-toggle {
-        width: 44px;
-        height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        border: none;
-        outline: none;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #667eea22 0%, #764ba222 100%);
-        color: #fff;
-        font-size: 1.3rem;
-        box-shadow: 0 2px 12px #667eea22;
-        transition: background 0.22s, transform 0.18s, box-shadow 0.22s;
-        padding: 1rem;
-      }
-
-      #theme-toggle:hover,
-      #theme-toggle:focus {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: #fff;
-        box-shadow: 0 2px 12px #667eea44;
-        transform: scale(1.13) rotate(-10deg);
-      }
-
-      /* Hamburger Menu Animation */
-      .menu-toggle {
-        display: none;
+/* Responsive design for modal */
+@media (max-width: 480px) {
+    .modal-actions {
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background: none;
-        border: none;
-        cursor: pointer;
-        margin-left: 1.5rem;
-        z-index: 10;
-      }
+    }
+    
+    .btn-modal {
+        min-width: auto;
+        width: 100%;
+    }
+}
+        /* Navbar Font and Layout */
+        .main-header {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            background: rgb(14, 17, 26);
+            box-shadow: 0 4px 24px 0 rgba(102, 126, 234, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: background 0.3s;
+        }
 
-      .hamburger {
-        width: 26px;
-        height: 3px;
-        background: #8092e2;
-        margin: 3px 0;
-        border-radius: 2px;
-        transition: all 0.3s cubic-bezier(0.4, 2, 0.6, 1);
-      }
-
-      .menu-toggle:active .hamburger,
-      .menu-toggle:focus .hamburger {
-        background: #fff;
-        box-shadow: 0 0 8px #667eea88;
-      }
-
-      /* Responsive */
-      @media (max-width: 900px) {
         .navbar {
           padding: 0.7rem 1.2rem;
         }
@@ -966,8 +883,24 @@
           <div class="smoke"></div>
           <div class="smoke"></div>
         </div>
-      </div>
-    </button>
+    </div>
+</button>
+
+
+<!-- Logout Confirmation Modal -->
+<div id="logoutModal" class="modal-overlay">
+    <div class="modal-content">
+        <h3 class="modal-title">Confirm Logout</h3>
+        <p class="modal-message">Are you sure you want to log out?</p>
+        <div class="modal-actions">
+            <button id="confirmLogout" class="btn-modal btn-confirm">✅ Yes, Logout</button>
+            <button id="cancelLogout" class="btn-modal btn-cancel">❌ Cancel</button>
+        </div>
+    </div>
+</div>
+<script type="module" src="./scripts/main.js"></script>
+<script type="module" src="./scripts/logout.js"></script>
+</body>
 
     <script type="module" src="./scripts/main.js"></script>
   </body>
