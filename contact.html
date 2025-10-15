@@ -22,6 +22,7 @@
         initThemeToggle();
       });
   </script>
+
   <style>
     body {
       background: linear-gradient(135deg, #23243a 0%, #18192b 100%);
@@ -104,6 +105,7 @@
     .contact-details a:hover {
       text-decoration: underline;
     }
+
     /* Footer override for dark theme */
     .premium-footer {
       background: #18192b;
@@ -136,6 +138,62 @@
       gap: 1rem;
       flex-wrap: wrap;
       justify-content: center; 
+    }
+
+    /* Modal styling */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(20, 21, 35, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 2000;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-box {
+      background: #23243a;
+      padding: 2rem 2.5rem;
+      border-radius: 1.2rem;
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.25);
+      max-width: 420px;
+      text-align: center;
+      border: 1px solid #667eea;
+      color: #e4e8f7;
+      animation: fadeIn 0.3s ease-out;
+    }
+    .modal-box h2 {
+      color: #667eea;
+      margin-bottom: 0.8rem;
+    }
+    .modal-box p {
+      color: #aab4e8;
+      margin-bottom: 1.5rem;
+    }
+    .modal-box button {
+      background: #667eea;
+      color: #fff;
+      border: none;
+      border-radius: 0.7rem;
+      padding: 0.6rem 1.4rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.25s ease;
+    }
+    .modal-box button:hover {
+      background: #764ba2;
+    }
+    @keyframes fadeIn {
+      from { transform: translateY(-15px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
   </style>
 </head>
@@ -212,6 +270,7 @@
     </div>
   </footer>
 
+  <!-- Custom cursor -->
   <div class="cursor"> 
     <div class="cursor__ball cursor__ball--big">
       <svg width="40" height="40">
@@ -220,7 +279,63 @@
     </div>
   </div>
 
+  <!-- Modal for success/error -->
+  <div id="notificationModal" class="modal-overlay">
+    <div class="modal-box">
+      <h2 id="modalTitle"></h2>
+      <p id="modalMessage"></p>
+      <button id="closeModal">OK</button>
+    </div>
+  </div>
+
   <script type="module" src="scripts/main.js"></script>
   <script src="scripts/cursor.js"></script>
+
+  <script>
+    const form = document.querySelector('.contact-form');
+    const modal = document.getElementById('notificationModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMessage = document.getElementById('modalMessage');
+    const closeModal = document.getElementById('closeModal');
+
+    // Simulated backend (replace later with actual API)
+    async function submitForm(data) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          Math.random() > 0.2 ? resolve({ ok: true }) : reject();
+        }, 1000);
+      });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await submitForm(data);
+        if (response.ok) {
+          form.reset();
+          showModal("Success!", "Your message has been sent successfully!");
+        }
+      } catch (error) {
+        showModal("Error", "Something went wrong, please try again.");
+      }
+    });
+
+    function showModal(title, message) {
+      modalTitle.textContent = title;
+      modalMessage.textContent = message;
+      modal.classList.add('active');
+    }
+
+    closeModal.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('active');
+    });
+  </script>
 </body>
 </html>
