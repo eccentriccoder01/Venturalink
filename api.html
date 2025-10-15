@@ -115,6 +115,158 @@
       color: #764ba2;
       text-decoration: underline;
     }
+      body {
+    background: linear-gradient(135deg, #23243a 0%, #18192b 100%);
+    color: #e4e8f7;
+    font-family: 'Inter', 'Space Grotesk', Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  .api-section {
+    max-width: 900px;
+    margin: 3rem auto 2rem auto;
+    background: rgba(34,36,58,0.95);
+    border-radius: 1.5rem;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 8px 32px rgba(102,126,234,0.12);
+    text-align: left;
+  }
+
+  .api-section h1 {
+    color: #667eea;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  .api-section p {
+    margin-bottom: 2rem;
+    color: #aab4e8;
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  /* --- INTERACTIVE API CARDS --- */
+  .api-endpoint {
+    background: #23243a;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(102,126,234,0.08);
+    margin-bottom: 2rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border 0.25s ease;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+
+  .api-endpoint:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 18px rgba(102,126,234,0.25);
+    border: 1px solid rgba(118,75,162,0.4);
+  }
+
+  .endpoint-title {
+    color: #667eea;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .endpoint-method {
+    font-weight: bold;
+    color: #764ba2;
+    margin-right: 1rem;
+  }
+
+  .endpoint-url {
+    font-family: monospace;
+    color: #e4e8f7;
+    background: #18192b;
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .endpoint-desc {
+    color: #e4e8f7;
+    margin: 0.7rem 0 0.5rem 0;
+  }
+
+  .endpoint-params {
+    color: #aab4e8;
+    font-size: 0.98rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .endpoint-example {
+    background: #18192b;
+    color: #e4e8f7;
+    font-family: monospace;
+    border-radius: 0.5rem;
+    padding: 0.8rem 1rem;
+    margin-top: 0.5rem;
+    font-size: 0.98rem;
+    overflow-x: auto;
+  }
+
+  /* --- LINK & BUTTON HOVER EFFECTS --- */
+  a {
+    color: #e4e8f7;
+    text-decoration: none;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+  }
+
+  a:hover {
+    color: #764ba2;
+    text-shadow: 0 0 6px rgba(118,75,162,0.6);
+  }
+
+  button, .btn {
+    background: #667eea;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.25s ease, transform 0.2s ease;
+  }
+
+  button:hover, .btn:hover {
+    background: #764ba2;
+    transform: translateY(-2px);
+  }
+
+  /* --- FOOTER LINKS --- */
+  .premium-footer {
+    background: #18192b;
+    color: #e4e8f7;
+    border-top: 2px solid #23243a;
+  }
+
+  .footer-section h4 {
+    color: #667eea;
+  }
+
+  .footer-links-grid a {
+    color: #e4e8f7;
+    text-decoration: none;
+    transition: color 0.25s ease, transform 0.2s ease;
+  }
+
+  .footer-links-grid a:hover {
+    color: #764ba2;
+    transform: translateX(4px);
+  }
+
+  /* --- OPTIONAL: Smooth hover cursor feedback --- */
+  .cursor__ball circle {
+    transition: fill 0.3s ease;
+  }
+  .api-endpoint:hover ~ .cursor__ball circle,
+  a:hover ~ .cursor__ball circle {
+    fill: #764ba2;
+  }
   </style>
 </head>
 <body>
