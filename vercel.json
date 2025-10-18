@@ -1,5 +1,24 @@
 {
-  "outputDirectory": ".",
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  },
   "redirects": [
     { "source": "/", "destination": "/index.html" },
     { "source": "/login", "destination": "/login.html" },
@@ -7,6 +26,9 @@
     { "source": "/profile", "destination": "/profile.html" },
     { "source": "/proposals", "destination": "/proposals.html" },
     { "source": "/create-proposal", "destination": "/create-proposal.html" },
-    { "source": "/about", "destination": "/about.html" }
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/features", "destination": "/features.html" },
+    { "source": "/pricing", "destination": "/pricing.html" }
   ]
 }
