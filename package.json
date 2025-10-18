@@ -21,6 +21,9 @@
   },
   "homepage": "https://github.com/krishagandhi0711/Venturalink#readme",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "dotenv": "^16.4.5",
+    "cors": "^2.8.5",
+    "@google/generative-ai": "^0.21.0"
   }
 }
