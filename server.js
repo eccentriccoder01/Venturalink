@@ -1,5 +1,5 @@
-// server.js
-require('dotenv').config(); // ✅ Load .env first
+
+require('dotenv').config();
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
@@ -7,12 +7,9 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-
-// ✅ Middleware
 app.use(express.json());
 app.use(express.static(__dirname));
 
-// ✅ CORS configuration for chatbot
 app.use(
   cors({
     origin: [
@@ -25,7 +22,6 @@ app.use(
   })
 );
 
-// ✅ Initialize Google Gemini AI API
 let genAI, model;
 try {
   const apiKey = process.env.API_KEY;
@@ -39,8 +35,6 @@ try {
 } catch (error) {
   console.error("❌ Failed to initialize Google Gemini AI:", error.message);
 }
-
-// ✅ Routes
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
 app.get("/login", (req, res) => res.sendFile(path.join(__dirname, "login.html")));
 app.get("/register", (req, res) => res.sendFile(path.join(__dirname, "register.html")));
@@ -71,7 +65,6 @@ app.post("/api/chat", async (req, res) => {
       return res.status(400).json({ error: "Message is required and must be a non-empty string" });
     }
 
-    // ✅ Add context about Venturalink to make responses more relevant
     const contextualPrompt = `You are Venturalink's AI assistant. Venturalink is a platform that connects entrepreneurs, investors, and advisors for startup ecosystem collaboration. 
 
 User question: ${message}
@@ -80,7 +73,6 @@ Please provide a helpful response related to entrepreneurship, startup funding, 
 
     const result = await model.generateContent(contextualPrompt);
 
-    // ✅ Ensure the response structure is valid
     const reply = result.response?.candidates?.[0]?.content?.parts?.[0]?.text || 
                   "I couldn't generate a response at the moment. Please try again.";
 
@@ -98,16 +90,14 @@ Please provide a helpful response related to entrepreneurship, startup funding, 
   }
 });
 
-// ✅ Optional: catch-all 404 route
 app.use((req, res) => res.status(404).send("Page not found"));
 
-// ✅ Start Server
 if (process.env.NODE_ENV !== 'production') {
   app.listen(PORT, () => {
     console.log(`🚀 Venturalink server running at http://localhost:${PORT}`);
     console.log(`🤖 Chatbot API available at http://localhost:${PORT}/api/chat`);
   });
 } else {
-  // ✅ For Vercel deployment
+
   module.exports = app;
 }
