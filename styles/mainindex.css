@@ -2376,3 +2376,43 @@ main {
 .btn-primary { background: #007bff; color: white; }
 .btn-secondary { background: #6c757d; color: white; }
 
+/* Stats Section */
+.stats-section {
+  padding: 4rem 1.5rem;
+  background: linear-gradient(135deg, #1a1f35 0%, #2d1b69 100%);
+  color: #fff;
+  text-align: center;
+}
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+  transition: transform 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #667eea;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 1.1rem;
+  color: #8092e2;
+}
