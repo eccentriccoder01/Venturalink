@@ -58,30 +58,31 @@
     }
 
     .pricing-card {
-      background: linear-gradient(135deg, #23243a 60%, #667eea 100%);
-      border-radius: 1.2rem;
-      box-shadow: 0 4px 24px rgba(102,126,234,0.18);
-      color: #fff;
-      padding: 2rem 1.5rem;
-      min-width: 220px;
-      max-width: 260px;
-      font-size: 1.1rem;
-      font-weight: 500;
-      transition: transform 0.25s, box-shadow 0.25s;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
+  background: linear-gradient(135deg, #23243a 60%, #667eea 100%);
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 24px rgba(102,126,234,0.18);
+  color: #fff;
+  padding: 2rem 1.5rem;
+  min-width: 220px;
+  max-width: 260px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 1;
+}
 
-    .pricing-card:hover {
-      transform: scale(1.07) rotate(-2deg);
-      box-shadow: 0 8px 32px #764ba2a0;
-      background: linear-gradient(135deg, #764ba2 60%, #667eea 100%);
-    }
+.pricing-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(102,126,234,0.25);
+  background: linear-gradient(135deg, #2a2b45 0%, #667eea 90%);
+}
 
     .pricing-card-title {
       color: #aab4e8;
@@ -109,21 +110,26 @@
     }
 
     .pricing-card-btn {
-      background: #667eea;
-      color: #fff;
-      border: none;
-      border-radius: 0.7rem;
-      padding: 0.5rem 1.2rem;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: auto;
-      transition: background 0.2s;
-    }
+  background: #667eea;
+  color: #fff;
+  border: none;
+  border-radius: 0.7rem;
+  padding: 0.6rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: auto;
+  position: relative;
+  z-index: 2;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 0 rgba(102,126,234,0);
+}
 
-    .pricing-card-btn:hover {
-      background: #764ba2;
-    }
+.pricing-card-btn:hover {
+  background: #764ba2;
+  box-shadow: 0 0 10px rgba(118,75,162,0.4);
+  transform: translateY(-2px);
+}
 
     /* Footer override for dark theme */
     .premium-footer {
