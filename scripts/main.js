@@ -1844,6 +1844,43 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 document.addEventListener('DOMContentLoaded', init);
 
+// Animated Count Up Stats
+const statsSection = document.getElementById("animated-stats");
+const statNumbers = document.querySelectorAll(".stat-number");
+let statsAnimated = false;
+
+function animateStats() {
+  if (statsAnimated) return;
+  
+  const sectionTop = statsSection.getBoundingClientRect().top;
+  const triggerPoint = window.innerHeight - 100;
+
+  if (sectionTop < triggerPoint) {
+    statNumbers.forEach((num) => {
+      const target = +num.getAttribute("data-target");
+      const duration = 2000; // 2 seconds
+      let start = 0;
+      const increment = target / (duration / 16);
+
+      function updateNumber() {
+        start += increment;
+        if (start < target) {
+          num.textContent = Math.ceil(start);
+          requestAnimationFrame(updateNumber);
+        } else {
+          num.textContent = target;
+        }
+      }
+      updateNumber();
+    });
+    statsAnimated = true;
+  }
+}
+
+window.addEventListener("scroll", animateStats);
+window.addEventListener("load", animateStats);
+
+
 
 // ===== THEME DEBUG MESSAGE =====
 
