@@ -12,6 +12,7 @@
 - <a href="#demo"> Live Demo </a>
 - <a href="#screenshots"> Screenshots </a>
 - <a href="#core-features">Core Features</a>
+- <a href="#project-structure">Project Structure</a>
 - <a href="#technology-stack"> Technology Stack </a>
 - <a href="#setup-instructions"> Setup Instructions </a>
 - <a href="#roadmap-enhancements">  Roadmap & Future Enhancements </a>
@@ -150,6 +151,114 @@ Experience Venturalink live here:
 - 📜 Receive certificates and swag!
 
 🎉 **I can’t wait to welcome new contributors** from GSSoC 2025 to this Venturalink project family! Let's build, learn, and grow together — one commit at a time. 🔥👨‍💻👩‍💻
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+<details>
+<summary>
+<h2 id="project-structure">📁 Project Structure</h2>
+</summary>
+
+```
+Venturalink/
+├── .gitignore                                        # Specifies files and directories to be ignored by Git  
+├── about.html                                        # About page
+├── api.html                                          # API documentation page
+├── App.png                                           # Project Screenshot
+├── blog.html                                         # Blog page
+├── CHATBOT_SETUP.md                                  # Guide for setting up the chatbot
+├── CODE_OF_CONDUCT.md                                # Code of conduct document
+├── contact.html                                      # Contact page
+├── CONTRIBUTING.md                                   # Guidelines for contributing to the project
+├── cookies.html                                      # Cookie policy page
+├── create-proposal.html                              # Business proposal creation page
+├── features.html                                     # Features page
+├── forgot-password.html                              # Forgot password page
+├── generate-env.js                                   # Generate environment variables
+├── getting-started-guide.html                        # Detailed guide on getting started
+├── guides.html                                       # User guide to navigate the platform
+├── help.html                                         # Help center page
+├── how-to-pitch-your-startup.html                    # Blog about how to pitch your startup
+├── index.html                                        # Homepage 
+├── investor-guide.html                               # Onboarding guide page
+├── investor-trends-in-2025.html                      # Blog about investor trends in 2025
+├── LICENSE                                           # License file for the project
+├── login.html                                        # Login page
+├── main-header.html                                  # Main header section
+├── manifest.json                                     # Web app manifest file for metadata
+├── messaging-guide.html                              # Guide for messaging system
+├── package-lock.json                                 # Automatically generated file for npm dependencies    
+├── package.json                                      # Configuration file for npm dependencies and scripts
+├── posting-guide.html                                # Guide for posting ideas page
+├── pricing.html                                      # Pricing page
+├── privacy.html                                      # Privacy policy page
+├── profile.html                                      # User profile page
+├── proposals.html                                    # Investment opportunities page
+├── README.md                                         # Project overview
+├── register.html                                     # Registration page 
+├── security.html                                     # Security page
+├── server.js                                         # Main express Server setup
+├── service-worker.js                                 # Service worker script for caching
+├── terms.html                                        # Terms of Service page
+├── top-5-mistakes-founders-make.html                 # Blog about top 5 mistakes founders make
+├── V.png                                             # Venturalink icon
+├── vercel.json                                       # Vercel configuration file
+├───.github/                                          # GitHub configuration files
+│   ├── FUNDING.yml                                   # Configuration file for funding
+│   ├── pull_request_template.md                      # Template for creating pull requests
+│   ├───ISSUE_TEMPLATE                                # Templates for issue creation
+│   ├── bug_report.yml                                # Template for bug report
+│   ├── config.yml                                    # Configuration for issue template
+│   ├── documentation.md                              # Template for documentation-related issues
+│   ├── feature_request.yml                           # Template for feature requests
+│   ├── performance.md                                # Template for performance-related issues
+│   └───workflows/                                    # GitHub Actions workflows
+│       ├── auto-author-assign.yml                    # Automatically assign authors to issues
+│       ├── deploy.yml                                # Deployment workflow
+│       ├── issue-create-automate-message.yml         # Automates message creation for issues
+│       ├── pr-create-automate-message.yml            # Automates message creation for PRs
+│       └───sync-issue-labels.yml                     # Synchronizes issue labels across repos 
+├───assets/                                           # Folder containing various assets/icons
+│   ├── advisor-icon.svg                              # Icon for advisor
+│   ├── entrepreneur-icon.svg                         # Icon for entrepreneur
+│   ├── facebook-icon.svg                             # Icon for Facebook
+│   ├── google.png                                    # Logo for Google
+│   ├── gssoc logo.png                                # Logo for GSSOC
+│   ├── investor-icon.svg                             # Icon for investor
+│   ├── linkedin-icon.svg                             # Icon for LinkedIn
+│   └───twitter-icon.svg                              # Icon for Twitter
+├───favicon/                                          # Folder containing Venturalink Icons
+│   ├── apple-touch-icon.png                         
+│   ├── favicon-96x96.png
+│   ├── favicon.ico
+│   ├── favicon.svg
+│   ├── site.webmanifest
+│   ├── web-app-manifest-192x192.png
+│   └───web-app-manifest-512x512.png
+├───scripts/                                           # JavaScript files for the site's functionality
+│   ├── auth.js                                        # Handle authentication
+│   ├── chatbot.js                                     # Chatbot functionality
+│   ├── create-proposal.js                             # Proposal submission logic
+│   ├── cursor.js                                      # Custom cursor
+│   ├── firebase-config.js                             # Firebase configuration file
+│   ├── firebase.js                                    # Firebase integration
+│   ├── forgot-password.js                             # Forgot password logic
+│   ├── login.js                                       # Login functionality
+│   ├── lucide.js                                      # Lucide icons
+│   ├── main.js                                        # Core logic of the website
+│   ├── profile.js                                     # User profile page functionality
+│   ├── proposals.js                                   # Manage investment proposals
+│   ├── register.js                                    # User registration 
+│   └───theme.js                                       # Theme-settings
+└───styles/                                            # CSS files for styling the website
+    ├── auth.css                                       # Styles for authentication page
+    ├── chatbot.css                                    # Styles for the chatbot
+    ├── mainindex.css                                  # Homepage layout
+    ├── navbar.css                                     # Styles for the navigation bar
+    ├── profile.css                                    # User profile page styling
+    ├── proposal.css                                   # Styles for business proposal page
+    └───proposals.css                                  # Styles for the investment opportunities page
+```
+</details>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
