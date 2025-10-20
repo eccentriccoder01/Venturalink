@@ -11,6 +11,7 @@
     <meta name="apple-mobile-web-app-title" content="Venturalink" />
     <link rel="manifest" href="/favicon/site.webmanifest" />
     <link rel="stylesheet" href="./styles/proposals.css">
+    <link rel="stylesheet" href="styles/footer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -243,8 +244,20 @@
         </div>
     </div>
 
-    <!-- Enhanced Footer -->
-    <footer class="main-footer">
+        <!-- Enhanced Footer (migrated to shared footer.html) -->
+        <div id="footer"></div>
+        <script>
+            (function loadFooter(){
+                fetch('footer.html')
+                    .then(function(res){ if(!res.ok) throw new Error('Failed to fetch footer'); return res.text(); })
+                    .then(function(html){ document.getElementById('footer').innerHTML = html; })
+                    .catch(function(err){ console.warn('Footer load failed:', err); });
+            })();
+        </script>
+
+        <!-- Original enhanced footer removed from this file -->
+
+        <footer class="main-footer">
         <div class="footer-glow"></div>
         <div class="footer-content">
             <div class="footer-section brand-section">

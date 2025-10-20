@@ -11,6 +11,7 @@
   <meta name="apple-mobile-web-app-title" content="Venturalink" />
   <link rel="manifest" href="/favicon/site.webmanifest" />
   <link rel="stylesheet" href="styles/mainindex.css">
+  <link rel="stylesheet" href="styles/footer.css">
   <script src="./scripts/theme.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
@@ -171,54 +172,15 @@
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="premium-footer" style="background:#181c2a;color:#e4e8f7;padding:2.5rem 0 1.5rem 0;">
-    <div class="footer-content" style="max-width:1200px;margin:auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:2.5rem;">
-      <div class="footer-info" style="flex:1;min-width:220px;">
-        <h2 style="color:#667eea;font-size:1.6rem;margin-bottom:0.7rem;">Venturalink</h2>
-        <p style="margin-bottom:1.2rem;line-height:1.6;">
-          Connecting investors with entrepreneurs to create meaningful business relationships and drive economic progress in the digital age.
-        </p>
-      </div>
-
-      <div class="footer-links-grid" style="display:flex;gap:2.5rem;flex:2;justify-content:space-between;">
-        <div class="footer-section">
-          <h4>Platform</h4>
-          <ul style="list-style:none;padding:0;margin:0;">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="features.html">Features</a></li>
-            <li><a href="pricing.html">Pricing</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-section">
-          <h4>Resources</h4>
-          <ul style="list-style:none;padding:0;margin:0;">
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="help.html">Help Center</a></li>
-            <li><a href="guides.html">Guides</a></li>
-            <li><a href="api.html">API Docs</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-section">
-          <h4>Legal</h4>
-          <ul style="list-style:none;padding:0;margin:0;">
-            <li><a href="terms.html">Terms of Service</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-            <li><a href="cookies.html">Cookie Policy</a></li>
-            <li><a href="security.html">Security</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div style="text-align:center;margin-top:2rem;">
-      <div class="footer-divider" style="height:1px;background:#23243a;margin-bottom:1rem;"></div>
-      <p style="margin-bottom:0.5rem;">&copy; 2025 Venturalink Platform. All rights reserved.</p>
-    </div>
-  </footer>
+  <div id="footer"></div>
+  <script>
+    (function loadFooter(){
+      fetch('footer.html')
+        .then(function(res){ if(!res.ok) throw new Error('Failed to fetch footer'); return res.text(); })
+        .then(function(html){ document.getElementById('footer').innerHTML = html; })
+        .catch(function(err){ console.warn('Footer load failed:', err); });
+    })();
+  </script>
 
   <div class="cursor">
     <div class="cursor__ball cursor__ball--big">

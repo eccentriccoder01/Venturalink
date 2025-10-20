@@ -14,6 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/proposal.css">
+    <link rel="stylesheet" href="styles/footer.css">
     <script src="/scripts/theme.js" defer></script>
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -327,11 +328,15 @@
         </div>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2024 Venturalink - Empowering Innovation</p>
-        </div>
-    </footer>
+        <div id="footer"></div>
+        <script>
+            (function loadFooter(){
+                fetch('footer.html')
+                    .then(function(res){ if(!res.ok) throw new Error('Failed to fetch footer'); return res.text(); })
+                    .then(function(html){ document.getElementById('footer').innerHTML = html; })
+                    .catch(function(err){ console.warn('Footer load failed:', err); });
+            })();
+        </script>
 
     <script type="module" src="./scripts/create-proposal.js"></script>
 </body>

@@ -6,6 +6,7 @@
   <title>Investor Trends in 2025 | Venturalink</title>
   <link rel="icon" type="image/png" href="V.png">
   <link rel="stylesheet" href="styles/mainindex.css">
+  <link rel="stylesheet" href="styles/footer.css">
   <style>
     body {
       background: linear-gradient(135deg, #23243a 0%, #18192b 100%);
@@ -170,8 +171,19 @@
     </section>
   </main>
 
-  <!-- Footer (same as other pages) -->
-  <footer class="premium-footer">
+  <div id="footer"></div>
+  <script>
+    (function loadFooter(){
+      fetch('footer.html')
+        .then(function(res){ if(!res.ok) throw new Error('Failed to fetch footer'); return res.text(); })
+        .then(function(html){ document.getElementById('footer').innerHTML = html; })
+        .catch(function(err){ console.warn('Footer load failed:', err); });
+    })();
+  </script>
+
+  <!-- Footer (moved to shared footer.html) -->
+  
+  
     <div class="footer-bg">
       <div class="footer-gradient"></div>
       <div class="footer-pattern"></div>
