@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,10 +41,10 @@
     .blog-section {
       max-width: 800px;
       margin: 3rem auto 2rem auto;
-      background: rgba(34,36,58,0.95);
+      background: rgba(34, 36, 58, 0.95);
       border-radius: 1.5rem;
       padding: 2.5rem 2rem;
-      box-shadow: 0 8px 32px rgba(102,126,234,0.12);
+      box-shadow: 0 8px 32px rgba(102, 126, 234, 0.12);
       text-align: center;
     }
 
@@ -71,13 +72,13 @@
       background: #23243a;
       border-radius: 1rem;
       padding: 1.5rem;
-      box-shadow: 0 2px 12px rgba(102,126,234,0.08);
+      box-shadow: 0 2px 12px rgba(102, 126, 234, 0.08);
       text-align: left;
       transition: box-shadow 0.2s;
     }
 
     .blog-post:hover {
-      box-shadow: 0 4px 24px rgba(102,126,234,0.18);
+      box-shadow: 0 4px 24px rgba(102, 126, 234, 0.18);
     }
 
     .blog-post-title {
@@ -118,8 +119,22 @@
       color: #764ba2;
       text-decoration: underline;
     }
+
+    #search {
+      width: 60%;
+      height: 45px;
+      border: 2px solid #667eea;
+      background-color: #202020;
+      color: white;
+      border-radius: 50px;
+      padding: 12px;
+      margin-bottom: 20px;
+      outline: none;
+      font-size: 16px;
+    }
   </style>
 </head>
+
 <body>
 
   <!-- Header (auto-loaded) -->
@@ -128,6 +143,9 @@
   <main>
     <section class="blog-section">
       <h1>Venturalink Blog</h1>
+      <div class="search-bar">
+        <input type="text" id="search" placeholder="Search blog post...">
+      </div>
       <p>
         Insights, tips, and stories from the world of startups, investing, and entrepreneurship.
       </p>
@@ -140,7 +158,8 @@
           </div>
           <div class="blog-post-meta">By Team Venturalink · April 2025</div>
           <div class="blog-post-summary">
-            Learn the key elements of a successful pitch, what investors look for, and how to make your business stand out in a crowded market.
+            Learn the key elements of a successful pitch, what investors look for, and how to make your business stand
+            out in a crowded market.
           </div>
         </div>
 
@@ -152,7 +171,8 @@
           </div>
           <div class="blog-post-meta">By Kavlin Kaur · March 2025</div>
           <div class="blog-post-summary">
-            Avoid common pitfalls in your startup journey with these practical tips from experienced entrepreneurs and mentors.
+            Avoid common pitfalls in your startup journey with these practical tips from experienced entrepreneurs and
+            mentors.
           </div>
         </div>
 
@@ -164,7 +184,8 @@
           </div>
           <div class="blog-post-meta">By Team Venturalink · February 2025</div>
           <div class="blog-post-summary">
-            Explore the latest trends in startup funding, sectors attracting the most capital, and how you can position your business for success.
+            Explore the latest trends in startup funding, sectors attracting the most capital, and how you can position
+            your business for success.
           </div>
         </div>
       </div>
@@ -173,11 +194,13 @@
 
   <!-- Footer -->
   <footer class="premium-footer" style="background:#181c2a;color:#e4e8f7;padding:2.5rem 0 1.5rem 0;">
-    <div class="footer-content" style="max-width:1200px;margin:auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:2.5rem;">
+    <div class="footer-content"
+      style="max-width:1200px;margin:auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:2.5rem;">
       <div class="footer-info" style="flex:1;min-width:220px;">
         <h2 style="color:#667eea;font-size:1.6rem;margin-bottom:0.7rem;">Venturalink</h2>
         <p style="margin-bottom:1.2rem;line-height:1.6;">
-          Connecting investors with entrepreneurs to create meaningful business relationships and drive economic progress in the digital age.
+          Connecting investors with entrepreneurs to create meaningful business relationships and drive economic
+          progress in the digital age.
         </p>
       </div>
 
@@ -228,7 +251,37 @@
     </div>
   </div>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const search = document.querySelector('#search');
+      const posts = document.querySelectorAll('.blog-post');
+
+      const noResult = document.createElement('p');
+      noResult.textContent = 'No posts found.';
+      noResult.style.display = 'none';
+      noResult.style.textAlign = 'center';
+      noResult.style.marginTop = '1rem';
+      document.querySelector('.blog-list').appendChild(noResult);
+
+      search.addEventListener('input', () => {
+        const val = search.value.trim().toLowerCase();
+        let visibleCount = 0;
+
+        posts.forEach(post => {
+          const title = post.querySelector('.blog-post-title').textContent.toLowerCase();
+          const match = !val || title.includes(val);
+          post.style.display = match ? '' : 'none';
+          if (match) visibleCount++;
+        });
+
+        noResult.style.display = visibleCount === 0 ? 'block' : 'none';
+      });
+    });
+  </script>
+
+
   <script type="module" src="scripts/main.js"></script>
   <script src="scripts/cursor.js"></script>
 </body>
+
 </html>
