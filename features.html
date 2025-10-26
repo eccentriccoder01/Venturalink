@@ -12,7 +12,6 @@
   <link rel="manifest" href="/favicon/site.webmanifest" />
   <link rel="stylesheet" href="styles/mainindex.css">
   <link rel="stylesheet" href="./styles/navbar.css">
-  <link rel="stylesheet" href="styles/footer.css">
   <style>
     body {
       background: linear-gradient(135deg, #23243a 0%, #18192b 100%);
@@ -95,7 +94,11 @@
       margin: 0;
       font-weight: 400;
     }
-  </style>
+
+    /* Footer styling */
+    /* Footer styling moved to styles/mainindex.css */
+
+</style>
 </head>
 <body>
   <!-- Header -->
@@ -172,16 +175,15 @@
     </section>
   </main>
 
-  <div id="footer"></div>
+  <!-- Footer: shared component loaded dynamically -->
+  <div id="footer-container" aria-hidden="false"></div>
   <script>
-    // Load shared footer HTML into pages
-    (function loadFooter(){
-      try{
-        fetch('footer.html')
-          .then(function(res){ if(!res.ok) throw new Error('Failed to fetch footer'); return res.text(); })
-          .then(function(html){ document.getElementById('footer').innerHTML = html; })
-          .catch(function(err){ console.warn('Footer load failed:', err); });
-      }catch(e){ console.warn('Footer load error', e); }
+    (function(){
+      var container = document.getElementById('footer-container');
+      if(!container) return;
+      fetch('footer.html').then(function(res){ return res.text(); }).then(function(html){
+        container.innerHTML = html;
+      }).catch(function(err){ console.error('Failed to load footer:', err); });
     })();
   </script>
   <script type="module" src="scripts/main.js"></script>
