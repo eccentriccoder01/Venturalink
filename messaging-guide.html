@@ -6,6 +6,7 @@
   <title>Messaging Guide | Venturalink</title>
   <link rel="icon" type="image/png" href="V.png">
   <link rel="stylesheet" href="styles/mainindex.css">
+  <link rel="stylesheet" href="styles/footer.css">
   <style>
     body {
       background: linear-gradient(135deg, #23243a 0%, #18192b 100%);
@@ -185,50 +186,15 @@
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="premium-footer" style="background:#181c2a;color:#e4e8f7;padding:2.5rem 0 1.5rem 0;">
-    <div class="footer-content" style="max-width:1200px;margin:auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:2.5rem;">
-      <div class="footer-info" style="flex:1;min-width:220px;">
-        <h2 style="color:#667eea;font-size:1.6rem;margin-bottom:0.7rem;">Venturalink</h2>
-        <p style="margin-bottom:1.2rem;line-height:1.6;">
-          Connecting investors with entrepreneurs to create meaningful business relationships and drive economic progress in the digital age.
-        </p>
-      </div>
-      <div class="footer-links-grid" style="display:flex;gap:2.5rem;flex:2;justify-content:space-between;">
-        <div class="footer-section">
-          <h4 style="color:#667eea;">Platform</h4>
-          <ul style="list-style:none;padding:0;margin:0;">
-            <li><a href="about.html" style="color:#e4e8f7;text-decoration:none;">About Us</a></li>
-            <li><a href="features.html" style="color:#e4e8f7;text-decoration:none;">Features</a></li>
-            <li><a href="pricing.html" style="color:#e4e8f7;text-decoration:none;">Pricing</a></li>
-            <li><a href="contact.html" style="color:#e4e8f7;text-decoration:none;">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h4 style="color:#667eea;">Resources</h4>
-          <ul style="list-style:none;padding:0;margin:0;">
-            <li><a href="blog.html" style="color:#e4e8f7;text-decoration:none;">Blog</a></li>
-            <li><a href="help.html" style="color:#e4e8f7;text-decoration:none;">Help Center</a></li>
-            <li><a href="guides.html" style="color:#e4e8f7;text-decoration:none;">Guides</a></li>
-            <li><a href="api.html" style="color:#e4e8f7;text-decoration:none;">API Docs</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h4 style="color:#667eea;">Legal</h4>
-          <ul style="list-style:none;padding:0;margin:0;">
-            <li><a href="terms.html" style="color:#e4e8f7;text-decoration:none;">Terms of Service</a></li>
-            <li><a href="privacy.html" style="color:#e4e8f7;text-decoration:none;">Privacy Policy</a></li>
-            <li><a href="cookies.html" style="color:#e4e8f7;text-decoration:none;">Cookie Policy</a></li>
-            <li><a href="security.html" style="color:#e4e8f7;text-decoration:none;">Security</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div style="text-align:center;margin-top:2rem;">
-      <div class="footer-divider" style="height:1px;background:#23243a;margin-bottom:1rem;"></div>
-      <p style="margin-bottom:0.5rem;">&copy; 2025 Venturalink Platform. All rights reserved.</p>
-    </div>
-  </footer>
+  <div id="footer"></div>
+  <script>
+    (function loadFooter(){
+      fetch('footer.html')
+        .then(function(res){ if(!res.ok) throw new Error('Failed to fetch footer'); return res.text(); })
+        .then(function(html){ document.getElementById('footer').innerHTML = html; })
+        .catch(function(err){ console.warn('Footer load failed:', err); });
+    })();
+  </script>
   <script type="module" src="scripts/main.js"></script>
 </body>
 </html>
