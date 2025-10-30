@@ -155,6 +155,71 @@
       color: #373a9c;
     }
 
+    [data-theme="light"] .contact-section {
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      color: #333333;
+    }
+
+    [data-theme="light"] .contact-section h1 {
+      color: #373a9c;
+    }
+
+    [data-theme="light"] .contact-form input,
+    [data-theme="light"] .contact-form textarea {
+      background: #ffffff;
+      color: #333333;
+      border: 1px solid #373a9c;
+    }
+
+    [data-theme="light"] .contact-form input:focus,
+    [data-theme="light"] .contact-form textarea:focus {
+      border-color: #5767f5;
+    }
+
+    [data-theme="light"] .contact-form button {
+      background: #373a9c;
+      color: #ffffff;
+    }
+
+    [data-theme="light"] .contact-form button:hover {
+      background: #5767f5;
+    }
+
+    [data-theme="light"] .contact-details {
+      color: #333333;
+    }
+
+    [data-theme="light"] .contact-details strong {
+      color: #373a9c;
+    }
+
+    [data-theme="light"] .contact-details a {
+      color: #333333;
+    }
+
+    [data-theme="light"] .contact-section p {
+      color: #555555;
+    }
+
+    [data-theme="light"] .modal-overlay {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    [data-theme="light"] .modal-box {
+      background: #ffffff;
+      border: 1px solid #373a9c;
+      color: #333333;
+    }
+
+    [data-theme="light"] .modal-box h2 {
+      color: #373a9c;
+    }
+
+    [data-theme="light"] .modal-box p {
+      color: #555555;
+    }
+
     [data-theme="light"] .cookie-section {
       background: rgba(255, 255, 255, 0.95);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
@@ -198,6 +263,18 @@
 
     [data-theme="light"] .footer-links-grid a:hover {
       color: #373a9c;
+    }
+
+    [data-theme="light"] .theme-toggle--floating#theme-toggle {
+      background: linear-gradient(135deg, #ffffff, #f5f5f5);
+      color: #373a9c;
+      border: 1px solid rgba(55, 58, 156, 0.2);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+    }
+
+    [data-theme="light"] .theme-toggle--floating#theme-toggle:hover {
+      background: linear-gradient(135deg, #373a9c, #5767f5);
+      color: #ffffff;
     }
   </style>
 
@@ -401,7 +478,6 @@
         </a>
       </div>
       <div class="nav-links">
-        <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
         <a href="index.html" class="nav-link" data-text="Home"><span>Home</span></a>
         <a href="about.html" class="nav-link" data-text="About"><span>About Us</span></a>
         <a href="features.html" class="nav-link" data-text="Features"><span>Features</span></a>
@@ -456,6 +532,9 @@
       </svg>
     </div>
   </div>
+
+  <!-- Theme Toggle Button -->
+  <button id="theme-toggle" class="theme-toggle--floating" aria-label="Toggle theme">🌙</button>
 
   <!-- Modal for success/error -->
   <div id="notificationModal" class="modal-overlay">
