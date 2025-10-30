@@ -164,24 +164,27 @@
 
 /* Toggle button styling */
 #theme-toggle {
-  position: static;
-  /* let navbar layout control placement */
+  position: fixed !important;
+  bottom: 28px !important;
+  left: 28px !important;
   background: transparent;
   color: var(--text-primary);
   border: 1px solid transparent;
   padding: 8px 10px;
   border-radius: var(--radius-full);
   cursor: pointer;
-  z-index: 10;
+  z-index: 1000;
   transition: background var(--transition-normal),
     color var(--transition-normal), border-color var(--transition-normal);
 }
 
-/* Float bottom-right on all pages for maximum visibility */
+/* Ensure the button stays at bottom left */
 .theme-toggle--floating#theme-toggle {
-  position: fixed;
-  bottom: 28px;
-  right: 28px;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 10, 15, 0.75),
+    rgba(20, 20, 28, 0.75)
+  );
   background: linear-gradient(
     135deg,
     rgba(10, 10, 15, 0.75),
@@ -205,22 +208,12 @@
     padding: 6px 10px;
     font-size: 14px;
   }
-
-  .theme-toggle--floating#theme-toggle {
-    bottom: 20px;
-    right: 20px;
-  }
 }
 
 @media (max-width: 480px) {
   #theme-toggle {
     padding: 4px 8px;
     font-size: 12px;
-  }
-
-  .theme-toggle--floating#theme-toggle {
-    bottom: 16px;
-    right: 16px;
   }
 }
 
