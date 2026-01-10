@@ -6,24 +6,36 @@
   "scripts": {
     "start": "node server.js",
     "generate-env": "node generate-env.js",
-    "build": "npm run generate-env"
+    "build": "npm run generate-env",
+    "dev": "node server.js",
+    "audit": "npm audit",
+    "audit-fix": "npm audit fix"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/krishagandhi0711/Venturalink.git"
+    "url": "git+https://github.com/eccentriccoder01/Venturalink.git"
   },
-  "keywords": [],
+  "keywords": [
+    "venturalink",
+    "startup",
+    "investment",
+    "entrepreneur",
+    "investor"
+  ],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/krishagandhi0711/Venturalink/issues"
+    "url": "https://github.com/eccentriccoder01/Venturalink/issues"
   },
-  "homepage": "https://github.com/krishagandhi0711/Venturalink#readme",
+  "homepage": "https://github.com/eccentriccoder01/Venturalink#readme",
   "dependencies": {
     "express": "^5.1.0",
     "dotenv": "^16.4.5",
     "cors": "^2.8.5",
-    "@google/generative-ai": "^0.21.0"
+    "@google/generative-ai": "^0.21.0",
+    "helmet": "^8.0.0",
+    "express-rate-limit": "^7.4.1",
+    "express-validator": "^7.2.0"
   }
 }
