@@ -61,6 +61,78 @@
       font-size: 1.1rem;
     }
 
+    /* Search Bar Styles */
+    .search-container {
+      margin: 2rem 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 1rem 3rem 1rem 3rem;
+      font-size: 1rem;
+      background: rgba(34,36,58,0.8);
+      border: 2px solid rgba(102,126,234,0.3);
+      border-radius: 50px;
+      color: #e4e8f7;
+      outline: none;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      box-sizing: border-box;
+    }
+
+    .search-input:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 4px rgba(102,126,234,0.1);
+      background: rgba(34,36,58,1);
+    }
+
+    .search-input::placeholder {
+      color: #aab4e8;
+      opacity: 0.6;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #667eea;
+      font-size: 1.2rem;
+      pointer-events: none;
+    }
+
+    .clear-search {
+      position: absolute;
+      right: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: #aab4e8;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none;
+      padding: 0;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .clear-search:hover {
+      color: #667eea;
+    }
+
+    .clear-search.visible {
+      display: block;
+    }
+
     .blog-list {
       display: flex;
       flex-direction: column;
@@ -119,6 +191,79 @@
       color: #764ba2;
       text-decoration: underline;
     }
+
+    /* No Results Message */
+    .no-results {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: #aab4e8;
+      display: none;
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    .no-results.visible {
+      display: block;
+    }
+
+    .no-results-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    .no-results h3 {
+      color: #667eea;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .no-results p {
+      font-size: 1.1rem;
+      margin: 0;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .blog-post {
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .blog-section {
+        margin: 2rem 1rem;
+        padding: 2rem 1.5rem;
+      }
+
+      .blog-section h1 {
+        font-size: 2rem;
+      }
+
+      .search-input {
+        padding: 0.9rem 2.5rem 0.9rem 2.5rem;
+        font-size: 0.95rem;
+      }
+
+      .search-icon {
+        left: 1rem;
+        font-size: 1rem;
+      }
+
+      .clear-search {
+        right: 1rem;
+        font-size: 1.3rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -132,8 +277,31 @@
       <p>
         Insights, tips, and stories from the world of startups, investing, and entrepreneurship.
       </p>
-      <div class="blog-list">
-        <div class="blog-post">
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input 
+            type="text" 
+            id="blog-search" 
+            class="search-input" 
+            placeholder="Search blog posts..."
+            aria-label="Search blog posts"
+          >
+          <button class="clear-search" id="clear-search" aria-label="Clear search">×</button>
+        </div>
+      </div>
+
+      <!-- No Results Message -->
+      <div class="no-results" id="no-results">
+        <div class="no-results-icon">🔍</div>
+        <h3>No matching blog posts found</h3>
+        <p>Try searching with different keywords</p>
+      </div>
+
+      <div class="blog-list" id="blog-list">
+        <div class="blog-post" data-title="How to Pitch Your Startup to Investors" data-author="Team Venturalink" data-summary="Learn the key elements of a successful pitch, what investors look for, and how to make your business stand out in a crowded market.">
           <div class="blog-post-title">
             <a href="how-to-pitch-your-startup.html" style="color: inherit; text-decoration: none;">
               How to Pitch Your Startup to Investors
@@ -145,7 +313,7 @@
           </div>
         </div>
 
-        <div class="blog-post">
+        <div class="blog-post" data-title="Top 5 Mistakes Founders Make (And How to Avoid Them)" data-author="Kavlin Kaur" data-summary="Avoid common pitfalls in your startup journey with these practical tips from experienced entrepreneurs and mentors.">
           <div class="blog-post-title">
             <a href="top-5-mistakes-founders-make.html" style="color: inherit; text-decoration: none;">
               Top 5 Mistakes Founders Make (And How to Avoid Them)
@@ -157,7 +325,7 @@
           </div>
         </div>
 
-        <div class="blog-post">
+        <div class="blog-post" data-title="Investor Trends in 2025: What's Hot?" data-author="Team Venturalink" data-summary="Explore the latest trends in startup funding, sectors attracting the most capital, and how you can position your business for success.">
           <div class="blog-post-title">
             <a href="investor-trends-in-2025.html" style="color: inherit; text-decoration: none;">
               Investor Trends in 2025: What’s Hot?
@@ -192,5 +360,79 @@
 
   <script type="module" src="scripts/main.js"></script>
   <script src="scripts/cursor.js"></script>
+
+  <!-- Blog Search Functionality -->
+  <script>
+    (function() {
+      'use strict';
+
+      const searchInput = document.getElementById('blog-search');
+      const clearButton = document.getElementById('clear-search');
+      const blogPosts = document.querySelectorAll('.blog-post');
+      const noResults = document.getElementById('no-results');
+
+      // Real-time search functionality
+      function performSearch() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        // Show/hide clear button
+        clearButton.classList.toggle('visible', searchTerm.length > 0);
+
+        blogPosts.forEach(post => {
+          const title = post.getAttribute('data-title').toLowerCase();
+          const author = post.getAttribute('data-author').toLowerCase();
+          const summary = post.getAttribute('data-summary').toLowerCase();
+
+          // Check if search term matches title, author, or summary
+          const isMatch = title.includes(searchTerm) || 
+                         author.includes(searchTerm) || 
+                         summary.includes(searchTerm);
+
+          if (isMatch) {
+            post.style.display = 'block';
+            visibleCount++;
+          } else {
+            post.style.display = 'none';
+          }
+        });
+
+        // Show/hide no results message
+        noResults.classList.toggle('visible', visibleCount === 0 && searchTerm.length > 0);
+      }
+
+      // Clear search
+      function clearSearch() {
+        searchInput.value = '';
+        clearButton.classList.remove('visible');
+        noResults.classList.remove('visible');
+        
+        blogPosts.forEach(post => {
+          post.style.display = 'block';
+        });
+        
+        searchInput.focus();
+      }
+
+      // Event listeners
+      searchInput.addEventListener('input', performSearch);
+      clearButton.addEventListener('click', clearSearch);
+
+      // Optional: Clear search on Escape key
+      searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          clearSearch();
+        }
+      });
+
+      // Optional: Add keyboard shortcut (Ctrl/Cmd + K) to focus search
+      document.addEventListener('keydown', function(e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+          e.preventDefault();
+          searchInput.focus();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
