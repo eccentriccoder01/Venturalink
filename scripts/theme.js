@@ -26,28 +26,19 @@
       button.type = "button";
       button.classList.add("theme-toggle--navbar");
 
-      // Create and append to navbar
-      const navbar = document.querySelector(".navbar");
-      if (navbar) {
-        navbar.appendChild(button);
-      } else {
-        // Fallback: append to body but position at top-right
-        document.body.appendChild(button);
-        Object.assign(button.style, {
-          position: "fixed",
-          top: "24px",
-          right: "24px",
-          zIndex: "9999",
-        });
-      }
+      // Always append to body to ensure fixed positioning works (avoids backdrop-filter containing block issues)
+      document.body.appendChild(button);
+
+      // Ensure specific ID for CSS targeting
+      button.id = "theme-toggle";
+      button.classList.add("theme-toggle--floating");
     } else {
-      // Ensure it's in the navbar
-      button.type = "button";
-      const navbar = document.querySelector(".navbar");
-      if (navbar && button.parentElement !== navbar) {
-        navbar.appendChild(button);
+      // Ensure it is attached to body if it exists but is elsewhere
+      if (button.parentElement !== document.body) {
+        document.body.appendChild(button);
       }
-      button.classList.add("theme-toggle--navbar");
+      button.classList.add("theme-toggle--floating");
+      button.classList.remove("theme-toggle--navbar");
     }
 
     // Style the button for navbar positioning
@@ -65,9 +56,7 @@
       justifyContent: "center",
       boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
       transition: "background 0.3s, color 0.3s, transform 0.2s",
-      marginLeft: "auto", // Push to the right in flex container
-      marginRight: "1rem", // Space from the edge
-      flexShrink: "0", // Prevent shrinking in flex container
+      zIndex: "9999" // Ensure it stays on top
     });
 
     // Add hover effect

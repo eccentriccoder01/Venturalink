@@ -5,18 +5,20 @@
         <div class="logo-container">
           <div class="logo-icon">
             <svg viewBox="0 0 40 40" fill="none">
-              <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="url(#logo-gradient)" stroke-width="2" fill="none"/>
-              <circle cx="20" cy="20" r="6" fill="url(#logo-gradient)"/>
+              <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="url(#logo-gradient)" stroke-width="2" fill="none" />
+              <circle cx="20" cy="20" r="6" fill="url(#logo-gradient)" />
               <defs>
                 <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style="stop-color:#667eea"/>
-                  <stop offset="100%" style="stop-color:#764ba2"/>
+                  <stop offset="0%" style="stop-color:#667eea" />
+                  <stop offset="100%" style="stop-color:#764ba2" />
                 </linearGradient>
               </defs>
             </svg>
           </div>
-          <div class="logo-text" style="transform: translateY(-4px); font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight:700; letter-spacing:2px; font-size:1.6rem;">
-            <img src="V.png" alt="V" style="height: 3rem; margin-right: -8px; transform: translateY(8px)"><span>ENTURALINK</span>
+          <div class="logo-text"
+            style="transform: translateY(-4px); font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight:700; letter-spacing:2px; font-size:1.6rem;">
+            <img src="V.png" alt="V"
+              style="height: 3rem; margin-right: -8px; transform: translateY(8px)"><span>ENTURALINK</span>
           </div>
         </div>
       </a>
@@ -53,177 +55,295 @@
 </header>
 
 <style>
-.main-header {
-  width: 100%;
-  background: var(--bg-primary, #111);
-  border-bottom: 1px solid var(--glass-border, rgba(255,255,255,0.1));
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.navbar {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 1rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-.logo-link {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-.logo-icon svg {
-  height: 2.6rem;
-  width: 2.6rem;
-  margin-right: 0.5rem;
-  transition: transform 0.3s cubic-bezier(.4,2,.6,1);
-}
-.logo-link:hover .logo-icon svg {
-  transform: rotate(-10deg) scale(1.08);
-  filter: drop-shadow(0 0 12px #667eea88);
-}
-.logo-text {
-  color: #fff;
-  text-shadow: 0 2px 12px #667eea33;
-  transition: color 0.3s;
-}
-.nav-links {
-  display: flex;
-  gap: 2rem;
-}
-.nav-link {
-  position: relative;
-  font-weight: 500;
-  color: var(--text-secondary, #aaa);
-  text-decoration: none;
-  padding: 0.4rem 1rem;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-}
-.nav-link:hover {
-  color: var(--text-primary, #fff);
-}
-.nav-link-cta {
-  position: relative;
-  padding: 0.5rem 1rem;
-  font-weight: 600;
-  color: var(--text-primary, #fff);
-  border-radius: var(--radius-md, 8px);
-  overflow: hidden;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  transition: all 0.2s ease;
-}
-.nav-link-cta .nav-link-bg {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 60% 40%, #fff3 0%, #fff0 80%);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.nav-link-cta:hover .nav-link-bg {
-  opacity: 1;
-}
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  gap: 4px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-.hamburger {
-  width: 24px;
-  height: 2px;
-  background: var(--text-primary, #fff);
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-.dropdown {
-  position: relative;
-}
-.dropdown-toggle::after {
-  font-size: 0.7rem;
-}
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--bg-secondary, #111);
-  border-radius: 10px;
-  padding: 1rem;
-  min-width: 320px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  z-index: 200;
-  grid-template-columns: repeat(2, minmax(120px, 1fr));
-  gap: 0.5rem 1rem;
-}
-.dropdown-menu a {
-  padding: 0.5rem 0.75rem;
-  border-radius: 6px;
-  color: var(--text-primary, #fff);
-  font-size: 0.9rem;
-  text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease;
-  white-space: nowrap;
-}
-.dropdown-menu a:hover {
-  background: rgba(255, 255, 255, 0.07);
-  color: var(--text-primary, #fff);
-}
-.dropdown:hover .dropdown-menu {
-  display: grid;
-}
-@media (max-width: 768px) {
-  .nav-links, .nav-actions {
-    display: none;
-    position: absolute;
-    top: 70px;
-    right: 0;
-    background: var(--bg-secondary, #111);
-    flex-direction: column;
-    width: 220px;
-    padding: 1rem;
-    border-radius: 0 0 0 12px;
-    box-shadow: 0 8px 32px #667eea22;
-    opacity: 0;
+  .main-header {
+    width: 100%;
+    position: sticky;
+    top: 1rem;
+    z-index: 1000;
     pointer-events: none;
+    /* Allow clicking through the header area outside navbar */
+    background: transparent;
+    /* Ensure no black line */
+    border: none;
+    /* remove any border on the strip */
+  }
+
+  .navbar {
+    max-width: 1050px;
+    /* Slightly tighter */
+    margin: 0 auto;
+    padding: 0.5rem 1.2rem;
+    /* Reduced padding */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: rgba(20, 22, 30, 0.4);
+    /* More transparent */
+    backdrop-filter: blur(20px);
+    /* Stronger blur */
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    /* Softer border */
+    border-radius: 50px;
+    pointer-events: auto;
+    /* Re-enable pointer events for the navbar itself */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    /* Softer shadow */
+    position: relative;
+  }
+
+  .logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .logo-icon svg {
+    height: 2.2rem;
+    width: 2.2rem;
+    margin-right: 0.5rem;
+    transition: transform 0.3s cubic-bezier(.4, 2, .6, 1);
+  }
+
+  .logo-link:hover .logo-icon svg {
+    transform: rotate(-10deg) scale(1.08);
+    filter: drop-shadow(0 0 12px #667eea88);
+  }
+
+  .logo-text {
+    color: #fff;
+    text-shadow: 0 2px 12px #667eea33;
+    transition: color 0.3s;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  /* Centering nav links if desired, or keeping them as standard flex items. 
+   The Creati example has them centered. Let's try to center them if space permits.
+   But current structure is logo - links - actions. 
+   We can keep standard spacing for now.
+*/
+
+  .nav-link {
+    position: relative;
+    font-weight: 500;
+    color: var(--text-secondary, #aaa);
+    text-decoration: none;
+    padding: 0.4rem 0.5rem;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--text-primary, #fff);
+  }
+
+  /* Specific style for Register/Get Started button */
+  .nav-link-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    color: #fff !important;
+    border-radius: 50px;
+    /* Pill shape for button */
+    overflow: hidden;
+    background: linear-gradient(135deg, #a855f7, #3b82f6);
+    /* Purple to Blue gradient like Creati */
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+    transition: all 0.3s ease;
+    margin-left: 0.5rem;
+  }
+
+  .nav-link-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(124, 58, 237, 0.4);
+    filter: brightness(1.1);
+  }
+
+  .nav-link-cta .nav-link-bg {
+    display: none;
+    /* Removing old effect for cleaner look */
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .hamburger {
+    width: 24px;
+    height: 2px;
+    background: var(--text-primary, #fff);
+    border-radius: 2px;
     transition: all 0.3s ease;
   }
-  .nav-links.open, .nav-actions.open {
-    display: flex;
-    opacity: 1;
-    pointer-events: auto;
+
+  .dropdown {
+    position: relative;
   }
-  .menu-toggle {
-    display: flex;
+
+  .dropdown-toggle::after {
+    font-size: 0.7rem;
   }
-}
-@media (max-width: 480px) {
+
   .dropdown-menu {
-    grid-template-columns: 1fr;
-    min-width: 200px;
+    display: none;
+    position: absolute;
+    top: 100%;
+    /* Adjust for pill shape margin */
+    left: 50%;
+    transform: translate(-50%, 15px);
+    background: rgba(20, 20, 25, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1rem;
+    min-width: 320px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    z-index: 200;
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+    gap: 0.5rem 1rem;
   }
-}
+
+  .dropdown-menu a {
+    padding: 0.6rem 0.75rem;
+    border-radius: 8px;
+    color: var(--text-primary, #fff);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .dropdown-menu a:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary, #fff);
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: grid;
+  }
+
+  @media (max-width: 850px) {
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: calc(100% + 10px);
+      /* 10px below the navbar */
+      left: 0;
+      right: 0;
+      background: rgba(20, 20, 25, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding: 1.5rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      gap: 1.2rem;
+      z-index: 999;
+      margin: 0 auto;
+      max-width: 90%;
+      /* Keep it contained */
+    }
+
+    .nav-links.open {
+      display: flex;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    /* Adjust links for mobile */
+    .nav-links a {
+      width: 100%;
+      text-align: center;
+      padding: 0.8rem;
+      font-size: 1.1rem;
+    }
+
+    /* Adjust CTA button for mobile */
+    .nav-link-cta {
+      width: 100%;
+      margin: 0;
+      justify-content: center;
+    }
+
+    .menu-toggle {
+      display: flex;
+    }
+
+    /* Hide the original nav-actions since we merged them or if they are separate */
+    .nav-actions {
+      display: none;
+    }
+
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 0.5rem;
+    display: none;
+    /* still hover based? usually click on mobile but keeping hover for now as per instructions "don't change functionality" */
+    grid-template-columns: 1fr;
+    min-width: auto;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: grid;
+  }
+  }
+
+  @media (max-width: 480px) {
+    .navbar {
+      padding: 0.6rem 1rem;
+      border-radius: 40px;
+    }
+  }
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const menuToggle = document.getElementById('menu-toggle');
-  const navLinks = document.getElementById('nav-links');
-  const navActions = document.querySelector('.nav-actions');
-  menuToggle.addEventListener('click', function () {
-    navLinks.classList.toggle('open');
-    navActions.classList.toggle('open');
+  document.addEventListener('DOMContentLoaded', function () {
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const navActions = document.querySelector('.nav-actions');
+    menuToggle.addEventListener('click', function () {
+      navLinks.classList.toggle('open');
+      menuToggle.classList.toggle('active'); // Optional: for hamburger animation if added later
+
+      // Animate hamburger lines
+      const spans = menuToggle.querySelectorAll('span');
+      if (navLinks.classList.contains('open')) {
+        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+        spans[1].style.opacity = '0';
+        spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+      } else {
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = 'none';
+      }
+    });
   });
-});
 </script>
