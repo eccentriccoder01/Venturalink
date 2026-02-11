@@ -64,6 +64,7 @@ if (registerForm) {
 document.addEventListener('DOMContentLoaded', () => {
   const passwordField = registerForm?.querySelector('input[name="password"]');
   const emailField = registerForm?.querySelector('input[name="email"]');
+  const passwordToggleBtn = document.getElementById('reg-password-toggle');
 
   checklist = {
     minLength: document.getElementById('rule-minLength'),
@@ -84,6 +85,26 @@ document.addEventListener('DOMContentLoaded', () => {
   if (emailField) {
     emailField.addEventListener('blur', () => {
       emailField.style.borderColor = isValidEmail(emailField.value) ? '' : '#ef4444';
+    });
+  }
+
+  // Password visibility toggle functionality
+  if (passwordToggleBtn && passwordField) {
+    passwordToggleBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const isVisible = passwordToggleBtn.getAttribute('data-visible') === 'true';
+      
+      if (isVisible) {
+        // Hide password
+        passwordField.type = 'password';
+        passwordToggleBtn.setAttribute('data-visible', 'false');
+      } else {
+        // Show password
+        passwordField.type = 'text';
+        passwordToggleBtn.setAttribute('data-visible', 'true');
+      }
     });
   }
 
