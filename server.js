@@ -27,7 +27,8 @@ app.use(helmet({
         "https://firestore.googleapis.com", 
         "https://identitytoolkit.googleapis.com",
         "https://securetoken.googleapis.com",
-        "https://www.googleapis.com"
+        "https://www.googleapis.com",
+        "https://www.gstatic.com"
       ],
       frameSrc: ["'none'"],
       objectSrc: ["'none'"],
@@ -133,6 +134,45 @@ app.get("/api/chat/health", apiLimiter, (req, res) => {
     message: "Venturalink Chatbot API is running!",
     timestamp: new Date().toISOString()
   });
+});
+
+// Config endpoint - serves Firebase configuration to client
+app.get("/api/config", apiLimiter, (req, res) => {
+  try {
+    const firebaseConfig = {
+      apiKey: process.env.VITE_FIREBASE_API_KEY,
+      authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN,
+      projectId: process.env.VITE_FIREBASE_PROJECT_ID,
+      storageBucket: process.env.VITE_FIREBASE_STORAGE_BUCKET,
+      messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+      appId: process.env.VITE_FIREBASE_APP_ID,
+      measurementId: process.env.VITE_FIREBASE_MEASUREMENT_ID
+    };
+
+    // Validate that all required Firebase keys are present
+    const requiredKeys = ['apiKey', 'authDomain', 'projectId', 'appId'];
+    const missingKeys = requiredKeys.filter(key => !firebaseConfig[key]);
+
+    if (missingKeys.length > 0) {
+      console.warn(`⚠️ Firebase Configuration Warning: Missing keys: ${missingKeys.join(', ')}`);
+      return res.status(400).json({
+        error: 'Incomplete Firebase configuration',
+        missingKeys: missingKeys,
+        message: 'Please check your .env file and ensure all required Firebase variables are set'
+      });
+    }
+
+    res.json({ 
+      firebaseConfig: firebaseConfig,
+      message: 'Firebase configuration loaded successfully'
+    });
+  } catch (error) {
+    console.error('❌ Error serving Firebase configuration:', error.message);
+    res.status(500).json({ 
+      error: 'Failed to load configuration',
+      message: error.message 
+    });
+  }
 });
 
 // Chatbot endpoint with validation and rate limiting
