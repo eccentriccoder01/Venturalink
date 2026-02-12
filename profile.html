@@ -129,16 +129,18 @@
             <label for="bio">Your Bio</label>
             <div class="input-wrapper">
               <i data-lucide="align-left"></i>
-              <textarea id="bio" name="bio" rows="3" placeholder="Tell us about yourself..."></textarea>
+              <textarea id="bio" name="bio" rows="3" placeholder="Tell us about yourself..." maxlength="500" aria-describedby="bioHelp"></textarea>
             </div>
+            <small id="bioHelp" class="form-text">Maximum 500 characters</small>
           </div>
           <!-- Phone -->
           <div class="form-group">
             <label for="phone">Phone Number</label>
             <div class="input-wrapper">
               <i data-lucide="phone"></i>
-              <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+              <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" pattern="[+]?[0-9\s()-]{7,}" aria-describedby="phoneHelp">
             </div>
+            <small id="phoneHelp" class="form-text">Enter a valid phone number with country code (e.g., +1-555-123-4567)</small>
           </div>
           <button type="submit" class="premium-btn">
             <i data-lucide="save"></i>
@@ -181,6 +183,7 @@
   </main>
 
   <!-- Profile JS -->
+  <script src="./scripts/env.js"></script>
   <script type="module" src="scripts/profile.js"></script>
 </body>
 </html>

@@ -530,11 +530,73 @@ async function handleLogout() {
     }
 }
 
+// Currency validation function for handling formatted amounts (₹3,00,000, etc.)
+function setupCurrencyValidation() {
+    const amountField = document.getElementById('amount');
+    
+    if (!amountField) return;
+    
+    // Real-time validation and formatting
+    amountField.addEventListener('input', function(e) {
+        let value = e.target.value;
+        
+        // Remove all non-numeric characters except comma and dot
+        let numericValue = value.replace(/[^\d,.]/g, '');
+        
+        // Update the field with cleaned value
+        e.target.value = numericValue;
+        
+        // Validate: ensure it's a valid number
+        if (numericValue && isNaN(numericValue.replace(/,/g, ''))) {
+            e.target.style.borderColor = '#ff6b6b';
+        } else {
+            e.target.style.borderColor = '';
+        }
+    });
+    
+    // Validation on blur and form submission
+    const validateAmount = () => {
+        const value = amountField.value.trim();
+        
+        if (!value) return true; // Allow empty if not required by section
+        
+        // Remove commas and convert to number
+        const numericValue = parseFloat(value.replace(/,/g, ''));
+        
+        if (isNaN(numericValue) || numericValue < 1000) {
+            amountField.style.borderColor = '#ff6b6b';
+            amountField.style.boxShadow = '0 0 0 3px rgba(255, 107, 107, 0.2)';
+            showAlert('Please enter a valid amount (minimum ₹1000)', 'error');
+            return false;
+        }
+        
+        amountField.style.borderColor = '';
+        amountField.style.boxShadow = '';
+        return true;
+    };
+    
+    amountField.addEventListener('blur', validateAmount);
+    
+    // Override form submission to validate amount
+    const originalValidate = validateCurrentSection;
+    window.validateCurrentSection = function() {
+        const result = originalValidate.call(this);
+        
+        // Check if we're on section 3 (Investment section)
+        if (currentSection === 3) {
+            return result && validateAmount();
+        }
+        
+        return result;
+    };
+}
+
 // Initialize form when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
     setupFormInteractions();
     setupCharacterCounters();
+    setupCurrencyValidation();
     updateFormNavigation();
     
     // Load draft if available
@@ -595,4 +657,46 @@ auth.onAuthStateChanged(async (user) => {
         updateDebugInfo('Error', 'Error checking type');
         showAlert('Error checking user permissions. Please refresh the page.', 'error');
     }
+});
+
+// ===========================
+// Select Dropdown Keyboard Navigation Enhancement
+// ===========================
+document.addEventListener('DOMContentLoaded', () => {
+    const customSelects = document.querySelectorAll('.custom-select select');
+    
+    customSelects.forEach(select => {
+        // Improve keyboard navigation for accessibility
+        select.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                const options = Array.from(select.options);
+                const currentIndex = select.selectedIndex;
+                
+                if (e.key === 'ArrowDown' && currentIndex < options.length - 1) {
+                    select.selectedIndex = currentIndex + 1;
+                } else if (e.key === 'ArrowUp' && currentIndex > 0) {
+                    select.selectedIndex = currentIndex - 1;
+                }
+                
+                // Trigger change event
+                select.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+        });
+        
+        // Add visual feedback on focus
+        select.addEventListener('focus', () => {
+            const parent = select.closest('.custom-select');
+            if (parent) {
+                parent.style.borderColor = 'var(--text-accent)';
+            }
+        });
+        
+        select.addEventListener('blur', () => {
+            const parent = select.closest('.custom-select');
+            if (parent) {
+                parent.style.borderColor = '';
+            }
+        });
+    });
 });
