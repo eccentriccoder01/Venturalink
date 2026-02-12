@@ -10,13 +10,13 @@
     --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     --gradient-success: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
     --gradient-warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-    
+
     /* Glassmorphism Colors */
     --glass-bg: rgba(255, 255, 255, 0.05);
     --glass-border: rgba(255, 255, 255, 0.1);
     --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     --glass-strong: rgba(255, 255, 255, 0.08);
-    
+
     /* Dark Mode Colors */
     --bg-primary: #0a0a0f;
     --bg-secondary: #111118;
@@ -24,25 +24,25 @@
     --text-secondary: #a0a0a8;
     --text-tertiary: #6b6b76;
     --text-accent: #667eea;
-    
+
     /* Interactive Colors */
     --hover-bg: rgba(255, 255, 255, 0.1);
     --active-bg: rgba(255, 255, 255, 0.15);
     --focus-ring: rgba(102, 126, 234, 0.4);
-    
+
     /* Shadows & Effects */
     --shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.1);
     --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
     --shadow-strong: 0 20px 40px rgba(0, 0, 0, 0.25);
     --shadow-glow: 0 0 20px rgba(102, 126, 234, 0.3);
-    
+
     /* Border Radius */
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
     --radius-xl: 24px;
     --radius-full: 9999px;
-    
+
     /* Spacing */
     --space-xs: 0.25rem;
     --space-sm: 0.5rem;
@@ -50,11 +50,11 @@
     --space-lg: 1.5rem;
     --space-xl: 2rem;
     --space-2xl: 3rem;
-    
+
     /* Typography */
     --font-primary: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-secondary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    
+
     /* Transitions */
     --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -116,8 +116,10 @@ body {
 .avatar-image { width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--text-accent); object-fit: cover; box-shadow: var(--shadow-strong); }
 .avatar-edit-btn { position: absolute; bottom: 5px; right: 5px; width: 36px; height: 36px; background: var(--gradient-primary); border: 2px solid var(--bg-primary); border-radius: 50%; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition-normal); }
 .avatar-edit-btn:hover { transform: scale(1.1); box-shadow: var(--shadow-glow); }
-.profile-info { flex: 1; }
-.profile-name { font-family: var(--font-primary); font-size: 2.5rem; font-weight: 700; margin: 0; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+/* [FIX] min-width: 0 prevents long names from overflowing flex container */
+.profile-info { flex: 1; min-width: 0; }
+/* [FIX] Added word-break to prevent long names from causing overflow */
+.profile-name { font-family: var(--font-primary); font-size: 2.5rem; font-weight: 700; margin: 0; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; word-break: break-word; }
 .profile-role { font-size: 1.2rem; color: var(--text-secondary); margin-top: var(--space-sm); text-transform: capitalize; }
 .profile-completion { margin-top: var(--space-lg); max-width: 400px; }
 .completion-text { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: var(--space-sm); display: block; }
@@ -128,15 +130,18 @@ body {
 .social-icon:hover { color: var(--text-primary); transform: scale(1.1) translateY(-2px); }
 
 /* --- Statistics Grid --- */
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-xl); }
+/* [FIX] Use min() to prevent overflow on narrow screens (<= 320px) */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: var(--space-xl); }
 .stat-card { display: flex; align-items: center; gap: var(--space-lg); padding: var(--space-lg); }
 .stat-icon { width: 56px; height: 56px; background: var(--gradient-accent); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: white; flex-shrink: 0; box-shadow: var(--shadow-subtle); }
-.stat-content { display: flex; flex-direction: column; }
+/* [FIX] Add min-width: 0 to prevent text overflow in grid/flex children */
+.stat-content { display: flex; flex-direction: column; min-width: 0; }
 .stat-number { font-family: var(--font-primary); font-size: 2rem; font-weight: 700; color: var(--text-primary); line-height: 1; }
 .stat-label { color: var(--text-secondary); }
 
 /* --- Profile Content Grid --- */
-.profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: var(--space-xl); }
+/* [FIX] Use min() to clamp minmax — prevents horizontal overflow on screens < 350px */
+.profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr)); gap: var(--space-xl); }
 .card-header { display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-xl); }
 .card-icon { width: 48px; height: 48px; background: var(--gradient-secondary); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: white; }
 .card-header h3 { font-family: var(--font-primary); font-size: 1.4rem; font-weight: 600; }
@@ -152,10 +157,9 @@ body {
 .input-wrapper input:focus, .input-wrapper textarea:focus { border-color: var(--text-accent); background: var(--glass-strong); box-shadow: 0 0 0 3px var(--focus-ring); outline: none; }
 
 /* --- Premium Button --- */
-.premium-btn { display: flex; align-items: center; justify-content: center; gap: var(--space-sm); padding: var(--space-md) var(--space-xl); background: transparent; border: none; border-radius: var(--radius-full); color: white; font-weight: 600; cursor: pointer; position: relative; overflow: hidden; z-index: 1; transition: var(--transition-normal); }
-.btn-gradient { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: var(--gradient-primary); z-index: -1; transition: var(--transition-normal); }
-.premium-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-glow); }
-.premium-btn:hover .btn-gradient { background: var(--gradient-accent); }
+/* [FIX] Applied gradient directly — .btn-gradient child element doesn't exist in HTML */
+.premium-btn { display: flex; align-items: center; justify-content: center; gap: var(--space-sm); padding: var(--space-md) var(--space-xl); background: var(--gradient-primary); border: none; border-radius: var(--radius-full); color: white; font-weight: 600; cursor: pointer; position: relative; overflow: hidden; z-index: 1; transition: var(--transition-normal); }
+.premium-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-glow); background: var(--gradient-accent); }
 
 /* --- Recent Activity Card --- */
 .activity-feed { display: flex; flex-direction: column; gap: var(--space-md); max-height: 250px; overflow-y: auto; }
@@ -167,7 +171,8 @@ body {
 
 /* --- My Proposals/Investments Card --- */
 .full-width-card { grid-column: 1 / -1; }
-.proposals-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-md); }
+/* [FIX] Use min() to prevent proposal cards from overflowing narrow viewports */
+.proposals-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--space-md); }
 .proposal-item { background: var(--glass-bg); padding: var(--space-lg); border-radius: var(--radius-lg); border-left: 3px solid var(--text-accent); display: flex; justify-content: space-between; align-items: center; transition: var(--transition-normal); }
 .proposal-item:hover { background: var(--hover-bg); transform: translateX(5px); }
 .proposal-item h4 { font-family: var(--font-primary); margin: 0 0 var(--space-sm) 0; }
@@ -181,57 +186,161 @@ body {
 ::-webkit-scrollbar-track { background: var(--glass-bg); }
 ::-webkit-scrollbar-thumb { background: var(--gradient-primary); border-radius: var(--radius-full); }
 
-/* --- Responsive Design --- */
+/* ==========================================================================
+   Responsive Design — Mobile-First Breakpoints
+   [FIX] Replaced incomplete breakpoints with full coverage:
+   320px, 375px, 425px, 768px, and 992px
+   ========================================================================== */
+
+/* --- Tablet & below (≤ 992px) --- */
 @media (max-width: 992px) {
     .profile-header { flex-direction: column; text-align: center; }
     .social-links { justify-content: center; }
+    /* [FIX] Center the completion bar when header stacks vertically */
+    .profile-completion { margin-left: auto; margin-right: auto; }
 }
 
+/* --- Tablet portrait (≤ 768px) --- */
 @media (max-width: 768px) {
     .profile-container { padding: var(--space-xl); }
-    .stats-grid, .profile-grid { grid-template-columns: 1fr; }
-    .navbar { padding: var(--space-lg); }
+    /* [FIX] Force single-column stacking for cards and stats */
+    .stats-grid,
+    .profile-grid { grid-template-columns: 1fr; }
+    .navbar { padding: var(--space-md) var(--space-lg); }
+    .profile-name { font-size: 2rem; }
+    .avatar-image { width: 100px; height: 100px; }
+    .stat-number { font-size: 1.75rem; }
+    /* [FIX] Reduce card padding on tablet */
+    .glass-card { padding: var(--space-xl); }
+    /* [FIX] Disable hover lift on touch-sized screens to prevent tap jank */
+    .glass-card:hover { transform: none; }
 }
 
-@media (max-width: 480px) {
-    .profile-container { padding: var(--space-lg); }
-    .profile-name { font-size: 2rem; }
-    .navbar { flex-direction: column; gap: var(--space-lg); }
-    .nav-links { width: 100%; justify-content: center; }
+/* --- Large phone (≤ 425px) --- */
+@media (max-width: 425px) {
+    .profile-container { padding: var(--space-lg); gap: var(--space-xl); }
+    .navbar { flex-direction: column; gap: var(--space-md); padding: var(--space-md); }
+    .nav-links { width: 100%; justify-content: center; gap: var(--space-md); }
+    .profile-name { font-size: 1.75rem; }
+    .profile-role { font-size: 1rem; }
+    .card-header h3 { font-size: 1.2rem; }
+    .stat-icon { width: 44px; height: 44px; }
+    .stat-number { font-size: 1.5rem; }
+    .glass-card { padding: var(--space-lg); }
+    /* [FIX] Ensure proposal items stack content on narrow screens */
+    .proposal-item { flex-direction: column; align-items: flex-start; gap: var(--space-sm); }
 }
-.modal-overlay {
+
+/* --- Medium phone (≤ 375px) --- */
+@media (max-width: 375px) {
+    .profile-container { padding: var(--space-md); gap: var(--space-lg); }
+    .navbar { padding: var(--space-sm) var(--space-md); }
+    .logo-text { font-size: 1.2rem; }
+    .logo-icon { width: 36px; height: 36px; }
+    .profile-name { font-size: 1.5rem; }
+    .avatar-image { width: 80px; height: 80px; }
+    .avatar-edit-btn { width: 28px; height: 28px; }
+    .nav-link { padding: var(--space-sm) var(--space-md); font-size: 0.875rem; }
+    .stat-card { padding: var(--space-md); }
+    .glass-card { padding: var(--space-md); border-radius: var(--radius-lg); }
+    .premium-btn { padding: var(--space-md); width: 100%; }
+    .completion-text { font-size: 0.8rem; }
+}
+
+/* --- Small phone (≤ 320px) --- */
+@media (max-width: 320px) {
+    .profile-container { padding: var(--space-sm); gap: var(--space-md); }
+    .profile-name { font-size: 1.3rem; }
+    .profile-role { font-size: 0.875rem; }
+    .avatar-image { width: 64px; height: 64px; border-width: 2px; }
+    .avatar-edit-btn { width: 24px; height: 24px; bottom: 2px; right: 2px; }
+    .card-header h3 { font-size: 1rem; }
+    .card-icon { width: 36px; height: 36px; }
+    .stat-icon { width: 36px; height: 36px; }
+    .stat-number { font-size: 1.25rem; }
+    .stat-label { font-size: 0.8rem; }
+    .nav-link span { display: none; }
+    /* [FIX] Show only icons in nav at 320px to save horizontal space */
+    .nav-link { padding: var(--space-sm); }
+    .social-links { gap: var(--space-sm); }
+    .input-wrapper input,
+    .input-wrapper textarea { padding-left: 36px; font-size: 0.875rem; }
+    .premium-form label { font-size: 0.875rem; }
+}
+/* [FIX] HTML uses .modal class, not .modal-overlay — fixed selector to match markup */
+.modal {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
 }
 
-.modal-overlay.hidden {
+.modal.hidden {
     display: none;
 }
 
 .modal-content {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px);
-    padding: 2rem;
-    border-radius: 1rem;
+    -webkit-backdrop-filter: blur(15px);
+    padding: var(--space-2xl);
+    border-radius: var(--radius-xl);
     text-align: center;
-    width: 320px;
-    max-width: 90%;
+    /* [FIX] Use responsive max-width instead of fixed width to avoid overflow on 320px */
+    width: min(90%, 320px);
+    max-width: 100%;
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+}
+
+.modal-content h3 {
+    font-family: var(--font-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.modal-content p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
 }
 
 .modal-actions {
     display: flex;
-    justify-content: space-between;
-    margin-top: 1.5rem;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
 }
 
 .modal-actions button {
     flex: 1;
-    margin: 0 0.5rem;
+    padding: var(--space-md);
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: var(--transition-normal);
+    border: none;
+}
+
+.btn-secondary {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--hover-bg);
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    box-shadow: var(--shadow-glow);
 }
 /* ==========================
    Light Theme Styles
