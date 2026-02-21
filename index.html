@@ -1,90 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Venturalink - Connect investors with entrepreneurs"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      href="/favicon/favicon-96x96.png"
-      sizes="96x96"
-    />
-    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon/favicon.ico" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/favicon/apple-touch-icon.png"
-    />
-    <meta name="apple-mobile-web-app-title" content="Venturalink" />
-    <link rel="manifest" href="/favicon/site.webmanifest" />
-    <title>Venturalink - Investor & Business Platform</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./styles/mainindex.css" />
-    <link rel="stylesheet" href="./styles/chatbot.css" />
-    <!-- Font Awesome CDN for social media icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <script src="./scripts/theme.js" defer></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <!-- TODO: Consider updating Firebase SDK version periodically -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-    <!-- TODO: Consider updating Firebase SDK version periodically -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-    <!-- TODO: Consider updating Firebase SDK version periodically -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Venturalink - Connect investors with entrepreneurs" />
+  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Venturalink" />
+  <link rel="manifest" href="/favicon/site.webmanifest" />
+  <title>Venturalink - Investor & Business Platform</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="./styles/mainindex.css" />
+  <link rel="stylesheet" href="./styles/chatbot.css" />
+  <!-- Font Awesome CDN for social media icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <style>
-      .nav-links a:hover {
-        color: white;
-      }
+  <script src="./scripts/theme.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <!-- TODO: Consider updating Firebase SDK version periodically -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <!-- TODO: Consider updating Firebase SDK version periodically -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <!-- TODO: Consider updating Firebase SDK version periodically -->
 
-      .nav-links a {
-        color: #8092e2;
-      }
+  <style>
+    .nav-links a:hover {
+      color: white;
+    }
 
-      main {
-        opacity: 1 !important;
-        pointer-events: auto !important;
-      }
+    .nav-links a {
+      color: #8092e2;
+    }
 
-      /* Place back-to-top arrow above the floating theme toggle */
+    main {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+
+    /* Place back-to-top arrow above the floating theme toggle */
+    #backToTopBtn {
+      right: 28px;
+      bottom: 96px;
+      /* above the theme toggle */
+    }
+
+    @media (max-width: 768px) {
       #backToTopBtn {
-        right: 28px;
+        right: 20px;
         bottom: 96px;
-        /* above the theme toggle */
+        /* keep stacked above on tablets */
       }
+    }
 
-      @media (max-width: 768px) {
-        #backToTopBtn {
-          right: 20px;
-          bottom: 96px;
-          /* keep stacked above on tablets */
-        }
+    @media (max-width: 480px) {
+      #backToTopBtn {
+        right: 16px;
+        bottom: 88px;
+        /* a bit closer but still above on phones */
       }
+    }
+  </style>
+</head>
 
-      @media (max-width: 480px) {
-        #backToTopBtn {
-          right: 16px;
-          bottom: 88px;
-          /* a bit closer but still above on phones */
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <!-- Loader -->
-    <div
-      id="logo-loader"
-      style="
+<body>
+  <!-- Loader -->
+  <div id="logo-loader" style="
         position: fixed;
         top: 0;
         left: 0;
@@ -96,387 +82,562 @@
         background: #181c2a;
         z-index: 9999;
         transition: opacity 0.6s;
-      "
-    >
-      <img
-        src="V.png"
-        alt="Venturalink Logo"
-        style="
+      ">
+    <img src="V.png" alt="Venturalink Logo" style="
           width: 100px;
           height: 100px;
           animation: spinLogo 1.2s linear infinite;
           filter: drop-shadow(0 0 24px #667eea);
-        "
-      />
-    </div>
-    <script>
-      // Preloader hide logic
-      window.addEventListener("load", function () {
-        var loader = document.getElementById("logo-loader");
-        if (loader) {
+        " />
+  </div>
+  <script>
+    // Preloader hide logic
+    window.addEventListener("load", function () {
+      var loader = document.getElementById("logo-loader");
+      if (loader) {
+        setTimeout(function () {
+          loader.style.opacity = "0";
           setTimeout(function () {
-            loader.style.opacity = "0";
-            setTimeout(function () {
-              loader.style.display = "none";
-            }, 600);
-          }, 2000); // Show loader for 2 seconds
-        }
-      });
-    </script>
+            loader.style.display = "none";
+          }, 600);
+        }, 2000); // Show loader for 2 seconds
+      }
+    });
+  </script>
 
-    <!-- Background Animation -->
-    <div class="bg-animation">
-      <div class="bg-particle"></div>
-      <div class="bg-particle"></div>
-      <div class="bg-particle"></div>
-      <div class="bg-particle"></div>
-      <div class="bg-particle"></div>
-      <div class="bg-orb orb-1"></div>
-      <div class="bg-orb orb-2"></div>
-      <div class="bg-orb orb-3"></div>
-    </div>
+  <!-- Background Animation -->
+  <div class="bg-animation">
+    <div class="bg-particle"></div>
+    <div class="bg-particle"></div>
+    <div class="bg-particle"></div>
+    <div class="bg-particle"></div>
+    <div class="bg-particle"></div>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+  </div>
 
-    <!-- Cursor follower -->
-    <div class="cursor-follower"></div>
+  <!-- Cursor follower -->
+  <div class="cursor-follower"></div>
 
-    <!-- Header -->
-    <header class="main-header">
-      <nav class="navbar" id="main-nav">
-        <div class="logo">
-          <a href="index.html" class="logo-link">
-            <div class="logo-container">
-              <div class="logo-icon">
-                <svg viewBox="0 0 40 40" fill="none">
-                  <path
-                    d="M20 4L36 12V28L20 36L4 28V12L20 4Z"
-                    stroke="url(#logo-gradient)"
-                    stroke-width="2"
-                    fill="none"
-                  />
-                  <circle cx="20" cy="20" r="6" fill="url(#logo-gradient)" />
-                  <defs>
-                    <linearGradient
-                      id="logo-gradient"
-                      x1="0%"
-                      y1="0%"
-                      x2="100%"
-                      y2="100%"
-                    >
-                      <stop offset="0%" style="stop-color: #667eea" />
-                      <stop offset="100%" style="stop-color: #764ba2" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-              <div
-                class="logo-text"
-                style="
-                  transform: translateY(-4px);
-                  font-family: 'Space Grotesk', 'Inter', sans-serif;
-                  font-weight: 700;
-                  letter-spacing: 2px;
-                  font-size: 1.6rem;
-                "
-              >
-                <img
-                  src="V.png"
-                  alt="V"
-                  style="
-                    height: 3rem;
-                    margin-right: -8px;
-                    transform: translateY(8px);
-                  "
-                />ENTURALINK
-              </div>
+  <!-- Header -->
+  <header class="main-header">
+    <nav class="navbar" id="main-nav">
+      <div class="logo">
+        <a href="index.html" class="logo-link">
+          <div class="logo-container">
+            <div class="logo-icon">
+              <svg viewBox="0 0 40 40" fill="none">
+                <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="url(#logo-gradient)" stroke-width="2"
+                  fill="none" />
+                <circle cx="20" cy="20" r="6" fill="url(#logo-gradient)" />
+                <defs>
+                  <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#667eea" />
+                    <stop offset="100%" style="stop-color:#764ba2" />
+                  </linearGradient>
+                </defs>
+              </svg>
             </div>
-          </a>
+            <div class="logo-text"
+              style="transform: translateY(-4px); font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight:700; letter-spacing:2px; font-size:1.6rem;">
+              <img src="V.png" alt="V"
+                style="height: 3rem; margin-right: -8px; transform: translateY(8px)"><span>ENTURALINK</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html" class="nav-link"><span>Home</span></a>
+        <div class="dropdown">
+          <a href="about.html" class="nav-link dropdown-toggle"><span>About</span></a>
+          <div class="dropdown-menu">
+            <a href="features.html" class="nav-link" data-text="Features"><span>Features</span></a>
+            <a href="pricing.html" class="nav-link" data-text="Pricing"><span>Pricing</span></a>
+            <a href="blog.html" class="nav-link" data-text="Blog"><span>Blog</span></a>
+            <a href="help.html" class="nav-link" data-text="Help"><span>Help Center</span></a>
+            <a href="guides.html" class="nav-link" data-text="Guides"><span>Guides</span></a>
+            <a href="api.html" class="nav-link" data-text="API"><span>API Docs</span></a>
+            <a href="terms.html" class="nav-link" data-text="Terms"><span>Terms of Service</span></a>
+          </div>
         </div>
-        <div class="nav-links">
-          <a href="index.html" class="nav-link"><span>Home</span></a>
-          <a href="about.html" class="nav-link"><span>About</span></a>
-          <a href="login.html" class="nav-link" data-text="Login"
-            ><span>Login</span></a
-          >
-          <a href="register.html" class="nav-link nav-link-cta">
-            <span>Register</span>
-            <div class="nav-link-bg"></div>
-          </a>
-        </div>
+        <a href="contact.html" class="nav-link"><span>Contact</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="login.html" class="nav-link">Login</a>
+        <a href="register.html" class="nav-link nav-link-cta">
+          <span>Register</span>
+          <div class="nav-link-bg"></div>
+        </a>
+      </div>
+      <button class="menu-toggle" aria-label="Toggle navigation menu" id="menu-toggle">
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+      </button>
+    </nav>
+  </header>
 
-        <button class="menu-toggle" aria-label="Toggle navigation menu">
-          <span class="hamburger"></span>
-          <span class="hamburger"></span>
-          <span class="hamburger"></span>
-        </button>
-      </nav>
-    </header>
+  <style>
+    /* Logout Confirmation Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      backdrop-filter: blur(8px);
+    }
 
-    <style>
-  /* Logout Confirmation Modal Styles */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-    backdrop-filter: blur(8px);
-}
+    .modal-content {
+      background: linear-gradient(135deg, #1a1f35 0%, #2d1b69 100%);
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      border: 1px solid rgba(102, 126, 234, 0.3);
+      position: relative;
+      overflow: hidden;
+      animation: modalSlideIn 0.3s ease-out;
+    }
 
-.modal-content {
-    background: linear-gradient(135deg, #1a1f35 0%, #2d1b69 100%);
-    padding: 2.5rem;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
-    max-width: 420px;
-    width: 90%;
-    text-align: center;
-    border: 1px solid rgba(102, 126, 234, 0.3);
-    position: relative;
-    overflow: hidden;
-    animation: modalSlideIn 0.3s ease-out;
-}
+    .modal-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #667eea, transparent);
+    }
 
-.modal-content::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #667eea, transparent);
-}
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #fff;
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+    }
 
-.modal-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: #fff;
-    font-family: 'Space Grotesk', 'Inter', sans-serif;
-}
+    .modal-message {
+      margin-bottom: 2rem;
+      color: #8092e2;
+      line-height: 1.6;
+      font-size: 1.1rem;
+    }
 
-.modal-message {
-    margin-bottom: 2rem;
-    color: #8092e2;
-    line-height: 1.6;
-    font-size: 1.1rem;
-}
+    .modal-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
 
-.modal-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-}
+    .btn-modal {
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      transition: all 0.3s ease;
+      min-width: 120px;
+    }
 
-.btn-modal {
-    padding: 0.75rem 2rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    font-family: 'Space Grotesk', 'Inter', sans-serif;
-    transition: all 0.3s ease;
-    min-width: 120px;
-}
+    .btn-confirm {
+      background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+      color: white;
+      box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+    }
 
-.btn-confirm {
-    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-    color: white;
-    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
-}
+    .btn-confirm:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(220, 53, 69, 0.6);
+    }
 
-.btn-confirm:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.6);
-}
+    .btn-cancel {
+      background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+      color: white;
+      box-shadow: 0 4px 15px rgba(108, 117, 125, 0.4);
+    }
 
-.btn-cancel {
-    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
-    color: white;
-    box-shadow: 0 4px 15px rgba(108, 117, 125, 0.4);
-}
+    .btn-cancel:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(108, 117, 125, 0.6);
+    }
 
-.btn-cancel:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.6);
-}
-
-@keyframes modalSlideIn {
-    from {
+    @keyframes modalSlideIn {
+      from {
         opacity: 0;
         transform: translateY(-30px) scale(0.9);
-    }
-    to {
+      }
+
+      to {
         opacity: 1;
         transform: translateY(0) scale(1);
+      }
     }
-}
 
-/* Responsive design for modal */
-@media (max-width: 480px) {
-    .modal-actions {
+    /* Responsive design for modal */
+    @media (max-width: 480px) {
+      .modal-actions {
         flex-direction: column;
-    }
-    
-    .btn-modal {
+      }
+
+      .btn-modal {
         min-width: auto;
         width: 100%;
+      }
     }
-}
-        /* Navbar Font and Layout */
-        .main-header {
-            font-family: 'Space Grotesk', 'Inter', sans-serif;
-            background: rgb(14, 17, 26);
-            box-shadow: 0 4px 24px 0 rgba(102, 126, 234, 0.08);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            transition: background 0.3s;
-        }
 
-        .navbar {
-          padding: 0.7rem 1.2rem;
-        }
+    /* Navbar Pill Design */
+    .main-header {
+      width: 100%;
+      position: sticky;
+      top: 1rem;
+      z-index: 1000;
+      pointer-events: none;
+      /* Allow clicking through the header area outside navbar */
+      background: transparent;
+      /* Ensure no black line */
+      border: none;
+      /* remove any border on the strip */
+    }
 
-        .nav-links {
-          gap: 0.7rem;
-        }
-      
+    .navbar {
+      max-width: 1050px;
+      /* Slightly tighter */
+      margin: 0 auto;
+      padding: 0.5rem 1.2rem;
+      /* Reduced padding */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background: rgba(20, 22, 30, 0.4);
+      /* More transparent */
+      backdrop-filter: blur(20px);
+      /* Stronger blur */
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      /* Softer border */
+      border-radius: 50px;
+      pointer-events: auto;
+      /* Re-enable pointer events for the navbar itself */
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      /* Softer shadow */
+      position: relative;
+    }
 
-      @media (max-width: 700px) {
-        .nav-links {
-          position: absolute;
-          top: 70px;
-          right: 0;
-          background: rgba(24, 28, 42, 0.98);
-          flex-direction: column;
-          align-items: flex-end;
-          width: 220px;
-          padding: 1.2rem 1.5rem;
-          border-radius: 0 0 0 18px;
-          box-shadow: 0 8px 32px #667eea22;
-          opacity: 0;
-          pointer-events: none;
-          transform: translateY(-20px);
-          transition: opacity 0.3s, transform 0.3s;
-          z-index: 99;
-        }
+    .logo-link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
 
-        .nav-links.open {
-          opacity: 1;
-          pointer-events: auto;
-          transform: translateY(0);
-        }
+    .logo-icon svg {
+      height: 2.2rem;
+      width: 2.2rem;
+      margin-right: 0.5rem;
+      transition: transform 0.3s cubic-bezier(.4, 2, .6, 1);
+    }
 
-        .menu-toggle {
-          display: flex;
-        }
-      }
+    .logo-link:hover .logo-icon svg {
+      transform: rotate(-10deg) scale(1.08);
+      filter: drop-shadow(0 0 12px #667eea88);
+    }
 
-      /* Nav underline animation */
-      .nav-link span {
-        display: inline-block;
-        position: relative;
-      }
+    .logo-text {
+      color: #fff;
+      text-shadow: 0 2px 12px #667eea33;
+      transition: color 0.3s;
+    }
 
-      .nav-link span::after {
-        content: "";
-        display: block;
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    /* Centering nav links if desired, or keeping them as standard flex items. 
+       The Creati example has them centered. Let's try to center them if space permits.
+       But current structure is logo - links - actions. 
+       We can keep standard spacing for now.
+    */
+
+    .nav-link {
+      position: relative;
+      font-weight: 500;
+      color: var(--text-secondary, #aaa);
+      text-decoration: none;
+      padding: 0.4rem 0.5rem;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary, #fff);
+    }
+
+    /* Specific style for Register/Get Started button */
+    .nav-link-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem 1.5rem;
+      font-weight: 600;
+      color: #fff !important;
+      border-radius: 50px;
+      /* Pill shape for button */
+      overflow: hidden;
+      background: linear-gradient(135deg, #a855f7, #3b82f6);
+      /* Purple to Blue gradient like Creati */
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+      transition: all 0.3s ease;
+      margin-left: 0.5rem;
+    }
+
+    .nav-link-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(124, 58, 237, 0.4);
+      filter: brightness(1.1);
+    }
+
+    .nav-link-cta .nav-link-bg {
+      display: none;
+      /* Removing old effect for cleaner look */
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .hamburger {
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary, #fff);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-toggle::after {
+      font-size: 0.7rem;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      /* Adjust for pill shape margin */
+      left: 50%;
+      transform: translate(-50%, 15px);
+      background: rgba(20, 20, 25, 0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 1rem;
+      min-width: 320px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+      z-index: 200;
+      grid-template-columns: repeat(2, minmax(120px, 1fr));
+      gap: 0.5rem 1rem;
+    }
+
+    .dropdown-menu a {
+      padding: 0.6rem 0.75rem;
+      border-radius: 8px;
+      color: var(--text-primary, #fff);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background 0.2s ease, color 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .dropdown-menu a:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary, #fff);
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: grid;
+    }
+
+    @media (max-width: 850px) {
+      .nav-links {
+        display: none;
         position: absolute;
+        top: calc(100% + 10px);
+        /* 10px below the navbar */
         left: 0;
         right: 0;
-        bottom: -2px;
-        height: 2px;
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-        border-radius: 2px;
-        transform: scaleX(0);
-        transition: transform 0.28s cubic-bezier(0.4, 2, 0.6, 1);
+        background: rgba(20, 20, 25, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 1.5rem;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+        gap: 1.2rem;
+        z-index: 999;
+        margin: 0 auto;
+        max-width: 90%;
+        /* Keep it contained */
       }
 
-      .nav-link:hover span::after,
-      .nav-link:focus span::after {
-        transform: scaleX(1);
+      .nav-links.open {
+        display: flex;
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
       }
 
-      /* Subtle nav fade-in animation */
+      /* Adjust links for mobile */
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 0.8rem;
+        font-size: 1.1rem;
+      }
+
+      /* Adjust CTA button for mobile */
+      .nav-link-cta {
+        width: 100%;
+        margin: 0;
+        justify-content: center;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      /* Hide the original nav-actions since we merged them or if they are separate */
+      .nav-actions {
+        display: none;
+      }
+
+      .dropdown-menu {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        margin-top: 0.5rem;
+        display: none;
+        /* Default hidden */
+        grid-template-columns: 1fr;
+        min-width: auto;
+        position: static;
+        /* Stack in flow */
+        transform: none;
+        background: transparent;
+      }
+
+      .dropdown:hover .dropdown-menu {
+        display: grid;
+      }
+    }
+
+    @media (max-width: 480px) {
       .navbar {
-        animation: navbarFadeIn 0.8s cubic-bezier(0.4, 2, 0.6, 1);
+        padding: 0.6rem 1rem;
+        border-radius: 40px;
+      }
+    }
+
+    @keyframes navbarFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-24px);
       }
 
-      @keyframes navbarFadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(-24px);
-        }
-
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
-    </style>
+    }
+  </style>
 
-    <!-- Main content -->
-    <main style="opacity: 1; pointer-events: auto">
-      <!-- Hero Section with Advanced Animations -->
-      <section id="hero" class="hero-section" style="margin-top: -2.5rem">
-        <div class="hero-bg-elements">
-          <div class="floating-shape shape-1"></div>
-          <div class="floating-shape shape-2"></div>
-          <div class="floating-shape shape-3"></div>
-          <div class="floating-shape shape-4"></div>
+  <!-- Main content -->
+  <main style="opacity: 1; pointer-events: auto">
+    <!-- Hero Section with Advanced Animations -->
+    <section id="hero" class="hero-section" style="margin-top: -2.5rem">
+      <div class="hero-bg-elements">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+        <div class="floating-shape shape-4"></div>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-icon">✨</span>
+          <span>Transforming Ideas Into Reality</span>
         </div>
 
-        <div class="hero-content">
-          <div class="hero-badge">
-            <span class="badge-icon">✨</span>
-            <span>Transforming Ideas Into Reality</span>
+        <h1 class="hero-title">
+          <span class="title-line">
+            <span class="word" data-word="Empowering">Empowering</span>
+            <span class="word gradient-text" data-word="Dreams">Dreams</span>
+          </span>
+          <span class="title-line">
+            <span class="word" data-word="Through">Through</span>
+            <span class="word" data-word="Smart">Smart</span>
+          </span>
+          <span class="title-line">
+            <span class="word gradient-text" data-word="Investments">Investments</span>
+          </span>
+        </h1>
+
+        <p class="hero-subtext">
+          Where visionary entrepreneurs meet modern-day investors to build the
+          future together, fostering innovation and creating sustainable
+          growth in tomorrow's economy.
+        </p>
+
+        <div class="cta-container">
+          <div class="cta-buttons">
+            <a href="login.html" class="btn btn-primary">
+              <span class="btn-text">Join as Investor</span>
+              <div class="btn-particles">
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+              </div>
+              <div class="btn-glow"></div>
+            </a>
+            <a href="login.html" class="btn btn-secondary">
+              <span class="btn-text">Join as Entrepreneur</span>
+              <div class="btn-border"></div>
+            </a>
           </div>
 
-          <h1 class="hero-title">
-            <span class="title-line">
-              <span class="word" data-word="Empowering">Empowering</span>
-              <span class="word gradient-text" data-word="Dreams">Dreams</span>
-            </span>
-            <span class="title-line">
-              <span class="word" data-word="Through">Through</span>
-              <span class="word" data-word="Smart">Smart</span>
-            </span>
-            <span class="title-line">
-              <span class="word gradient-text" data-word="Investments"
-                >Investments</span
-              >
-            </span>
-          </h1>
-
-          <p class="hero-subtext">
-            Where visionary entrepreneurs meet modern-day investors to build the
-            future together, fostering innovation and creating sustainable
-            growth in tomorrow's economy.
-          </p>
-
-          <div class="cta-container">
-            <div class="cta-buttons">
-              <a href="login.html" class="btn btn-primary">
-                <span class="btn-text">Join as Investor</span>
-                <div class="btn-particles">
-                  <span class="particle"></span>
-                  <span class="particle"></span>
-                  <span class="particle"></span>
-                </div>
-                <div class="btn-glow"></div>
-              </a>
-              <a href="login.html" class="btn btn-secondary">
-                <span class="btn-text">Join as Entrepreneur</span>
-                <div class="btn-border"></div>
-              </a>
-            </div>
-
-            <!-- <div class="hero-stats">
+          <!-- <div class="hero-stats">
               <div class="stat-item">
                 <div class="stat-number" data-target="10000">0</div>
                 <div class="stat-label">Active Users</div>
@@ -492,541 +653,479 @@
                 <div class="stat-label">Countries</div>
               </div>
             </div> -->
-            <!-- Animated Statistics Section -->
-            <section id="animated-stats" class="stats-section">
-              <div class="stats-container">
-                <div class="stat-card">
-                  <div class="stat-number" data-target="500">0</div>
-                  <div class="stat-label">Entrepreneurs Connected</div>
-                </div>
-                <div class="stat-card">
-                  <div class="stat-number" data-target="120">0</div>
-                  <div class="stat-label">Active Investors</div>
-                </div>
-                <div class="stat-card">
-                  <div class="stat-number" data-target="80">0</div>
-                  <div class="stat-label">Projects Funded</div>
-                </div>
-                <div class="stat-card">
-                  <div class="stat-number" data-target="10">0</div>
-                  <div class="stat-label">Countries Reached</div>
-                </div>
+          <!-- Animated Statistics Section -->
+          <section id="animated-stats" class="stats-section">
+            <div class="stats-container">
+              <div class="stat-card">
+                <div class="stat-number" data-target="500">0</div>
+                <div class="stat-label">Entrepreneurs Connected</div>
               </div>
-            </section>
+              <div class="stat-card">
+                <div class="stat-number" data-target="120">0</div>
+                <div class="stat-label">Active Investors</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number" data-target="80">0</div>
+                <div class="stat-label">Projects Funded</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number" data-target="10">0</div>
+                <div class="stat-label">Countries Reached</div>
+              </div>
+            </div>
+          </section>
 
+        </div>
+      </div>
+
+      <div class="scroll-indicator">
+        <div class="scroll-line"></div>
+        <div class="scroll-text">Scroll to explore</div>
+      </div>
+    </section>
+    <!-- Features Section with Card Morphing -->
+    <section id="features" class="features-section">
+      <div class="section-header">
+        <div class="section-badge">
+          <span>Our Platform</span>
+        </div>
+        <h2 class="section-title">
+          <span class="title-word">Seamless</span>
+          <span class="title-word">Connections</span>
+          <span class="title-word gradient-text">Powerful</span>
+          <span class="title-word">Growth</span>
+        </h2>
+        <p class="section-subtitle">
+          Discover how our platform revolutionizes the way investors and
+          entrepreneurs connect
+        </p>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-card" data-category="investors">
+          <div class="card-glow"></div>
+          <div class="card-header">
+            <div class="icon-container">
+              <div class="icon-bg"></div>
+              <svg class="feature-icon" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L22 8.5V15.5L12 22L2 15.5V8.5L12 2Z" stroke="currentColor" stroke-width="2" />
+                <circle cx="12" cy="12" r="3" fill="currentColor" />
+              </svg>
+            </div>
+            <h3>For Investors</h3>
+            <div class="card-number">01</div>
+          </div>
+
+          <div class="card-content">
+            <ul class="feature-list">
+              <li>
+                <span class="list-icon">
+                  <svg viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </span>
+                <span>Curated Business Proposals</span>
+              </li>
+              <li>
+                <span class="list-icon">
+                  <svg viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </span>
+                <span>Direct Entrepreneur Connections</span>
+              </li>
+              <li>
+                <span class="list-icon">
+                  <svg viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </span>
+                <span>Exclusive Investment Opportunities</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-footer">
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 85%"></div>
+            </div>
+            <span class="progress-text">85% Success Rate</span>
           </div>
         </div>
 
-        <div class="scroll-indicator">
-          <div class="scroll-line"></div>
-          <div class="scroll-text">Scroll to explore</div>
-        </div>
-      </section>
-      <!-- Features Section with Card Morphing -->
-      <section id="features" class="features-section">
-        <div class="section-header">
-          <div class="section-badge">
-            <span>Our Platform</span>
+        <div class="feature-card" data-category="entrepreneurs">
+          <div class="card-glow"></div>
+          <div class="card-header">
+            <div class="icon-container">
+              <div class="icon-bg"></div>
+              <svg class="feature-icon" viewBox="0 0 24 24" fill="none">
+                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" fill="none" />
+              </svg>
+            </div>
+            <h3>For Entrepreneurs</h3>
+            <div class="card-number">02</div>
           </div>
-          <h2 class="section-title">
-            <span class="title-word">Seamless</span>
-            <span class="title-word">Connections</span>
-            <span class="title-word gradient-text">Powerful</span>
-            <span class="title-word">Growth</span>
-          </h2>
-          <p class="section-subtitle">
-            Discover how our platform revolutionizes the way investors and
-            entrepreneurs connect
+
+          <div class="card-content">
+            <ul class="feature-list">
+              <li>
+                <span class="list-icon">
+                  <svg viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </span>
+                <span>Showcase Innovative Ideas</span>
+              </li>
+              <li>
+                <span class="list-icon">
+                  <svg viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </span>
+                <span>Access to Global Investors</span>
+              </li>
+              <li>
+                <span class="list-icon">
+                  <svg viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </span>
+                <span>Receive Expert Mentorship</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-footer">
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 92%"></div>
+            </div>
+            <span class="progress-text">92% Funding Success</span>
+          </div>
+        </div>
+
+        <div class="feature-card" data-category="advisors">
+          <div class="card-glow"></div>
+          <div class="card-header">
+            <div class="icon-container">
+              <div class="icon-bg"></div>
+              <svg class="feature-icon" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7.5V9M15 11.5V9.5L21 10V12L15 11.5ZM11 20V14L13 12L15 14V20H11ZM3 12V10L9 9.5V11.5L3 12ZM9 9V7L3 7.5V8.5L9 9Z"
+                  stroke="currentColor" stroke-width="2" fill="none" />
+              </svg>
+            </div>
+            <h3>For Advisors</h3>
+            <div class="card-number">03</div>
+          </div>
+
+          <div class="card-content">
+            <ul class="feature-list">
+              <li>
+                <span class="list-icon">
+                  <svg viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </span>
+                <span>Share Specialized Knowledge</span>
+              </li>
+              <li>
+                <span class="list-icon">
+                  <svg viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </span>
+                <span>Engage in Q&A Sessions</span>
+              </li>
+              <li>
+                <span class="list-icon">
+                  <svg viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </span>
+                <span>Build Professional Reputation</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-footer">
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 78%"></div>
+            </div>
+            <span class="progress-text">78% Network Growth</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="testimonials-section">
+      <div class="container">
+        <h2 class="section-title">What Our Users Say</h2>
+        <div class="testimonials-carousel">
+          <div class="testimonial-card active">
+            <p class="testimonial-text">"Venturalink helped me pitch my idea to the right investors. Within weeks, I
+              secured my first round of funding!"</p>
+            <div class="testimonial-author">
+              <img src="https://i.pravatar.cc/60?img=11" alt="Rohan Mehta" class="author-img" />
+              <h4>Rohan Mehta</h4>
+              <span>Startup Founder</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"I discovered promising startups through Venturalink. The platform bridges the
+              gap between innovation and opportunity."</p>
+            <div class="testimonial-author">
+              <img src="https://i.pravatar.cc/60?img=12" alt="Neha Bansal" class="author-img" />
+              <h4>Kishor Bansal</h4>
+              <span>Investor</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"The mentorship feature is game-changing. I guided two founders last month — the
+              experience was seamless and rewarding."</p>
+            <div class="testimonial-author">
+              <img src="https://i.pravatar.cc/60?img=13" alt="Vikram Chauhan" class="author-img" />
+              <h4>Vikram Chauhan</h4>
+              <span>Mentor</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Networking on Venturalink gave my business nationwide visibility. It’s more
+              than a platform — it’s a movement."</p>
+            <div class="testimonial-author">
+              <img src="https://i.pravatar.cc/60?img=14" alt="Ananya Iyer" class="author-img" />
+              <h4>Arpit Mehra</h4>
+              <span>Entrepreneur</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"As an angel investor, I’ve connected with brilliant minds through Venturalink.
+              The user experience is top-notch."</p>
+            <div class="testimonial-author">
+              <img src="https://i.pravatar.cc/60?img=15" alt="Arjun Deshmukh" class="author-img" />
+              <h4>Arjun Deshmukh</h4>
+              <span>Angel Investor</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Venturalink’s ecosystem allowed me to collaborate with founders from multiple
+              industries. Highly recommended!"</p>
+            <div class="testimonial-author">
+              <img src="https://i.pravatar.cc/60?img=16" alt="Sneha Kapoor" class="author-img" />
+              <h4>Sarah Wan</h4>
+              <span>Venture Partner</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"From idea to execution — Venturalink guided me at every step. The mentorship
+              and funding support are unmatched."</p>
+            <div class="testimonial-author">
+              <img src="https://i.pravatar.cc/60?img=17" alt="Kunal Sethi" class="author-img" />
+              <h4>Kunal Sethi</h4>
+              <span>Entrepreneur</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"I’ve seen a significant rise in startup collaborations thanks to Venturalink’s
+              curated network. Brilliant concept!"</p>
+            <div class="testimonial-author">
+              <img src="https://i.pravatar.cc/60?img=18" alt="Meera Narang" class="author-img" />
+              <h4>Atharva Narang</h4>
+              <span>Business Coach</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Venturalink streamlined my search for early-stage startups. The transparency
+              and insights are incredibly useful."</p>
+            <div class="testimonial-author">
+              <img src="https://i.pravatar.cc/60?img=19" alt="Devansh Rao" class="author-img" />
+              <h4>Devanshi Rao</h4>
+              <span>Investor</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Every connection I’ve made here added real value. Venturalink is the future of
+              entrepreneurship in India."</p>
+            <div class="testimonial-author">
+              <img src="https://i.pravatar.cc/60?img=20" alt="Ishita Malhotra" class="author-img" />
+              <h4>Ishita Malhotra</h4>
+              <span>Startup Founder</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-controls">
+          <button class="prev-btn">‹</button>
+          <button class="next-btn">›</button>
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="premium-footer">
+    <div class="footer-bg">
+      <div class="footer-gradient"></div>
+      <div class="footer-pattern"></div>
+    </div>
+
+    <div class="footer-content">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="logo-container">
+              <div class="logo-icon">
+                <svg viewBox="0 0 40 40" fill="none">
+                  <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="url(#footer-logo-gradient)" stroke-width="2"
+                    fill="none" />
+                  <circle cx="20" cy="20" r="6" fill="url(#footer-logo-gradient)" />
+                  <defs>
+                    <linearGradient id="footer-logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style="stop-color: #667eea" />
+                      <stop offset="100%" style="stop-color: #764ba2" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <span class="logo-text">Venturalink</span>
+            </div>
+          </div>
+          <p class="footer-description">
+            Connecting investors with entrepreneurs to create meaningful
+            business relationships and drive economic progress in the digital
+            age.
           </p>
         </div>
 
-        <div class="feature-grid">
-          <div class="feature-card" data-category="investors">
-            <div class="card-glow"></div>
-            <div class="card-header">
-              <div class="icon-container">
-                <div class="icon-bg"></div>
-                <svg class="feature-icon" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M12 2L22 8.5V15.5L12 22L2 15.5V8.5L12 2Z"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  />
-                  <circle cx="12" cy="12" r="3" fill="currentColor" />
-                </svg>
-              </div>
-              <h3>For Investors</h3>
-              <div class="card-number">01</div>
-            </div>
-
-            <div class="card-content">
-              <ul class="feature-list">
-                <li>
-                  <span class="list-icon">
-                    <svg viewBox="0 0 20 20" fill="currentColor">
-                      <path
-                        fill-rule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  <span>Curated Business Proposals</span>
-                </li>
-                <li>
-                  <span class="list-icon">
-                    <svg viewBox="0 0 20 20" fill="currentColor">
-                      <path
-                        fill-rule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  <span>Direct Entrepreneur Connections</span>
-                </li>
-                <li>
-                  <span class="list-icon">
-                    <svg viewBox="0 0 20 20" fill="currentColor">
-                      <path
-                        fill-rule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  <span>Exclusive Investment Opportunities</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="card-footer">
-              <div class="progress-bar">
-                <div class="progress-fill" style="width: 85%"></div>
-              </div>
-              <span class="progress-text">85% Success Rate</span>
-            </div>
+        <div class="footer-links-grid">
+          <div class="footer-section">
+            <h4>Platform</h4>
+            <ul>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="features.html">Features</a></li>
+              <li><a href="pricing.html">Pricing</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
           </div>
-
-          <div class="feature-card" data-category="entrepreneurs">
-            <div class="card-glow"></div>
-            <div class="card-header">
-              <div class="icon-container">
-                <div class="icon-bg"></div>
-                <svg class="feature-icon" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M13 2L3 14H12L11 22L21 10H12L13 2Z"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    fill="none"
-                  />
-                </svg>
-              </div>
-              <h3>For Entrepreneurs</h3>
-              <div class="card-number">02</div>
-            </div>
-
-            <div class="card-content">
-              <ul class="feature-list">
-                <li>
-                  <span class="list-icon">
-                    <svg viewBox="0 0 20 20" fill="currentColor">
-                      <path
-                        fill-rule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  <span>Showcase Innovative Ideas</span>
-                </li>
-                <li>
-                  <span class="list-icon">
-                    <svg viewBox="0 0 20 20" fill="currentColor">
-                      <path
-                        fill-rule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  <span>Access to Global Investors</span>
-                </li>
-                <li>
-                  <span class="list-icon">
-                    <svg viewBox="0 0 20 20" fill="currentColor">
-                      <path
-                        fill-rule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  <span>Receive Expert Mentorship</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="card-footer">
-              <div class="progress-bar">
-                <div class="progress-fill" style="width: 92%"></div>
-              </div>
-              <span class="progress-text">92% Funding Success</span>
-            </div>
+          <div class="footer-section">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="blog.html">Blog</a></li>
+              <li><a href="help.html">Help Center</a></li>
+              <li><a href="guides.html">Guides</a></li>
+              <li><a href="api.html">API Docs</a></li>
+            </ul>
           </div>
-
-          <div class="feature-card" data-category="advisors">
-            <div class="card-glow"></div>
-            <div class="card-header">
-              <div class="icon-container">
-                <div class="icon-bg"></div>
-                <svg class="feature-icon" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7.5V9M15 11.5V9.5L21 10V12L15 11.5ZM11 20V14L13 12L15 14V20H11ZM3 12V10L9 9.5V11.5L3 12ZM9 9V7L3 7.5V8.5L9 9Z"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    fill="none"
-                  />
-                </svg>
-              </div>
-              <h3>For Advisors</h3>
-              <div class="card-number">03</div>
-            </div>
-
-            <div class="card-content">
-              <ul class="feature-list">
-                <li>
-                  <span class="list-icon">
-                    <svg viewBox="0 0 20 20" fill="currentColor">
-                      <path
-                        fill-rule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  <span>Share Specialized Knowledge</span>
-                </li>
-                <li>
-                  <span class="list-icon">
-                    <svg viewBox="0 0 20 20" fill="currentColor">
-                      <path
-                        fill-rule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  <span>Engage in Q&A Sessions</span>
-                </li>
-                <li>
-                  <span class="list-icon">
-                    <svg viewBox="0 0 20 20" fill="currentColor">
-                      <path
-                        fill-rule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  <span>Build Professional Reputation</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="card-footer">
-              <div class="progress-bar">
-                <div class="progress-fill" style="width: 78%"></div>
-              </div>
-              <span class="progress-text">78% Network Growth</span>
-            </div>
+          <div class="footer-section">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="terms.html">Terms of Service</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="cookies.html">Cookie Policy</a></li>
+              <li><a href="security.html">Security</a></li>
+            </ul>
           </div>
-        </div> 
-      </section>
-
-      <section id="testimonials" class="testimonials-section">
-  <div class="container">
-    <h2 class="section-title">What Our Users Say</h2>
-    <div class="testimonials-carousel">
-      <div class="testimonial-card active">
-        <p class="testimonial-text">"Venturalink helped me pitch my idea to the right investors. Within weeks, I secured my first round of funding!"</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=11" alt="Rohan Mehta" class="author-img" />
-          <h4>Rohan Mehta</h4>
-          <span>Startup Founder</span>
         </div>
       </div>
 
-      <div class="testimonial-card">
-        <p class="testimonial-text">"I discovered promising startups through Venturalink. The platform bridges the gap between innovation and opportunity."</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=12" alt="Neha Bansal" class="author-img" />
-          <h4>Kishor Bansal</h4>
-          <span>Investor</span>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="testimonial-text">"The mentorship feature is game-changing. I guided two founders last month — the experience was seamless and rewarding."</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=13" alt="Vikram Chauhan" class="author-img" />
-          <h4>Vikram Chauhan</h4>
-          <span>Mentor</span>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="testimonial-text">"Networking on Venturalink gave my business nationwide visibility. It’s more than a platform — it’s a movement."</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=14" alt="Ananya Iyer" class="author-img" />
-          <h4>Arpit Mehra</h4>
-          <span>Entrepreneur</span>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="testimonial-text">"As an angel investor, I’ve connected with brilliant minds through Venturalink. The user experience is top-notch."</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=15" alt="Arjun Deshmukh" class="author-img" />
-          <h4>Arjun Deshmukh</h4>
-          <span>Angel Investor</span>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="testimonial-text">"Venturalink’s ecosystem allowed me to collaborate with founders from multiple industries. Highly recommended!"</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=16" alt="Sneha Kapoor" class="author-img" />
-          <h4>Sarah Wan</h4>
-          <span>Venture Partner</span>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="testimonial-text">"From idea to execution — Venturalink guided me at every step. The mentorship and funding support are unmatched."</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=17" alt="Kunal Sethi" class="author-img" />
-          <h4>Kunal Sethi</h4>
-          <span>Entrepreneur</span>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="testimonial-text">"I’ve seen a significant rise in startup collaborations thanks to Venturalink’s curated network. Brilliant concept!"</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=18" alt="Meera Narang" class="author-img" />
-          <h4>Atharva Narang</h4>
-          <span>Business Coach</span>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="testimonial-text">"Venturalink streamlined my search for early-stage startups. The transparency and insights are incredibly useful."</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=19" alt="Devansh Rao" class="author-img" />
-          <h4>Devanshi Rao</h4>
-          <span>Investor</span>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="testimonial-text">"Every connection I’ve made here added real value. Venturalink is the future of entrepreneurship in India."</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=20" alt="Ishita Malhotra" class="author-img" />
-          <h4>Ishita Malhotra</h4>
-          <span>Startup Founder</span>
+      <div class="footer-bottom">
+        <div class="footer-divider"></div>
+        <div class="footer-bottom-content">
+          <p>&copy; 2025 Venturalink Platform. All rights reserved.</p>
+          <div class="footer-social-icons">
+            <a href="#" aria-label="Facebook" class="footer-social-link" target="_blank" rel="noopener"><i
+                class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram" class="footer-social-link" target="_blank" rel="noopener"><i
+                class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter/X" class="footer-social-link" target="_blank" rel="noopener"><i
+                class="fab fa-x-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn" class="footer-social-link" target="_blank" rel="noopener"><i
+                class="fab fa-linkedin-in"></i></a>
+          </div>
+          <div class="footer-badges">
+            <span class="badge">Trusted by 10K+ users</span>
+            <span class="badge">SOC 2 Compliant</span>
+          </div>
         </div>
       </div>
     </div>
+  </footer>
 
-    <div class="carousel-controls">
-      <button class="prev-btn">‹</button>
-      <button class="next-btn">›</button>
+  <button id="backToTopBtn" title="Back to top" aria-label="Back to top">
+    <svg class="rocket-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 60">
+      <!-- Left Fin -->
+      <path fill="#667eea" d="M12,45 L8,54 L12,52 Z" />
+      <!-- Right Fin -->
+      <path fill="#667eea" d="M28,45 L32,54 L28,52 Z" />
+      <!-- Center Back Fin -->
+      <path fill="#5a6bc9" d="M18,45 L20,56 L22,45 Z" />
+      <!-- Engine Nozzle -->
+      <path fill="#4a5ab0" d="M16,52 Q20,54 24,52 L24,48 L16,48 Z" />
+      <!-- Main Body -->
+      <rect fill="#f5f5f5" x="16" y="20" width="8" height="28" rx="1" />
+      <!-- Nose Cone -->
+      <path fill="#764ba2" d="M20,6 L26,20 L14,20 Z" />
+      <!-- Optional tiny window -->
+      <circle fill="#667eea" cx="20" cy="32" r="2" opacity="0.6" />
+    </svg>
+    <div class="effects">
+      <div class="flames">
+        <div class="flame"></div>
+        <div class="flame"></div>
+        <div class="flame"></div>
+      </div>
+      <div class="smoke-trail">
+        <div class="smoke"></div>
+        <div class="smoke"></div>
+        <div class="smoke"></div>
+        <div class="smoke"></div>
+      </div>
+    </div>
+  </button>
+
+
+  <!-- Logout Confirmation Modal -->
+  <div id="logoutModal" class="modal-overlay">
+    <div class="modal-content">
+      <h3 class="modal-title">Confirm Logout</h3>
+      <p class="modal-message">Are you sure you want to log out?</p>
+      <div class="modal-actions">
+        <button id="confirmLogout" class="btn-modal btn-confirm">✅ Yes, Logout</button>
+        <button id="cancelLogout" class="btn-modal btn-cancel">❌ Cancel</button>
+      </div>
     </div>
   </div>
-</section>
-
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="premium-footer">
-      <div class="footer-bg">
-        <div class="footer-gradient"></div>
-        <div class="footer-pattern"></div>
-      </div>
-
-      <div class="footer-content">
-        <div class="footer-main">
-          <div class="footer-brand">
-            <div class="footer-logo">
-              <div class="logo-container">
-                <div class="logo-icon">
-                  <svg viewBox="0 0 40 40" fill="none">
-                    <path
-                      d="M20 4L36 12V28L20 36L4 28V12L20 4Z"
-                      stroke="url(#footer-logo-gradient)"
-                      stroke-width="2"
-                      fill="none"
-                    />
-                    <circle
-                      cx="20"
-                      cy="20"
-                      r="6"
-                      fill="url(#footer-logo-gradient)"
-                    />
-                    <defs>
-                      <linearGradient
-                        id="footer-logo-gradient"
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="100%"
-                      >
-                        <stop offset="0%" style="stop-color: #667eea" />
-                        <stop offset="100%" style="stop-color: #764ba2" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </div>
-                <span class="logo-text">Venturalink</span>
-              </div>
-            </div>
-            <p class="footer-description">
-              Connecting investors with entrepreneurs to create meaningful
-              business relationships and drive economic progress in the digital
-              age.
-            </p>
-          </div>
-
-          <div class="footer-links-grid">
-            <div class="footer-section">
-              <h4>Platform</h4>
-              <ul>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="features.html">Features</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
-                <li><a href="contact.html">Contact</a></li>
-              </ul>
-            </div>
-            <div class="footer-section">
-              <h4>Resources</h4>
-              <ul>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="help.html">Help Center</a></li>
-                <li><a href="guides.html">Guides</a></li>
-                <li><a href="api.html">API Docs</a></li>
-              </ul>
-            </div>
-            <div class="footer-section">
-              <h4>Legal</h4>
-              <ul>
-                <li><a href="terms.html">Terms of Service</a></li>
-                <li><a href="privacy.html">Privacy Policy</a></li>
-                <li><a href="cookies.html">Cookie Policy</a></li>
-                <li><a href="security.html">Security</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-bottom">
-          <div class="footer-divider"></div>
-          <div class="footer-bottom-content">
-            <p>&copy; 2025 Venturalink Platform. All rights reserved.</p>
-            <div class="footer-social-icons">
-              <a
-                href="#"
-                aria-label="Facebook"
-                class="footer-social-link"
-                target="_blank"
-                rel="noopener"
-                ><i class="fab fa-facebook-f"></i
-              ></a>
-              <a
-                href="#"
-                aria-label="Instagram"
-                class="footer-social-link"
-                target="_blank"
-                rel="noopener"
-                ><i class="fab fa-instagram"></i
-              ></a>
-              <a
-                href="#"
-                aria-label="Twitter/X"
-                class="footer-social-link"
-                target="_blank"
-                rel="noopener"
-                ><i class="fab fa-x-twitter"></i
-              ></a>
-              <a
-                href="#"
-                aria-label="LinkedIn"
-                class="footer-social-link"
-                target="_blank"
-                rel="noopener"
-                ><i class="fab fa-linkedin-in"></i
-              ></a>
-            </div>
-            <div class="footer-badges">
-              <span class="badge">Trusted by 10K+ users</span>
-              <span class="badge">SOC 2 Compliant</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <button id="backToTopBtn" title="Back to top" aria-label="Back to top">
-      <svg
-        class="rocket-svg"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 40 60"
-      >
-        <!-- Left Fin -->
-        <path fill="#667eea" d="M12,45 L8,54 L12,52 Z" />
-        <!-- Right Fin -->
-        <path fill="#667eea" d="M28,45 L32,54 L28,52 Z" />
-        <!-- Center Back Fin -->
-        <path fill="#5a6bc9" d="M18,45 L20,56 L22,45 Z" />
-        <!-- Engine Nozzle -->
-        <path fill="#4a5ab0" d="M16,52 Q20,54 24,52 L24,48 L16,48 Z" />
-        <!-- Main Body -->
-        <rect fill="#f5f5f5" x="16" y="20" width="8" height="28" rx="1" />
-        <!-- Nose Cone -->
-        <path fill="#764ba2" d="M20,6 L26,20 L14,20 Z" />
-        <!-- Optional tiny window -->
-        <circle fill="#667eea" cx="20" cy="32" r="2" opacity="0.6" />
-      </svg>
-      <div class="effects">
-        <div class="flames">
-          <div class="flame"></div>
-          <div class="flame"></div>
-          <div class="flame"></div>
-        </div>
-        <div class="smoke-trail">
-          <div class="smoke"></div>
-          <div class="smoke"></div>
-          <div class="smoke"></div>
-          <div class="smoke"></div>
-        </div>
-    </div>
-</button>
-
-
-<!-- Logout Confirmation Modal -->
-<div id="logoutModal" class="modal-overlay">
-    <div class="modal-content">
-        <h3 class="modal-title">Confirm Logout</h3>
-        <p class="modal-message">Are you sure you want to log out?</p>
-        <div class="modal-actions">
-            <button id="confirmLogout" class="btn-modal btn-confirm">✅ Yes, Logout</button>
-            <button id="cancelLogout" class="btn-modal btn-cancel">❌ Cancel</button>
-        </div>
-    </div>
-</div>
-<script type="module" src="./scripts/main.js"></script>
-<script type="module" src="./scripts/logout.js"></script>
-<script src="./scripts/chatbot.js"></script>
+  <script type="module" src="./scripts/main.js"></script>
+  <script type="module" src="./scripts/logout.js"></script>
+  <script src="./scripts/chatbot.js"></script>
 </body>
+
 </html>

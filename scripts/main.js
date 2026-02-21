@@ -46,6 +46,44 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }, 1500);
     });
+    // Navbar Toggle Logic
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', function () {
+            navLinks.classList.toggle('open');
+            menuToggle.classList.toggle('active');
+
+            // Animate hamburger lines if they exist
+            const spans = menuToggle.querySelectorAll('span');
+            if (spans.length === 3) {
+                if (navLinks.classList.contains('open')) {
+                    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    spans[1].style.opacity = '0';
+                    spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+                } else {
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                }
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function (e) {
+            if (navLinks.classList.contains('open') && !navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                navLinks.classList.remove('open');
+                menuToggle.classList.remove('active');
+                const spans = menuToggle.querySelectorAll('span');
+                if (spans.length === 3) {
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                }
+            }
+        });
+    }
 });
 
 const firebaseConfig = {
@@ -205,13 +243,13 @@ class PremiumUIController {
         };
 
         document.addEventListener('mousemove', (e) => {
-        targetX = e.clientX;
-        targetY = e.clientY;
-        if (this.cursorFollower && this.cursorFollower.style.opacity !== '1') {
-            this.cursorFollower.style.opacity = '1';
-            cursorTrail.style.opacity = '1';
-            cursorGlow.style.opacity = '1';
-        }
+            targetX = e.clientX;
+            targetY = e.clientY;
+            if (this.cursorFollower && this.cursorFollower.style.opacity !== '1') {
+                this.cursorFollower.style.opacity = '1';
+                cursorTrail.style.opacity = '1';
+                cursorGlow.style.opacity = '1';
+            }
         });
 
         // Create scroll progress indicator
@@ -1458,45 +1496,45 @@ auth.onAuthStateChanged(async (user) => {
 });
 
 async function updateNavigationForLoggedInUser(user) {
-  let userType = null;
-  try {
-    const userDoc = await db.collection('users').doc(user.uid).get();
-    if (userDoc && userDoc.exists) {
-      userType = userDoc.data().userType || null;
-      try { localStorage.setItem('userType', userType || ''); } catch (e) {}
+    let userType = null;
+    try {
+        const userDoc = await db.collection('users').doc(user.uid).get();
+        if (userDoc && userDoc.exists) {
+            userType = userDoc.data().userType || null;
+            try { localStorage.setItem('userType', userType || ''); } catch (e) { }
+        }
+    } catch (err) {
+        console.error('Failed to fetch userType for navigation:', err);
+        userType = localStorage.getItem('userType');
     }
-  } catch (err) {
-    console.error('Failed to fetch userType for navigation:', err);
-    userType = localStorage.getItem('userType');
-  }
 
-  const nav = document.querySelector('.nav-links');
-  if (!nav) return userType;
+    const nav = document.querySelector('.nav-links');
+    if (!nav) return userType;
 
-  nav.innerHTML = `
+    nav.innerHTML = `
     <a href="/" class="nav-link">Home</a>
     <a href="/profile.html" class="nav-link">Dashboard</a>
   `;
 
-  if (userType === 'investor') {
-    nav.innerHTML += `<a href="/proposals.html" class="nav-link">View Proposals</a>`;
-  } else if (userType === 'business') {
-    nav.innerHTML += `
+    if (userType === 'investor') {
+        nav.innerHTML += `<a href="/proposals.html" class="nav-link">View Proposals</a>`;
+    } else if (userType === 'business') {
+        nav.innerHTML += `
       <a href="/proposals.html" class="nav-link">My Proposals</a>
       <a href="/create-proposal.html" class="nav-link">Create Proposal</a>
     `;
-  }
+    }
 
-  nav.innerHTML += `<a href="#" class="nav-link" id="logout-link">Logout</a>`;
-  document.getElementById('logout-link')?.addEventListener('click', handleLogout);
+    nav.innerHTML += `<a href="#" class="nav-link" id="logout-link">Logout</a>`;
+    document.getElementById('logout-link')?.addEventListener('click', handleLogout);
 
-  return userType;
+    return userType;
 }
 
 function updateNavigationForLoggedOutUser() {
-  const nav = document.querySelector('.nav-links');
-  if (!nav) return;
-  nav.innerHTML = `
+    const nav = document.querySelector('.nav-links');
+    if (!nav) return;
+    nav.innerHTML = `
     <a href="/" class="nav-link">Home</a>
     <a href="/about.html" class="nav-link">About</a>
     <a href="/login.html" class="nav-link">Login</a>
@@ -1506,23 +1544,23 @@ function updateNavigationForLoggedOutUser() {
 
 async function handleLogout(e) {
     e.preventDefault();
-    
+
     // Show confirmation modal
     const modal = document.getElementById('logoutModal');
     if (modal) {
         modal.style.display = 'flex';
-        
+
         // Wait for user decision
         return new Promise((resolve) => {
             const confirmLogout = document.getElementById('confirmLogout');
             const cancelLogout = document.getElementById('cancelLogout');
-            
+
             const cleanup = () => {
                 confirmLogout.removeEventListener('click', onConfirm);
                 cancelLogout.removeEventListener('click', onCancel);
                 modal.style.display = 'none';
             };
-            
+
             const onConfirm = async () => {
                 cleanup();
                 try {
@@ -1535,12 +1573,12 @@ async function handleLogout(e) {
                 }
                 resolve(true);
             };
-            
+
             const onCancel = () => {
                 cleanup();
                 resolve(false);
             };
-            
+
             confirmLogout.addEventListener('click', onConfirm);
             cancelLogout.addEventListener('click', onCancel);
         });
@@ -1815,32 +1853,32 @@ function init() {
     console.log('Application initialized with enhanced UI features.');
 }
 document.addEventListener('DOMContentLoaded', () => {
-  window.premiumUI = new PremiumUIController();
+    window.premiumUI = new PremiumUIController();
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  auth.onAuthStateChanged(async (user) => {
-    if (user) {
-      const userType = await updateNavigationForLoggedInUser(user);
+    auth.onAuthStateChanged(async (user) => {
+        if (user) {
+            const userType = await updateNavigationForLoggedInUser(user);
 
-      const ctaInvestor = document.querySelector('.cta-buttons .btn-primary');
-      const ctaEntrepreneur = document.querySelector('.cta-buttons .btn-secondary');
-      if (ctaInvestor && ctaEntrepreneur) {
-        if (userType === 'investor') {
-          ctaInvestor.href = '/proposals.html';
-          ctaEntrepreneur.href = '/proposals.html';
-        } else if (userType === 'business') {
-          ctaInvestor.href = '/create-proposal.html';
-          ctaEntrepreneur.href = '/create-proposal.html';
+            const ctaInvestor = document.querySelector('.cta-buttons .btn-primary');
+            const ctaEntrepreneur = document.querySelector('.cta-buttons .btn-secondary');
+            if (ctaInvestor && ctaEntrepreneur) {
+                if (userType === 'investor') {
+                    ctaInvestor.href = '/proposals.html';
+                    ctaEntrepreneur.href = '/proposals.html';
+                } else if (userType === 'business') {
+                    ctaInvestor.href = '/create-proposal.html';
+                    ctaEntrepreneur.href = '/create-proposal.html';
+                } else {
+                    ctaInvestor.href = '/profile.html';
+                    ctaEntrepreneur.href = '/profile.html';
+                }
+            }
         } else {
-          ctaInvestor.href = '/profile.html';
-          ctaEntrepreneur.href = '/profile.html';
+            updateNavigationForLoggedOutUser();
         }
-      }
-    } else {
-      updateNavigationForLoggedOutUser();
-    }
-  });
+    });
 });
 document.addEventListener('DOMContentLoaded', init);
 
@@ -1850,31 +1888,31 @@ const statNumbers = document.querySelectorAll(".stat-number");
 let statsAnimated = false;
 
 function animateStats() {
-  if (statsAnimated) return;
-  
-  const sectionTop = statsSection.getBoundingClientRect().top;
-  const triggerPoint = window.innerHeight - 100;
+    if (statsAnimated) return;
 
-  if (sectionTop < triggerPoint) {
-    statNumbers.forEach((num) => {
-      const target = +num.getAttribute("data-target");
-      const duration = 2000; // 2 seconds
-      let start = 0;
-      const increment = target / (duration / 16);
+    const sectionTop = statsSection.getBoundingClientRect().top;
+    const triggerPoint = window.innerHeight - 100;
 
-      function updateNumber() {
-        start += increment;
-        if (start < target) {
-          num.textContent = Math.ceil(start);
-          requestAnimationFrame(updateNumber);
-        } else {
-          num.textContent = target;
-        }
-      }
-      updateNumber();
-    });
-    statsAnimated = true;
-  }
+    if (sectionTop < triggerPoint) {
+        statNumbers.forEach((num) => {
+            const target = +num.getAttribute("data-target");
+            const duration = 2000; // 2 seconds
+            let start = 0;
+            const increment = target / (duration / 16);
+
+            function updateNumber() {
+                start += increment;
+                if (start < target) {
+                    num.textContent = Math.ceil(start);
+                    requestAnimationFrame(updateNumber);
+                } else {
+                    num.textContent = target;
+                }
+            }
+            updateNumber();
+        });
+        statsAnimated = true;
+    }
 }
 
 window.addEventListener("scroll", animateStats);
@@ -1886,18 +1924,18 @@ let startX;
 let scrollLeft;
 
 carousel.addEventListener('mousedown', (e) => {
-  isDown = true;
-  startX = e.pageX - carousel.offsetLeft;
-  scrollLeft = carousel.scrollLeft;
+    isDown = true;
+    startX = e.pageX - carousel.offsetLeft;
+    scrollLeft = carousel.scrollLeft;
 });
 carousel.addEventListener('mouseleave', () => isDown = false);
 carousel.addEventListener('mouseup', () => isDown = false);
 carousel.addEventListener('mousemove', (e) => {
-  if(!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - carousel.offsetLeft;
-  const walk = (x - startX) * 2; 
-  carousel.scrollLeft = scrollLeft - walk;
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - carousel.offsetLeft;
+    const walk = (x - startX) * 2;
+    carousel.scrollLeft = scrollLeft - walk;
 });
 
 
