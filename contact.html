@@ -345,6 +345,38 @@
     .contact-form button:hover {
       background: #764ba2;
     }
+    .contact-form .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      position: relative;
+    }
+    .contact-form .form-help,
+    .contact-form .error-message {
+      font-size: 0.85rem;
+      margin-top: 0.2rem;
+    }
+    .contact-form .form-help {
+      color: #aab4e8;
+    }
+    .contact-form .error-message {
+      color: #ff6b6b;
+      display: none;
+    }
+    .contact-form .form-group.has-error .error-message {
+      display: block;
+    }
+    .contact-form .form-group.has-error input,
+    .contact-form .form-group.has-error textarea {
+      border-color: #ff6b6b;
+      box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+    }
+    .contact-form .message-counter {
+      font-size: 0.85rem;
+      color: #aab4e8;
+      text-align: right;
+      margin-top: 0.2rem;
+    }
     .contact-details {
       margin-top: 2.5rem;
       color: #e4e8f7;
@@ -501,11 +533,24 @@
       <p>
         We'd love to hear from you! Fill out the form below and our team will get back to you soon.
       </p>
-      <form class="contact-form" autocomplete="off">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
+      <form id="contact-form" class="contact-form" autocomplete="off" novalidate>
+        <div class="form-group">
+          <input type="text" id="contact-name" name="name" placeholder="Your Name" minlength="2" maxlength="50" required aria-describedby="nameHelp">
+          <small id="nameHelp" class="form-help">Full name (2-50 characters)</small>
+          <span class="error-message" id="nameError"></span>
+        </div>
+        <div class="form-group">
+          <input type="email" id="contact-email" name="email" placeholder="Your Email" required aria-describedby="emailHelp">
+          <small id="emailHelp" class="form-help">Valid email address</small>
+          <span class="error-message" id="emailError"></span>
+        </div>
+        <div class="form-group">
+          <textarea id="contact-message" name="message" rows="5" placeholder="Your Message" minlength="10" maxlength="1000" required aria-describedby="messageHelp"></textarea>
+          <small id="messageHelp" class="form-help">Your message (10-1000 characters)</small>
+          <span class="error-message" id="messageError"></span>
+          <div class="message-counter"><span id="messageCount">0</span>/1000</div>
+        </div>
+        <button type="submit" id="contactSubmitBtn">Send Message</button>
       </form>
       <div class="contact-details">
         <p><strong>Email:</strong> <a href="mailto:support@venturalink.com">support@venturalink.com</a></p>
@@ -550,34 +595,146 @@
   <script src="scripts/cursor.js"></script>
 
   <script>
-    const form = document.querySelector('.contact-form');
+    const form = document.getElementById('contact-form');
+    const nameInput = document.getElementById('contact-name');
+    const emailInput = document.getElementById('contact-email');
+    const messageInput = document.getElementById('contact-message');
+    const messageCount = document.getElementById('messageCount');
     const modal = document.getElementById('notificationModal');
     const modalTitle = document.getElementById('modalTitle');
     const modalMessage = document.getElementById('modalMessage');
     const closeModal = document.getElementById('closeModal');
+    const submitBtn = document.getElementById('contactSubmitBtn');
 
-    // Simulated backend (replace later with actual API)
-    async function submitForm(data) {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          Math.random() > 0.2 ? resolve({ ok: true }) : reject();
-        }, 1000);
-      });
+    // Validation functions
+    function validateName(value) {
+      return value && value.trim().length >= 2 && value.trim().length <= 50;
     }
 
+    function validateEmail(value) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return value && emailRegex.test(value);
+    }
+
+    function validateMessage(value) {
+      return value && value.trim().length >= 10 && value.trim().length <= 1000;
+    }
+
+    function showFieldError(fieldId, errorId, message) {
+      const field = document.getElementById(fieldId);
+      const errorElement = document.getElementById(errorId);
+      const formGroup = field.closest('.form-group');
+      
+      formGroup.classList.add('has-error');
+      errorElement.textContent = message;
+    }
+
+    function clearFieldError(fieldId, errorId) {
+      const field = document.getElementById(fieldId);
+      const errorElement = document.getElementById(errorId);
+      const formGroup = field.closest('.form-group');
+      
+      formGroup.classList.remove('has-error');
+      errorElement.textContent = '';
+    }
+
+    // Character counter for message
+    messageInput.addEventListener('input', () => {
+      messageCount.textContent = messageInput.value.length;
+      
+      if (messageInput.value.length > messageInput.maxLength * 0.8) {
+        messageCount.style.color = '#ffa500';
+      } else if (messageInput.value.length > messageInput.maxLength * 0.95) {
+        messageCount.style.color = '#ff6b6b';
+      } else {
+        messageCount.style.color = '#aab4e8';
+      }
+    });
+
+    // Real-time validation
+    nameInput.addEventListener('blur', () => {
+      if (!nameInput.value) {
+        showFieldError('contact-name', 'nameError', 'Name is required');
+      } else if (!validateName(nameInput.value)) {
+        showFieldError('contact-name', 'nameError', 'Name must be between 2-50 characters');
+      } else {
+        clearFieldError('contact-name', 'nameError');
+      }
+    });
+
+    emailInput.addEventListener('blur', () => {
+      if (!emailInput.value) {
+        showFieldError('contact-email', 'emailError', 'Email is required');
+      } else if (!validateEmail(emailInput.value)) {
+        showFieldError('contact-email', 'emailError', 'Please enter a valid email address');
+      } else {
+        clearFieldError('contact-email', 'emailError');
+      }
+    });
+
+    messageInput.addEventListener('blur', () => {
+      if (!messageInput.value) {
+        showFieldError('contact-message', 'messageError', 'Message is required');
+      } else if (!validateMessage(messageInput.value)) {
+        showFieldError('contact-message', 'messageError', 'Message must be between 10-1000 characters');
+      } else {
+        clearFieldError('contact-message', 'messageError');
+      }
+    });
+
+    // Form submission
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
+
+      // Validate all fields
+      let isFormValid = true;
+
+      if (!validateName(nameInput.value)) {
+        showFieldError('contact-name', 'nameError', 'Name must be between 2-50 characters');
+        isFormValid = false;
+      } else {
+        clearFieldError('contact-name', 'nameError');
+      }
+
+      if (!validateEmail(emailInput.value)) {
+        showFieldError('contact-email', 'emailError', 'Please enter a valid email address');
+        isFormValid = false;
+      } else {
+        clearFieldError('contact-email', 'emailError');
+      }
+
+      if (!validateMessage(messageInput.value)) {
+        showFieldError('contact-message', 'messageError', 'Message must be between 10-1000 characters');
+        isFormValid = false;
+      } else {
+        clearFieldError('contact-message', 'messageError');
+      }
+
+      if (!isFormValid) return;
+
+      // Submit form
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
 
       try {
-        const response = await submitForm(data);
-        if (response.ok) {
-          form.reset();
-          showModal("Success!", "Your message has been sent successfully!");
-        }
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        // Simulated backend call (replace with actual API)
+        await new Promise((resolve, reject) => {
+          setTimeout(() => {
+            Math.random() > 0.2 ? resolve({ ok: true }) : reject();
+          }, 1000);
+        });
+
+        form.reset();
+        messageCount.textContent = '0';
+        showModal('Success!', 'Your message has been sent successfully! We will get back to you soon.');
       } catch (error) {
-        showModal("Error", "Something went wrong, please try again.");
+        showModal('Error', 'Something went wrong, please try again.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
       }
     });
 

@@ -3,46 +3,79 @@
 // ===========================================
 document.addEventListener("DOMContentLoaded", function () {
   const backToTopBtn = document.getElementById("backToTopBtn");
-  if (!backToTopBtn) return;
+  
+  if (backToTopBtn) {
+    // Add random offset to smoke puffs
+    const smokePuffs = backToTopBtn.querySelectorAll(".smoke");
+    smokePuffs.forEach((smoke) => {
+      const randomX = (Math.random() - 0.5) * 30;
+      smoke.style.setProperty("--random-x", `${randomX}px`);
+    });
 
-  // Add random offset to smoke puffs
-  const smokePuffs = backToTopBtn.querySelectorAll(".smoke");
-  smokePuffs.forEach((smoke) => {
-    const randomX = (Math.random() - 0.5) * 30;
-    smoke.style.setProperty("--random-x", `${randomX}px`);
-  });
+    // Show button when scrolled down
+    window.addEventListener("scroll", function () {
+      if (window.scrollY > 300) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    });
 
-  // Show button when scrolled down
-  window.addEventListener("scroll", function () {
-    if (window.scrollY > 300) {
-      backToTopBtn.style.display = "block";
-    } else {
-      backToTopBtn.style.display = "none";
-    }
-  });
+    // Smooth scroll + launch animation
+    backToTopBtn.addEventListener("click", function () {
+      // Prevent launching if already in flight
+      if (backToTopBtn.classList.contains("launching")) {
+        return;
+      }
 
-  // Smooth scroll + launch animation
-  backToTopBtn.addEventListener("click", function () {
-    // Prevent launching if already in flight
-    if (backToTopBtn.classList.contains("launching")) {
-      return;
-    }
+      // Add launch animation class
+      backToTopBtn.classList.add("launching");
 
-    // Add launch animation class
-    backToTopBtn.classList.add("launching");
+      // Smooth scroll to top
+      window.scrollTo({ top: 0, behavior: "smooth" });
 
-    // Smooth scroll to top
-    window.scrollTo({ top: 0, behavior: "smooth" });
+      // Remove class and reset after animation ends
+      setTimeout(() => {
+        backToTopBtn.classList.remove("launching");
+        // Randomize smoke positions for next launch
+        smokePuffs.forEach((smoke) => {
+          const randomX = (Math.random() - 0.5) * 30;
+          smoke.style.setProperty("--random-x", `${randomX}px`);
+        });
+      }, 1500);
+    });
+  }
 
-    // Remove class and reset after animation ends
-    setTimeout(() => {
-      backToTopBtn.classList.remove("launching");
-      // Randomize smoke positions for next launch
-      smokePuffs.forEach((smoke) => {
-        const randomX = (Math.random() - 0.5) * 30;
-        smoke.style.setProperty("--random-x", `${randomX}px`);
-      });
-    }, 1500);
+  // ===============================
+  // Navbar Motion & Magnetic Effect
+  // ===============================
+  // Magnetic hover effect for logo and nav links
+  function addMagneticEffect(element, strength = 30) {
+    if (!element) return;
+    element.classList.add('magnetic-hover');
+    let boundingRect;
+    element.addEventListener('mouseenter', () => {
+        boundingRect = element.getBoundingClientRect();
+    });
+    element.addEventListener('mousemove', (e) => {
+        const x = e.clientX - boundingRect.left - boundingRect.width / 2;
+        const y = e.clientY - boundingRect.top - boundingRect.height / 2;
+        element.style.transform = `translate(${x / strength}px, ${y / strength}px)`;
+    });
+    element.addEventListener('mouseleave', () => {
+        element.style.transform = '';
+    });
+  }
+
+  // Apply to logo and nav links
+  const logo = document.querySelector('.logo');
+  if (logo) addMagneticEffect(logo, 18);
+  document.querySelectorAll('.nav-link').forEach(link => addMagneticEffect(link, 12));
+
+  // Staggered nav link animation
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach((link, i) => {
+      link.style.animationDelay = `${0.25 + i * 0.08}s`;
   });
 });
 
@@ -365,27 +398,21 @@ class PremiumUIController {
     }
   }
 
-  // Parallax Effects Setup
   setupParallaxEffects() {
     this.parallaxElements = document.querySelectorAll(
       ".floating-shape, .bg-orb",
     );
-
-    // Add parallax data attributes
     this.parallaxElements.forEach((el, index) => {
       el.dataset.parallaxSpeed = (0.2 + index * 0.1).toString();
     });
   }
 
-  // Advanced Text Animations
   setupTextAnimations() {
-    // Split text animation for hero title
     const heroTitle = document.querySelector(".hero-title");
     if (heroTitle) {
       this.createSplitTextAnimation(heroTitle);
     }
 
-    // Typewriter effect for descriptions
     const descriptions = document.querySelectorAll(
       ".hero-subtext, .section-subtitle",
     );
@@ -393,7 +420,6 @@ class PremiumUIController {
       this.createTypewriterEffect(desc);
     });
 
-    // Morphing text effects
     this.setupMorphingText();
   }
 
@@ -443,14 +469,12 @@ class PremiumUIController {
         i++;
         setTimeout(typeWriter, 30 + Math.random() * 20);
       } else {
-        // Remove cursor after typing
         setTimeout(() => {
           element.style.borderRight = "none";
         }, 1000);
       }
     };
 
-    // Start typewriter when element is in view
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -488,26 +512,19 @@ class PremiumUIController {
     });
   }
 
-  // Enhanced Button Interactions
   setupButtonEnhancements() {
     const buttons = document.querySelectorAll(".btn");
 
     buttons.forEach((btn) => {
-      // Ripple effect
       btn.addEventListener("click", (e) => {
         this.createRippleEffect(e, btn);
       });
-
-      // Particle explosion on hover
       btn.addEventListener("mouseenter", () => {
         this.createParticleExplosion(btn);
       });
-
-      // 3D tilt effect
       btn.addEventListener("mousemove", (e) => {
         this.create3DTiltEffect(e, btn);
       });
-
       btn.addEventListener("mouseleave", () => {
         btn.style.transform =
           "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
@@ -617,18 +634,12 @@ class PremiumUIController {
     element.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
   }
 
-  // Advanced Card Interactions
   setupCardInteractions() {
     const cards = document.querySelectorAll(".feature-card");
 
     cards.forEach((card) => {
-      // Liquid morphing effect
       this.setupLiquidMorph(card);
-
-      // Advanced hover states
       this.setupAdvancedHover(card);
-
-      // Card flip interactions
       this.setupCardFlip(card);
     });
   }
@@ -696,7 +707,6 @@ class PremiumUIController {
       card.style.transition =
         "transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
 
-      // Add back face content
       if (isFlipped && !card.querySelector(".card-back")) {
         this.createCardBack(card);
       }
@@ -736,14 +746,10 @@ class PremiumUIController {
     card.style.transformStyle = "preserve-3d";
   }
 
-  // Loading Animations
   setupLoadingAnimations() {
-    // Page load animation
     window.addEventListener("load", () => {
       this.createPageLoadAnimation();
     });
-
-    // Form loading states
     this.setupFormLoadingStates();
   }
 
@@ -845,7 +851,6 @@ class PremiumUIController {
 
     document.body.appendChild(loader);
 
-    // Remove loader after animation
     setTimeout(() => {
       loader.style.opacity = "0";
       setTimeout(() => loader.remove(), 500);
@@ -901,14 +906,12 @@ class PremiumUIController {
       document.head.appendChild(styleSheet);
     }
 
-    // Restore button after form processing
     setTimeout(() => {
       button.disabled = false;
       button.innerHTML = originalHTML;
     }, 3000);
   }
 
-  // Scroll Trigger Animations
   setupScrollTriggerAnimations() {
     const observerOptions = {
       threshold: 0.1,
@@ -923,7 +926,6 @@ class PremiumUIController {
       });
     }, observerOptions);
 
-    // Observe elements for animation
     const animatedElements = document.querySelectorAll(
       ".feature-card, .section-header, .hero-stats, .footer-brand",
     );
@@ -935,7 +937,6 @@ class PremiumUIController {
       observer.observe(el);
     });
 
-    // Counter animation for stats
     this.setupCounterAnimations();
   }
 
@@ -943,7 +944,6 @@ class PremiumUIController {
     element.style.opacity = "1";
     element.style.transform = "translateY(0)";
 
-    // Special animations for specific elements
     if (element.classList.contains("feature-card")) {
       setTimeout(() => {
         element.style.transform = "translateY(0) scale(1)";
@@ -981,7 +981,6 @@ class PremiumUIController {
 
       element.textContent = Math.floor(current).toLocaleString();
 
-      // Add pulsing effect
       if (current === target) {
         element.style.animation = "counterComplete 0.5s ease";
       }
@@ -1003,9 +1002,7 @@ class PremiumUIController {
     }
   }
 
-  // Sound Effects (Optional - can be muted)
   setupSoundEffects() {
-    // Create audio context for sound effects
     this.audioContext = null;
 
     try {
@@ -1017,7 +1014,6 @@ class PremiumUIController {
       return;
     }
 
-    // Add subtle sound effects for interactions
     const buttons = document.querySelectorAll(".btn, .nav-link");
     buttons.forEach((btn) => {
       btn.addEventListener("mouseenter", () => this.playHoverSound());
@@ -1083,18 +1079,10 @@ class PremiumUIController {
     oscillator.stop(this.audioContext.currentTime + 0.2);
   }
 
-  // Micro Interactions
   setupMicroInteractions() {
-    // Input field enhancements
     this.setupInputEnhancements();
-
-    // Logo animations
     this.setupLogoAnimations();
-
-    // Navigation enhancements
     this.setupNavEnhancements();
-
-    // Footer interactions
     this.setupFooterInteractions();
   }
 
@@ -1102,10 +1090,8 @@ class PremiumUIController {
     const inputs = document.querySelectorAll("input, textarea, select");
 
     inputs.forEach((input) => {
-      // Floating labels
       this.createFloatingLabel(input);
 
-      // Focus rings
       input.addEventListener("focus", () => {
         input.style.boxShadow = "0 0 0 3px rgba(102, 126, 234, 0.2)";
         input.style.borderColor = "#667eea";
@@ -1116,7 +1102,6 @@ class PremiumUIController {
         input.style.borderColor = "rgba(255, 255, 255, 0.1)";
       });
 
-      // Typing animation
       input.addEventListener("input", () => {
         this.createTypingParticles(input);
       });
@@ -1203,8 +1188,6 @@ class PremiumUIController {
     const logo = document.querySelector(".logo-link");
     if (!logo) return;
 
-    let animationFrame;
-
     logo.addEventListener("mouseenter", () => {
       const logoIcon = logo.querySelector(".logo-icon svg");
       if (logoIcon) {
@@ -1213,7 +1196,6 @@ class PremiumUIController {
       }
     });
 
-    // Add logo hover styles
     const logoStyles = `
             @keyframes logoHover {
                 0% { transform: rotate(0deg) scale(1); }
@@ -1236,15 +1218,12 @@ class PremiumUIController {
     const navLinks = document.querySelectorAll(".nav-link");
 
     navLinks.forEach((link) => {
-      // Liquid loading effect
       link.addEventListener("click", (e) => {
         if (link.href && !link.href.includes("#")) {
           e.preventDefault();
           this.createLiquidTransition(link.href);
         }
       });
-
-      // Underline animation
       this.createUnderlineAnimation(link);
     });
   }
@@ -1341,20 +1320,13 @@ class PremiumUIController {
     }
   }
 
-  // Advanced Transitions
   setupAdvancedTransitions() {
-    // Page transition effects
     this.setupPageTransitions();
-
-    // Element transition orchestration
     this.setupTransitionOrchestration();
-
-    // Smooth state changes
     this.setupSmoothStateChanges();
   }
 
   setupPageTransitions() {
-    // Intercept page navigation for smooth transitions
     document.addEventListener("click", (e) => {
       const link = e.target.closest("a");
       if (link && link.href && !link.href.includes("#") && !link.target) {
@@ -1380,19 +1352,16 @@ class PremiumUIController {
 
     document.body.appendChild(overlay);
 
-    // Fade in overlay
     setTimeout(() => {
       overlay.style.opacity = "1";
     }, 10);
 
-    // Navigate after transition
     setTimeout(() => {
       window.location.href = href;
     }, 500);
   }
 
   setupTransitionOrchestration() {
-    // Orchestrate multiple element transitions
     const sections = document.querySelectorAll("section");
 
     sections.forEach((section, index) => {
@@ -1424,13 +1393,11 @@ class PremiumUIController {
   }
 
   setupSmoothStateChanges() {
-    // Smooth transitions for dynamic content changes
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.type === "childList") {
           mutation.addedNodes.forEach((node) => {
             if (node.nodeType === 1) {
-              // Element node
               this.animateNewElement(node);
             }
           });

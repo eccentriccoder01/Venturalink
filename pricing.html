@@ -4,27 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pricing | Venturalink</title>
-    <link
-      rel="icon"
-      type="image/png"
-      href="/favicon/favicon-96x96.png"
-      sizes="96x96"
-    />
+    
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/favicon/apple-touch-icon.png"
-    />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="Venturalink" />
     <link rel="manifest" href="/favicon/site.webmanifest" />
+    
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    
     <link rel="stylesheet" href="styles/mainindex.css" />
     <link rel="stylesheet" href="styles/mobile-menu.css" />
     <link rel="stylesheet" href="styles/footer.css" />
+    
     <script src="./scripts/theme.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
@@ -33,7 +28,7 @@
         .then((res) => res.text())
         .then((html) => {
           document.querySelector("#header").innerHTML = html;
-          initThemeToggle();
+          if (typeof initThemeToggle === 'function') initThemeToggle();
         });
     </script>
 
@@ -81,10 +76,7 @@
         max-width: 260px;
         font-size: 1.1rem;
         font-weight: 500;
-        transition:
-          transform 0.25s,
-          box-shadow 0.25s,
-          background 0.25s;
+        transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
         cursor: pointer;
         position: relative;
         overflow: hidden;
@@ -227,7 +219,6 @@
   </head>
 
   <body>
-    <!-- Dynamic Header -->
     <div id="header"></div>
 
     <main>
@@ -278,7 +269,6 @@
       </section>
     </main>
 
-    <!-- Footer -->
     <div id="footer"></div>
     <script>
       (function loadFooter() {
@@ -306,5 +296,6 @@
 
     <script type="module" src="scripts/main.js"></script>
     <script src="scripts/cursor.js"></script>
+    <script src="scripts/mobile-menu.js"></script>
   </body>
 </html>

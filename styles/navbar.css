@@ -1,56 +1,258 @@
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.nav-link {
-  padding: 0.5rem 0;
-  font-size: 1rem;
-  color: #e4e8f7;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.nav-link:hover {
-  color: #764ba2;
-}
-
 .main-header {
-  background: #23243a;
-  box-shadow: 0 2px 16px rgba(102, 126, 234, 0.08);
-  padding: 0.5rem 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #18191c;
+  border: none;
+  margin: 32px auto 0 auto;
+  width: fit-content;
+  min-width: 340px;
+  max-width: 700px;
+  border-radius: 40px;
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18), 0 2px 8px 0 rgba(0,0,0,0.10);
+  padding: 0;
+  animation: navbarFadeIn 1.1s cubic-bezier(0.23, 1, 0.32, 1) 0.1s both;
 }
-
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2rem;
+  padding: 0.5rem 1.5rem;
+  min-height: 64px;
+  width: 100%;
+  gap: 1.5rem;
+  background: transparent;
+  border-radius: 40px;
+  box-sizing: border-box;
 }
-
 .logo {
-  margin-right: 2rem;
+  margin-right: 2.2rem;
+  background: #23242a;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
 }
-
 .logo-container {
+  animation: floatLogo 3.5s ease-in-out infinite alternate;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+}
+.nav-links {
+  display: flex;
+  gap: 2.2rem;
+  align-items: center;
+}
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.08rem;
+  letter-spacing: 0.2px;
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0.5rem 0.7rem;
+  border-radius: 18px;
+  margin: 0 0.1rem;
+  transition: color 0.2s, background 0.2s, box-shadow 0.2s;
+  display: inline-block;
+  cursor: pointer;
+  animation: navLinkFadeIn 0.7s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+.nav-link:hover {
+  color: #fff;
+  background: #23242a;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  transform: translateY(-2px) scale(1.07);
+}
+.nav-link-cta {
+  padding: 0.5rem 1.2rem;
+  border-radius: 22px;
+  background: #fff;
+  color: #23242a !important;
+  font-weight: 600;
+  margin-left: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  animation: none;
+}
+.nav-link-cta:hover {
+  background: #f3f3f3;
+  color: #23242a !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+  transform: translateY(-2px) scale(1.04);
+}
+/* ============================= */
+/* Modern Animated Navbar Design */
+/* ============================= */
+
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(16px);
+  background: rgba(20, 21, 40, 0.85);
+  border-bottom: 1px solid rgba(102, 126, 234, 0.15);
+  transition: all 0.3s ease;
+  animation: navbarFadeIn 1.1s cubic-bezier(0.23, 1, 0.32, 1) 0.1s both;
+  border-radius: 18px;
+  box-shadow: 0 6px 32px 0 rgba(102, 126, 234, 0.10), 0 1.5px 8px 0 rgba(20,21,40,0.12);
+  margin: 16px auto 0 auto;
+  width: calc(100% - 32px);
+  border: 1.5px solid rgba(102, 126, 234, 0.13);
 }
 
+.navbar {
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: fadeSlideDown 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.2s both;
+}
+
+/* Animation on load */
+@keyframes fadeSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes navbarFadeIn {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+/* Logo hover glow */
 .logo-icon svg {
-  height: 2.5rem;
-  width: 2.5rem;
-  display: block;
+  transition: transform 0.4s ease, filter 0.4s ease;
 }
 
-.logo-text img {
-  height: 2.2rem;
-  margin-right: 0.5rem;
-  vertical-align: middle;
-  filter: drop-shadow(0 0 8px #667eea);
+.logo:hover .logo-icon svg {
+  transform: rotate(10deg) scale(1.1);
+  filter: drop-shadow(0 0 10px #667eea);
+}
+
+/* Floating logo animation */
+.logo-container {
+  animation: floatLogo 3.5s ease-in-out infinite alternate;
+}
+@keyframes floatLogo {
+  from { transform: translateY(0); }
+  to { transform: translateY(-8px); }
+}
+
+/* Nav links */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  color: #cbd5ff;
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+  padding: 6px 0;
+  will-change: transform;
+  transition: color 0.3s, transform 0.18s cubic-bezier(0.23, 1, 0.32, 1);
+  display: inline-block;
+  cursor: pointer;
+  animation: navLinkFadeIn 0.7s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+@keyframes navLinkFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-18px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Animated underline */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #ffffff;
+  transform: translateY(-2px) scale(1.07);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* CTA Button */
+.nav-link-cta {
+  padding: 8px 18px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff !important;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  animation: ctaPulse 2.2s infinite alternate cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.nav-link-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(118, 75, 162, 0.6);
+  filter: brightness(1.1) drop-shadow(0 0 8px #764ba2);
+}
+
+@keyframes ctaPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(118, 75, 162, 0.25), 0 4px 15px rgba(102, 126, 234, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 16px 8px rgba(118, 75, 162, 0.18), 0 8px 25px rgba(102, 126, 234, 0.4);
+  }
+}
+
+/* Scroll effect */
+.main-header.scrolled {
+  background: rgba(15, 16, 35, 0.95);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Magnetic effect for nav links and logo (JS will add .magnetic-hover) */
+.magnetic-hover {
+  transition: transform 0.18s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
 }

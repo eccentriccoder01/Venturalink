@@ -1,26 +1,13 @@
 {
   "version": 2,
-  "builds": [
+  "outputDirectory": ".",
+  "rewrites": [
     {
-      "src": "server.js",
-      "use": "@vercel/node"
+      "source": "/api/(.*)",
+      "destination": "/api"
     }
   ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  },
   "redirects": [
-    { "source": "/", "destination": "/index.html" },
     { "source": "/login", "destination": "/login.html" },
     { "source": "/register", "destination": "/register.html" },
     { "source": "/profile", "destination": "/profile.html" },
@@ -30,5 +17,8 @@
     { "source": "/contact", "destination": "/contact.html" },
     { "source": "/features", "destination": "/features.html" },
     { "source": "/pricing", "destination": "/pricing.html" }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }

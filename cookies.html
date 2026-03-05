@@ -4,324 +4,244 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cookie Policy | Venturalink</title>
+
   <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
   <link rel="shortcut icon" href="/favicon/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="Venturalink" />
   <link rel="manifest" href="/favicon/site.webmanifest" />
+
   <link rel="stylesheet" href="styles/mainindex.css">
   <link rel="stylesheet" href="styles/footer.css">
   <link rel="stylesheet" href="styles/mobile-menu.css">
   <script src="./scripts/theme.js" defer></script>
+
   <style>
+    /* ===== BODY ===== */
+    html, body {
+      height: 100%;
+    }
+
     body {
-      background: linear-gradient(135deg, #23243a 0%, #18192b 100%);
-      color: #e4e8f7;
-      font-family: 'Inter', 'Space Grotesk', Arial, sans-serif;
       margin: 0;
-      min-height: 100vh;
-    }
-
-    .main-header {
-      background: #23243a;
-      box-shadow: 0 2px 16px rgba(102,126,234,0.08);
-      padding: 0.5rem 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .navbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2rem;
-    }
-
-    .logo {
-      margin-right: 2rem;
-    }
-
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .logo-icon svg {
-      height: 2.5rem;
-      width: 2.5rem;
-      display: block;
-    }
-
-    .logo-text img {
-      height: 2.2rem;
-      margin-right: 0.5rem;
-      vertical-align: middle;
-      filter: drop-shadow(0 0 8px #667eea);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .nav-link {
-      padding: 0.5rem 0;
-      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      background: #0f1123;
       color: #e4e8f7;
-      text-decoration: none;
-      transition: color 0.2s;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
-    .nav-link:hover {
-      color: #764ba2;
+    /* ===== PARTICLE BACKGROUND ===== */
+    canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
     }
 
+    /* ===== MAIN ===== */
     main {
-      margin-top: 60px;
+      flex: 1;
+      padding: 140px 20px;
+      position: relative;
+      z-index: 2;
     }
 
-    .cookie-section {
-      max-width: 800px;
-      margin: 3rem auto 2rem auto;
-      background: rgba(34,36,58,0.95);
-      border-radius: 1.5rem;
-      padding: 2.5rem 2rem;
-      box-shadow: 0 8px 32px rgba(102,126,234,0.12);
-      text-align: left;
-    }
-
-    .cookie-section h1 {
-      color: #667eea;
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-      letter-spacing: 1px;
+    /* ===== TITLE ===== */
+    .page-title {
       text-align: center;
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 4rem;
+      background: linear-gradient(90deg,#00f2fe,#8f94fb);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientMove 5s linear infinite;
     }
 
-    .cookie-section h2 {
-      color: #764ba2;
-      font-size: 1.3rem;
-      margin-top: 2rem;
-      margin-bottom: 0.7rem;
+    @keyframes gradientMove {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
     }
 
-    .cookie-section p, .cookie-section ul {
-      color: #e4e8f7;
-      font-size: 1.08rem;
+    /* ===== GRID ===== */
+    .cookie-grid {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+      gap: 35px;
+    }
+
+    /* ===== CARD ===== */
+    .cookie-card {
+      position: relative;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(20px);
+      border-radius: 25px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      transition: 0.4s ease;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .cookie-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .cookie-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 80px rgba(0,242,254,0.4);
+    }
+
+    .cookie-card h2 {
+      color: #00f2fe;
       margin-bottom: 1rem;
     }
 
-    .cookie-section ul {
-      padding-left: 1.5rem;
+    .cookie-card p,
+    .cookie-card li {
+      color: #cfd6ff;
+      line-height: 1.6;
     }
 
-    .cookie-section li {
-      margin-bottom: 0.5rem;
+    .cookie-card ul {
+      padding-left: 1.2rem;
     }
 
-    .cookie-section a {
-      color: #667eea;
+    .cookie-card li:hover {
+      color: #fff;
+      transform: translateX(6px);
+      transition: 0.3s;
+    }
+
+    .cookie-card a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: linear-gradient(90deg,#00f2fe,#8f94fb);
+      color: #000;
       text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
     }
 
-    .cookie-section a:hover {
-      color: #764ba2;
-      text-decoration: underline;
-    }
-
-    /* Footer styles */
-    .premium-footer {
-      background: #18192b;
-      color: #e4e8f7;
-      border-top: 2px solid #23243a;
-    }
-
-    .footer-section h4 {
-      color: #667eea;
-    }
-
-    .footer-links-grid a {
-      color: #e4e8f7;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-links-grid a:hover {
-      color: #764ba2;
-      text-decoration: underline;
-    }
-
-    /* Light Theme Overrides */
-    [data-theme="light"] body {
-      background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
-      color: #333333;
-    }
-
-    [data-theme="light"] .main-header {
-      background: #ffffff;
-      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
-    }
-
-    [data-theme="light"] .nav-link {
-      color: #333333;
-    }
-
-    [data-theme="light"] .nav-link:hover {
-      color: #373a9c;
-    }
-
-    [data-theme="light"] .cookie-section {
-      background: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-    }
-
-    [data-theme="light"] .cookie-section h1 {
-      color: #373a9c;
-    }
-
-    [data-theme="light"] .cookie-section h2 {
-      color: #5767f5;
-    }
-
-    [data-theme="light"] .cookie-section p,
-    [data-theme="light"] .cookie-section ul,
-    [data-theme="light"] .cookie-section li {
-      color: #333333;
-    }
-
-    [data-theme="light"] .cookie-section a {
-      color: #373a9c;
-    }
-
-    [data-theme="light"] .cookie-section a:hover {
-      color: #5767f5;
-    }
-
-    [data-theme="light"] .premium-footer {
-      background: #f5f5f5;
-      color: #333333;
-      border-top: 2px solid #e0e0e0;
-    }
-
-    [data-theme="light"] .footer-section h4 {
-      color: #373a9c;
-    }
-
-    [data-theme="light"] .footer-links-grid a {
-      color: #333333;
-    }
-
-    [data-theme="light"] .footer-links-grid a:hover {
-      color: #373a9c;
+    .cookie-card a:hover {
+      box-shadow: 0 0 20px #00f2fe;
+      transform: scale(1.08);
     }
   </style>
 </head>
-<body>
-  <!-- Header -->
-  <header class="main-header">
-    <nav class="navbar" id="main-nav">
-      <div class="logo">
-        <a href="index.html" class="logo-link">
-          <div class="logo-container">
-            <div class="logo-icon">
-              <svg viewBox="0 0 40 40" fill="none">
-                <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="url(#logo-gradient)" stroke-width="2" fill="none"/>
-                <circle cx="20" cy="20" r="6" fill="url(#logo-gradient)"/>
-                <defs>
-                  <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style="stop-color:#667eea"/>
-                    <stop offset="100%" style="stop-color:#764ba2"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-            <div class="logo-text">
-              <img src="V.png" alt="Venturalink Logo">
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="nav-links">
-        <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
-        <a href="index.html" class="nav-link" data-text="Home"><span>Home</span></a>
-        <a href="about.html" class="nav-link" data-text="About"><span>About Us</span></a>
-        <a href="features.html" class="nav-link" data-text="Features"><span>Features</span></a>
-        <a href="pricing.html" class="nav-link" data-text="Pricing"><span>Pricing</span></a>
-        <a href="contact.html" class="nav-link" data-text="Contact"><span>Contact</span></a>
-        <a href="blog.html" class="nav-link" data-text="Blog"><span>Blog</span></a>
-        <a href="help.html" class="nav-link" data-text="Help"><span>Help Center</span></a>
-        <a href="guides.html" class="nav-link" data-text="Guides"><span>Guides</span></a>
-        <a href="api.html" class="nav-link" data-text="API"><span>API Docs</span></a>
-        <a href="terms.html" class="nav-link" data-text="Terms"><span>Terms of Service</span></a>
-        <a href="login.html" class="nav-link" data-text="Login"><span>Login</span></a>
-        <a href="register.html" class="nav-link nav-link-cta"><span>Register</span><div class="nav-link-bg"></div></a>
-      </div>
-    </nav>
-  </header>
 
-  <main>
-    <section class="cookie-section">
-      <h1>Cookie Policy</h1>
-      <p>
-        This Cookie Policy explains how Venturalink uses cookies and similar technologies to recognize you when you visit our website.
-      </p>
+<body>
+
+<canvas id="particles"></canvas>
+
+<div id="header"></div>
+
+<main>
+  <h1 class="page-title">Cookie Policy</h1>
+
+  <div class="cookie-grid">
+    <div class="cookie-card">
       <h2>1. What Are Cookies?</h2>
-      <p>
-        Cookies are small data files placed on your device when you visit a website. They help us remember your preferences and improve your experience.
-      </p>
+      <p>Cookies are small data files stored on your device.</p>
+    </div>
+
+    <div class="cookie-card">
       <h2>2. How We Use Cookies</h2>
       <ul>
-        <li>To remember your login and session information.</li>
-        <li>To analyze site usage and improve our services.</li>
-        <li>To personalize content and features.</li>
+        <li>Maintain secure sessions</li>
+        <li>Analyze traffic</li>
+        <li>Personalize preferences</li>
       </ul>
-      <h2>3. Types of Cookies We Use</h2>
+    </div>
+
+    <div class="cookie-card">
+      <h2>3. Types of Cookies</h2>
       <ul>
-        <li><strong>Essential Cookies:</strong> Necessary for basic site functionality.</li>
-        <li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our site.</li>
-        <li><strong>Preference Cookies:</strong> Remember your settings and choices.</li>
+        <li>Essential</li>
+        <li>Analytics</li>
+        <li>Preference</li>
       </ul>
+    </div>
+
+    <div class="cookie-card">
       <h2>4. Managing Cookies</h2>
-      <p>
-        You can control or delete cookies through your browser settings. However, disabling cookies may affect your experience on Venturalink.
-      </p>
-      <h2>5. Changes to This Policy</h2>
-      <p>
-        We may update this Cookie Policy from time to time. Changes will be posted on this page.
-      </p>
-      <h2>6. Contact Us</h2>
-      <p>
-        For any questions about our Cookie Policy, contact us at <a href="mailto:support@venturalink.com">support@venturalink.com</a>.
-      </p>
-    </section>
-  </main>
+      <p>You may disable cookies in browser settings.</p>
+    </div>
 
-  <div id="footer"></div>
-  <script>
-    (function loadFooter(){
-      fetch('footer.html')
-        .then(function(res){ if(!res.ok) throw new Error('Failed to fetch footer'); return res.text(); })
-        .then(function(html){ document.getElementById('footer').innerHTML = html; })
-        .catch(function(err){ console.warn('Footer load failed:', err); });
-    })();
-  </script>
-<!-- Cursor markup -->
-<div class="cursor">
-  <div class="cursor__ball cursor__ball--big">
-    <svg width="40" height="40">
-      <circle cx="20" cy="20" r="20" />
-    </svg>
+    <div class="cookie-card">
+      <h2>5. Contact</h2>
+      <a href="mailto:support@venturalink.com">support@venturalink.com</a>
+    </div>
   </div>
-</div>
+</main>
 
-<!-- Scripts -->
+<div id="footer"></div>
+
+<script>
+  // Load Dynamic Header
+  fetch("main-header.html")
+    .then(res => res.text())
+    .then(data => {
+        document.getElementById("header").innerHTML = data;
+        if (typeof initThemeToggle === 'function') initThemeToggle();
+    });
+
+  // Load Footer
+  fetch('footer.html')
+    .then(res=>res.text())
+    .then(html=>document.getElementById('footer').innerHTML=html);
+
+  /* Scroll Reveal */
+  const cards=document.querySelectorAll(".cookie-card");
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){entry.target.classList.add("visible");}
+    });
+  },{threshold:0.2});
+  cards.forEach(card=>observer.observe(card));
+
+  /* Particle Background */
+  const canvas=document.getElementById("particles");
+  const ctx=canvas.getContext("2d");
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+  let particles=[];
+  for(let i=0;i<80;i++){
+    particles.push({
+      x:Math.random()*canvas.width,
+      y:Math.random()*canvas.height,
+      size:Math.random()*2,
+      speedY:Math.random()*0.5+0.2
+    });
+  }
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="#00f2fe";
+    particles.forEach(p=>{
+      p.y+=p.speedY;
+      if(p.y>canvas.height)p.y=0;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+      ctx.fill();
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="scripts/cursor.js"></script>
 <script type="module" src="scripts/main.js"></script>
 <script src="scripts/mobile-menu.js"></script>
-  </body>
+
+</body>
 </html>

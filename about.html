@@ -4,25 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Us | Venturalink</title>
+    
     <link rel="stylesheet" href="styles/mainindex.css" />
     <link rel="stylesheet" href="styles/footer.css" />
     <link rel="stylesheet" href="styles/chatbot.css" />
-    <link
-      rel="icon"
-      type="image/png"
-      href="/favicon/favicon-96x96.png"
-      sizes="96x96"
-    />
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/favicon/apple-touch-icon.png"
-    />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
     <link rel="stylesheet" href="styles/mobile-menu.css" />
     <meta name="apple-mobile-web-app-title" content="Venturalink" />
     <link rel="manifest" href="/favicon/site.webmanifest" />
+    
     <script src="./scripts/theme.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
@@ -31,7 +24,7 @@
         .then((res) => res.text())
         .then((html) => {
           document.querySelector("#header").innerHTML = html;
-          initThemeToggle();
+          if (typeof initThemeToggle === 'function') initThemeToggle();
         });
     </script>
 
@@ -414,28 +407,15 @@
         animation: fadeInUp 0.6s ease-out forwards;
       }
 
-      .about-section > *:nth-child(1) {
-        animation-delay: 0.1s;
-      }
-      .about-section > *:nth-child(2) {
-        animation-delay: 0.2s;
-      }
-      .about-section > *:nth-child(3) {
-        animation-delay: 0.3s;
-      }
-      .about-section > *:nth-child(4) {
-        animation-delay: 0.4s;
-      }
-      .about-section > *:nth-child(5) {
-        animation-delay: 0.5s;
-      }
-      .about-section > *:nth-child(6) {
-        animation-delay: 0.6s;
-      }
+      .about-section > *:nth-child(1) { animation-delay: 0.1s; }
+      .about-section > *:nth-child(2) { animation-delay: 0.2s; }
+      .about-section > *:nth-child(3) { animation-delay: 0.3s; }
+      .about-section > *:nth-child(4) { animation-delay: 0.4s; }
+      .about-section > *:nth-child(5) { animation-delay: 0.5s; }
+      .about-section > *:nth-child(6) { animation-delay: 0.6s; }
     </style>
   </head>
   <body>
-    <!-- Header injected dynamically -->
     <div id="header"></div>
 
     <main>

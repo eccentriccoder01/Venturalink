@@ -4,238 +4,311 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Security | Venturalink</title>
+
   <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
   <link rel="shortcut icon" href="/favicon/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="Venturalink" />
   <link rel="manifest" href="/favicon/site.webmanifest" />
+
   <link rel="stylesheet" href="styles/mainindex.css">
   <link rel="stylesheet" href="styles/mobile-menu.css">
   <link rel="stylesheet" href="styles/footer.css">
+  <script src="./scripts/theme.js" defer></script>
+
   <style>
     body {
-      background: linear-gradient(135deg, #23243a 0%, #18192b 100%);
-      color: #e4e8f7;
-      font-family: 'Inter', 'Space Grotesk', Arial, sans-serif;
       margin: 0;
-      min-height: 100vh;
-    }
-
-    .main-header {
-      background: #23243a;
-      box-shadow: 0 2px 16px rgba(102,126,234,0.08);
-      padding: 0.5rem 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .navbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2rem;
-    }
-
-    .logo {
-      margin-right: 2rem;
-    }
-
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .logo-icon svg {
-      height: 2.5rem;
-      width: 2.5rem;
-      display: block;
-    }
-
-    .logo-text img {
-      height: 2.2rem;
-      margin-right: 0.5rem;
-      vertical-align: middle;
-      filter: drop-shadow(0 0 8px #667eea);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .nav-link {
-      padding: 0.5rem 0;
-      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      background: #0f1123;
       color: #e4e8f7;
-      text-decoration: none;
-      transition: color 0.2s;
+      overflow-x: hidden;
     }
 
-    .nav-link:hover {
-      color: #764ba2;
+    /* ================= PARTICLE BACKGROUND ================= */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
     }
-    
+
+    /* ================= MAIN ================= */
     main {
-      margin-top: 60px;
+      padding: 120px 20px;
     }
-    .security-section {
-      max-width: 800px;
-      margin: 3rem auto 2rem auto;
-      background: rgba(34,36,58,0.95);
-      border-radius: 1.5rem;
-      padding: 2.5rem 2rem;
-      box-shadow: 0 8px 32px rgba(102,126,234,0.12);
-      text-align: left;
+
+    .security-wrapper {
+      max-width: 1200px;
+      margin: auto;
     }
-    .security-section h1 {
-      color: #667eea;
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-      letter-spacing: 1px;
+
+    .security-title {
       text-align: center;
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 4rem;
+      background: linear-gradient(90deg, #00f2fe, #8f94fb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .security-section h2 {
-      color: #764ba2;
-      font-size: 1.3rem;
-      margin-top: 2rem;
-      margin-bottom: 0.7rem;
+
+    /* ================= GRID ================= */
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 35px;
     }
-    .security-section p, .security-section ul {
-      color: #e4e8f7;
-      font-size: 1.08rem;
+
+    /* ================= CARD ================= */
+    .security-card {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(20px);
+      border-radius: 25px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      transform-style: preserve-3d;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .security-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .security-card:hover {
+      box-shadow: 0 30px 80px rgba(0,242,254,0.4);
+    }
+
+    /* Neon Glow Border */
+    .security-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 25px;
+      padding: 2px;
+      background: linear-gradient(90deg, #00f2fe, #8f94fb);
+      -webkit-mask: 
+         linear-gradient(#000 0 0) content-box, 
+         linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+    }
+
+    .security-card h2 {
+      font-size: 1.4rem;
       margin-bottom: 1rem;
+      color: #00f2fe;
     }
-    .security-section ul {
-      padding-left: 1.5rem;
+
+    .security-card p,
+    .security-card li {
+      color: #cfd6ff;
+      line-height: 1.6;
     }
-    .security-section li {
-      margin-bottom: 0.5rem;
+
+    .security-card ul {
+      padding-left: 1.2rem;
     }
-    /* Footer override for dark theme */
-    .premium-footer {
-      background: #18192b;
-      color: #e4e8f7;
-      border-top: 2px solid #23243a;
+
+    .security-card li:hover {
+      color: #fff;
+      transform: translateX(5px);
+      transition: 0.3s;
     }
-    .footer-section h4 {
-      color: #667eea;
-    }
-    .footer-links-grid a {
-      color: #e4e8f7;
+
+    /* Email button */
+    .security-card a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: linear-gradient(90deg, #00f2fe, #8f94fb);
+      color: #000;
       text-decoration: none;
-      transition: color 0.2s;
+      font-weight: 600;
+      transition: 0.3s;
     }
-    .footer-links-grid a:hover {
-      color: #764ba2;
-      text-decoration: underline;
+
+    .security-card a:hover {
+      box-shadow: 0 0 20px #00f2fe;
+      transform: scale(1.08);
     }
   </style>
 </head>
+
 <body>
-  <!-- Header -->
-  <header class="main-header">
-    <nav class="navbar" id="main-nav">
-      <div class="logo">
-        <a href="index.html" class="logo-link">
-          <div class="logo-container">
-            <div class="logo-icon">
-              <svg viewBox="0 0 40 40" fill="none">
-                <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="url(#logo-gradient)" stroke-width="2" fill="none"/>
-                <circle cx="20" cy="20" r="6" fill="url(#logo-gradient)"/>
-                <defs>
-                  <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style="stop-color:#667eea"/>
-                    <stop offset="100%" style="stop-color:#764ba2"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-            <div class="logo-text">
-              <img src="V.png" alt="Venturalink Logo">
-            </div>
-          </div>
+
+<canvas id="particles"></canvas>
+
+<div id="header"></div>
+
+<main>
+  <div class="security-wrapper">
+    <h1 class="security-title">Security at Venturalink</h1>
+
+    <div class="security-grid">
+
+      <div class="security-card">
+        <h2>1. Data Encryption</h2>
+        <p>End-to-end SSL/TLS encryption protects all sensitive data.</p>
+      </div>
+
+      <div class="security-card">
+        <h2>2. Account Protection</h2>
+        <ul>
+          <li>Strong password policies</li>
+          <li>Two-factor authentication</li>
+          <li>Session timeout protection</li>
+        </ul>
+      </div>
+
+      <div class="security-card">
+        <h2>3. Security Monitoring</h2>
+        <p>Continuous audits and vulnerability testing ensure integrity.</p>
+      </div>
+
+      <div class="security-card">
+        <h2>4. Responsible Disclosure</h2>
+        <p>Report issues responsibly to:</p>
+        <a href="mailto:security@venturalink.com">
+          security@venturalink.com
         </a>
       </div>
-      <div class="nav-links">
-        
-        <a href="index.html" class="nav-link" data-text="Home"><span>Home</span></a>
-        <a href="about.html" class="nav-link" data-text="About"><span>About Us</span></a>
-        <a href="features.html" class="nav-link" data-text="Features"><span>Features</span></a>
-        <a href="pricing.html" class="nav-link" data-text="Pricing"><span>Pricing</span></a>
-        <a href="contact.html" class="nav-link" data-text="Contact"><span>Contact</span></a>
-        <a href="blog.html" class="nav-link" data-text="Blog"><span>Blog</span></a>
-        <a href="help.html" class="nav-link" data-text="Help"><span>Help Center</span></a>
-        <a href="guides.html" class="nav-link" data-text="Guides"><span>Guides</span></a>
-        <a href="api.html" class="nav-link" data-text="API"><span>API Docs</span></a>
-        <a href="terms.html" class="nav-link" data-text="Terms"><span>Terms of Service</span></a>
-        <a href="login.html" class="nav-link" data-text="Login"><span>Login</span></a>
-        <a href="register.html" class="nav-link nav-link-cta"><span>Register</span><div class="nav-link-bg"></div></a>
+
+      <div class="security-card">
+        <h2>5. User Responsibilities</h2>
+        <ul>
+          <li>Protect login credentials</li>
+          <li>Report suspicious behavior</li>
+          <li>Keep software updated</li>
+        </ul>
       </div>
-    </nav>
-  </header>
-  <main>
-    <section class="security-section">
-      <h1>Security</h1>
-      <p>
-        Venturalink is committed to protecting your data and ensuring a secure experience for all users.
-      </p>
-      <h2>1. Data Encryption</h2>
-      <p>
-        All sensitive data is encrypted in transit using SSL/TLS and stored securely using industry-standard encryption protocols.
-      </p>
-      <h2>2. Account Protection</h2>
-      <ul>
-        <li>Strong password requirements for all users.</li>
-        <li>Two-factor authentication (2FA) available for enhanced security.</li>
-        <li>Automatic logout after periods of inactivity.</li>
-      </ul>
-      <h2>3. Regular Security Audits</h2>
-      <p>
-        Our platform undergoes regular security audits and vulnerability assessments to identify and address potential risks.
-      </p>
-      <h2>4. Responsible Disclosure</h2>
-      <p>
-        If you discover a security issue, please report it to <a href="mailto:security@venturalink.com">security@venturalink.com</a>. We appreciate your help in keeping Venturalink safe.
-      </p>
-      <h2>5. User Responsibilities</h2>
-      <ul>
-        <li>Keep your login credentials confidential.</li>
-        <li>Report any suspicious activity immediately.</li>
-        <li>Update your password regularly.</li>
-      </ul>
-      <h2>6. Updates to Security Practices</h2>
-      <p>
-        We may update our security practices from time to time. Changes will be posted on this page.
-      </p>
-    </section>
-  </main>
 
-  <div id="footer"></div>
-  <script>
-    (function loadFooter(){
-      fetch('footer.html')
-        .then(function(res){ if(!res.ok) throw new Error('Failed to fetch footer'); return res.text(); })
-        .then(function(html){ document.getElementById('footer').innerHTML = html; })
-        .catch(function(err){ console.warn('Footer load failed:', err); });
-    })();
-  </script>
-<!-- Cursor markup -->
-<div class="cursor">
-  <div class="cursor__ball cursor__ball--big">
-    <svg width="40" height="40">
-      <circle cx="20" cy="20" r="20" />
-    </svg>
+      <div class="security-card">
+        <h2>6. Continuous Improvement</h2>
+        <p>Security evolves with modern threats and best practices.</p>
+      </div>
+
+      <div class="security-card">
+        <h2>7. Backend & Infrastructure Security</h2>
+        <ul>
+          <li>All APIs are protected with authentication and authorization checks.</li>
+          <li>Cloud infrastructure uses firewalls, network segmentation, and least-privilege access.</li>
+          <li>Regular patching and updates for all backend services.</li>
+        </ul>
+      </div>
+
+      <div class="security-card">
+        <h2>8. Data Privacy & Compliance</h2>
+        <ul>
+          <li>User data is stored securely and never shared without consent.</li>
+          <li>Compliance with GDPR and other relevant data protection regulations.</li>
+          <li>Data minimization and retention policies in place.</li>
+        </ul>
+      </div>
+
+      <div class="security-card">
+        <h2>9. Incident Response</h2>
+        <ul>
+          <li>Dedicated team for rapid response to security incidents.</li>
+          <li>Clear procedures for notification and mitigation.</li>
+          <li>Post-incident reviews to improve future security posture.</li>
+        </ul>
+      </div>
+
+    </div>
   </div>
-</div>
+</main>
 
-<!-- Scripts -->
+<div id="footer"></div>
+
+<script>
+  // Load Dynamic Header
+  fetch("main-header.html")
+    .then(res => res.text())
+    .then(data => {
+        document.getElementById("header").innerHTML = data;
+        if (typeof initThemeToggle === 'function') initThemeToggle();
+    });
+
+  // Load Footer
+  fetch('footer.html')
+    .then(res=>res.text())
+    .then(html=>document.getElementById('footer').innerHTML=html);
+
+  /* ===== Scroll Reveal ===== */
+  const cards = document.querySelectorAll(".security-card");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, { threshold: 0.2 });
+
+  cards.forEach(card => observer.observe(card));
+
+  /* ===== 3D Tilt Effect ===== */
+  cards.forEach(card => {
+    card.addEventListener("mousemove", e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const rotateX = ((y / rect.height) - 0.5) * 10;
+      const rotateY = ((x / rect.width) - 0.5) * -10;
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "rotateX(0) rotateY(0)";
+    });
+  });
+
+  /* ===== Particle Background ===== */
+  const canvas = document.getElementById("particles");
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let particles = [];
+
+  for (let i = 0; i < 80; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 2,
+      speedY: Math.random() * 0.5 + 0.2
+    });
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#00f2fe";
+
+    particles.forEach(p => {
+      p.y += p.speedY;
+      if (p.y > canvas.height) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="scripts/cursor.js"></script>
 <script type="module" src="scripts/main.js"></script>
 <script src="scripts/mobile-menu.js"></script>
-  </body>
+
+</body>
 </html>
