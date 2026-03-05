@@ -1934,7 +1934,8 @@ const statNumbers = document.querySelectorAll(".stat-number");
 let statsAnimated = false;
 
 function animateStats() {
-  if (statsAnimated) return;
+  // ADDED SAFETY CHECK HERE:
+  if (statsAnimated || !statsSection) return;
 
   const sectionTop = statsSection.getBoundingClientRect().top;
   const triggerPoint = window.innerHeight - 100;
@@ -1964,24 +1965,91 @@ function animateStats() {
 window.addEventListener("scroll", animateStats);
 window.addEventListener("load", animateStats);
 
+// ==========================================
+// Upgraded Testimonials Carousel
+// Features: Drag to scroll, Auto-play, Prev/Next buttons
+// ==========================================
 const carousel = document.querySelector(".testimonials-carousel");
-let isDown = false;
-let startX;
-let scrollLeft;
 
-carousel.addEventListener("mousedown", (e) => {
-  isDown = true;
-  startX = e.pageX - carousel.offsetLeft;
-  scrollLeft = carousel.scrollLeft;
-});
-carousel.addEventListener("mouseleave", () => (isDown = false));
-carousel.addEventListener("mouseup", () => (isDown = false));
-carousel.addEventListener("mousemove", (e) => {
-  if (!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - carousel.offsetLeft;
-  const walk = (x - startX) * 2;
-  carousel.scrollLeft = scrollLeft - walk;
-});
+if (carousel) {
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+  let autoScrollTimer;
+  
+  // 1. Settings
+  const scrollAmount = 350; // Approximate width of one card (adjust if needed)
+  const autoScrollDelay = 3000; // 3 seconds
+
+  // 2. Select your buttons (Update these class names to match your HTML!)
+  const prevBtn = document.querySelector(".prev-btn"); 
+  const nextBtn = document.querySelector(".next-btn");
+
+  // 3. Auto-Scroll Logic
+  function startAutoScroll() {
+    autoScrollTimer = setInterval(() => {
+      // If we've reached the end of the scroll, instantly jump back to the start
+      if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 10) {
+        carousel.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        // Otherwise, keep scrolling right
+        carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    }, autoScrollDelay);
+  }
+
+  function stopAutoScroll() {
+    clearInterval(autoScrollTimer);
+  }
+
+  function resetAutoScroll() {
+    stopAutoScroll();
+    startAutoScroll();
+  }
+
+  // 4. Button Click Events
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      carousel.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+      resetAutoScroll(); // Restart the timer so it doesn't immediately scroll again
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      carousel.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      resetAutoScroll();
+    });
+  }
+
+  // 5. Original Click & Drag Logic (with auto-scroll pausing added)
+  carousel.addEventListener("mousedown", (e) => {
+    isDown = true;
+    startX = e.pageX - carousel.offsetLeft;
+    scrollLeft = carousel.scrollLeft;
+    stopAutoScroll(); // Stop scrolling while user drags
+  });
+
+  carousel.addEventListener("mouseleave", () => {
+    isDown = false;
+    startAutoScroll(); // Resume scrolling when mouse leaves
+  });
+
+  carousel.addEventListener("mouseup", () => {
+    isDown = false;
+    startAutoScroll(); // Resume scrolling when user drops the card
+  });
+
+  carousel.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - carousel.offsetLeft;
+    const walk = (x - startX) * 2;
+    carousel.scrollLeft = scrollLeft - walk;
+  });
+
+  // Start the auto-scroll when the page loads
+  startAutoScroll();
+}
 
 // ===== THEME DEBUG MESSAGE =====
