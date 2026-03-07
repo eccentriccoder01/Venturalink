@@ -149,6 +149,7 @@ body {
 /* --- Edit Profile Form --- */
 .premium-form { display: flex; flex-direction: column; gap: var(--space-lg); }
 .premium-form .form-group { display: flex; flex-direction: column; gap: var(--space-sm); }
+.form-text { font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.3rem; display: block; }
 .premium-form label { font-weight: 500; color: var(--text-secondary); }
 .input-wrapper { position: relative; display: flex; align-items: center; }
 .input-wrapper i { position: absolute; left: var(--space-md); color: var(--text-tertiary); z-index: 1; pointer-events: none; }

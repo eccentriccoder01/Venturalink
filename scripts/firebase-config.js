@@ -3,15 +3,23 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebas
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyA37bruIT_neT5w-8CUuPGofy0Lnv2UJOg",
-    authDomain: "project-1-747ec.firebaseapp.com",
-    projectId: "project-1-747ec",
-    storageBucket: "project-1-747ec.firebasestorage.app",
-    messagingSenderId: "122686135785",
-    appId: "1:122686135785:web:7e159363045f52208cbf78",
-    measurementId: "G-1GT8XMMFM3"
+// Get Firebase configuration from window object (loaded by env.js)
+// env.js fetches this from /api/config endpoint
+const firebaseConfig = window.firebaseConfig || {
+    apiKey: undefined,
+    authDomain: undefined,
+    projectId: undefined,
+    storageBucket: undefined,
+    messagingSenderId: undefined,
+    appId: undefined,
+    measurementId: undefined
 };
+
+// Check if configuration is available
+if (!firebaseConfig.apiKey) {
+    console.error('❌ Firebase configuration not available. Make sure env.js is loaded before this script.');
+    console.warn('⚠️ Firebase initialization will fail without proper configuration.');
+}
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

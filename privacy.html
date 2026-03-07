@@ -1,239 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Privacy Policy | Venturalink</title>
-    <link
-      rel="icon"
-      type="image/png"
-      href="/favicon/favicon-96x96.png"
-      sizes="96x96"
-    />
-    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon/favicon.ico" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/favicon/apple-touch-icon.png"
-    />
-    <meta name="apple-mobile-web-app-title" content="Venturalink" />
-    <link rel="manifest" href="/favicon/site.webmanifest" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | Venturalink</title>
+
+  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Venturalink" />
+  <link rel="manifest" href="/favicon/site.webmanifest" />
+
   <link rel="stylesheet" href="styles/mainindex.css" />
   <link rel="stylesheet" href="styles/footer.css" />
+  <link rel="stylesheet" href="styles/mobile-menu.css" />
   <script src="./scripts/theme.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <style>
-      body {
-        background: linear-gradient(135deg, #23243a 0%, #18192b 100%);
-        color: #e4e8f7;
-        font-family: "Inter", "Space Grotesk", Arial, sans-serif;
-        margin: 0;
-        min-height: 100vh;
-      }
-      .main-header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        background: #23243a;
-        box-shadow: 0 2px 16px rgba(102, 126, 234, 0.08);
-        z-index: 100;
-        padding: 0.5rem 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .navbar {
-        width: 100%;
-        max-width: 1200px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 2rem;
-      }
-      .logo-container {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-      .logo-icon svg {
-        height: 2.5rem;
-        width: 2.5rem;
-        display: block;
-      }
-      .logo-text img {
-        height: 2.2rem;
-        margin-right: -8px;
-        vertical-align: middle;
-        filter: drop-shadow(0 0 8px #667eea);
-      }
-      .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 1.2rem;
-      }
-      .nav-link {
-        color: #e4e8f7;
-        text-decoration: none;
-        font-size: 1.08rem;
-        padding: 0.4rem 1rem;
-        border-radius: 0.5rem;
-        transition: background 0.2s, color 0.2s;
-        position: relative;
-      }
-      .nav-link.active,
-      .nav-link:hover {
-        background: #2d2e4a;
-        color: #764ba2;
-      }
-      .nav-link-cta {
-        background: #667eea;
-        color: #fff !important;
-        font-weight: 600;
-        position: relative;
-        overflow: hidden;
-      }
-      .nav-link-cta:hover {
-        background: #764ba2;
-        color: #fff !important;
-      }
-      main {
-        margin-top: 90px;
-      }
-      .privacy-section {
-        max-width: 900px;
-        margin: 3rem auto 2rem auto;
-        background: rgba(34, 36, 58, 0.95);
-        border-radius: 1.5rem;
-        padding: 2.5rem 2rem;
-        box-shadow: 0 8px 32px rgba(102, 126, 234, 0.12);
-        text-align: left;
-      }
-      .privacy-section h1 {
-        color: #667eea;
-        font-size: 2.5rem;
-        margin-bottom: 1.5rem;
-        letter-spacing: 1px;
-        text-align: center;
-      }
-      .privacy-section h2 {
-        color: #764ba2;
-        font-size: 1.3rem;
-        margin-top: 2rem;
-        margin-bottom: 0.7rem;
-      }
-      .privacy-section p,
-      .privacy-section ul {
-        color: #e4e8f7;
-        font-size: 1.08rem;
-        margin-bottom: 1rem;
-      }
-      .privacy-section ul {
-        padding-left: 1.5rem;
-      }
-      .privacy-section li {
-        margin-bottom: 0.5rem;
-      }
-      /* footer styles moved to styles/footer.css */
-    </style>
-    <script>
-      // Load header dynamically
-      fetch("main-header.html")
-        .then((res) => res.text())
-        .then((html) => {
-          document.querySelector("#header").innerHTML = html;
-          initThemeToggle();
-        });
-    </script>
-  </head>
-  <body>
-    <!-- Header (fixed navbar) -->
-    <div id="header"></div>
 
-    <main>
-      <section class="privacy-section">
-        <h1>Privacy Policy</h1>
-        <p>
-          Your privacy is important to us. This policy explains how Venturalink
-          collects, uses, and protects your information.
-        </p>
+  <style>
+  /* ===== BODY ===== */
+  body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background: linear-gradient(135deg, #18192b, #23243a, #2b3a75);
+    color: #e4e8f7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== MAIN SECTION ===== */
+  main {
+    margin-top: 110px;
+    padding: 40px 20px;
+  }
+
+  /* ===== CONTAINER ===== */
+  .privacy-container {
+    max-width: 1000px;
+    margin: auto;
+    text-align: center;
+  }
+
+  /* ===== TITLE ===== */
+  .privacy-title {
+    font-size: 3rem;
+    background: linear-gradient(90deg, #4f8cff, #00f5ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  .privacy-sub {
+    color: #7ed6fb;
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+  }
+
+  /* ===== GRID ===== */
+  .policy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+  }
+
+  /* ===== CARD ===== */
+  .policy-card {
+    background: linear-gradient(135deg, #23243a 60%, #2b3a75 100%);
+    backdrop-filter: blur(16px);
+    border-radius: 20px;
+    padding: 25px;
+    text-align: left;
+    border: 1.5px solid #4f8cff;
+    box-shadow: 0 4px 24px #4f8cff33;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Glow border effect */
+  .policy-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 1px;
+    background: linear-gradient(90deg, #4f8cff, #00f5ff);
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  /* Hover Effect */
+  .policy-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(118,75,162,0.3);
+  }
+
+  .policy-card:hover::before {
+    opacity: 1;
+  }
+
+  .policy-card h2 {
+    color: #4f8cff;
+    font-weight: 700;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+  }
+
+  .policy-card p, .policy-card ul {
+    color: #e4e8f7;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .policy-card ul {
+    padding-left: 20px;
+  }
+
+  /* CONTACT LINK */
+  .policy-card a {
+    color: #00f5ff;
+    text-decoration: underline;
+    font-weight: 700;
+    transition: 0.3s;
+  }
+
+  .policy-card a:hover {
+    color: #4f8cff;
+    text-shadow: 0 0 10px #00f5ff;
+  }
+
+  /* Animation */
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .privacy-title {
+      font-size: 2.2rem;
+    }
+  }
+  </style>
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<main>
+  <div class="privacy-container">
+
+    <h1 class="privacy-title">Privacy Policy</h1>
+    <p class="privacy-sub">
+      Your privacy matters to us. Here's how Venturalink collects, uses, and protects your information.
+    </p>
+
+    <div class="policy-grid">
+
+      <div class="policy-card">
         <h2>1. Information We Collect</h2>
         <ul>
-          <li>
-            Personal information you provide during registration (name, email,
-            etc.).
-          </li>
-          <li>
-            Usage data, such as pages visited and actions taken on the platform.
-          </li>
-          <li>
-            Cookies and similar technologies for analytics and preferences.
-          </li>
+          <li>Personal information (name, email, etc.)</li>
+          <li>Platform usage data</li>
+          <li>Cookies & analytics data</li>
         </ul>
-        <h2>2. How We Use Your Information</h2>
+      </div>
+
+      <div class="policy-card">
+        <h2>2. How We Use Information</h2>
         <ul>
-          <li>To provide and improve our services.</li>
-          <li>To communicate with you about your account and updates.</li>
-          <li>To personalize your experience on Venturalink.</li>
+          <li>Improve our services</li>
+          <li>Account communication</li>
+          <li>Personalized experience</li>
         </ul>
+      </div>
+
+      <div class="policy-card">
         <h2>3. Data Protection</h2>
         <p>
-          We use industry-standard security measures to protect your data from
-          unauthorized access and disclosure.
+          We implement strong security measures to protect your data from unauthorized access.
         </p>
-        <h2>4. Sharing of Information</h2>
+      </div>
+
+      <div class="policy-card">
+        <h2>4. Sharing Information</h2>
         <ul>
-          <li>We do not sell your personal information.</li>
-          <li>
-            We may share data with trusted partners for service delivery, under
-            strict confidentiality agreements.
-          </li>
-          <li>We may disclose information if required by law.</li>
+          <li>We never sell your data</li>
+          <li>Shared only with trusted partners</li>
+          <li>Disclosed if required by law</li>
         </ul>
-        <h2>5. Your Choices</h2>
+      </div>
+
+      <div class="policy-card">
+        <h2>5. Your Rights</h2>
         <ul>
-          <li>
-            You can update or delete your account information at any time.
-          </li>
-          <li>You may opt out of marketing communications.</li>
+          <li>Update or delete your account</li>
+          <li>Opt out of marketing emails</li>
         </ul>
-        <h2>6. Changes to This Policy</h2>
+      </div>
+
+      <div class="policy-card">
+        <h2>6. Policy Updates</h2>
         <p>
-          We may update this Privacy Policy from time to time. Changes will be
-          posted on this page.
+          We may update this Privacy Policy occasionally. Changes will appear on this page.
         </p>
+      </div>
+
+      <div class="policy-card">
         <h2>7. Contact Us</h2>
         <p>
-          For any questions about this policy, contact us at
-          <a href="mailto:support@venturalink.com">support@venturalink.com</a>.
+          Questions? Reach us at  
+          <a href="mailto:support@venturalink.com">
+            support@venturalink.com
+          </a>
         </p>
-      </section>
-    </main>
+      </div>
 
-    <!-- Footer -->
-    <div id="footer"></div>
-    <!-- Cursor markup -->
-<div class="cursor">
-  <div class="cursor__ball cursor__ball--big">
-    <svg width="40" height="40">
-      <circle cx="20" cy="20" r="20" />
-    </svg>
+    </div>
   </div>
-</div>
+</main>
 
-<!-- Scripts -->
+<div id="footer"></div>
+
 <script>
-  // Load footer dynamically
-  fetch("footer.html")
-    .then((res) => res.text())
-    .then((html) => {
-      document.querySelector("#footer").innerHTML = html;
-    })
-    .catch((e) => console.error("Failed to load footer:", e));
+fetch("main-header.html")
+  .then(res => res.text())
+  .then(data => {
+      document.getElementById("header").innerHTML = data;
+      if (typeof initThemeToggle === 'function') initThemeToggle();
+  });
+
+fetch("footer.html")
+  .then(res => res.text())
+  .then(data => document.getElementById("footer").innerHTML = data);
 </script>
+
 <script type="module" src="scripts/main.js"></script>
 <script src="scripts/cursor.js"></script>
+<script src="scripts/mobile-menu.js"></script>
 
-  </body>
+</body>
 </html>
