@@ -1,214 +1,287 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Terms of Service | Venturalink</title>
-    <link
-      rel="icon"
-      type="image/png"
-      href="/favicon/favicon-96x96.png"
-      sizes="96x96"
-    />
-    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon/favicon.ico" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/favicon/apple-touch-icon.png"
-    />
-    <meta name="apple-mobile-web-app-title" content="Venturalink" />
-    <link rel="manifest" href="/favicon/site.webmanifest" />
-    <link rel="stylesheet" href="styles/mainindex.css" />
-    <link rel="stylesheet" href="styles/mobile-menu.css" />
-    <link rel="stylesheet" href="styles/footer.css" />
-    <script src="./scripts/theme.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<head>
 
-    <style>
-      body {
-        background: linear-gradient(135deg, #23243a 0%, #18192b 100%);
-        color: #e4e8f7;
-        font-family: "Inter", "Space Grotesk", Arial, sans-serif;
-        margin: 0;
-        min-height: 100vh;
-      }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      /* Sticky header styles */
-      #header {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        transition: all 0.3s ease;
-      }
+<title>Terms of Service | Venturalink</title>
 
-      /* Ensure header content has proper background when sticky */
-      #header .header-container {
-        background: rgba(34, 36, 58, 0.95);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-      }
+<link rel="stylesheet" href="styles/mainindex.css">
+<link rel="stylesheet" href="styles/mobile-menu.css">
+<link rel="stylesheet" href="styles/footer.css">
 
-      /* Add slight shadow when scrolled */
-      .header-scrolled {
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-      .terms-section {
-        max-width: 900px;
-        margin: 3rem auto 2rem auto;
-        background: rgba(34, 36, 58, 0.95);
-        border-radius: 1.5rem;
-        padding: 2.5rem 2rem;
-        box-shadow: 0 8px 32px rgba(102, 126, 234, 0.12);
-        text-align: left;
-      }
-      .terms-section h1 {
-        color: #667eea;
-        font-size: 2.5rem;
-        margin-bottom: 1.5rem;
-        letter-spacing: 1px;
-        text-align: center;
-      }
-      .terms-section h2 {
-        color: #764ba2;
-        font-size: 1.3rem;
-        margin-top: 2rem;
-        margin-bottom: 0.7rem;
-      }
-      .terms-section p,
-      .terms-section ul {
-        color: #e4e8f7;
-        font-size: 1.08rem;
-        margin-bottom: 1rem;
-      }
-      .terms-section ul {
-        padding-left: 1.5rem;
-      }
-      .terms-section li {
-        margin-bottom: 0.5rem;
-      }
-      .terms-section a {
-        color: #667eea;
-        text-decoration: none;
-        transition: color 0.2s;
-      }
-      .terms-section a:hover {
-        color: #764ba2;
-        text-decoration: underline;
-      }
+<style>
 
-      /* footer styles moved to styles/footer.css */
-    </style>
+body{
+background:linear-gradient(135deg,#020617,#1e293b);
+color:#e2e8f0;
+font-family:'Inter',sans-serif;
+margin:0;
+}
 
-    <script>
-      // Load header dynamically
-      fetch("main-header.html")
-        .then((res) => res.text())
-        .then((html) => {
-          document.querySelector("#header").innerHTML = html;
-          initThemeToggle();
+/* PAGE WRAPPER */
 
-          // Add scroll effect to header
-          window.addEventListener("scroll", function () {
-            const header = document.querySelector("#header");
-            if (window.scrollY > 50) {
-              header.classList.add("header-scrolled");
-            } else {
-              header.classList.remove("header-scrolled");
-            }
-          });
-        });
-    </script>
-  </head>
-  <body>
-    <!-- Header -->
-    <div id="header"></div>
+.terms-wrapper{
 
-    <main>
-      <section class="terms-section">
-        <h1>Terms of Service</h1>
-        <p>
-          Welcome to Venturalink! By using our platform, you agree to the
-          following terms and conditions.
-        </p>
-        <h2>1. Acceptance of Terms</h2>
-        <p>
-          By accessing or using Venturalink, you agree to comply with and be
-          bound by these Terms of Service.
-        </p>
-        <h2>2. User Responsibilities</h2>
-        <ul>
-          <li>
-            You must provide accurate and complete information during
-            registration.
-          </li>
-          <li>
-            You are responsible for maintaining the confidentiality of your
-            account credentials.
-          </li>
-          <li>
-            You agree not to use Venturalink for any unlawful or prohibited
-            activities.
-          </li>
-        </ul>
-        <h2>3. Content & Intellectual Property</h2>
-        <ul>
-          <li>
-            All content you post must comply with applicable laws and must not
-            infringe on third-party rights.
-          </li>
-          <li>
-            Venturalink reserves the right to remove any content that violates
-            these terms.
-          </li>
-        </ul>
-        <h2>4. Privacy</h2>
-        <p>
-          Please review our <a href="privacy.html">Privacy Policy</a> to
-          understand how we collect and use your information.
-        </p>
-        <h2>5. Limitation of Liability</h2>
-        <p>
-          Venturalink is not liable for any indirect, incidental, or
-          consequential damages arising from your use of the platform.
-        </p>
-        <h2>6. Changes to Terms</h2>
-        <p>
-          Venturalink may update these Terms of Service at any time. Continued
-          use of the platform constitutes acceptance of the new terms.
-        </p>
-        <h2>7. Contact</h2>
-        <p>
-          For any questions regarding these terms, please contact us at
-          <a href="mailto:support@venturalink.com">support@venturalink.com</a>.
-        </p>
-      </section>
-    </main>
+max-width:900px;
+margin:60px auto;
+padding:20px;
 
-    <!-- Footer -->
-    <div id="footer"></div>
+}
 
-    <!-- Cursor -->
-    <div class="cursor">
-      <div class="cursor__ball cursor__ball--big">
-        <svg width="40" height="40">
-          <circle cx="20" cy="20" r="20" />
-        </svg>
-      </div>
-    </div>
+/* PAGE TITLE */
 
-    <script>
-      // Load footer dynamically
-      fetch("footer.html")
-        .then((res) => res.text())
-        .then((html) => {
-          document.querySelector("#footer").innerHTML = html;
-        })
-        .catch((e) => console.error("Failed to load footer:", e));
-    </script>
-    <script type="module" src="scripts/main.js"></script>
-    <script src="scripts/mobile-menu.js"></script>
-    <script src="scripts/cursor.js"></script>
-  </body>
+.terms-title{
+
+text-align:center;
+margin-bottom:40px;
+
+}
+
+.terms-title h1{
+
+font-size:40px;
+
+background:linear-gradient(90deg,#6366f1,#8b5cf6,#22d3ee);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+}
+
+/* CARD */
+
+.term-card{
+
+background:rgba(30,41,59,.75);
+
+border-radius:14px;
+
+padding:25px;
+
+margin-bottom:20px;
+
+border:1px solid rgba(255,255,255,.08);
+
+box-shadow:0 8px 20px rgba(0,0,0,.35);
+
+transition:all .3s;
+
+}
+
+/* HOVER EFFECT */
+
+.term-card:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0 15px 35px rgba(0,0,0,.45);
+
+border-color:#6366f1;
+
+}
+
+/* HEADINGS */
+
+.term-card h2{
+
+color:#a5b4fc;
+
+margin-bottom:10px;
+
+}
+
+/* TEXT */
+
+.term-card p{
+
+color:#cbd5f5;
+
+line-height:1.7;
+
+}
+
+/* LIST */
+
+.term-card ul{
+
+padding-left:20px;
+
+}
+
+.term-card li{
+
+margin-bottom:8px;
+
+}
+
+/* LINKS */
+
+.term-card a{
+
+color:#60a5fa;
+
+text-decoration:none;
+
+}
+
+.term-card a:hover{
+
+color:#a5b4fc;
+
+text-decoration:underline;
+
+}
+
+</style>
+
+<script>
+
+/* HEADER LOAD */
+
+fetch("main-header.html")
+.then(res=>res.text())
+.then(html=>{
+document.querySelector("#header").innerHTML=html
+})
+
+</script>
+
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<main class="terms-wrapper">
+
+<div class="terms-title">
+
+<h1>Terms of Service</h1>
+
+<p>Welcome to Venturalink! Please read our terms carefully.</p>
+
+</div>
+
+
+<div class="term-card">
+
+<h2>1. Acceptance of Terms</h2>
+
+<p>
+By accessing or using Venturalink, you agree to comply with and be bound by these Terms of Service.
+</p>
+
+</div>
+
+
+<div class="term-card">
+
+<h2>2. User Responsibilities</h2>
+
+<ul>
+
+<li>You must provide accurate and complete information during registration.</li>
+
+<li>You are responsible for maintaining the confidentiality of your account credentials.</li>
+
+<li>You agree not to use Venturalink for unlawful or prohibited activities.</li>
+
+</ul>
+
+</div>
+
+
+<div class="term-card">
+
+<h2>3. Content & Intellectual Property</h2>
+
+<ul>
+
+<li>All content must comply with applicable laws.</li>
+
+<li>You must not infringe on third-party intellectual property rights.</li>
+
+<li>Venturalink reserves the right to remove content violating these terms.</li>
+
+</ul>
+
+</div>
+
+
+<div class="term-card">
+
+<h2>4. Privacy</h2>
+
+<p>
+
+Please review our <a href="privacy.html">Privacy Policy</a> to understand how we collect and use your information.
+
+</p>
+
+</div>
+
+
+<div class="term-card">
+
+<h2>5. Limitation of Liability</h2>
+
+<p>
+
+Venturalink is not liable for any indirect, incidental, or consequential damages resulting from the use of our platform.
+
+</p>
+
+</div>
+
+
+<div class="term-card">
+
+<h2>6. Changes to Terms</h2>
+
+<p>
+
+Venturalink may update these Terms of Service at any time. Continued use of the platform means acceptance of the updated terms.
+
+</p>
+
+</div>
+
+
+<div class="term-card">
+
+<h2>7. Contact</h2>
+
+<p>
+
+If you have any questions regarding these terms please contact us at  
+<a href="mailto:support@venturalink.com">support@venturalink.com</a>
+
+</p>
+
+</div>
+
+
+</main>
+
+<div id="footer"></div>
+
+<script>
+
+/* FOOTER LOAD */
+
+fetch("footer.html")
+.then(res=>res.text())
+.then(html=>{
+document.querySelector("#footer").innerHTML=html
+})
+
+</script>
+
+<script src="scripts/mobile-menu.js"></script>
+
+</body>
 </html>
