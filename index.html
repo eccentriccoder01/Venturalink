@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -30,8 +30,13 @@
     <link rel="stylesheet" href="./styles/mainindex.css" />
     <link rel="stylesheet" href="./styles/chatbot.css" />
     <!-- Font Awesome CDN for social media icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="styles/mobile-menu.css" />
 
     <script src="./scripts/theme.js" defer></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -172,7 +177,8 @@
                 class="logo-text"
                 style="
                   transform: translateY(-4px);
-                  font-family: 'Space Grotesk', 'Inter', sans-serif;
+                  font-family:
+                    &quot;Space Grotesk&quot;, &quot;Inter&quot;, sans-serif;
                   font-weight: 700;
                   letter-spacing: 2px;
                   font-size: 1.6rem;
@@ -191,7 +197,7 @@
             </div>
           </a>
         </div>
-        <div class="nav-links">
+        <div class="nav-links" id="nav-links">
           <a href="index.html" class="nav-link"><span>Home</span></a>
           <a href="about.html" class="nav-link"><span>About</span></a>
           <a href="login.html" class="nav-link" data-text="Login"
@@ -203,7 +209,11 @@
           </a>
         </div>
 
-        <button class="menu-toggle" aria-label="Toggle navigation menu">
+        <button
+          class="menu-toggle"
+          id="menu-toggle"
+          aria-label="Toggle navigation menu"
+        >
           <span class="hamburger"></span>
           <span class="hamburger"></span>
           <span class="hamburger"></span>
@@ -212,140 +222,139 @@
     </header>
 
     <style>
-  /* Logout Confirmation Modal Styles */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-    backdrop-filter: blur(8px);
-}
-
-.modal-content {
-    background: linear-gradient(135deg, #1a1f35 0%, #2d1b69 100%);
-    padding: 2.5rem;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
-    max-width: 420px;
-    width: 90%;
-    text-align: center;
-    border: 1px solid rgba(102, 126, 234, 0.3);
-    position: relative;
-    overflow: hidden;
-    animation: modalSlideIn 0.3s ease-out;
-}
-
-.modal-content::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #667eea, transparent);
-}
-
-.modal-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: #fff;
-    font-family: 'Space Grotesk', 'Inter', sans-serif;
-}
-
-.modal-message {
-    margin-bottom: 2rem;
-    color: #8092e2;
-    line-height: 1.6;
-    font-size: 1.1rem;
-}
-
-.modal-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-}
-
-.btn-modal {
-    padding: 0.75rem 2rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    font-family: 'Space Grotesk', 'Inter', sans-serif;
-    transition: all 0.3s ease;
-    min-width: 120px;
-}
-
-.btn-confirm {
-    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-    color: white;
-    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
-}
-
-.btn-confirm:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.6);
-}
-
-.btn-cancel {
-    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
-    color: white;
-    box-shadow: 0 4px 15px rgba(108, 117, 125, 0.4);
-}
-
-.btn-cancel:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.6);
-}
-
-@keyframes modalSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-30px) scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* Responsive design for modal */
-@media (max-width: 480px) {
-    .modal-actions {
-        flex-direction: column;
-    }
-    
-    .btn-modal {
-        min-width: auto;
+      /* Logout Confirmation Modal Styles */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
         width: 100%;
-    }
-}
-        /* Navbar Font and Layout */
-        .main-header {
-            font-family: 'Space Grotesk', 'Inter', sans-serif;
-            background: rgb(14, 17, 26);
-            box-shadow: 0 4px 24px 0 rgba(102, 126, 234, 0.08);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            transition: background 0.3s;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        backdrop-filter: blur(8px);
+      }
+
+      .modal-content {
+        background: linear-gradient(135deg, #1a1f35 0%, #2d1b69 100%);
+        padding: 2.5rem;
+        border-radius: 16px;
+        box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+        max-width: 420px;
+        width: 90%;
+        text-align: center;
+        border: 1px solid rgba(102, 126, 234, 0.3);
+        position: relative;
+        overflow: hidden;
+        animation: modalSlideIn 0.3s ease-out;
+      }
+
+      .modal-content::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #667eea, transparent);
+      }
+
+      .modal-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #fff;
+        font-family: "Space Grotesk", "Inter", sans-serif;
+      }
+
+      .modal-message {
+        margin-bottom: 2rem;
+        color: #8092e2;
+        line-height: 1.6;
+        font-size: 1.1rem;
+      }
+
+      .modal-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+      }
+
+      .btn-modal {
+        padding: 0.75rem 2rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-family: "Space Grotesk", "Inter", sans-serif;
+        transition: all 0.3s ease;
+        min-width: 120px;
+      }
+
+      .btn-confirm {
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        color: white;
+        box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+      }
+
+      .btn-confirm:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(220, 53, 69, 0.6);
+      }
+
+      .btn-cancel {
+        background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+        color: white;
+        box-shadow: 0 4px 15px rgba(108, 117, 125, 0.4);
+      }
+
+      .btn-cancel:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(108, 117, 125, 0.6);
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-30px) scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* Responsive design for modal */
+      @media (max-width: 480px) {
+        .modal-actions {
+          flex-direction: column;
         }
 
-        .navbar {
-          padding: 0.7rem 1.2rem;
+        .btn-modal {
+          min-width: auto;
+          width: 100%;
         }
+      }
+      /* Navbar Font and Layout */
+      .main-header {
+        font-family: "Space Grotesk", "Inter", sans-serif;
+        background: rgb(14, 17, 26);
+        box-shadow: 0 4px 24px 0 rgba(102, 126, 234, 0.08);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        transition: background 0.3s;
+      }
 
-        .nav-links {
-          gap: 0.7rem;
-        }
-      
+      .navbar {
+        padding: 0.7rem 1.2rem;
+      }
+
+      .nav-links {
+        gap: 0.7rem;
+      }
 
       @media (max-width: 700px) {
         .nav-links {
@@ -362,7 +371,9 @@
           opacity: 0;
           pointer-events: none;
           transform: translateY(-20px);
-          transition: opacity 0.3s, transform 0.3s;
+          transition:
+            opacity 0.3s,
+            transform 0.3s;
           z-index: 99;
         }
 
@@ -513,7 +524,6 @@
                 </div>
               </div>
             </section>
-
           </div>
         </div>
 
@@ -741,113 +751,184 @@
               <span class="progress-text">78% Network Growth</span>
             </div>
           </div>
-        </div> 
+        </div>
       </section>
 
       <section id="testimonials" class="testimonials-section">
-  <div class="container">
-    <h2 class="section-title">What Our Users Say</h2>
-    <div class="testimonials-carousel">
-      <div class="testimonial-card active">
-        <p class="testimonial-text">"Venturalink helped me pitch my idea to the right investors. Within weeks, I secured my first round of funding!"</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=11" alt="Rohan Mehta" class="author-img" />
-          <h4>Rohan Mehta</h4>
-          <span>Startup Founder</span>
+        <div class="container">
+          <h2 class="section-title">What Our Users Say</h2>
+          <div class="testimonials-carousel">
+            <div class="testimonial-card active">
+              <p class="testimonial-text">
+                "Venturalink helped me pitch my idea to the right investors.
+                Within weeks, I secured my first round of funding!"
+              </p>
+              <div class="testimonial-author">
+                <img
+                  src="https://i.pravatar.cc/60?img=11"
+                  alt="Rohan Mehta"
+                  class="author-img"
+                />
+                <h4>Rohan Mehta</h4>
+                <span>Startup Founder</span>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                "I discovered promising startups through Venturalink. The
+                platform bridges the gap between innovation and opportunity."
+              </p>
+              <div class="testimonial-author">
+                <img
+                  src="https://i.pravatar.cc/60?img=12"
+                  alt="Neha Bansal"
+                  class="author-img"
+                />
+                <h4>Kishor Bansal</h4>
+                <span>Investor</span>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                "The mentorship feature is game-changing. I guided two founders
+                last month — the experience was seamless and rewarding."
+              </p>
+              <div class="testimonial-author">
+                <img
+                  src="https://i.pravatar.cc/60?img=13"
+                  alt="Vikram Chauhan"
+                  class="author-img"
+                />
+                <h4>Vikram Chauhan</h4>
+                <span>Mentor</span>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                "Networking on Venturalink gave my business nationwide
+                visibility. It’s more than a platform — it’s a movement."
+              </p>
+              <div class="testimonial-author">
+                <img
+                  src="https://i.pravatar.cc/60?img=14"
+                  alt="Ananya Iyer"
+                  class="author-img"
+                />
+                <h4>Arpit Mehra</h4>
+                <span>Entrepreneur</span>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                "As an angel investor, I’ve connected with brilliant minds
+                through Venturalink. The user experience is top-notch."
+              </p>
+              <div class="testimonial-author">
+                <img
+                  src="https://i.pravatar.cc/60?img=15"
+                  alt="Arjun Deshmukh"
+                  class="author-img"
+                />
+                <h4>Arjun Deshmukh</h4>
+                <span>Angel Investor</span>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                "Venturalink’s ecosystem allowed me to collaborate with founders
+                from multiple industries. Highly recommended!"
+              </p>
+              <div class="testimonial-author">
+                <img
+                  src="https://i.pravatar.cc/60?img=16"
+                  alt="Sneha Kapoor"
+                  class="author-img"
+                />
+                <h4>Sarah Wan</h4>
+                <span>Venture Partner</span>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                "From idea to execution — Venturalink guided me at every step.
+                The mentorship and funding support are unmatched."
+              </p>
+              <div class="testimonial-author">
+                <img
+                  src="https://i.pravatar.cc/60?img=17"
+                  alt="Kunal Sethi"
+                  class="author-img"
+                />
+                <h4>Kunal Sethi</h4>
+                <span>Entrepreneur</span>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                "I’ve seen a significant rise in startup collaborations thanks
+                to Venturalink’s curated network. Brilliant concept!"
+              </p>
+              <div class="testimonial-author">
+                <img
+                  src="https://i.pravatar.cc/60?img=18"
+                  alt="Meera Narang"
+                  class="author-img"
+                />
+                <h4>Atharva Narang</h4>
+                <span>Business Coach</span>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                "Venturalink streamlined my search for early-stage startups. The
+                transparency and insights are incredibly useful."
+              </p>
+              <div class="testimonial-author">
+                <img
+                  src="https://i.pravatar.cc/60?img=19"
+                  alt="Devansh Rao"
+                  class="author-img"
+                />
+                <h4>Devanshi Rao</h4>
+                <span>Investor</span>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                "Every connection I’ve made here added real value. Venturalink
+                is the future of entrepreneurship in India."
+              </p>
+              <div class="testimonial-author">
+                <img
+                  src="https://i.pravatar.cc/60?img=20"
+                  alt="Ishita Malhotra"
+                  class="author-img"
+                />
+                <h4>Ishita Malhotra</h4>
+                <span>Startup Founder</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-controls">
+            <button class="prev-btn">‹</button>
+            <button class="next-btn">›</button>
+          </div>
         </div>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="testimonial-text">"I discovered promising startups through Venturalink. The platform bridges the gap between innovation and opportunity."</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=12" alt="Neha Bansal" class="author-img" />
-          <h4>Kishor Bansal</h4>
-          <span>Investor</span>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="testimonial-text">"The mentorship feature is game-changing. I guided two founders last month — the experience was seamless and rewarding."</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=13" alt="Vikram Chauhan" class="author-img" />
-          <h4>Vikram Chauhan</h4>
-          <span>Mentor</span>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="testimonial-text">"Networking on Venturalink gave my business nationwide visibility. It’s more than a platform — it’s a movement."</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=14" alt="Ananya Iyer" class="author-img" />
-          <h4>Arpit Mehra</h4>
-          <span>Entrepreneur</span>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="testimonial-text">"As an angel investor, I’ve connected with brilliant minds through Venturalink. The user experience is top-notch."</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=15" alt="Arjun Deshmukh" class="author-img" />
-          <h4>Arjun Deshmukh</h4>
-          <span>Angel Investor</span>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="testimonial-text">"Venturalink’s ecosystem allowed me to collaborate with founders from multiple industries. Highly recommended!"</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=16" alt="Sneha Kapoor" class="author-img" />
-          <h4>Sarah Wan</h4>
-          <span>Venture Partner</span>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="testimonial-text">"From idea to execution — Venturalink guided me at every step. The mentorship and funding support are unmatched."</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=17" alt="Kunal Sethi" class="author-img" />
-          <h4>Kunal Sethi</h4>
-          <span>Entrepreneur</span>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="testimonial-text">"I’ve seen a significant rise in startup collaborations thanks to Venturalink’s curated network. Brilliant concept!"</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=18" alt="Meera Narang" class="author-img" />
-          <h4>Atharva Narang</h4>
-          <span>Business Coach</span>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="testimonial-text">"Venturalink streamlined my search for early-stage startups. The transparency and insights are incredibly useful."</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=19" alt="Devansh Rao" class="author-img" />
-          <h4>Devanshi Rao</h4>
-          <span>Investor</span>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="testimonial-text">"Every connection I’ve made here added real value. Venturalink is the future of entrepreneurship in India."</p>
-        <div class="testimonial-author">
-          <img src="https://i.pravatar.cc/60?img=20" alt="Ishita Malhotra" class="author-img" />
-          <h4>Ishita Malhotra</h4>
-          <span>Startup Founder</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="carousel-controls">
-      <button class="prev-btn">‹</button>
-      <button class="next-btn">›</button>
-    </div>
-  </div>
-</section>
-
-
+      </section>
     </main>
+
+    <!-- Dark/Light Mode Toggle (top-right) -->
+    <button id="theme-toggle" aria-label="Switch theme"></button>
 
     <!-- Footer -->
     <footer class="premium-footer">
@@ -1010,23 +1091,27 @@
           <div class="smoke"></div>
           <div class="smoke"></div>
         </div>
-    </div>
-</button>
+      </div>
+    </button>
 
-
-<!-- Logout Confirmation Modal -->
-<div id="logoutModal" class="modal-overlay">
-    <div class="modal-content">
+    <!-- Logout Confirmation Modal -->
+    <div id="logoutModal" class="modal-overlay">
+      <div class="modal-content">
         <h3 class="modal-title">Confirm Logout</h3>
         <p class="modal-message">Are you sure you want to log out?</p>
         <div class="modal-actions">
-            <button id="confirmLogout" class="btn-modal btn-confirm">✅ Yes, Logout</button>
-            <button id="cancelLogout" class="btn-modal btn-cancel">❌ Cancel</button>
+          <button id="confirmLogout" class="btn-modal btn-confirm">
+            ✅ Yes, Logout
+          </button>
+          <button id="cancelLogout" class="btn-modal btn-cancel">
+            ❌ Cancel
+          </button>
         </div>
+      </div>
     </div>
-</div>
-<script type="module" src="./scripts/main.js"></script>
-<script type="module" src="./scripts/logout.js"></script>
-<script src="./scripts/chatbot.js"></script>
-</body>
+    <script type="module" src="./scripts/main.js"></script>
+    <script type="module" src="./scripts/logout.js"></script>
+    <script src="./scripts/chatbot.js"></script>
+    <script src="scripts/mobile-menu.js"></script>
+  </body>
 </html>

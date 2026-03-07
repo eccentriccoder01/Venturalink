@@ -12,6 +12,7 @@
   <link rel="manifest" href="/favicon/site.webmanifest" />
   <link rel="stylesheet" href="styles/mainindex.css">
   <link rel="stylesheet" href="./styles/navbar.css">
+  <link rel="stylesheet" href="styles/mobile-menu.css">
   <style>
     body {
       background: linear-gradient(135deg, #23243a 0%, #18192b 100%);
@@ -175,6 +176,9 @@
     </section>
   </main>
 
+  <!-- Dark/Light Mode Toggle (top-right) -->
+  <button id="theme-toggle" aria-label="Switch theme"></button>
+
   <!-- Footer: shared component loaded dynamically -->
   <div id="footer-container" aria-hidden="false"></div>
   <script>
@@ -187,5 +191,6 @@
     })();
   </script>
   <script type="module" src="scripts/main.js"></script>
+  <script src="scripts/mobile-menu.js"></script>
 </body>
 </html>

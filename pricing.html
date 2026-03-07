@@ -1,286 +1,301 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pricing | Venturalink</title>
-  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Venturalink" />
-  <link rel="manifest" href="/favicon/site.webmanifest" />
-  <link rel="stylesheet" href="styles/mainindex.css">
-  <link rel="stylesheet" href="styles/footer.css">
-  <script src="./scripts/theme.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing | Venturalink</title>
+    
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Venturalink" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    
+    <link rel="stylesheet" href="styles/mainindex.css" />
+    <link rel="stylesheet" href="styles/mobile-menu.css" />
+    <link rel="stylesheet" href="styles/footer.css" />
+    
+    <script src="./scripts/theme.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
-  <script>
-    fetch("main-header.html")
-      .then((res) => res.text())
-      .then((html) => {
-        document.querySelector("#header").innerHTML = html;
-        initThemeToggle();
-      });
-  </script>
+    <script>
+      fetch("main-header.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.querySelector("#header").innerHTML = html;
+          if (typeof initThemeToggle === 'function') initThemeToggle();
+        });
+    </script>
 
-  <style>
-    body {
-      background: linear-gradient(135deg, #23243a 0%, #18192b 100%);
-      color: #e4e8f7;
-      font-family: 'Inter', 'Space Grotesk', Arial, sans-serif;
-      margin: 0;
-      min-height: 100vh;
-    }
+    <style>
+      body {
+        background: linear-gradient(135deg, #23243a 0%, #18192b 100%);
+        color: #e4e8f7;
+        font-family: "Inter", "Space Grotesk", Arial, sans-serif;
+        margin: 0;
+        min-height: 100vh;
+      }
 
-    .pricing-section {
-      max-width: 900px;
-      margin: 3rem auto 2rem auto;
-      background: rgba(34,36,58,0.95);
-      border-radius: 1.5rem;
-      padding: 2.5rem 2rem;
-      box-shadow: 0 8px 32px rgba(102,126,234,0.12);
-      text-align: center;
-    }
+      .pricing-section {
+        max-width: 900px;
+        margin: 3rem auto 2rem auto;
+        background: rgba(34, 36, 58, 0.95);
+        border-radius: 1.5rem;
+        padding: 2.5rem 2rem;
+        box-shadow: 0 8px 32px rgba(102, 126, 234, 0.12);
+        text-align: center;
+      }
 
-    .pricing-section h1 {
-      color: #667eea;
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-      letter-spacing: 1px;
-    }
+      .pricing-section h1 {
+        color: #667eea;
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        letter-spacing: 1px;
+      }
 
-    .pricing-cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      justify-content: center;
-      margin: 2.5rem 0 1rem 0;
-    }
+      .pricing-cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
+        margin: 2.5rem 0 1rem 0;
+      }
 
-    .pricing-card {
-  background: linear-gradient(135deg, #23243a 60%, #667eea 100%);
-  border-radius: 1.2rem;
-  box-shadow: 0 4px 24px rgba(102,126,234,0.18);
-  color: #fff;
-  padding: 2rem 1.5rem;
-  min-width: 220px;
-  max-width: 260px;
-  font-size: 1.1rem;
-  font-weight: 500;
-  transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  z-index: 1;
-}
+      .pricing-card {
+        background: linear-gradient(135deg, #23243a 60%, #667eea 100%);
+        border-radius: 1.2rem;
+        box-shadow: 0 4px 24px rgba(102, 126, 234, 0.18);
+        color: #fff;
+        padding: 2rem 1.5rem;
+        min-width: 220px;
+        max-width: 260px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        z-index: 1;
+      }
 
-.pricing-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 30px rgba(102,126,234,0.25);
-  background: linear-gradient(135deg, #2a2b45 0%, #667eea 90%);
-}
+      .pricing-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.25);
+        background: linear-gradient(135deg, #2a2b45 0%, #667eea 90%);
+      }
 
-    .pricing-card-title {
-      color: #aab4e8;
-      font-size: 1.3rem;
-      margin-bottom: 0.7rem;
-      font-weight: 700;
-    }
+      .pricing-card-title {
+        color: #aab4e8;
+        font-size: 1.3rem;
+        margin-bottom: 0.7rem;
+        font-weight: 700;
+      }
 
-    .pricing-card-price {
-      font-size: 2rem;
-      color: #fff;
-      font-weight: 700;
-      margin-bottom: 0.7rem;
-    }
+      .pricing-card-price {
+        font-size: 2rem;
+        color: #fff;
+        font-weight: 700;
+        margin-bottom: 0.7rem;
+      }
 
-    .pricing-card-features {
-      margin-bottom: 1rem;
-      padding-left: 1rem;
-    }
+      .pricing-card-features {
+        margin-bottom: 1rem;
+        padding-left: 1rem;
+      }
 
-    .pricing-card-features li {
-      margin-bottom: 0.5rem;
-      font-size: 1rem;
-      color: #e4e8f7;
-    }
+      .pricing-card-features li {
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        color: #e4e8f7;
+      }
 
-    .pricing-card-btn {
-  background: #667eea;
-  color: #fff;
-  border: none;
-  border-radius: 0.7rem;
-  padding: 0.6rem 1.4rem;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  margin-top: auto;
-  position: relative;
-  z-index: 2;
-  transition: all 0.25s ease;
-  box-shadow: 0 0 0 rgba(102,126,234,0);
-}
+      .pricing-card-btn {
+        background: #667eea;
+        color: #fff;
+        border: none;
+        border-radius: 0.7rem;
+        padding: 0.6rem 1.4rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: auto;
+        position: relative;
+        z-index: 2;
+        transition: all 0.25s ease;
+        box-shadow: 0 0 0 rgba(102, 126, 234, 0);
+      }
 
-.pricing-card-btn:hover {
-  background: #764ba2;
-  box-shadow: 0 0 10px rgba(118,75,162,0.4);
-  transform: translateY(-2px);
-}
+      .pricing-card-btn:hover {
+        background: #764ba2;
+        box-shadow: 0 0 10px rgba(118, 75, 162, 0.4);
+        transform: translateY(-2px);
+      }
 
-    /* Footer override for dark theme */
-    .premium-footer {
-      background: #18192b;
-      color: #e4e8f7;
-      border-top: 2px solid #23243a;
-      padding: 3rem 2rem 1.5rem 2rem;
-    }
+      /* Footer override for dark theme */
+      .premium-footer {
+        background: #18192b;
+        color: #e4e8f7;
+        border-top: 2px solid #23243a;
+        padding: 3rem 2rem 1.5rem 2rem;
+      }
 
-    .footer-main {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 2rem;
-      margin-bottom: 2.5rem;
-    }
+      .footer-main {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 2rem;
+        margin-bottom: 2.5rem;
+      }
 
-    .footer-brand {
-      max-width: 320px;
-      line-height: 1.6;
-    }
+      .footer-brand {
+        max-width: 320px;
+        line-height: 1.6;
+      }
 
-    .footer-description {
-      margin-top: 1rem;
-      font-size: 0.95rem;
-      color: #cbd5f7;
-    }
+      .footer-description {
+        margin-top: 1rem;
+        font-size: 0.95rem;
+        color: #cbd5f7;
+      }
 
-    .footer-links-grid {
-      display: flex;
-      gap: 3rem;
-    }
+      .footer-links-grid {
+        display: flex;
+        gap: 3rem;
+      }
 
-    .footer-section h4 {
-      color: #667eea;
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
-    }
+      .footer-section h4 {
+        color: #667eea;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+      }
 
-    .footer-section ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+      .footer-section ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
 
-    .footer-section li {
-      margin-bottom: 0.6rem;
-    }
+      .footer-section li {
+        margin-bottom: 0.6rem;
+      }
 
-    .footer-bottom {
-      text-align: center;
-      margin-top: 2rem;
-    }
+      .footer-bottom {
+        text-align: center;
+        margin-top: 2rem;
+      }
 
-    .footer-divider {
-      height: 1px;
-      background: #23243a;
-      margin-bottom: 1.5rem;
-    }
+      .footer-divider {
+        height: 1px;
+        background: #23243a;
+        margin-bottom: 1.5rem;
+      }
 
-    .footer-bottom-content {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      align-items: center;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #aab4e8;
-    }
+      .footer-bottom-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: center;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #aab4e8;
+      }
 
-    .footer-badges {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-  </style>
-</head>
+      .footer-badges {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    </style>
+  </head>
 
-<body>
-  <!-- Dynamic Header -->
-  <div id="header"></div>
+  <body>
+    <div id="header"></div>
 
-  <main>
-    <section class="pricing-section">
-      <h1>Our Pricing Plans</h1>
-      <p>
-        Choose the plan that fits your needs. Simple, transparent pricing for every stage of your journey.
-      </p>
+    <main>
+      <section class="pricing-section">
+        <h1>Our Pricing Plans</h1>
+        <p>
+          Choose the plan that fits your needs. Simple, transparent pricing for
+          every stage of your journey.
+        </p>
 
-      <div class="pricing-cards">
-        <div class="pricing-card">
-          <div class="pricing-card-title">Starter</div>
-          <div class="pricing-card-price">Free</div>
-          <ul class="pricing-card-features">
-            <li>Access to public business proposals</li>
-            <li>Basic matchmaking</li>
-            <li>Limited messaging</li>
-            <li>Community support</li>
-          </ul>
-          <button class="pricing-card-btn">Get Started</button>
+        <div class="pricing-cards">
+          <div class="pricing-card">
+            <div class="pricing-card-title">Starter</div>
+            <div class="pricing-card-price">Free</div>
+            <ul class="pricing-card-features">
+              <li>Access to public business proposals</li>
+              <li>Basic matchmaking</li>
+              <li>Limited messaging</li>
+              <li>Community support</li>
+            </ul>
+            <button class="pricing-card-btn">Get Started</button>
+          </div>
+
+          <div class="pricing-card">
+            <div class="pricing-card-title">Pro</div>
+            <div class="pricing-card-price">₹499/mo</div>
+            <ul class="pricing-card-features">
+              <li>Unlimited proposals & connections</li>
+              <li>Advanced analytics</li>
+              <li>Priority support</li>
+              <li>Access to exclusive deals</li>
+            </ul>
+            <button class="pricing-card-btn">Upgrade</button>
+          </div>
+
+          <div class="pricing-card">
+            <div class="pricing-card-title">Enterprise</div>
+            <div class="pricing-card-price">Custom</div>
+            <ul class="pricing-card-features">
+              <li>Dedicated account manager</li>
+              <li>Custom integrations</li>
+              <li>Team onboarding</li>
+              <li>Premium mentorship</li>
+            </ul>
+            <button class="pricing-card-btn">Contact Sales</button>
+          </div>
         </div>
+      </section>
+    </main>
 
-        <div class="pricing-card">
-          <div class="pricing-card-title">Pro</div>
-          <div class="pricing-card-price">₹499/mo</div>
-          <ul class="pricing-card-features">
-            <li>Unlimited proposals & connections</li>
-            <li>Advanced analytics</li>
-            <li>Priority support</li>
-            <li>Access to exclusive deals</li>
-          </ul>
-          <button class="pricing-card-btn">Upgrade</button>
-        </div>
+    <div id="footer"></div>
+    <script>
+      (function loadFooter() {
+        fetch("footer.html")
+          .then(function (res) {
+            if (!res.ok) throw new Error("Failed to fetch footer");
+            return res.text();
+          })
+          .then(function (html) {
+            document.getElementById("footer").innerHTML = html;
+          })
+          .catch(function (err) {
+            console.warn("Footer load failed:", err);
+          });
+      })();
+    </script>
 
-        <div class="pricing-card">
-          <div class="pricing-card-title">Enterprise</div>
-          <div class="pricing-card-price">Custom</div>
-          <ul class="pricing-card-features">
-            <li>Dedicated account manager</li>
-            <li>Custom integrations</li>
-            <li>Team onboarding</li>
-            <li>Premium mentorship</li>
-          </ul>
-          <button class="pricing-card-btn">Contact Sales</button>
-        </div>
+    <div class="cursor">
+      <div class="cursor__ball cursor__ball--big">
+        <svg width="40" height="40">
+          <circle cx="20" cy="20" r="20" />
+        </svg>
       </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <div id="footer"></div>
-  <script>
-    (function loadFooter(){
-      fetch('footer.html')
-        .then(function(res){ if(!res.ok) throw new Error('Failed to fetch footer'); return res.text(); })
-        .then(function(html){ document.getElementById('footer').innerHTML = html; })
-        .catch(function(err){ console.warn('Footer load failed:', err); });
-    })();
-  </script>
-
-  <div class="cursor">
-    <div class="cursor__ball cursor__ball--big">
-      <svg width="40" height="40">
-        <circle cx="20" cy="20" r="20"/>
-      </svg>
     </div>
-  </div>
 
-  <script type="module" src="scripts/main.js"></script>
-  <script src="scripts/cursor.js"></script>
-</body>
+    <script type="module" src="scripts/main.js"></script>
+    <script src="scripts/cursor.js"></script>
+    <script src="scripts/mobile-menu.js"></script>
+  </body>
 </html>
