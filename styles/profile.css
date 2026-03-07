@@ -142,9 +142,9 @@ body {
 /* --- Profile Content Grid --- */
 /* [FIX] Use min() to clamp minmax — prevents horizontal overflow on screens < 350px */
 .profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr)); gap: var(--space-xl); }
-.card-header { display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-xl); }
-.card-icon { width: 48px; height: 48px; background: var(--gradient-secondary); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: white; }
-.card-header h3 { font-family: var(--font-primary); font-size: 1.4rem; font-weight: 600; }
+.card-header { display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-xl); justify-content: flex-start; }
+.card-header h3 { font-family: var(--font-primary); font-size: 1.4rem; font-weight: 600; margin: 0; }
+.card-icon { width: 48px; height: 48px; background: var(--gradient-secondary); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: white; flex-shrink: 0; }
 
 /* --- Edit Profile Form --- */
 .premium-form { display: flex; flex-direction: column; gap: var(--space-lg); }
@@ -207,6 +207,9 @@ body {
     /* [FIX] Force single-column stacking for cards and stats */
     .stats-grid,
     .profile-grid { grid-template-columns: 1fr; }
+    /* [FIX] Align Edit Your Profile header with form fields on mobile */
+    .profile-form-card .card-header { justify-content: flex-start; margin-left: 0; margin-right: 0; }
+    .profile-form-card .premium-form { margin-left: 0; margin-right: 0; }
     .navbar { padding: var(--space-md) var(--space-lg); }
     .profile-name { font-size: 2rem; }
     .avatar-image { width: 100px; height: 100px; }
@@ -228,6 +231,9 @@ body {
     .stat-icon { width: 44px; height: 44px; }
     .stat-number { font-size: 1.5rem; }
     .glass-card { padding: var(--space-lg); }
+    /* [FIX] Edit Your Profile: align header with form (same left edge) */
+    .profile-form-card .card-header { justify-content: flex-start; margin-left: 0; margin-right: 0; }
+    .profile-form-card .premium-form { margin-left: 0; margin-right: 0; }
     /* [FIX] Ensure proposal items stack content on narrow screens */
     .proposal-item { flex-direction: column; align-items: flex-start; gap: var(--space-sm); }
 }
@@ -246,6 +252,8 @@ body {
     .glass-card { padding: var(--space-md); border-radius: var(--radius-lg); }
     .premium-btn { padding: var(--space-md); width: 100%; }
     .completion-text { font-size: 0.8rem; }
+    .profile-form-card .card-header { justify-content: flex-start; margin-left: 0; margin-right: 0; }
+    .profile-form-card .premium-form { margin-left: 0; margin-right: 0; }
 }
 
 /* --- Small phone (≤ 320px) --- */
@@ -257,6 +265,8 @@ body {
     .avatar-edit-btn { width: 24px; height: 24px; bottom: 2px; right: 2px; }
     .card-header h3 { font-size: 1rem; }
     .card-icon { width: 36px; height: 36px; }
+    .profile-form-card .card-header { justify-content: flex-start; margin-left: 0; margin-right: 0; }
+    .profile-form-card .premium-form { margin-left: 0; margin-right: 0; }
     .stat-icon { width: 36px; height: 36px; }
     .stat-number { font-size: 1.25rem; }
     .stat-label { font-size: 0.8rem; }
