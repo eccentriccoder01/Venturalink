@@ -181,45 +181,50 @@ body {
     top: 0;
     z-index: 1000;
     backdrop-filter: blur(20px);
-    background: rgba(10, 10, 15, 0.8);
+    background: linear-gradient(90deg, #23243a 0%, #373a9c 100%);
     border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 2px 12px rgba(55, 58, 156, 0.08);
 }
 
 .nav-container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--space-lg) var(--space-xl);
+    padding: 0.75rem 2rem;
+    height: 70px;
 }
 
 .logo-link {
     display: flex;
     align-items: center;
-    gap: var(--space-md);
+    gap: 0.75rem;
     text-decoration: none;
     color: var(--text-primary);
     transition: var(--transition-normal);
+    font-size: 1.7rem;
+    font-weight: 700;
 }
 
 .logo-icon {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     background: var(--gradient-primary);
-    border-radius: var(--radius-md);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.25rem;
-    color: white;
-    box-shadow: var(--shadow-glow);
+    font-size: 1.5rem;
+    color: #fff;
+    box-shadow: 0 0 12px rgba(102, 126, 234, 0.18);
 }
 
 .logo-text {
     font-family: var(--font-primary);
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: 700;
+    letter-spacing: 0.04em;
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -228,41 +233,45 @@ body {
 
 .nav-links {
     display: flex;
-    gap: var(--space-lg);
+    gap: 2rem;
     align-items: center;
 }
 
 .nav-link {
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
-    padding: var(--space-md) var(--space-lg);
-    border-radius: var(--radius-md);
+    gap: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
     background: transparent;
-    border: 1px solid transparent;
-    color: var(--text-secondary);
+    border: none;
+    color: #bfc7e3;
     text-decoration: none;
-    font-weight: 500;
-    transition: var(--transition-normal);
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
     cursor: pointer;
+    box-shadow: none;
 }
 
 .nav-link:hover {
-    background: var(--hover-bg);
-    border-color: var(--glass-border);
-    color: var(--text-primary);
+    background: linear-gradient(90deg, #667eea 0%, #373a9c 100%);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.12);
     transform: translateY(-2px);
 }
 
 .logout-btn {
     color: #ff6b6b;
-    border-color: rgba(255, 107, 107, 0.2);
+    font-weight: 700;
+    background: transparent;
+    border: none;
 }
 
 .logout-btn:hover {
-    background: rgba(255, 107, 107, 0.1);
-    border-color: rgba(255, 107, 107, 0.3);
-    color: #ff5252;
+    background: linear-gradient(90deg, #ff6b6b 0%, #ff5252 100%);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.12);
 }
 
 /* Debug Panel */
